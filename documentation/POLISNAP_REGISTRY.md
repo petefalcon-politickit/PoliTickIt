@@ -13,7 +13,9 @@ The system currently supports 100+ generated snaps across several core domains. 
 _Targeting corruption, finance, and voting records._
 
 - **Representation ROI Audit**: (High-Fidelity) A "Pro" tier scorecard providing an A-F grade based on Alignment, Corruption Risk, and Sentiment Gap.
+- **Action Timeline**: (Dual Comparison) A high-intensity comparison of voting metrics and financial influence with precision vertical padding.
 - **Dynamic Correlation: FEC-to-Vote**: (New) Automatically links significant PAC donations to legislative floor votes occurring within a tight temporal window.
+- **Corruption Index**: (Metric) High-density breakdown of donor PACs and industry contributions with top-aligned iconography.
 - **Deep Dive: Congressional Stock Activity**: (High-Fidelity) Uses Bar Charts and Expandable Tables to show trading volume against history.
 - **Campaign Finance: High-Interest Donors**: Focuses on FEC data and corporate tracing.
 - **Key Vote Alerts**: Dynamic layouts for specific legislative resolutions.

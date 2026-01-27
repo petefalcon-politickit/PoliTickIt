@@ -18,10 +18,13 @@ PoliTickIt is a mission-driven platform focused on political transparency, const
 - **Primary Color**: Deep Navy Blue (`#164570`) - Evokes trust, stability, and institutional authority.
 - **Secondary Color**: Royal Blue (`#1E3A8A`) - Professional and institutional.
 - **Accent Color**: Rose Crimson (`#E11D48`) - Used for highlights, warnings, and sharp calls to action.
+- **Status Success**: Forest Green (`#38A169`) - Muted professional success (Institutional Palette).
+- **Status Error**: Crimson Red (`#E53E3E`) - Muted professional error (Institutional Palette).
+- **Status Warning**: Golden Ochre (`#D69E2E`) - Muted professional warning (Institutional Palette).
 - **Intelligence Tier (Tier 4)**: Amethyst Purple (`#6B46C1`) - Represents high-fidelity AI forecasting and institutional predictive data.
 - **Typography**: Clean sans-serif system fonts for maximum readability across mobile devices.
-- **Design System**: Built on the "Vertical Block System," ensuring a consistent, modular feel across all data visualizations.
-- **Layout Precision**: Standardized to a 12px vertical gutter between content blocks.
+- **Design System**: Built on the "Institutional Feed" architecture, using a solid Slate gray track and interleaving white content cells.
+- **Layout Precision**: Standardized to a 8px-16px mechanical gutter (FeedGutter) between content blocks to ensure consistent vertical rhythm.
 
 ---
 

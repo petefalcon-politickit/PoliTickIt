@@ -4,7 +4,21 @@ This catalog documents the available molecules that can be used to construct Pol
 
 ## Layout Standard (Critical)
 
-Every element listed below must adhere to the **Zero-Margin Policy**. To ensure consistent vertical spacing within the `PoliSnapItem` renderer, all molecules must have `marginTop: 0` and `marginBottom: 0` on their outermost container. Spacing is managed by the renderer's 12px gutter.
+Every element listed below must adhere to the **Zero-Margin Policy**. To ensure consistent vertical spacing within the `PoliSnapItem` renderer, all molecules must have `marginTop: 0` and `marginBottom: 0` on their outermost container. 
+
+### Feed Gutter (The Institutional Track)
+
+- **Purpose**: Managing the visual space and interstitial content (Slugs) between PoliSnaps.
+- **Visuals**: Solid Slate background (`#F1F5F9`) or custom backgrounds for branded slugs.
+- **Mechanism**: The `FeedGutter` is interleaved as a distinct cell type in the feed, ensuring a mechanical, rhythmic grid.
+- **File**: `components/ui/feed-gutter.tsx`
+
+### Participation Slug (Intellectual Capital)
+
+- **Purpose**: Encouraging civic engagement through rhythmic interstitials.
+- **Visuals**: Card-based (White), `minHeight: 48`, dashed border, using Regular (400) weight text.
+- **Mechanism**: Rendered via `SlugFactory` within a `FeedGutter`.
+- **File**: `components/ui/participation-slug.tsx`
 
 ### `Auth.Background` (Global Branding)
 

@@ -95,7 +95,30 @@ Focuses on the presentation, interaction, and user-centric features.
 
 ---
 
-## ✅ Completed Session Milestones (Jan 26, 2026 - The Meritocratic Expansion)
+## ✅ Completed Session Milestones (Jan 26, 2026 - The Institutional Foundation)
+
+### [UI Layer] Institutional Feed Architecture
+- **Status**: [COMPLETED]
+- **Value**: Establishes a professional, high-density "mechanical" feed.
+- **Work**: 
+  - Implemented `FeedGutter` component for standardized gray "tracks" between snaps.
+  - Refactored `PoliSnapCollection` / `polisnap-renderer.tsx` to interleave gutters and snap cells in a flat list.
+  - Reduced "visual vibration" by shifting from separate card margins to a unified feed cell architecture.
+
+### [UI Layer] Status Color Professionalization
+- **Status**: [COMPLETED]
+- **Work**: Updated `theme.ts` to use muted, sophisticated tones for Success (`#38A169`), Error (`#E53E3E`), and Warning (`#D69E2E`), aligning with institutional design standards.
+
+### [UI Layer] Navigation Icon Standardization
+- **Status**: [COMPLETED]
+- **Work**: Shifted "Watchlist" iconography from stars to "Bookmarks" across the App Drawer, Header, and Snap footer buttons for categorical clarity.
+
+### [UI Layer] Element Alignment & Padding (Micro-Refinements)
+- **Status**: [COMPLETED]
+- **Work**: 
+  - Top-aligned icons in `Corruption Index` to match multi-line PAC labels.
+  - Added 8px additional padding (15px total) to `Action Timeline` titles for better breathing room.
+  - Drop font weight to **Regular (400)** on `Participation Slugs` for a cleaner look.
 
 ### Participation Capital & Intelligence Gating
 
