@@ -1,6 +1,26 @@
-# Welcome to your Expo app 👋
+# PoliTickIt Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A high-fidelity political transparency platform built with React Native and Expo.
+
+## Overview
+
+PoliTickIt uses a metadata-driven **Vertical Block Architecture** to deliver "PoliSnaps"—bite-sized, actionable insights into legislative activity, campaign finance, and representative accountability.
+
+### Key Features
+
+- **PoliSnap Feed**: A dynamic list of political insights (Accountability, Knowledge, Representative, Economics).
+- **Signal Ripple™ Engagement**: Advanced interactive constituent feedback loop using the **Quantum Feedback** methodology.
+- **Service-Oriented Architecture**: Powered by Awilix for robust dependency injection and modularity.
+- **Dynamic Correlation Engine**: Real-time cross-referencing of FEC data with legislative voting records.
+- **Unified Design System**: Consistent typography (14px base / 22px line-height), monochromatic branding, and accessibility using a token-based theme.
+
+## Architecture
+
+Detailed documentation can be found in the `/documentation` directory:
+
+- [Architecture Overview](documentation/ARCHITECTURE.md)
+- [PoliSnap Registry](documentation/POLISNAP_REGISTRY.md)
+- [Pro Roadmap & Backlog](documentation/PRO_BACKLOG.md)
 
 ## Get started
 
@@ -16,35 +36,15 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Design Tokens
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+We follow a strict set of typography and spacing tokens defined in `constants/theme.ts`.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **XS**: 10px (Metadata/Captions)
+- **SM**: 12px (Small body/Labels)
+- **Base**: 14px (Standard text)
+- **MD**: 16px (Medium emphasis)
 
-## Get a fresh project
+---
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Developed for the Citizen Accountability Initiative.
