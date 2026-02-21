@@ -1,0 +1,205 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Ingestion.Providers;
+
+/// <summary>
+/// Bridge Provider for Institutional Presence Pulse data.
+/// Maps Congressional Activity Logs to the InstitutionalPresence Snap Class via api.congress.gov.
+/// </summary>
+public class CongressionalActivityProvider : BaseOracleProvider
+{
+    public override string ProviderName => "Congressional.Activity.Oracle";
+
+    public CongressionalActivityProvider(HttpClient httpClient, IContextEnrichmentProcessor cep) : base(httpClient, cep)
+    {
+    }
+
+    public override async Task<IEnumerable<PoliSnap>> FetchLatestSnapsAsync()
+    {
+        var snaps = new List<PoliSnap>();
+
+        try
+        {
+            // SNP-004 Enhancement: Sort by update date and limit for testing
+            var response = await HttpClient.GetFromJsonAsync<CongressApiResponse>("https://api.congress.gov/v3/bill?api_key=DEMO_KEY&format=json&limit=20");
+
+            if (response?.Bills != null)
+            {
+                foreach (var bill in response.Bills)
+                {
+                    var daysSinceUpdate = (DateTime.UtcNow - (bill.UpdateDate ?? DateTime.UtcNow)).TotalDays;
+
+                    // Mission SNP-004: If dormant for > 90 days, activate Stagnation Sentinel
+                    if (daysSinceUpdate > 90)
+                    {
+                        snaps.Add(MapToStagnationSnap(bill, daysSinceUpdate));
+                    }
+                    else
+                    {
+                        snaps.Add(MapToActivitySnap(bill));
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Oracle Error [{ProviderName}]: {ex.Message}");
+        }
+
+        return snaps;
+    }
+
+    private PoliSnap MapToStagnationSnap(CongressBill bill, double daysSinceUpdate)
+    {
+        var friction = Math.Min(1.0, daysSinceUpdate / 365.0);
+
+        var snap = new PoliSnap
+        {
+            Id = $"sentinel-{bill.Type}-{bill.Number}-{bill.UpdateDate:yyyyMMdd}",
+            Sku = $"SENTINEL-STAGNATION-{bill.Type}-{bill.Number}",
+            Title = $"Stagnation Sentinel: {bill.Title}",
+            Type = "Accountability",
+            CreatedAt = DateTime.UtcNow,
+            Sources = new List<Source> { new Source { Name = "Congress.gov", Url = bill.Url ?? "https://www.congress.gov" } },
+            Metadata = new SnapMetadata
+            {
+                PolicyArea = "Legislative Oversight",
+                InsightType = "Committee Stagnation",
+                Keywords = new List<string> { "Stagnation", "Friction", "Bureaucracy", "Sentinel" },
+                LaymanSummary = $"CRITICAL STAGNATION: This bill has been dormant for {daysSinceUpdate:F0} days. Our forensic analysis indicates high institutional resistance."
+            },
+            Elements = new List<SnapElement>
+            {
+                new SnapElement
+                {
+                    Id = "stagnation-gauge",
+                    Type = "Universal.Gauge",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "mode", "Friction" },
+                        { "value", (int)(friction * 100) },
+                        { "label", "Committee Friction" },
+                        { "subLabel", $"{daysSinceUpdate:F0} Days Dormant" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "impact-indicator",
+                    Type = "Universal.Gauge",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "mode", "Linear" },
+                        { "value", (int)(friction * 85) },
+                        { "label", "Accountability Delta" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "trust-thread",
+                    Type = "Trust.Thread",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "oracleSource", "Congress.gov API v3" },
+                        { "verificationLevel", "Tier 2" },
+                        { "analysisMode", "Forensic Stagnation Check" }
+                    }
+                }
+            }
+        };
+
+        ThreadDown(
+            snap,
+            intensity: friction,
+            geographicDensity: 0.5,
+            roiPotential: 0.8,
+            derivationSummary: $"SNP-004 triggered: Stagnation detected on {bill.Type} {bill.Number}."
+        );
+
+        return snap;
+    }
+
+    private class CongressApiResponse
+    {
+        public List<CongressBill> Bills { get; set; } = new();
+    }
+
+    private class CongressBill
+    {
+        public string? Number { get; set; }
+        public string? Title { get; set; }
+        public string? Type { get; set; }
+        public string? OriginChamber { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public string? Url { get; set; }
+    }
+
+    private PoliSnap MapToActivitySnap(CongressBill bill)
+    {
+        var snap = new PoliSnap
+        {
+            Id = $"bill-{bill.Type}-{bill.Number}-{bill.UpdateDate:yyyyMMdd}",
+            Sku = $"CONG-BILL-{bill.Type}-{bill.Number}",
+            Title = $"Legislative Pulse: {bill.Title}",
+            Type = "Accountability",
+            CreatedAt = bill.UpdateDate ?? DateTime.UtcNow,
+            Sources = new List<Source> { new Source { Name = "Congress.gov", Url = bill.Url ?? "https://www.congress.gov" } },
+            Metadata = new SnapMetadata
+            {
+                PolicyArea = "Legislative Activity",
+                InsightType = "Bill Tracking",
+                Keywords = new List<string> { "Congress", "Bill", "Legislation", "Activity" },
+                LaymanSummary = $"Recent activity detected on {bill.Type} {bill.Number}: {bill.Title}. This pulse tracks institutional velocity."
+            },
+            Elements = new List<SnapElement>
+            {
+                new SnapElement
+                {
+                    Id = "bill-info",
+                    Type = "Metric.Legislative.Info",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "billNumber", bill.Number ?? "" },
+                        { "chamber", bill.OriginChamber ?? "" },
+                        { "status", "Updated" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "trust-thread",
+                    Type = "Trust.Thread",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "oracleSource", "Congress.gov API v3" },
+                        { "verificationLevel", "Tier 2" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "presentation-overrides",
+                    Type = "Meta.Presentation",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "fontSizeOffset", 5 },
+                        { "v-rhythm", "tight-1" }
+                    }
+                }
+            }
+        };
+
+        // Apply ACD Enrichment
+        ThreadDown(
+            snap,
+            intensity: 0.5,
+            geographicDensity: 0.3, // State/National mix
+            roiPotential: 0.4,
+            derivationSummary: $"Legislative velocity update for {bill.Type} {bill.Number}."
+        );
+
+        return snap;
+    }
+}

@@ -1,0 +1,104 @@
+﻿using Moq;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+using PoliTickIt.Ingestion.Services;
+
+namespace PoliTickIt.Api.Tests.Services;
+
+public class IngestionServiceTests
+{
+    [Fact]
+    public async Task RunIngestionAsync_ShouldReturnSnapsFromAllProviders()
+    {
+        // Arrange
+        var mockProvider1 = new Mock<IDataSourceProvider>();
+        var mockProvider2 = new Mock<IDataSourceProvider>();
+        var mockSnapRepository = new Mock<ISnapRepository>();
+
+        var snap1 = new PoliSnap 
+        { 
+            Id = "snap1", 
+            Sku = "SKU1", 
+            Title = "Snap 1",
+            Type = "Type1",
+            CreatedAt = DateTime.UtcNow
+        };
+        var snap2 = new PoliSnap 
+        { 
+            Id = "snap2", 
+            Sku = "SKU2", 
+            Title = "Snap 2",
+            Type = "Type2",
+            CreatedAt = DateTime.UtcNow
+        };
+
+        mockProvider1
+            .Setup(p => p.FetchLatestSnapsAsync())
+            .ReturnsAsync(new List<PoliSnap> { snap1 });
+
+        mockProvider2
+            .Setup(p => p.FetchLatestSnapsAsync())
+            .ReturnsAsync(new List<PoliSnap> { snap2 });
+
+        var providers = new List<IDataSourceProvider> { mockProvider1.Object, mockProvider2.Object };
+        var service = new IngestionService(providers, mockSnapRepository.Object);
+
+        // Act
+        var result = await service.RunIngestionAsync();
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(2, result.Count());
+        Assert.Contains(snap1, result);
+        Assert.Contains(snap2, result);
+        
+        mockProvider1.Verify(p => p.FetchLatestSnapsAsync(), Times.Once);
+        mockProvider2.Verify(p => p.FetchLatestSnapsAsync(), Times.Once);
+        mockSnapRepository.Verify(r => r.SaveSnapsAsync(It.IsAny<IEnumerable<PoliSnap>>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task RunIngestionAsync_ShouldHandleEmptyProviders()
+    {
+        // Arrange
+        var providers = new List<IDataSourceProvider>();
+        var mockSnapRepository = new Mock<ISnapRepository>();
+        var service = new IngestionService(providers, mockSnapRepository.Object);
+
+        // Act
+        var result = await service.RunIngestionAsync();
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Empty(result);
+        mockSnapRepository.Verify(r => r.SaveSnapsAsync(It.IsAny<IEnumerable<PoliSnap>>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task RunIngestionAsync_ShouldPersistSnapsToRepository()
+    {
+        // Arrange
+        var mockProvider = new Mock<IDataSourceProvider>();
+        var mockSnapRepository = new Mock<ISnapRepository>();
+
+        var testSnaps = new List<PoliSnap>
+        {
+            new PoliSnap { Id = "1", Sku = "S1", Title = "T1", Type = "Ty1", CreatedAt = DateTime.UtcNow },
+            new PoliSnap { Id = "2", Sku = "S2", Title = "T2", Type = "Ty2", CreatedAt = DateTime.UtcNow }
+        };
+
+        mockProvider
+            .Setup(p => p.FetchLatestSnapsAsync())
+            .ReturnsAsync(testSnaps);
+
+        var service = new IngestionService(new[] { mockProvider.Object }, mockSnapRepository.Object);
+
+        // Act
+        await service.RunIngestionAsync();
+
+        // Assert
+        mockSnapRepository.Verify(
+            r => r.SaveSnapsAsync(It.Is<IEnumerable<PoliSnap>>(s => s.Count() == 2)),
+            Times.Once);
+    }
+}

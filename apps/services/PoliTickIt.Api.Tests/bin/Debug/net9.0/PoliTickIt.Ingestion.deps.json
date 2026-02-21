@@ -1,0 +1,56 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "PoliTickIt.Ingestion/1.0.0": {
+        "dependencies": {
+          "PoliTickIt.Domain": "1.0.0",
+          "PoliTickIt.Infrastructure": "1.0.0"
+        },
+        "runtime": {
+          "PoliTickIt.Ingestion.dll": {}
+        }
+      },
+      "PoliTickIt.Domain/1.0.0": {
+        "runtime": {
+          "PoliTickIt.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "PoliTickIt.Infrastructure/1.0.0": {
+        "dependencies": {
+          "PoliTickIt.Domain": "1.0.0"
+        },
+        "runtime": {
+          "PoliTickIt.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PoliTickIt.Ingestion/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PoliTickIt.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PoliTickIt.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

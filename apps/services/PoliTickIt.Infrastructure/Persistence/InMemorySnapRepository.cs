@@ -1,0 +1,714 @@
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Infrastructure.Persistence
+{
+    public class InMemorySnapRepository : ISnapRepository
+    {
+        private static readonly ConcurrentDictionary<string, PoliSnap> _store = new();
+
+        static InMemorySnapRepository()
+        {
+            SeedData();
+        }
+
+        private static void SeedData()
+        {
+            var snaps = new List<PoliSnap>
+            {
+                new PoliSnap
+                {
+                    Id = "community-org-001",
+                    Sku = "INIT-TX-FOOD-001",
+                    Title = "Central Texas: Regional Food Bank Mobilization",
+                    Type = "Community",
+                    CreatedAt = DateTime.Parse("2023-10-10T10:00:00Z"),
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "Central Texas Food Bank", Url = "https://www.centraltexasfoodbank.org" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Social Welfare",
+                        InsightType = "Collective Initiative",
+                        ApplicationTier = "Standard",
+                        HeaderElementId = "org-header-001",
+                        RepresentativeId = "C001131",
+                        LaymanSummary = "Local non-profit mobilization to address seasonal food insecurity in the Austin metro area."
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "org-header-001",
+                            Type = "Identity.Organization.Header",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "ct-food-bank" },
+                                { "name", "Central Texas Food Bank" },
+                                { "imgUri", "https://www.centraltexasfoodbank.org/sites/default/files/ctfb_logo.png" },
+                                { "location", "Austin, Texas" },
+                                { "isVerified", true },
+                                { "tags", new List<string> { "Hunger Relief", "Disaster Response" } }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "initiative-summary",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Initiative: Seasonal Expansion" },
+                                { "text", "We are expanding our mobile pantry operations to reach 15 additional rural zip codes in the next quarter. This requires a 20% increase in volunteer staffing and logistics support." }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "event-details",
+                            Type = "Narrative.Event.Details",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Volunteer Training: Mobile Pantry" },
+                                { "date", "Saturday, Oct 14, 2023" },
+                                { "time", "9:00 AM - 12:00 PM" },
+                                { "location", "6500 Metropolis Dr, Austin, TX 78744" },
+                                { "requirements", "Background check required (onsite). Must be 18+." }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "volunteer-action",
+                            Type = "Interaction.Action.Card",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Community Action: Volunteer Sign-up" },
+                                { "label", "Secure your spot" },
+                                { "actionType", "link" },
+                                { "actionPayload", "https://www.centraltexasfoodbank.org/get-involved/volunteer" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "acc-pulse-cyber-security",
+                    Sku = "PTS-ACC-PULSE-034",
+                    Title = "Quantum Cybersecurity Initiative",
+                    Type = "Accountability",
+                    CreatedAt = DateTime.Parse("2026-01-26T10:00:00Z"),
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "Cybersecurity & Infrastructure Security Agency", Url = "#" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Cybersecurity",
+                        InsightType = "Legislative Sentiment",
+                        RepresentativeId = "S000148",
+                        ApplicationTier = "Intelligence"
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "rep-header",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "S000148" },
+                                { "name", "Chuck Schumer" },
+                                { "location", "New York" },
+                                { "position", "U.S. Senator" },
+                                { "party", "Democratic" },
+                                { "imgUri", "https://unitedstates.github.io/images/congress/225x275/S000148.jpg" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "insight-cyber",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "text", "Proposed framework for securing national quantum-computing research labs. Focuses on encryption standards and international cooperation." },
+                                { "accentColor", "#805AD5" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "cyber-sentiment",
+                            Type = "Interaction.Sentiment.Slider",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Protect Federal Infrastructure?" },
+                                { "leftLabel", "PRIVACY CONCERNS" },
+                                { "rightLabel", "STRENGTHEN SECURITY" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "hvdf-civic-dividend-001",
+                    Sku = "HVDF-TX-CDP-001",
+                    Title = "Civic Dividend: Multi-Oracle Payout Trace",
+                    Type = "Participation",
+                    CreatedAt = DateTime.UtcNow,
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "Sovereign Ledger Explorer", Url = "https://explorer.politickit.io" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Economy",
+                        InsightType = "Protocol Analysis",
+                        ApplicationTier = "ROI Auditor",
+                        LaymanSummary = "Tracking the first 100% verified ROI distribution to verified residents via the Multi-Oracle ZK Protocol."
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "dividend-metric",
+                            Type = "Metric.Value.Display",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "label", "Direct Civic Dividend" },
+                                { "value", "$42.50" },
+                                { "trend", "positive" },
+                                { "description", "Per-capita ROI from local efficiency gains." }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "dividend-narrative",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "text", "This dividend reflects the successful 12% reduction in administrative overhead for Travis County, verified via the Maven Multi-Oracle system. Funds have been distributed to your local Sovereign Ledger." }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "dividend-action",
+                            Type = "Interaction.Action.Card",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Authorize Next-Cycle Allocation?" },
+                                { "label", "Approve Strategy" },
+                                { "actionType", "navigate" },
+                                { "actionPayload", "participation-detail" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "ethics-dark-money-mirror-001",
+                    Sku = "ETH-AUD-DMM-001",
+                    Title = "Ethics Audit: The Dark Money Mirror",
+                    Type = "Accountability",
+                    CreatedAt = DateTime.UtcNow,
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "Office of Congressional Ethics", Url = "https://oce.house.gov" },
+                        new Source { Name = "FEC Forensic API", Url = "https://www.fec.gov/data/" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Ethics",
+                        InsightType = "Corruption Correlation",
+                        ApplicationTier = "ROI Auditor",
+                        LaymanSummary = "A forensic audit correlating ethics referrals with campaign finance velocity to detect lobbyist influence."
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "rep-header-ethics",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "S000148" },
+                                { "name", "Chuck Schumer" },
+                                { "location", "New York" },
+                                { "position", "U.S. Senator" },
+                                { "party", "Democratic" },
+                                { "imgUri", "https://unitedstates.github.io/images/congress/225x275/S000148.jpg" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "corruption-index",
+                            Type = "Metric.CorruptionIndex",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "CORRUPTION INDEX" },
+                                { "score", 84 },
+                                { "donor", "Sovereign Tech PAC" },
+                                { "industry", "Technology" },
+                                { "amount", "$250,000" },
+                                { "voteAction", "Against H.B. 402" },
+                                { "insight", "Referral linked to donation spike." },
+                                { "confidence", 0.92 }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "fec-correlation",
+                            Type = "Data.Correlation.Heatmap",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "donors", new List<object> {
+                                    new Dictionary<string, object> { { "industry", "Tech" }, { "amount", 250000 }, { "correlation", 0.92 } },
+                                    new Dictionary<string, object> { { "industry", "Energy" }, { "amount", 150000 }, { "correlation", 0.45 } }
+                                } },
+                                { "totalInfluence", 0.84 }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "ethics-provenance",
+                            Type = "Trust.Thread",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "referenceId", "OCE-23-4901" },
+                                { "serialNumber", "TX-4902-TRUTH" },
+                                { "verificationLevel", "Tier 3" },
+                                { "oracleSource", "Office of Congressional Ethics" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "ethics-committee-pivot-generic",
+                    Sku = "ETH-AUD-CRP-001",
+                    Title = "Ethics Finding: Institutional Pivot",
+                    Type = "Accountability",
+                    CreatedAt = DateTime.UtcNow,
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "House Ethics Committee", Url = "https://ethics.house.gov" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Ethics",
+                        InsightType = "Committee Finding",
+                        ApplicationTier = "ROI Auditor",
+                        LaymanSummary = "A high-intensity snap class mapping 'Substantial Evidence' findings directly to the representative's record."
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "rep-header-generic",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "GENERIC_REP" },
+                                { "name", "Representative Template" },
+                                { "location", "District Registry" },
+                                { "position", "Member of Congress" },
+                                { "party", "Unassigned" },
+                                { "imgUri", "https://via.placeholder.com/225x275" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "finding-summary",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "text", "The committee has released a report regarding alleged violations of institutional rules. This snap will be updated as forensic details are serialized." }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "corruption-index-high",
+                            Type = "Metric.CorruptionIndex",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "PIVOT INTENSITY" },
+                                { "score", 92 },
+                                { "donor", "Multiple Oracles" },
+                                { "industry", "Varies" },
+                                { "amount", "Analysis Pending" },
+                                { "voteAction", "Institutional Review" },
+                                { "insight", "High-intensity finding detected in formal release." },
+                                { "confidence", 0.95 }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "allegation-list",
+                            Type = "Metric.Achievement.List",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Formal Allegations" },
+                                { "items", new List<string> { "Violation of House Rule XXIII", "Conduct Unbecoming", "Financial Disclosure Omission" } }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "institutional-proof",
+                            Type = "Trust.Thread",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "referenceId", "ETHICS-FINDING-001" },
+                                { "serialNumber", "INSTITUTIONAL-101" },
+                                { "verificationLevel", "Tier 3" },
+                                { "oracleSource", "House Committee on Ethics" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "ethics-florida-fraud-001",
+                    Sku = "ETH-AUD-CRP-FL-001",
+                    Title = "Ethics Finding: Substantial Evidence of Fraud",
+                    Type = "Accountability",
+                    CreatedAt = DateTime.UtcNow,
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "House Ethics Committee", Url = "https://ethics.house.gov" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Ethics",
+                        InsightType = "Committee Finding",
+                        ApplicationTier = "ROI Auditor",
+                        RepresentativeId = "FL-DEM-001",
+                        LaymanSummary = "The House Ethics Committee has announced findings of substantial evidence regarding fraud charges against a Florida representative."
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "rep-header-fl",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "FL-DEM-001" },
+                                { "name", "Florida Representative" },
+                                { "location", "Florida" },
+                                { "position", "Member of Congress" },
+                                { "party", "Democratic" },
+                                { "imgUri", "https://via.placeholder.com/225x275" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "fraud-summary",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "text", "A special subcommittee has concluded there is 'substantial evidence' that the representative engaged in a scheme to defraud a venture capital firm and diverted campaign funds for personal use." }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "corruption-index-fl",
+                            Type = "Metric.CorruptionIndex",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "PIVOT INTENSITY" },
+                                { "score", 95 },
+                                { "donor", "Multiple Oracles" },
+                                { "industry", "Venture Capital / Campaign Funds" },
+                                { "amount", "$150,000+" },
+                                { "voteAction", "Fraud Investigation" },
+                                { "insight", "Institutional finding of 'Substantial Evidence' triggers maximum pivot intensity." },
+                                { "confidence", 0.98 }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "fraud-allegations",
+                            Type = "Metric.Achievement.List",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "Documented Allegations" },
+                                { "items", new List<string> { "Wire Fraud", "Campaign Finance Diversion", "False Statements to Ethics Committee" } }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "ethics-proof-fl",
+                            Type = "Trust.Thread",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "referenceId", "FL-ETH-2026-042" },
+                                { "serialNumber", "INST-FL-402" },
+                                { "verificationLevel", "Tier 3" },
+                                { "oracleSource", "House Committee on Ethics" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "acc-pulse-veterans-bill",
+                    Sku = "PTS-ACC-PULSE-032",
+                    Title = "Veteran Health Access Act",
+                    Type = "Accountability",
+                    CreatedAt = DateTime.Parse("2026-01-26T09:00:00Z"),
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "Department of Veterans Affairs", Url = "#" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Veterans",
+                        InsightType = "Legislative Sentiment",
+                        RepresentativeId = "T000250"
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "rep-header",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "T000250" },
+                                { "name", "John Thune" },
+                                { "location", "South Dakota" },
+                                { "position", "U.S. Senator" },
+                                { "party", "Republican" },
+                                { "imgUri", "https://unitedstates.github.io/images/congress/225x275/T000250.jpg" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "insight-vets",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "text", "Expansion of rural health clinics for veterans. This bill aims to reduce wait times for mental health services in underserved regions." },
+                                { "accentColor", "#E53E3E" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "vets-action",
+                            Type = "Interaction.Action.Card",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "label", "COLLECTIVE IMPACT" },
+                                { "title", "Advocate for Rural Vets" },
+                                { "icon", "heart" },
+                                { "actionType", "advocate" },
+                                { "publisherImage", "https://www.va.gov/img/design/logo/va-logo-white.png" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "TOP-CORRELATION-COLLECTIVE",
+                    Sku = "PTS-CORR-COL-001",
+                    Title = "INTELLIGENCE ALERT: H.R. 882 CORRELATION",
+                    Type = "Accountability",
+                    CreatedAt = DateTime.Parse("2026-01-26T23:59:59Z"),
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "FEC.gov", Url = "https://www.fec.gov" },
+                        new Source { Name = "Congress.gov", Url = "https://www.congress.gov" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Accountability",
+                        InsightType = "Corruption Index Intelligence",
+                        RepresentativeId = "C001131",
+                        ApplicationTier = "Intelligence"
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "rep-header",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "id", "C001131" },
+                                { "name", "Greg Casar" },
+                                { "party", "Democratic" },
+                                { "location", "Texas, District 35" },
+                                { "position", "Representative" },
+                                { "imgUri", "https://unitedstates.github.io/images/congress/225x275/C001131.jpg" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "corr-index-casar",
+                            Type = "Metric.CorruptionIndex",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "title", "CORRUPTION INDEX" },
+                                { "score", 88 },
+                                { "donor", "Global Energy PAC" },
+                                { "industry", "Energy & Natural Resources" },
+                                { "amount", "$5,000" },
+                                { "voteAction", "YEA (H.R. 882)" },
+                                { "insight", "A maximum individual donation was received from Global Energy PAC just 4 days prior to the 'YEA' vote on H.R. 882. This aligns with a significant trend of Energy Sector support." },
+                                { "confidence", 0.95 },
+                                { "auditId", "FEC-TX35-CASAR-2026" },
+                                { "asOfDate", "JAN 26, 2026" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "schumer-presence-pulse-prod",
+                    Sku = "PRODUCTIVITY-PRESENCE-LOG-CH-001",
+                    Title = "Institutional Presence Pulse",
+                    Type = "Accountability", // Set to Accountability for API discovery
+                    CreatedAt = DateTime.UtcNow,
+                    Sources = new List<Source> 
+                    { 
+                        new Source { Name = "Congress.gov Activity Log", Url = "https://www.congress.gov" } 
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Government Operations and Politics",
+                        InsightType = "Productivity Audit",
+                        RepresentativeId = "S000148",
+                        ApplicationTier = "Intelligence",
+                        Description = "Real-time audit of voting consistency and floor presence.",
+                        Keywords = new List<string> { "Accountability", "Attendance", "Velocity", "Productivity" }
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "schumer-header",
+                            Type = "Header.Representative",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "name", "Chuck Schumer" },
+                                { "position", "U.S. Senator" },
+                                { "chamber", "Senate" },
+                                { "party", "Democrat" },
+                                { "state", "New York" },
+                                { "imgUri", "https://unitedstates.github.io/images/congress/225x275/S000148.jpg" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "attendance-heatmap",
+                            Type = "Metric.Attendance.Grid",
+                            DisplayName = "12-Month Attendance Heatmap",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "presenceRate", 0.985 },
+                                { "totalSessions", 142 },
+                                { "attended", 140 },
+                                { "missed", 2 },
+                                { "trend", "Stable" }
+                            },
+                            Provenance = new ProvenanceMetadata
+                            {
+                                Provider = "Official Senate Journal",
+                                IsVerified = true,
+                                Timestamp = DateTime.UtcNow
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "schumer-trust-thread",
+                            Type = "Trust.Thread",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "referenceId", "REF: PS-PROD-SCHUMER-001" },
+                                { "serialNumber", "SN: 2026-01-30-X15" },
+                                { "verificationLevel", "ZK-Verified" },
+                                { "oracleSource", "Official Senate Journal" }
+                            }
+                        },
+                        new SnapElement
+                        {
+                            Id = "schumer-participation-cta",
+                            Type = "Interaction.Participation.CTA",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "label", "Audit this Presence Pulse" },
+                                { "actionLabel", "PULSE TO EARN" },
+                                { "creditValue", 15 },
+                                { "economyType", "Sovereignty Credits" },
+                                { "actionType", "sentiment_pulse" }
+                            }
+                        }
+                    }
+                },
+                new PoliSnap
+                {
+                    Id = "community-ny-schumer-001",
+                    Sku = "COMM-NY-SCHUMER-001",
+                    Title = "Community Discussion: New York Infrastructure",
+                    Type = "Community",
+                    CreatedAt = DateTime.UtcNow.AddHours(-2),
+                    Sources = new List<Source>
+                    {
+                        new Source { Name = "Local NY Forums", Url = "#" }
+                    },
+                    Metadata = new SnapMetadata
+                    {
+                        PolicyArea = "Infrastructure",
+                        InsightType = "Community Pulse",
+                        RepresentativeId = "S000148",
+                        LaymanSummary = "Constituents are discussing the impact of recent federal infrastructure grants on New York City transit."
+                    },
+                    Elements = new List<SnapElement>
+                    {
+                        new SnapElement
+                        {
+                            Id = "comm-summary",
+                            Type = "Narrative.Insight.Summary",
+                            Data = new Dictionary<string, object>
+                            {
+                                { "text", "The consensus among New York residents is that while the funding is welcome, the timeline for subway improvements is still too long." }
+                            }
+                        }
+                    }
+                }
+            };
+
+            foreach (var snap in snaps)
+            {
+                _store[snap.Id] = snap;
+            }
+        }
+
+        public Task SaveSnapAsync(PoliSnap snap)
+        {
+            _store[snap.Id] = snap;
+            return Task.CompletedTask;
+        }
+
+        public Task SaveSnapsAsync(IEnumerable<PoliSnap> snaps)
+        {
+            foreach (var snap in snaps)
+            {
+                _store[snap.Id] = snap;
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<PoliSnap>> GetAllSnapsAsync()
+        {
+            return Task.FromResult(_store.Values.AsEnumerable());
+        }
+
+        public Task<PoliSnap?> GetSnapByIdAsync(string id)
+        {
+            _store.TryGetValue(id, out var snap);
+            return Task.FromResult(snap);
+        }
+    }
+}

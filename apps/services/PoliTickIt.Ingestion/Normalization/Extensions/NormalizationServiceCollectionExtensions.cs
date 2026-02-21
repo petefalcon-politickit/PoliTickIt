@@ -1,0 +1,151 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using PoliTickIt.Ingestion.Normalization.Extractors;
+using PoliTickIt.Ingestion.Normalization.Interfaces;
+using PoliTickIt.Ingestion.Normalization.Models;
+using PoliTickIt.Ingestion.Normalization.Persistence;
+using PoliTickIt.Ingestion.Normalization.Services;
+
+namespace PoliTickIt.Ingestion.Normalization.Extensions;
+
+/// <summary>
+/// DI configuration for Multi-Oracle Entity Normalization
+/// Extension methods for IServiceProvider (manual registration for now)
+/// </summary>
+public static class NormalizationInitializer
+{
+    /// <summary>
+    /// Create and initialize all normalization services manually
+    /// (Using this approach to avoid DI framework dependency issues)
+    /// </summary>
+    public static void CreateNormalizationServices(
+        out ICrossReferenceIndex index,
+        out ICanonicalEntityRepository<CanonicalRepresentative> repRepo,
+        out ICanonicalEntityRepository<CanonicalBill> billRepo,
+        out ICanonicalEntityRepository<CanonicalCommittee> committeeRepo,
+        out ICanonicalEntityRepository<CanonicalDonor> donorRepo,
+        out ICrossReferenceResolver resolver,
+        out ITransactionalLinker linker,
+        out INormalizationPipeline pipeline)
+    {
+        // Create services
+        index = new InMemoryCrossReferenceIndex();
+        repRepo = new InMemoryCanonicalEntityRepository<CanonicalRepresentative>();
+        billRepo = new InMemoryCanonicalEntityRepository<CanonicalBill>();
+        committeeRepo = new InMemoryCanonicalEntityRepository<CanonicalCommittee>();
+        donorRepo = new InMemoryCanonicalEntityRepository<CanonicalDonor>();
+        
+        resolver = new CrossReferenceResolver(index, repRepo, billRepo, committeeRepo, donorRepo);
+        linker = new TransactionalLinker();
+        
+        var extractors = new Dictionary<string, IIdentifierExtractor>
+        {
+            ["Congress.gov"] = new CongressGovIdentifierExtractor(),
+            ["FEC.gov"] = new FecIdentifierExtractor(),
+            ["default"] = new CongressGovIdentifierExtractor()
+        };
+        
+        pipeline = new NormalizationPipeline(extractors, resolver, linker);
+    }
+    
+    /// <summary>
+    /// Initialize normalization system by loading data from files at startup
+    /// </summary>
+    public static async Task InitializeNormalizationAsync(
+        string dataDirectory,
+        ICanonicalEntityRepository<CanonicalRepresentative> repRepo,
+        ICanonicalEntityRepository<CanonicalBill> billRepo,
+        ICanonicalEntityRepository<CanonicalCommittee> committeeRepo,
+        ICanonicalEntityRepository<CanonicalDonor> donorRepo,
+        ICrossReferenceIndex index)
+    {
+        var persistence = new NormalizationDataPersistence(dataDirectory);
+        
+        // Load all data from files
+        var snapshot = await persistence.LoadAllAsync();
+        
+        // Load into repositories (cast to implementations)
+        var repRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalRepresentative>)repRepo;
+        var billRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalBill>)billRepo;
+        var committeeRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalCommittee>)committeeRepo;
+        var donorRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalDonor>)donorRepo;
+        
+        await repRepoImpl.LoadAsync(snapshot.Representatives);
+        await billRepoImpl.LoadAsync(snapshot.Bills);
+        await committeeRepoImpl.LoadAsync(snapshot.Committees);
+        await donorRepoImpl.LoadAsync(snapshot.Donors);
+        
+        // Restore cross-reference index
+        var entriesToRegister = new List<(string, string, Guid)>();
+        foreach (var kvp in snapshot.CrossReferences)
+        {
+            var key = kvp.Key;
+            var id = kvp.Value;
+            var parts = key.Split(':');
+            if (parts.Length == 2)
+            {
+                entriesToRegister.Add((parts[0], parts[1], id));
+            }
+        }
+        
+        if (entriesToRegister.Count > 0)
+        {
+            await index.BulkRegisterAsync(entriesToRegister);
+        }
+        
+        Console.WriteLine($"Normalization initialized: {snapshot.Representatives.Count} representatives, " +
+            $"{snapshot.Bills.Count} bills, {snapshot.Committees.Count} committees, " +
+            $"{snapshot.Donors.Count} donors, {snapshot.CrossReferences.Count} cross-references");
+    }
+    
+    /// <summary>
+    /// Persist all normalization data to files
+    /// </summary>
+    public static async Task PersistNormalizationAsync(
+        string dataDirectory,
+        ICanonicalEntityRepository<CanonicalRepresentative> repRepo,
+        ICanonicalEntityRepository<CanonicalBill> billRepo,
+        ICanonicalEntityRepository<CanonicalCommittee> committeeRepo,
+        ICanonicalEntityRepository<CanonicalDonor> donorRepo,
+        ICrossReferenceIndex index)
+    {
+        var persistence = new NormalizationDataPersistence(dataDirectory);
+        
+        // Get all data from repositories (cast to implementations)
+        var repRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalRepresentative>)repRepo;
+        var billRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalBill>)billRepo;
+        var committeeRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalCommittee>)committeeRepo;
+        var donorRepoImpl = (InMemoryCanonicalEntityRepository<CanonicalDonor>)donorRepo;
+        
+        var snapshot = new NormalizationDataSnapshot
+        {
+            Representatives = await repRepoImpl.GetStoreAsync(),
+            Bills = await billRepoImpl.GetStoreAsync(),
+            Committees = await committeeRepoImpl.GetStoreAsync(),
+            Donors = await donorRepoImpl.GetStoreAsync()
+        };
+        
+        // Build cross-reference map
+        var indexImpl = (InMemoryCrossReferenceIndex)index;
+        var allCanonicalIds = await indexImpl.GetAllCanonicalIdsAsync();
+        foreach (var id in allCanonicalIds)
+        {
+            var identifiers = await index.GetIdentifiersAsync(id);
+            foreach (var tup in identifiers.GetAll())
+            {
+                var source = tup.Source;
+                var value = tup.Value;
+                var key = $"{source}:{value}";
+                snapshot.CrossReferences[key] = id;
+            }
+        }
+        
+        // Save to files
+        await persistence.SaveAllAsync(snapshot);
+        
+        Console.WriteLine($"Normalization persisted: {snapshot.Representatives.Count} representatives, " +
+            $"{snapshot.Bills.Count} bills, {snapshot.Committees.Count} committees, " +
+            $"{snapshot.Donors.Count} donors, {snapshot.CrossReferences.Count} cross-references");
+    }
+}

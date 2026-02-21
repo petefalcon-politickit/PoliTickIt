@@ -1,0 +1,117 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Ingestion.Providers;
+
+/// <summary>
+/// Autonomous Processor for Federal Election Commission (FEC) data.
+/// Monitors candidate filings and committee contributions via api.open.fec.gov.
+/// </summary>
+public class FecProvider : BaseOracleProvider
+{
+    public override string ProviderName => "FEC.Oracle";
+
+    public FecProvider(HttpClient httpClient, IContextEnrichmentProcessor cep) : base(httpClient, cep)
+    {
+    }
+
+    public override async Task<IEnumerable<PoliSnap>> FetchLatestSnapsAsync()
+    {
+        var snaps = new List<PoliSnap>();
+
+        try
+        {
+            // Example endpoint: https://api.open.fec.gov/v1/schedules/schedule_a/?api_key=DEMO_KEY&sort=-contribution_receipt_date&per_page=1
+            var response = await HttpClient.GetFromJsonAsync<FecApiResponse>("https://api.open.fec.gov/v1/schedules/schedule_a/?api_key=DEMO_KEY&sort=-contribution_receipt_date&per_page=5");
+
+            if (response?.Results != null)
+            {
+                foreach (var result in response.Results)
+                {
+                    snaps.Add(MapToFecSnap(result));
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Oracle Error [{ProviderName}]: {ex.Message}");
+        }
+
+        return snaps;
+    }
+
+    private class FecApiResponse
+    {
+        public List<FecContribution> Results { get; set; } = new();
+    }
+
+    private class FecContribution
+    {
+        public string? CommitteeId { get; set; }
+        public decimal? ContributionReceiptAmount { get; set; }
+        public string? ContributorName { get; set; }
+        public DateTime? ContributionReceiptDate { get; set; }
+        public string? ContributorOccupation { get; set; }
+        public string? ContributorState { get; set; }
+    }
+
+    private PoliSnap MapToFecSnap(FecContribution contribution)
+    {
+        var snap = new PoliSnap
+        {
+            Id = $"fec-{contribution.CommitteeId}-{contribution.ContributionReceiptDate:yyyyMMdd}",
+            Sku = "FEC-CONT-A1",
+            Title = $"FEC: Large Contribution from {contribution.ContributorName}",
+            Type = "Economics",
+            CreatedAt = contribution.ContributionReceiptDate ?? DateTime.UtcNow,
+            Sources = new List<Source> { new Source { Name = "FEC Open Data", Url = "https://www.fec.gov" } },
+            Metadata = new SnapMetadata
+            {
+                PolicyArea = "Accountability",
+                InsightType = "Campaign Finance",
+                Keywords = new List<string> { "FEC", "Election", "Money", "Political Spend" },
+                LaymanSummary = $"A contribution of ${contribution.ContributionReceiptAmount:N2} was filed by {contribution.ContributorName} ({contribution.ContributorOccupation}) from {contribution.ContributorState}."
+            },
+            Elements = new List<SnapElement>
+            {
+                new SnapElement
+                {
+                    Id = "fec-metric",
+                    Type = "Metric.CurrencyLarge",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "value", contribution.ContributionReceiptAmount ?? 0 },
+                        { "label", "CONTRIBUTION AMOUNT" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "trust-thread",
+                    Type = "Trust.Thread",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "oracleSource", "Federal Election Commission" },
+                        { "verificationLevel", "Tier 3" }
+                    }
+                }
+            }
+        };
+
+        // Apply ACD Enrichment
+        ThreadDown(
+            snap,
+            intensity: 0.6,
+            geographicDensity: 0.4, // State-level density
+            roiPotential: 0.5,
+            derivationSummary: $"Financial signal detected for {contribution.ContributorState} interests.",
+            targetState: contribution.ContributorState
+        );
+
+        return snap;
+    }
+}

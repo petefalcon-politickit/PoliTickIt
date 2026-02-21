@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.2" />
+    <PackageReference Include="xunit" Version="2.6.6" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PoliTickIt.Api\PoliTickIt.Api.csproj" />
+    <ProjectReference Include="..\PoliTickIt.Domain\PoliTickIt.Domain.csproj" />
+    <ProjectReference Include="..\PoliTickIt.Ingestion\PoliTickIt.Ingestion.csproj" />
+    <ProjectReference Include="..\PoliTickIt.Infrastructure\PoliTickIt.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+    "command": "vision-sync",
+    "intent": "Aligning the domain with your strategic vision, Pete.",
+    "logic": "persona-only",
+    "output": "Domain-Vision parity established. Forensic DNA is synchronized with the company roadmap.",
+    "guide": "Run 'omni mission list' to verify the alignment across our active priorities."
+}

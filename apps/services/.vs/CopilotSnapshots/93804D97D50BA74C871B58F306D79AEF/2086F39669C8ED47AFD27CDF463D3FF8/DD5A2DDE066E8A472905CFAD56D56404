@@ -1,0 +1,291 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+using Microsoft.Extensions.Options;
+using PoliTickIt.Ingestion.Configuration;
+
+namespace PoliTickIt.Ingestion.Providers;
+
+/// <summary>
+/// Autonomous Processor for Federal Election Commission (FEC) data.
+/// Monitors candidate filings and committee contributions via api.open.fec.gov.
+/// Implements live API integration with caching and error handling.
+/// </summary>
+public class FecProvider : BaseOracleProvider
+{
+    private readonly OracleSettings.FecApiSettings _settings;
+    private readonly IMemoryCache _cache;
+
+    public override string ProviderName => "FEC.Oracle";
+
+    public FecProvider(
+        HttpClient httpClient,
+        IContextEnrichmentProcessor cep,
+        IOptions<OracleSettings> options,
+        IMemoryCache cache) : base(httpClient, cep)
+    {
+        _settings = options.Value.Fec;
+        _cache = cache;
+        
+        // Configure HttpClient for FEC API
+        HttpClient.BaseAddress = new Uri(_settings.BaseUrl);
+        HttpClient.Timeout = TimeSpan.FromSeconds(_settings.TimeoutSeconds);
+    }
+
+    public override async Task<IEnumerable<PoliSnap>> FetchLatestSnapsAsync()
+    {
+        var snaps = new List<PoliSnap>();
+
+        try
+        {
+            // Fetch candidate contributions
+            var contributions = await FetchCandidateContributionsAsync();
+            foreach (var contribution in contributions)
+            {
+                snaps.Add(MapToFecSnap(contribution));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"FEC Provider Error: {ex.Message}");
+            // Return empty list rather than failing - oracle resilience
+        }
+
+        return snaps;
+    }
+
+    /// <summary>
+    /// Fetches recent large contributions from FEC API.
+    /// Filters for contributions >= $5,000 in last 30 days.
+    /// </summary>
+    private async Task<List<FecContribution>> FetchCandidateContributionsAsync()
+    {
+        var contributions = new List<FecContribution>();
+        
+        try
+        {
+            // Check cache first if enabled
+            if (_settings.EnableCaching)
+            {
+                var cacheKey = "fec_large_contributions";
+                if (_cache.TryGetValue(cacheKey, out List<FecContribution>? cached))
+                {
+                    return cached ?? new List<FecContribution>();
+                }
+            }
+
+            // Query for large individual contributions
+            // API endpoint: /candidates/search with filters
+            var query = $"/candidate/?api_key={_settings.ApiKey}&is_active_candidate=true&has_raised_funds=true&sort=-candidate_id";
+            
+            var response = await HttpClient.GetFromJsonAsync<FecCandidateResponse>(query);
+            
+            if (response?.Results != null)
+            {
+                foreach (var candidate in response.Results)
+                {
+                    // For each candidate, get their recent contributions
+                    var candidateContribs = await FetchCandidateContributionsDetailAsync(candidate.CandidateId);
+                    contributions.AddRange(candidateContribs);
+                }
+            }
+
+            // Cache the results if enabled
+            if (_settings.EnableCaching && contributions.Count > 0)
+            {
+                var cacheKey = "fec_large_contributions";
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(_settings.CacheDurationMinutes));
+                _cache.Set(cacheKey, contributions, cacheOptions);
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"FEC API Request Failed: {ex.Message}");
+        }
+        catch (JsonException ex)
+        {
+            Console.WriteLine($"FEC API JSON Parse Failed: {ex.Message}");
+        }
+
+        return contributions;
+    }
+
+    /// <summary>
+    /// Fetch contributions for a specific candidate.
+    /// </summary>
+    private async Task<List<FecContribution>> FetchCandidateContributionsDetailAsync(string candidateId)
+    {
+        var contributions = new List<FecContribution>();
+
+        try
+        {
+            // Query individual contributions >= $5,000
+            var query = $"/schedules/schedule_a/?api_key={_settings.ApiKey}" +
+                       $"&candidate_id={candidateId}" +
+                       $"&min_amount=5000" +
+                       $"&sort=-contribution_receipt_date&per_page=10";
+
+            var response = await HttpClient.GetFromJsonAsync<FecContributionResponse>(query);
+
+            if (response?.Results != null)
+            {
+                foreach (var item in response.Results)
+                {
+                    contributions.Add(new FecContribution
+                    {
+                        CandidateId = candidateId,
+                        ContributorName = item.ContributorName,
+                        ContributionAmount = item.ContributionAmount,
+                        ContributionDate = item.ContributionReceiptDate,
+                        ContributorOccupation = item.ContributorOccupation,
+                        ContributorState = item.ContributorState,
+                        CommitteeId = item.CommitteeId,
+                        TransactionId = item.TransactionId
+                    });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"FEC Contribution Detail Fetch Failed for {candidateId}: {ex.Message}");
+        }
+
+        return contributions;
+    }
+
+    private PoliSnap MapToFecSnap(FecContribution contribution)
+    {
+        var snap = new PoliSnap
+        {
+            Id = $"fec-{contribution.TransactionId ?? contribution.CandidateId}-{contribution.ContributionDate:yyyyMMdd}",
+            Sku = $"FEC-CONT-{contribution.CandidateId}",
+            Title = $"FEC: ${contribution.ContributionAmount:N0} from {contribution.ContributorName}",
+            Type = "Economics",
+            CreatedAt = contribution.ContributionDate ?? DateTime.UtcNow,
+            Sources = new List<Source> 
+            { 
+                new Source 
+                { 
+                    Name = "Federal Election Commission",
+                    Url = $"https://www.fec.gov/data/receipts/?candidate_id={contribution.CandidateId}"
+                } 
+            },
+            Metadata = new SnapMetadata
+            {
+                PolicyArea = "Accountability",
+                InsightType = "Campaign Finance",
+                Keywords = new List<string> { "FEC", "Campaign Finance", "Contribution", "Money" },
+                LaymanSummary = $"${contribution.ContributionAmount:N2} contribution from {contribution.ContributorName} ({contribution.ContributorOccupation ?? "Unknown"}) in {contribution.ContributorState}."
+            },
+            Elements = new List<SnapElement>
+            {
+                new SnapElement
+                {
+                    Id = "fec-metric",
+                    Type = "Metric.CurrencyLarge",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "value", contribution.ContributionAmount ?? 0 },
+                        { "label", "CONTRIBUTION AMOUNT" },
+                        { "currency", "USD" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "donor-info",
+                    Type = "Narrative.Insight.Summary",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "text", $"Donor: {contribution.ContributorName}\nOccupation: {contribution.ContributorOccupation}\nLocation: {contribution.ContributorState}" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "trust-thread",
+                    Type = "Trust.Thread",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "referenceId", contribution.TransactionId ?? "N/A" },
+                        { "oracleSource", "Federal Election Commission" },
+                        { "verificationLevel", "Tier 3" }
+                    }
+                }
+            }
+        };
+
+        // Apply ACD enrichment
+        ThreadDown(
+            snap,
+            intensity: 0.7,
+            geographicDensity: GetGeoWeight(contribution.ContributorState),
+            roiPotential: 0.6,
+            derivationSummary: $"Financial signal: ${contribution.ContributionAmount:N0} from {contribution.ContributorState}",
+            targetState: contribution.ContributorState
+        );
+
+        return snap;
+    }
+
+    private double GetGeoWeight(string? state)
+    {
+        // Higher weight for competitive swing states
+        return state switch
+        {
+            "PA" or "MI" or "WI" or "GA" or "AZ" or "NV" => 0.9,
+            "CA" or "NY" or "TX" or "FL" => 0.7,
+            _ => 0.4
+        };
+    }
+
+    #region FEC API Response Models
+
+    private class FecCandidateResponse
+    {
+        public List<FecCandidate>? Results { get; set; }
+    }
+
+    private class FecCandidate
+    {
+        public string? CandidateId { get; set; }
+        public string? Name { get; set; }
+        public string? State { get; set; }
+        public string? Party { get; set; }
+        public string? Office { get; set; }
+    }
+
+    private class FecContributionResponse
+    {
+        public List<FecContributionItem>? Results { get; set; }
+    }
+
+    private class FecContributionItem
+    {
+        public string? TransactionId { get; set; }
+        public string? CommitteeId { get; set; }
+        public string? CandidateId { get; set; }
+        public string? ContributorName { get; set; }
+        public decimal? ContributionAmount { get; set; }
+        public DateTime? ContributionReceiptDate { get; set; }
+        public string? ContributorOccupation { get; set; }
+        public string? ContributorState { get; set; }
+    }
+
+    private class FecContribution
+    {
+        public string? TransactionId { get; set; }
+        public string? CandidateId { get; set; }
+        public string? CommitteeId { get; set; }
+        public string? ContributorName { get; set; }
+        public decimal? ContributionAmount { get; set; }
+        public DateTime? ContributionDate { get; set; }
+        public string? ContributorOccupation { get; set; }
+        public string? ContributorState { get; set; }
+    }
+
+    #endregion
+}

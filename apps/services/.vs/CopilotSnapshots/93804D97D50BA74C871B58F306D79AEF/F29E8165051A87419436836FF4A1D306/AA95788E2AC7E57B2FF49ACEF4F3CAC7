@@ -1,0 +1,35 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Ingestion.Services;
+
+public class IngestionService : IIngestionService
+{
+    private readonly IEnumerable<IDataSourceProvider> _providers;
+    private readonly ISnapRepository _snapRepository;
+
+    public IngestionService(IEnumerable<IDataSourceProvider> providers, ISnapRepository snapRepository)
+    {
+        _providers = providers;
+        _snapRepository = snapRepository;
+    }
+
+    public async Task<IEnumerable<PoliSnap>> RunIngestionAsync()
+    {
+        var allSnaps = new List<PoliSnap>();
+        
+        foreach (var provider in _providers)
+        {
+            var snaps = await provider.FetchLatestSnapsAsync();
+            allSnaps.AddRange(snaps);
+        }
+
+        // Logic here for deduplication, normalization, and persistence
+        await _snapRepository.SaveSnapsAsync(allSnaps);
+
+        return allSnaps;
+    }
+}

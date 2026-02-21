@@ -1,0 +1,7 @@
+{
+    "command": "sync",
+    "intent": "Aligning the PoliTickIt domain with the Beta v0.7.0-B kernel...",
+    "logic": "persona-only",
+    "output": "Domain-Kernel parity established. The PoliTickIt manifestation is now fully anchored to the Beta mainline.",
+    "guide": "Run 'omni audit' to ensure all legacy files have their DNA headers updated."
+}

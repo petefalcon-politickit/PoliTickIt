@@ -1,0 +1,76 @@
+using System.Net;
+using System.Text.Json;
+using Xunit;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Api.Tests.Controllers;
+
+public class SnapsControllerTests : IAsyncLifetime
+{
+    private ApiWebApplicationFactory? _factory;
+    private HttpClient? _client;
+
+    public async Task InitializeAsync()
+    {
+        _factory = new ApiWebApplicationFactory();
+        _client = _factory.CreateClient();
+    }
+
+    public async Task DisposeAsync()
+    {
+        _client?.Dispose();
+        _factory?.Dispose();
+    }
+
+    [Fact]
+    public async Task GetAll_ShouldReturnEmptyList_WhenNoSnapsExist()
+    {
+        // Act
+        var response = await _client!.GetAsync("/snaps");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var content = await response.Content.ReadAsStringAsync();
+        var snaps = JsonSerializer.Deserialize<List<PoliSnap>>(content, 
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        
+        Assert.NotNull(snaps);
+        Assert.NotEmpty(snaps); // Repository is seeded with data
+    }
+
+    [Fact]
+    public async Task GetById_ShouldReturnNotFound_WhenSnapDoesNotExist()
+    {
+        // Act
+        var response = await _client!.GetAsync("/snaps/non-existent-id");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task GetById_ShouldReturnSnap_WhenSnapExists()
+    {
+        // First get all snaps to find an existing ID
+        var allResponse = await _client!.GetAsync("/snaps");
+        var allContent = await allResponse.Content.ReadAsStringAsync();
+        var allSnaps = JsonSerializer.Deserialize<List<PoliSnap>>(allContent, 
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        
+        Assert.NotNull(allSnaps);
+        Assert.NotEmpty(allSnaps);
+        
+        // Now test getting by ID
+        var existingId = allSnaps[0].Id;
+        var response = await _client!.GetAsync($"/snaps/{existingId}");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var content = await response.Content.ReadAsStringAsync();
+        var snap = JsonSerializer.Deserialize<PoliSnap>(content,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        
+        Assert.NotNull(snap);
+        Assert.Equal(existingId, snap.Id);
+    }
+}

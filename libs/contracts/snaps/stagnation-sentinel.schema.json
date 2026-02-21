@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PoliSnap Metadata Contract: Stagnation Sentinel (SNP-004)",
+  "description": "Metadata-driven definition for the Legislative Friction molecule, measuring committee stagnation.",
+  "type": "object",
+  "required": ["id", "billNumber", "frictionCoefficient", "forensicTimeline"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Forensic DNA Identifier."
+    },
+    "billNumber": {
+      "type": "string",
+      "example": "H.R. 1234"
+    },
+    "frictionCoefficient": {
+      "type": "number",
+      "description": "The calculated stagnation score (0.0 to 1.0) where 1.0 is maximum committee resistance.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "forensicTimeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "deltaDays": { "type": "integer" }
+        }
+      }
+    },
+    "uiMapping": {
+      "type": "object",
+      "properties": {
+        "molecule": { "type": "string", "default": "Visual.FrictionGauge" },
+        "intensity": { "type": "string", "enum": ["Low", "Medium", "High", "Critical"] }
+      }
+    }
+  }
+}

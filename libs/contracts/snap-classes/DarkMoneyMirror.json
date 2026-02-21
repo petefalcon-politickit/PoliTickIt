@@ -1,0 +1,23 @@
+{
+  "className": "DarkMoneyMirror",
+  "description": "Correlates ethics referrals with campaign finance influence to detect potential corruption patterns.",
+  "tier": 3,
+  "genre": "Ethics",
+  "requiredMolecules": [
+    "Identity.Rep.Header",
+    "Metric.CorruptionIndex",
+    "Visual.Chart.FEC.CorrelationGrid",
+    "Interaction.Provenance.Receipt"
+  ],
+  "liquidLogic": {
+    "referralWeight": 0.6,
+    "financeWeight": 0.4,
+    "decayDays": 180
+  },
+  "metadataSchema": {
+    "representativeId": "string",
+    "ethicsReferrals": "number",
+    "fecViolationFlag": "boolean",
+    "topDonorIndustry": "string"
+  }
+}

@@ -1,50 +1,53 @@
-# PoliTickIt Mobile
+# **Omni-OS: Product Evolution & Patent Roadmap**
 
-A high-fidelity political transparency platform built with React Native and Expo.
-
-## Overview
-
-PoliTickIt uses a metadata-driven **Vertical Block Architecture** to deliver "PoliSnaps"—bite-sized, actionable insights into legislative activity, campaign finance, and representative accountability.
-
-### Key Features
-
-- **PoliSnap Feed**: A dynamic list of political insights (Accountability, Knowledge, Representative, Economics).
-- **Signal Ripple™ Engagement**: Advanced interactive constituent feedback loop using the **Quantum Feedback** methodology.
-- **Service-Oriented Architecture**: Powered by Awilix for robust dependency injection and modularity.
-- **Dynamic Correlation Engine**: Real-time cross-referencing of FEC data with legislative voting records.
-- **Unified Design System**: Consistent typography (14px base / 22px line-height), monochromatic branding, and accessibility using a token-based theme.
-
-## Architecture
-
-Detailed documentation can be found in the `/documentation` directory:
-
-- [Architecture Overview](documentation/ARCHITECTURE.md)
-- [PoliSnap Registry](documentation/POLISNAP_REGISTRY.md)
-- [Pro Roadmap & Backlog](documentation/PRO_BACKLOG.md)
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-## Design Tokens
-
-We follow a strict set of typography and spacing tokens defined in `constants/theme.ts`.
-
-- **XS**: 10px (Metadata/Captions)
-- **SM**: 12px (Small body/Labels)
-- **Base**: 14px (Standard text)
-- **MD**: 16px (Medium emphasis)
+- **Context**: Root / Product Registry
+- **Subject**: Intellectual Property R&D Environment
+- **Standard**: Omni Analysis Standard (Meta-Engine v1.1.0)
+- **Author**: Pete Falcon (Visionary)
+- **Status**: Active / Evolutionary Mode
 
 ---
 
-Developed for the Citizen Accountability Initiative.
+## ⚡ Quick Start (First-Time Ignition)
+
+To initialize the Omni-OS native CLI and establish the global handshake:
+
+1. Open a terminal in the root directory.
+2. Run: `.\Hello-Omni.cmd`
+3. Follow the "I am alive" prompt to start your first mission.
+
+---
+
+## 🏛️ Directory Hierarchy
+
+This repository is dedicated to the self-development of Omni-OS and the documentation of its non-provisional patent novelty.
+
+### 🛡️ [omni-os/](./omni-os/)
+
+The isolated OS engine (Tiers 0 & 2).
+
+- [kernel/](./omni-os/kernel/): Core governance foundations (e.g., [omni-kernel-v1.6.1.md](./omni-os/kernel/omni-kernel-v1.6.1.md)).
+- [modules/](./omni-os/modules/): Distilled logic blueprints.
+- [operations/](./omni-os/operations/): Operational SOPs (HVDF Protocol, OMNI-CLI).
+- [omni-vocabulary.md](./omni-os/omni-vocabulary.md): Global Glossary & Entropy Strategy.
+- [setup/](./omni-os/setup/): Guides for porting and environment scaffolding.
+
+### 📋 [patent-roadmap.manifest.md](./patent-roadmap.manifest.md)
+
+Tier 1 Anchor. The primary configuration for the Patent Roadmap domain.
+
+### ⚖️ [domain-workspace/](./domain-workspace/)
+
+The primary home for the Product Domain and IP documentation.
+
+- [Novelty-Logs/](./domain-workspace/Novelty-Logs/): Forensic evidence logs for patent filing.
+- [Research/](./domain-workspace/Research/): Seeded IP foundations and algorithms.
+- [Methodology/](./domain-workspace/Methodology/): Theoretical foundations (HVDF Whitepaper, Guardrails).
+
+### ️ [registry/](./registry/)
+
+Forensic session logs and checkpoint history.
+
+---
+
+_Omni-OS: Engineering the Future of Deterministic AI Governance._

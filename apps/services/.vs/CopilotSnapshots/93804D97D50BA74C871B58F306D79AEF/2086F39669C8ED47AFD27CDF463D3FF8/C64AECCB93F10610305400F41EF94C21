@@ -1,0 +1,39 @@
+﻿{
+  "OracleSettings": {
+    "Fec": {
+      "ApiKey": "demo_key_fec_local_dev",
+      "BaseUrl": "https://api.open.fec.gov/v1",
+      "TimeoutSeconds": 30,
+      "EnableCaching": true,
+      "CacheDurationMinutes": 5
+    },
+    "Congress": {
+      "ApiKey": "DEMO_KEY",
+      "BaseUrl": "https://api.congress.gov/v3",
+      "TimeoutSeconds": 30,
+      "EnableCaching": true,
+      "CacheDurationMinutes": 5
+    },
+    "Grants": {
+      "SamApiKey": "demo_key_sam_local_dev",
+      "GrantsApiKey": "demo_key_grants_local_dev",
+      "SamBaseUrl": "https://api.sam.gov/opportunities/v2",
+      "TimeoutSeconds": 30,
+      "EnableCaching": false,
+      "CacheDurationMinutes": 5
+    },
+    "Census": {
+      "ApiKey": "demo_key_census_local_dev",
+      "BaseUrl": "https://api.census.gov/data",
+      "TimeoutSeconds": 30,
+      "EnableCaching": false,
+      "CacheDurationMinutes": 5
+    }
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft.AspNetCore": "Information"
+    }
+  }
+}

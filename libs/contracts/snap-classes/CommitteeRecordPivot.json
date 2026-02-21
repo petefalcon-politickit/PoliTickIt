@@ -1,0 +1,26 @@
+{
+  "className": "CommitteeRecordPivot",
+  "description": "Triggered by formal institutional findings or document releases from Ethics Committees. Maps forensic allegations to the representative's accountability profile.",
+  "tier": 3,
+  "genre": "Ethics",
+  "feedType": "Accountability",
+  "requiredMolecules": [
+    "Header.Representative",
+    "Narrative.Insight.Summary",
+    "Metric.CorruptionIndex",
+    "Metric.Achievement.List",
+    "Trust.Thread"
+  ],
+  "liquidLogic": {
+    "findingIntensity": 0.85,
+    "decayDays": 180,
+    "overrideStandardMetrics": true
+  },
+  "metadataSchema": {
+    "representativeId": "string",
+    "findingLevel": "string",
+    "allegationCounts": "number",
+    "reportUrl": "string",
+    "pressReleaseDate": "string"
+  }
+}

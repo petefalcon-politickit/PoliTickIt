@@ -1,0 +1,125 @@
+using Xunit;
+using PoliTickIt.Domain.Models;
+using PoliTickIt.Infrastructure.Persistence;
+
+namespace PoliTickIt.Api.Tests.Infrastructure;
+
+public class InMemorySnapRepositoryTests
+{
+    [Fact]
+    public async Task SaveSnapAsync_ShouldSaveSnap()
+    {
+        // Arrange
+        var repository = new InMemorySnapRepository();
+        var snap = new PoliSnap
+        {
+            Id = "test-unique-1-" + Guid.NewGuid(),
+            Sku = "TEST-SKU",
+            Title = "Test Snap",
+            Type = "TestType",
+            CreatedAt = DateTime.UtcNow
+        };
+
+        // Act
+        await repository.SaveSnapAsync(snap);
+
+        // Assert
+        var retrieved = await repository.GetSnapByIdAsync(snap.Id);
+        Assert.NotNull(retrieved);
+        Assert.Equal(snap.Id, retrieved.Id);
+        Assert.Equal("TEST-SKU", retrieved.Sku);
+    }
+
+    [Fact]
+    public async Task SaveSnapsAsync_ShouldAddToRepository()
+    {
+        // Arrange
+        var repository = new InMemorySnapRepository();
+        var initialCount = (await repository.GetAllSnapsAsync()).Count();
+        
+        var snaps = new List<PoliSnap>
+        {
+            new PoliSnap { Id = "add-1-" + Guid.NewGuid(), Sku = "S1", Title = "T1", Type = "Ty1", CreatedAt = DateTime.UtcNow },
+            new PoliSnap { Id = "add-2-" + Guid.NewGuid(), Sku = "S2", Title = "T2", Type = "Ty2", CreatedAt = DateTime.UtcNow },
+            new PoliSnap { Id = "add-3-" + Guid.NewGuid(), Sku = "S3", Title = "T3", Type = "Ty3", CreatedAt = DateTime.UtcNow }
+        };
+
+        // Act
+        await repository.SaveSnapsAsync(snaps);
+
+        // Assert
+        var allSnaps = await repository.GetAllSnapsAsync();
+        Assert.NotNull(allSnaps);
+        var finalCount = allSnaps.Count();
+        Assert.Equal(initialCount + 3, finalCount);
+    }
+
+    [Fact]
+    public async Task GetAllSnapsAsync_ShouldReturnSnaps()
+    {
+        // Arrange
+        var repository = new InMemorySnapRepository();
+
+        // Act
+        var result = await repository.GetAllSnapsAsync();
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.NotEmpty(result); // Repository is seeded with data
+    }
+
+    [Fact]
+    public async Task GetSnapByIdAsync_ShouldReturnNullWhenNotFound()
+    {
+        // Arrange
+        var repository = new InMemorySnapRepository();
+
+        // Act
+        var result = await repository.GetSnapByIdAsync("non-existent-id-" + Guid.NewGuid());
+
+        // Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task GetSnapByIdAsync_ShouldReturnSnapWhenExists()
+    {
+        // Arrange
+        var repository = new InMemorySnapRepository();
+        var snap1 = new PoliSnap 
+        { 
+            Id = "test-get-" + Guid.NewGuid(), 
+            Sku = "S1", 
+            Title = "T1", 
+            Type = "Ty1", 
+            CreatedAt = DateTime.UtcNow 
+        };
+
+        // Act
+        await repository.SaveSnapAsync(snap1);
+        var result = await repository.GetSnapByIdAsync(snap1.Id);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(snap1.Id, result.Id);
+    }
+
+    [Fact]
+    public async Task SaveSnapAsync_ShouldOverwriteExistingSnap()
+    {
+        // Arrange
+        var repository = new InMemorySnapRepository();
+        var id = "overwrite-test-" + Guid.NewGuid();
+        var snap1 = new PoliSnap { Id = id, Sku = "S1", Title = "Original", Type = "Ty1", CreatedAt = DateTime.UtcNow };
+        var snap2 = new PoliSnap { Id = id, Sku = "S1", Title = "Updated", Type = "Ty1", CreatedAt = DateTime.UtcNow };
+
+        // Act
+        await repository.SaveSnapAsync(snap1);
+        await repository.SaveSnapAsync(snap2);
+        var result = await repository.GetSnapByIdAsync(id);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal("Updated", result.Title);
+    }
+}

@@ -1,0 +1,229 @@
+{
+  "$id": "https://politickit.com/schemas/polisnap.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PoliSnap",
+  "description": "Shared PoliSnap Metadata Contract for the Politickit Platform",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "sku": { "type": "string" },
+    "title": { "type": "string" },
+    "type": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        },
+        "required": ["name"]
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "policyArea": { "type": "string" },
+        "insightType": { "type": "string" },
+        "representativeId": { "type": "string" },
+        "applicationTier": {
+          "type": "string",
+          "enum": ["Standard", "Intelligence", "ROI Auditor", "Institutional"]
+        },
+        "headerElementId": { "type": "string" },
+        "laymanSummary": { "type": "string" },
+        "description": { "type": "string" },
+        "provenance": { "$ref": "#/definitions/ProvenanceMetadata" },
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "schemaVersion": { "type": "string" },
+        "accessLevel": {
+          "type": "string",
+          "enum": ["public", "authenticated", "restricted"]
+        },
+        "featureFlags": { "type": "object", "additionalProperties": { "type": "boolean" } },
+        "author": { "type": "string" }
+      }
+    },
+    "elements": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Element" }
+    },
+    "navigation": {
+      "type": "object",
+      "properties": {
+        "screenName": { "type": "string" },
+        "screenParams": { "type": "object" },
+        "availableActions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["back", "home", "refresh", "share", "save"]
+          }
+        }
+      }
+    },
+    "theme": { "type": "string" },
+    "locale": { "type": "string" }
+  },
+  "required": ["id", "sku", "title", "type", "createdAt", "elements"],
+  "definitions": {
+    "ProvenanceMetadata": {
+      "type": "object",
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "label": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["official", "news", "archive", "blockchain", "custom"]
+        },
+        "isVerified": { "type": "boolean" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "provider": { "type": "string" },
+        "auditTrailId": { "type": "string" }
+      },
+      "required": ["url"]
+    },
+    "NavigationMetadata": {
+      "type": "object",
+      "properties": {
+        "route": { "type": "string" },
+        "parameters": { "type": "object" },
+        "isClickable": { "type": "boolean" },
+        "actionType": {
+          "type": "string",
+          "enum": ["navigate", "push", "link", "back", "custom"]
+        },
+        "customAction": { "type": "string" },
+        "feedbackType": {
+          "type": "string",
+          "enum": ["highlight", "underline", "button", "none"]
+        }
+      },
+      "required": ["route", "isClickable", "actionType"]
+    },
+    "PresentationMetadata": {
+      "type": "object",
+      "properties": {
+        "layout": { "type": "string", "enum": ["horizontal", "vertical"] },
+        "styling": { "type": "string" },
+        "order": { "type": "integer" },
+        "visible": { "type": "boolean" },
+        "size": { "type": "string", "enum": ["small", "medium", "large", "full"] },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "responsive_size": { "type": "string", "enum": ["small", "medium", "large", "full"] },
+            "emphasis": { "type": "string", "enum": ["low", "medium", "high"] },
+            "border": { "type": "string", "enum": ["none", "light", "heavy"] },
+            "spacing": { "type": "string", "enum": ["compact", "normal", "spacious"] },
+            "background": { "type": "string", "enum": ["none", "subtle", "solid", "gradient"] }
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "ControlFeatures": {
+      "type": "object",
+      "properties": {
+        "template": { "type": "string" },
+        "collectionMode": { "type": "string", "enum": ["carousel", "grid", "list", "stack", "tabs"] },
+        "carousel": { "type": "string", "enum": ["auto-scroll", "manual"] },
+        "truncation": { "type": "string", "enum": ["none", "truncate", "expand", "expand-inline"] },
+        "customSettings": {
+          "type": "object",
+          "properties": {
+            "autoScrollInterval": { "type": "integer" },
+            "showPagingIndicators": { "type": "boolean" },
+            "columns": { "type": "integer" },
+            "itemSpacing": { "type": "string", "enum": ["compact", "normal", "spacious"] },
+            "truncationLimit": { "type": "integer" },
+            "pageSize": { "type": "integer" },
+            "hidden": { "type": "boolean" },
+            "animation": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string", "enum": ["fade", "slide", "scale", "none"] },
+                "duration": { "type": "integer" },
+                "delay": { "type": "integer" }
+              }
+            }
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "Template": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "elementType": { "type": "string" },
+        "dataSchema": { "type": "object", "additionalProperties": { "type": "string" } },
+        "requiredFields": { "type": "array", "items": { "type": "string" } },
+        "componentMap": { "type": "object", "additionalProperties": { "type": "string" } },
+        "renderingGuidance": { "type": "string" },
+        "version": { "type": "string" }
+      },
+      "required": ["id", "name", "elementType"]
+    },
+    "Element": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "displayName": { "type": "string" },
+        "data": { "type": "object" },
+        "template": { "$ref": "#/definitions/Template" },
+        "textMetadata": {
+          "type": "object",
+          "properties": {
+            "maxCharacters": { "type": "integer" },
+            "showMoreAction": { "type": "boolean" },
+            "truncationType": { "type": "string", "enum": ["Ellipsis", "Fade", "Clip"] },
+            "isClickable": { "type": "boolean" },
+            "level": { "type": "string", "enum": ["Default", "Emphasized", "Muted", "Caption"] },
+            "textTransform": { "type": "string", "enum": ["uppercase", "lowercase", "capitalize", "capitalize_all_words", "none"] },
+            "lineClamp": { "type": "integer" },
+            "selectable": { "type": "boolean" },
+            "monospace": { "type": "boolean" }
+          }
+        },
+        "navigation": { "$ref": "#/definitions/NavigationMetadata" },
+        "presentation": { "$ref": "#/definitions/PresentationMetadata" },
+        "controlFeatures": { "$ref": "#/definitions/ControlFeatures" },
+        "provenance": { "$ref": "#/definitions/ProvenanceMetadata" },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Element" }
+        },
+        "dataBinding": {
+          "type": "object",
+          "properties": {
+            "sourcePath": { "type": "string" },
+            "dataType": { "type": "string" },
+            "transformation": { "type": "string" },
+            "isRequired": { "type": "boolean" }
+          }
+        },
+        "accessibility": {
+          "type": "object",
+          "properties": {
+            "label": { "type": "string" },
+            "hint": { "type": "string" },
+            "role": { "type": "string", "enum": ["button", "link", "heading", "region", "image", "text"] },
+            "alternativeText": { "type": "string" }
+          }
+        },
+        "analytics": {
+          "type": "object",
+          "properties": {
+            "eventName": { "type": "string" },
+            "eventProperties": { "type": "object" }
+          }
+        }
+      },
+      "required": ["id", "type"]
+    }
+  }
+}

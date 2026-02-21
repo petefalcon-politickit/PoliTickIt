@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Api.Tests;
+
+/// <summary>
+/// Technical validation of the ACD and AMM capabilities.
+/// Simulates the "Thread-Down" logic and Maintenance heartbeat.
+/// </summary>
+public class CapabilityValidationTest
+{
+    private readonly IContextEnrichmentProcessor _cep;
+    private readonly IManifestorMaintenanceService _maintenance;
+
+    public CapabilityValidationTest(IContextEnrichmentProcessor cep, IManifestorMaintenanceService maintenance)
+    {
+        _cep = cep;
+        _maintenance = maintenance;
+    }
+
+    public async Task RunValidationSequenceAsync()
+    {
+        Console.WriteLine("=== PoliTickIt Capability Validation ===");
+
+        // 1. Test Scenario A: National Debt Logic (State Tier)
+        Console.WriteLine("\n[Test 1] Scenario A: National Debt -> State Tier...");
+        var debtSnap = new PoliSnap { Id = "test-debt" };
+        _cep.EnrichWithContext(debtSnap, intensity: 1.0, geographicDensity: 0.1, roiPotential: 0.6, derivationSummary: "National debt impact assessment");
+        ValidateTier(debtSnap, "State");
+
+        // 2. Test Scenario B: Grant Logic (District Tier)
+        Console.WriteLine("\n[Test 2] Scenario B: Local Grant -> District Tier...");
+        var grantSnap = new PoliSnap { Id = "test-grant" };
+        _cep.EnrichWithContext(grantSnap, intensity: 0.8, geographicDensity: 0.9, roiPotential: 1.0, derivationSummary: "Local grant district impact");
+        ValidateTier(grantSnap, "District");
+
+        // 3. Test AMM Heartbeat (Maintenance)
+        Console.WriteLine("\n[Test 3] AMM Integrity Check...");
+        var auditValue = await _maintenance.AuditContextEfficiencyAsync();
+        Console.WriteLine($"Audit Output: {auditValue}");
+
+        Console.WriteLine("\n=== Validation Complete: CID=ACD-CEP-AMM-PASS ===");
+    }
+
+    private void ValidateTier(PoliSnap snap, string expectedTier)
+    {
+        var thread = snap.Elements.FirstOrDefault(e => e.Type == "Context.Thread");
+        if (thread == null) throw new Exception("Context.Thread molecule missing.");
+        
+        var score = (double)thread.Data["refinementScore"];
+        var tier = (string)thread.Data["activeTier"];
+
+        Console.WriteLine($"RS Score: {score:F2} | Resulting Tier: {tier}");
+        if (tier != expectedTier) throw new Exception($"Tier mismatch. Expected {expectedTier}, got {tier}");
+    }
+}

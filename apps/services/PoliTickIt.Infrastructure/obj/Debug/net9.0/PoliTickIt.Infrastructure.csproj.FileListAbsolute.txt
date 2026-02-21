@@ -1,0 +1,15 @@
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\bin\Debug\net9.0\PoliTickIt.Infrastructure.deps.json
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\bin\Debug\net9.0\PoliTickIt.Infrastructure.dll
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\bin\Debug\net9.0\PoliTickIt.Infrastructure.pdb
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\bin\Debug\net9.0\PoliTickIt.Domain.dll
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\bin\Debug\net9.0\PoliTickIt.Domain.pdb
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.csproj.AssemblyReference.cache
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.AssemblyInfoInputs.cache
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.AssemblyInfo.cs
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTick.F6A4645D.Up2Date
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.dll
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\refint\PoliTickIt.Infrastructure.dll
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\PoliTickIt.Infrastructure.pdb
+C:\Projects\Organization\Projects\PoliTickIt\mobile\project\PoliTickIt\apps\services\PoliTickIt.Infrastructure\obj\Debug\net9.0\ref\PoliTickIt.Infrastructure.dll

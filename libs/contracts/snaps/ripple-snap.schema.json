@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PoliSnap Metadata Contract: Consensus Ripple (SNP-005)",
+  "description": "Metadata-driven definition for the District Sentiment molecule, aggregating verified voter signals.",
+  "type": "object",
+  "required": [
+    "id",
+    "district",
+    "consensusScore",
+    "voterDensity",
+    "trustAnchor"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique Forensic DNA Identifier."
+    },
+    "district": {
+      "type": "string",
+      "example": "CA-45",
+      "description": "The Congressional District associated with this ripple."
+    },
+    "consensusScore": {
+      "type": "number",
+      "description": "Aggregated sentiment score (-1.0 to 1.0).",
+      "minimum": -1,
+      "maximum": 1
+    },
+    "voterDensity": {
+      "type": "number",
+      "description": "Percentage of verified registered voters participating in this ripple.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "userRippleState": {
+      "type": "string",
+      "enum": [
+        "Support",
+        "Oppose",
+        "Neutral",
+        "Unset"
+      ],
+      "description": "Local user's state. In Tier 2, this is synced with local SQLite."
+    },
+    "trustAnchor": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Verified",
+            "Pending-ZK",
+            "Unverified"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "default": "ZK-Residency-Proof"
+        }
+      }
+    },
+    "uiMapping": {
+      "type": "object",
+      "properties": {
+        "molecule": {
+          "type": "string",
+          "default": "Visual.RipplePulse"
+        },
+        "theme": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "High-Alert",
+            "Consensus"
+          ]
+        }
+      }
+    }
+  }
+}

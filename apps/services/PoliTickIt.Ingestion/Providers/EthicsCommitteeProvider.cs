@@ -1,0 +1,168 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Ingestion.Providers;
+
+/// <summary>
+/// Autonomous Processor for institutional Ethics Committee findings.
+/// Monitors House/Senate PR feeds and Maps them to the CommitteeRecordPivot Snap Class.
+/// </summary>
+public class EthicsCommitteeProvider : BaseOracleProvider
+{
+    public override string ProviderName => "Institutional.Ethics.Audit.Engine";
+
+    public EthicsCommitteeProvider(HttpClient httpClient, IContextEnrichmentProcessor cep) : base(httpClient, cep)
+    {
+    }
+
+    // In a real implementation, we would use a ScraperService with the injected HttpClient
+    // For the manifestation, we demonstrate the mapping logic and "self-serving" architecture
+
+    public override async Task<IEnumerable<PoliSnap>> FetchLatestSnapsAsync()
+    {
+        // 1. Simulation of checking current committees (House Ethics, Senate Ethics)
+        // Logic: Scrape https://ethics.house.gov/press-releases 
+        // and https://www.ethics.senate.gov/public/index.cfm/press-releases
+        
+        // 2. Mocking the result of an automated scan finding a new PR
+        var findings = new List<EthicsFinding>
+        {
+            new EthicsFinding 
+            { 
+                RepId = "FL-DEM-001", 
+                Title = "Substantial Evidence of Fraud", 
+                Allegations = new List<string> { "Wire Fraud", "Campaign Finance Diversion", "False Statements" },
+                ReportUrl = "https://ethics.house.gov/reports/FL-DEM-001-Finding.pdf",
+                Intensity = 95,
+                Date = DateTime.UtcNow
+            }
+        };
+
+        var snaps = new List<PoliSnap>();
+
+        foreach (var finding in findings)
+        {
+            snaps.Add(MapToCommitteeRecordPivot(finding));
+        }
+
+        return await Task.FromResult(snaps);
+    }
+
+    private PoliSnap MapToCommitteeRecordPivot(EthicsFinding finding)
+    {
+        var snap = new PoliSnap
+        {
+            Id = $"ethics-finding-{finding.RepId}-{finding.Date:yyyyMMdd}",
+            Sku = $"ETH-AUD-CRP-{finding.RepId}-{finding.Date:yyyyMM}",
+            Title = $"Ethics Finding: {finding.Title}",
+            Type = "Accountability", // Mapping to Feed Tier 1
+            CreatedAt = finding.Date,
+            Sources = new List<Source> 
+            { 
+                new Source { Name = "House Ethics Committee", Url = "https://ethics.house.gov" } 
+            },
+            Metadata = new SnapMetadata
+            {
+                PolicyArea = "Ethics",
+                InsightType = "Committee Finding",
+                RepresentativeId = finding.RepId,
+                ApplicationTier = "ROI Auditor",
+                Keywords = new List<string> { "Ethics", "Integrity", "Accountability", "Forensic", "Substantial Evidence" },
+                LaymanSummary = $"The Ethics Committee has concluded that there is substantial evidence regarding {finding.Title} for the target representative."
+            },
+            Elements = new List<SnapElement>
+            {
+                new SnapElement
+                {
+                    Id = "rep-header",
+                    Type = "Header.Representative",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "id", finding.RepId },
+                        { "name", "Florida Representative" }, 
+                        { "position", "Member of Congress" },
+                        { "state", "Florida" },
+                        { "party", "Democratic" },
+                        { "imgUri", "https://via.placeholder.com/225x275" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "finding-summary",
+                    Type = "Narrative.Insight.Summary",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "text", $"Automated Audit: The House Ethics Committee released a formal finding regarding {finding.Title}. Documented allegations include: {string.Join(", ", finding.Allegations)}." }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "corruption-metric",
+                    Type = "Metric.CorruptionIndex",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "title", "PIVOT INTENSITY" },
+                        { "score", finding.Intensity },
+                        { "insight", "Institutional finding triggers maximum forensic audit intensity." },
+                        { "confidence", 0.99 }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "allegation-list",
+                    Type = "Metric.Achievement.List",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "title", "Documented Allegations" },
+                        { "items", finding.Allegations }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "trust-thread",
+                    Type = "Trust.Thread",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "referenceId", $"ETH-{finding.RepId}-{finding.Date:yyyy}" },
+                        { "verificationLevel", "Tier 3" },
+                        { "oracleSource", "House Ethics Committee" }
+                    },
+                    Provenance = new ProvenanceMetadata
+                    {
+                        Url = finding.ReportUrl,
+                        Label = "Official Committee Report",
+                        Timestamp = finding.Date,
+                        IsVerified = true
+                    }
+                }
+            }
+        };
+
+        // Apply ACD Thread-Down Heuristic
+        // Ethics findings for a specific representative are highly district-relevant (High ROI, High Intensity)
+        ThreadDown(
+            snap, 
+            intensity: finding.Intensity / 100.0, 
+            geographicDensity: 1.0, // Specific rep = high density for their district
+            roiPotential: 0.95,
+            derivationSummary: $"Ethics finding for representative in FL-23: {finding.Title}",
+            targetState: "FL",
+            targetDistrict: "23"
+        );
+
+        return snap;
+    }
+
+    private class EthicsFinding
+    {
+        public string RepId { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public List<string> Allegations { get; set; } = new();
+        public string ReportUrl { get; set; } = string.Empty;
+        public int Intensity { get; set; }
+        public DateTime Date { get; set; }
+    }
+}

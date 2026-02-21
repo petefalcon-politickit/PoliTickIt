@@ -1,0 +1,114 @@
+﻿using System.Linq;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Infrastructure.Persistence;
+using PoliTickIt.Ingestion.Providers;
+using PoliTickIt.Ingestion.Services;
+using PoliTickIt.Ingestion.Normalization.Extensions;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
+
+// Register Core Infrastructure
+builder.Services.AddSingleton<ISnapRepository, InMemorySnapRepository>();
+
+// Register Multi-Oracle Entity Normalization System (manual initialization)
+NormalizationInitializer.CreateNormalizationServices(
+    out var index,
+    out var repRepo,
+    out var billRepo,
+    out var committeeRepo,
+    out var donorRepo,
+    out var resolver,
+    out var linker,
+    out var pipeline);
+
+builder.Services.AddSingleton(index);
+builder.Services.AddSingleton(repRepo);
+builder.Services.AddSingleton(billRepo);
+builder.Services.AddSingleton(committeeRepo);
+builder.Services.AddSingleton(donorRepo);
+builder.Services.AddSingleton(resolver);
+builder.Services.AddSingleton(linker);
+builder.Services.AddSingleton(pipeline);
+
+// Register Ingestion Engine Components
+builder.Services.AddScoped<IManifestorIntelligenceService, ManifestorIntelligenceService>();
+builder.Services.AddScoped<IManifestorMaintenanceService, ManifestorMaintenanceService>();
+builder.Services.AddScoped<IContextEnrichmentProcessor, ContextEnrichmentProcessor>();
+builder.Services.AddScoped<IDataSourceProvider, FecProvider>();
+builder.Services.AddScoped<IDataSourceProvider, CongressionalActivityProvider>();
+builder.Services.AddScoped<IDataSourceProvider, EthicsCommitteeProvider>();
+builder.Services.AddScoped<IDataSourceProvider, FiscalPulseProvider>();
+builder.Services.AddScoped<IDataSourceProvider, GrantPulseProvider>();
+builder.Services.AddScoped<IIngestionService, IngestionService>();
+
+// Enable CORS for mobile development
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+var app = builder.Build();
+
+// Initialize normalization system from static files
+await NormalizationInitializer.InitializeNormalizationAsync(
+    "Data/Normalization",
+    repRepo, billRepo, committeeRepo, donorRepo, index);
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "PoliTickIt API v1");
+        options.RoutePrefix = "swagger";
+    });
+}
+
+app.UseCors("AllowAll");
+app.UseAuthorization();
+app.MapControllers();
+
+// Minimal API Endpoints for Snap Distribution
+app.MapGet("/api/snaps/registry", async (ISnapRepository repository) =>
+{
+    var snaps = await repository.GetAllSnapsAsync();
+    return Results.Ok(snaps);
+})
+.WithName("GetSnapRegistry")
+.WithOpenApi();
+
+app.MapGet("/api/snaps/{id}", async (string id, ISnapRepository repository) =>
+{
+    var snap = await repository.GetSnapByIdAsync(id);
+    return snap is not null ? Results.Ok(snap) : Results.NotFound();
+})
+.WithName("GetSnapById")
+.WithOpenApi();
+
+// Persist normalization data on shutdown
+var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+lifetime.ApplicationStopping.Register(async () =>
+{
+    await NormalizationInitializer.PersistNormalizationAsync(
+        "Data/Normalization",
+        repRepo, billRepo, committeeRepo, donorRepo, index);
+});
+
+app.Run();
+
+// Make Program accessible to test projects
+public partial class Program { }
+

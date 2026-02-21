@@ -1,0 +1,27 @@
+{
+  "className": "FiscalPulsePivot",
+  "description": "Triggered by high-frequency fiscal data updates from the U.S. Treasury. Maps national debt velocity, interest expenses, and federal revenue flows to citizen-centric economic impact metrics.",
+  "tier": 2,
+  "genre": "Fiscal",
+  "interestArea": "Economics and Public Finance",
+  "feedType": "Knowledge",
+  "requiredMolecules": [
+    "Narrative.Insight.Summary",
+    "Metric.Financial.Velocity",
+    "Visual.Chart.TreasuryFlow",
+    "Trust.Thread",
+    "Interaction.Participation.CTA"
+  ],
+  "liquidLogic": {
+    "volatilityWeight": 0.75,
+    "decayDays": 30,
+    "importanceScore": 85
+  },
+  "metadataSchema": {
+    "datasetId": "string",
+    "metricType": "string",
+    "fiscalYear": "number",
+    "changePercentage": "number",
+    "oracleSource": "string"
+  }
+}

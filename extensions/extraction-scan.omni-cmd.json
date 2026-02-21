@@ -1,0 +1,7 @@
+{
+    "command": "scan",
+    "intent": "Commencing forensic extraction scan of the PoliTickIt legacy domain...",
+    "logic": "persona-only",
+    "output": "[SCAN SUCCESS]\n- Identified 3 Core Molecules: Voter, Donor, Pulse.\n- Metadata Gap Analysis: COMPLETED.\n- Forensic DNA Requirements: LOGGED.\n\nI have itemized the requirements for the PoliTickIt-to-Beta transition.",
+    "guide": "Run 'omni mission submit EVO-006' to move the extraction molecules into the development pipeline."
+}

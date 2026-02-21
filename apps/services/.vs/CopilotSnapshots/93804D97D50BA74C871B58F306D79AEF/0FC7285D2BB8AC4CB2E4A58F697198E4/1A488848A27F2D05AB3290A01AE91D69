@@ -1,0 +1,126 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Models;
+
+namespace PoliTickIt.Ingestion.Providers;
+
+/// <summary>
+/// Autonomous Processor for Federal Grants (Infrastructure, Education, Research).
+/// Monitors Grants.gov/SAM.gov and threads them down to District context.
+/// Scenario B Implementation: Infrastructure Grant -> District ROI.
+/// </summary>
+public class GrantPulseProvider : IDataSourceProvider
+{
+    private readonly IContextEnrichmentProcessor _cep;
+    public string ProviderName => "Regional.Grant.Pulse.Engine";
+
+    public GrantPulseProvider(IContextEnrichmentProcessor cep)
+    {
+        _cep = cep;
+    }
+
+    public async Task<IEnumerable<PoliSnap>> FetchLatestSnapsAsync()
+    {
+        var snaps = new List<PoliSnap>();
+
+        // Simulation of discovering a high-velocity grant announcement
+        var infrastructureGrant = new FederalGrant
+        {
+            Id = "DOT-INFRA-2024-001",
+            Title = "Bipartisan Infrastructure Law: Local Bridge Rehabilitation",
+            TotalFunding = 5000000000m, // $5B
+            Department = "Department of Transportation",
+            Date = DateTime.UtcNow,
+            Eligibility = "State/Local Governments",
+            Status = "Open",
+            SourceUrl = "https://www.grants.gov/search-grants?opportunityNumber=DOT-INFRA-2024-001"
+        };
+
+        snaps.Add(MapToGrantInsightPivot(infrastructureGrant));
+
+        return await Task.FromResult(snaps);
+    }
+
+    private PoliSnap MapToGrantInsightPivot(FederalGrant grant)
+    {
+        var snap = new PoliSnap
+        {
+            Id = $"grant-{grant.Id}",
+            Sku = $"GRN-ROI-INFRA-{grant.Id}",
+            Title = $"Infrastructure Update: {grant.Title}",
+            Type = "Economics",
+            CreatedAt = grant.Date,
+            Sources = new List<Source> 
+            { 
+                new Source { Name = grant.Department, Url = grant.SourceUrl } 
+            },
+            Metadata = new SnapMetadata
+            {
+                PolicyArea = "Infrastructure",
+                InsightType = "Grant Opportunity",
+                Keywords = new List<string> { "Grants", "Infrastructure", "Funding", "Local ROI", "Jobs" },
+                LaymanSummary = $"A new ${grant.TotalFunding / 1000000000:N1}B funding pool for '{grant.Title}' has been opened. This triggers a localized ROI audit for your district."
+            },
+            Elements = new List<SnapElement>
+            {
+                new SnapElement
+                {
+                    Id = "funding-hero",
+                    Type = "Metric.CurrencyLarge",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "value", grant.TotalFunding },
+                        { "label", "TOTAL NATIONAL POOL" },
+                        { "trend", "Up" }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "grant-details",
+                    Type = "Narrative.Insight.Summary",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "text", $"The {grant.Department} is now accepting applications for {grant.Title}. Targeted at {grant.Eligibility}, this program focuses on regional development." }
+                    }
+                },
+                new SnapElement
+                {
+                    Id = "trust-thread",
+                    Type = "Trust.Thread",
+                    Data = new Dictionary<string, object>
+                    {
+                        { "oracleSource", "SAM.gov / Grants.gov" },
+                        { "verificationLevel", "Tier 3" }
+                    }
+                }
+            }
+        };
+
+        // Scenario B: Drill down to District
+        // Large infrastructure grants have high ROI potential (1.0) 
+        // and high geographic density (0.9) since they target local projects.
+        _cep.EnrichWithContext(
+            snap,
+            intensity: 0.8, 
+            geographicDensity: 0.9, 
+            roiPotential: 1.0, 
+            derivationSummary: "Infrastructure grant identified for potential district ROI impact in FL-23"
+        );
+
+        return snap;
+    }
+
+    private class FederalGrant
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public decimal TotalFunding { get; set; }
+        public string Department { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+        public string Eligibility { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public string SourceUrl { get; set; } = string.Empty;
+    }
+}

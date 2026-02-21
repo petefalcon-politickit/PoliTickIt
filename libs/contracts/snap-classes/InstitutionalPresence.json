@@ -1,0 +1,22 @@
+{
+  "className": "InstitutionalPresence",
+  "description": "A high-density audit of physical presence and participation consistency within institutional bodies.",
+  "tier": 2,
+  "genre": "Productivity",
+  "requiredMolecules": [
+    "Header.Representative",
+    "Metric.Attendance.Grid",
+    "Metric.Achievement.List",
+    "Metric.Congressional.WeeklySummary"
+  ],
+  "liquidLogic": {
+    "participationWeight": 0.7,
+    "activityWeight": 0.3,
+    "decayDays": 90
+  },
+  "metadataSchema": {
+    "representativeId": "string",
+    "sessionYear": "number",
+    "chamber": "string"
+  }
+}
