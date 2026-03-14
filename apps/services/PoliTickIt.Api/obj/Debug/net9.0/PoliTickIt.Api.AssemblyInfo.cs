@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PoliTickIt.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef86d5fc2f14b22e1e09062c8c8c89f3baae67ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+214f162b6b09fc93f02dff622ab282a1c1b7df71")]
 [assembly: System.Reflection.AssemblyProductAttribute("PoliTickIt.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PoliTickIt.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
