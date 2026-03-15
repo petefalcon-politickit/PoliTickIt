@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PoliTickIt.Ingestion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+214f162b6b09fc93f02dff622ab282a1c1b7df71")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96561b3bfd2aca6ddb5aa34d305da3940ae2e728")]
 [assembly: System.Reflection.AssemblyProductAttribute("PoliTickIt.Ingestion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PoliTickIt.Ingestion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
