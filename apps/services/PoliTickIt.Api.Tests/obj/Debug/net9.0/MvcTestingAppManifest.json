@@ -1,6 +1,0 @@
-{
-  "PoliTickIt.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Organization\\Projects\\PoliTickIt\\mobile\\project\\PoliTickIt\\apps\\services\\PoliTickIt.Api",
-  "PoliTickIt.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Organization\\Projects\\PoliTickIt\\mobile\\project\\PoliTickIt\\apps\\services\\PoliTickIt.Domain",
-  "PoliTickIt.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Organization\\Projects\\PoliTickIt\\mobile\\project\\PoliTickIt\\apps\\services\\PoliTickIt.Infrastructure",
-  "PoliTickIt.Ingestion, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Projects\\Organization\\Projects\\PoliTickIt\\mobile\\project\\PoliTickIt\\apps\\services\\PoliTickIt.Ingestion"
-}

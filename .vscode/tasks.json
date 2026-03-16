@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "[PoliTickIt-B2B] DASHBOARD DEV",
+      "type": "shell",
+      "command": "npm.cmd run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/../district-dashboard"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "group": "politickit",
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "[PoliTickIt-Mobile] WEB SIMULATOR",
+      "type": "shell",
+      "command": "npx.cmd expo start --web",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/mobile"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "group": "politickit",
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "[PoliTickIt-Api] PLATFORM IGNITION",
+      "type": "shell",
+      "command": "dotnet run --project apps/services/PoliTickIt.Api/PoliTickIt.Api.csproj",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "group": "politickit",
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}

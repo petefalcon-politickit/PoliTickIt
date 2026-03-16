@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Ignite & Launch Web Platform",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/../district-dashboard",
+      "preLaunchTask": "[PoliTickIt-B2B] DASHBOARD DEV"
+    },
+    {
+      "name": "Ignite & Launch Web Platform (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/../district-dashboard",
+      "preLaunchTask": "[PoliTickIt-B2B] DASHBOARD DEV"
+    }
+  ]
+}
