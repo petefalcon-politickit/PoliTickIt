@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PoliTickIt.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96561b3bfd2aca6ddb5aa34d305da3940ae2e728")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9170398eb2b7700c5c30ec87c2d72dfec5ec5dba")]
 [assembly: System.Reflection.AssemblyProductAttribute("PoliTickIt.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PoliTickIt.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
