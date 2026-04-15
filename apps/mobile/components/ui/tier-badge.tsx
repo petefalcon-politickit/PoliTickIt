@@ -23,7 +23,7 @@ export const TierBadge: React.FC<TierBadgeProps> = ({ credits }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="tier-badge">
       <View style={styles.tierContainer}>
         <ThemedText style={styles.tierText}>{tier}</ThemedText>
       </View>

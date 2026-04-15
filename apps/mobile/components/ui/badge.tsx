@@ -18,6 +18,7 @@ export const Badge: React.FC<BadgeProps> = ({ value, type = "red" }) => {
         { backgroundColor },
         type === "blue" && styles.blueBadge,
       ]}
+      testID="badge"
     >
       <Text style={styles.badgeText}>{value}</Text>
     </View>

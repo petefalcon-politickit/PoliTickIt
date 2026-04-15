@@ -11,7 +11,7 @@ export const SimpleFilterBar: React.FC<SimpleFilterBarProps> = ({
   onFilterPress,
 }) => {
   return (
-    <View style={styles.filterRow}>
+    <View style={styles.filterRow} testID="simple-filter-bar">
       <TouchableOpacity
         style={styles.filterIcon}
         onPress={onFilterPress}
