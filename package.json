@@ -13,6 +13,13 @@
     "mobile:test": "powershell -Command \"cd apps/mobile; npm test\"",
     "dashboard:dev": "npm run dev --workspace=apps/dashboard",
     "agency:dev": "npm run dev --workspace=apps/agency-portal",
-    "services:build": "dotnet build apps/services/PoliTickIt.Platform.sln"
+    "services:build": "dotnet build apps/services/PoliTickIt.Platform.sln",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "expo": "~54.0.27",
+    "react": "19.1.0",
+    "react-native": "0.81.5"
   }
 }

@@ -317,6 +317,15 @@ export const REPRESENTATIVES = [
     party: "Democrat",
     isFollowing: true,
   },
+  {
+    id: "J000299",
+    label: "Mike Johnson",
+    image: "https://unitedstates.github.io/images/congress/225x275/J000299.jpg",
+    state: "Louisiana",
+    gov: "Federal",
+    party: "Republican",
+    isFollowing: true,
+  },
 ];
 
 const US_STATES = [

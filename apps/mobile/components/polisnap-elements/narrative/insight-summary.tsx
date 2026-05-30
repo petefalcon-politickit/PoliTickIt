@@ -1,25 +1,17 @@
 import { ComponentFactory } from "@/components/factories/component-factory";
 import { ThemedText } from "@/components/themed-text";
-import { SeveredTitle } from "@/components/ui/severed-title";
 import { Colors, GlobalStyles, Spacing, Typography } from "@/constants/theme";
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 export const NarrativeInsightSummary = ({ data }: any) => {
   const [expanded, setExpanded] = useState(false);
-  const {
-    title,
-    text,
-    content,
-    summary,
-    sourceLink,
-    isExpandable,
-    accentColor,
-  } = data || {};
+  const { title, text, content, summary, sourceLink, isExpandable } =
+    data || {};
 
   const bodyText = text || content || summary || "";
   const displayLimit = 250;
-  const buffer = 30; // Only truncate if expansion provides significant value
+  const buffer = 30;
   const shouldTruncate =
     isExpandable && bodyText?.length > displayLimit + buffer;
   const displayText =
@@ -29,74 +21,54 @@ export const NarrativeInsightSummary = ({ data }: any) => {
 
   return (
     <View style={GlobalStyles.narrativeContainer}>
-      {title && (
-        <View style={styles.titleWrapper}>
-          <SeveredTitle title={title} textAlign="left" style={styles.title} />
-        </View>
-      )}
-      <View style={[styles.layout, title && { marginTop: 15 }]}>
-        <View
-          style={[
-            styles.accentBar,
-            { backgroundColor: accentColor || Colors.light.primary },
-          ]}
-        />
-        <View style={styles.content}>
-          <ThemedText style={styles.text}>{displayText}</ThemedText>
+      <View style={styles.insightBox}>
+        {title && <ThemedText style={styles.title}>{title}</ThemedText>}
+        <ThemedText style={styles.text}>{displayText}</ThemedText>
 
-          {shouldTruncate && (
-            <TouchableOpacity
-              onPress={() => setExpanded(!expanded)}
-              style={styles.moreButton}
-            >
-              <ThemedText style={styles.moreText}>
-                {expanded ? "SHOW LESS" : "READ FULL INSIGHT"}
-              </ThemedText>
-            </TouchableOpacity>
-          )}
+        {shouldTruncate && (
+          <TouchableOpacity
+            onPress={() => setExpanded(!expanded)}
+            style={styles.moreButton}
+          >
+            <ThemedText style={styles.moreText}>
+              {expanded ? "SHOW LESS" : "READ FULL INSIGHT"}
+            </ThemedText>
+          </TouchableOpacity>
+        )}
 
-          {sourceLink && (
-            <TouchableOpacity style={styles.sourceContainer}>
-              <ThemedText style={styles.sourceText}>
-                SOURCE: {sourceLink}
-              </ThemedText>
-            </TouchableOpacity>
-          )}
-        </View>
+        {sourceLink && (
+          <TouchableOpacity style={styles.sourceContainer}>
+            <ThemedText style={styles.sourceText}>
+              SOURCE: {sourceLink}
+            </ThemedText>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  titleWrapper: {
-    marginBottom: 0,
+  insightBox: {
+    backgroundColor: "rgba(0, 0, 0, 0.03)",
+    padding: Spacing.sm,
+    borderRadius: 2,
+    borderLeftWidth: 3,
+    borderLeftColor: Colors.light.textTertiary,
   },
   title: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: Colors.light.text, // Standard visibility
-    textTransform: "uppercase",
-    letterSpacing: 0.8,
-  },
-  layout: {
-    flexDirection: "row" as any,
-    alignItems: "flex-start",
-  },
-  accentBar: {
-    width: 4,
-    borderRadius: 2,
-    alignSelf: "stretch",
-    marginVertical: 2, // Tiny inset for visual air
-  },
-  content: {
-    flex: 1,
-    paddingLeft: Spacing.md,
+    fontSize: 11,
+    fontWeight: Typography.weights.bold as any,
+    color: Colors.light.textTertiary,
+    marginBottom: 4,
+    letterSpacing: 0.5,
+    textTransform: "uppercase" as any,
   },
   text: {
-    fontSize: Typography.sizes.base,
-    lineHeight: 22,
-    color: Colors.light.textSlate,
+    fontSize: 13,
+    lineHeight: 18,
+    color: Colors.light.text,
+    fontStyle: "italic" as any,
   },
   moreButton: {
     marginTop: Spacing.sm,

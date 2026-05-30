@@ -1,0 +1,10 @@
+{
+  "android": {
+    "package": "com.petefalcon1028.politickitplatform"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "f041039e-0aab-4a9f-a145-58cd7f924edc"
+    }
+  }
+}

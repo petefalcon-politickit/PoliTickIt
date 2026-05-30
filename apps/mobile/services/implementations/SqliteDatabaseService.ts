@@ -1,28 +1,59 @@
 import * as SQLite from "expo-sqlite";
+import { Platform } from "react-native";
 import { IDatabaseService } from "../interfaces/IDatabaseService";
 
 const DB_NAME = "politickit.db";
 
+// On web, expo-sqlite uses wa-sqlite internally. The persistent backend (AccessHandlePoolVFS)
+// uses OPFS SyncAccessHandles which require Cross-Origin isolation headers that the Expo
+// dev server does not provide. Passing ':memory:' routes expo-sqlite's worker to MemoryVFS
+// instead — no OPFS, no lock errors. Data resets on refresh, but web is a preview/dev
+// target and all data is hydrated from the API on startup anyway.
+const EFFECTIVE_DB_NAME = Platform.OS === "web" ? ":memory:" : DB_NAME;
+
+// Module-level singletons: ensures only one SQLiteDatabase connection is ever opened
+// regardless of how many SqliteDatabaseService instances exist (React StrictMode, DI
+// container re-resolution, etc.).
+let _db: SQLite.SQLiteDatabase | null = null;
+let _initPromise: Promise<void> | null = null;
+
 export class SqliteDatabaseService implements IDatabaseService {
-  private db: SQLite.SQLiteDatabase | null = null;
-  private initPromise: Promise<void> | null = null;
+  private get db(): SQLite.SQLiteDatabase | null {
+    return _db;
+  }
+  private set db(value: SQLite.SQLiteDatabase | null) {
+    _db = value;
+  }
+  private get initPromise(): Promise<void> | null {
+    return _initPromise;
+  }
+  private set initPromise(value: Promise<void> | null) {
+    _initPromise = value;
+  }
 
   async initialize(): Promise<void> {
     if (this.initPromise) return this.initPromise;
 
     this.initPromise = (async () => {
       try {
-        const database = await SQLite.openDatabaseAsync(DB_NAME);
+        const database = await SQLite.openDatabaseAsync(EFFECTIVE_DB_NAME);
 
         // Execute Foreign Key pragma separately - Use runAsync for single statements for better stability
         await database.runAsync("PRAGMA foreign_keys = ON");
 
-        // Handle Schema Migrations using user_version
-        const result = await database.getFirstAsync<{ user_version: number }>(
+        // Handle Schema Migrations using user_version.
+        // expo-sqlite web (wa-sqlite) can return the PRAGMA row with a different
+        // column key depending on the backend. We read any numeric value from the
+        // first column as a fallback so migrations don't re-run on every load.
+        const versionRow = await database.getFirstAsync<any>(
           "PRAGMA user_version",
-          [],
         );
-        const currentVersion = result?.user_version || 0;
+        const currentVersion: number =
+          versionRow != null
+            ? Number(
+                versionRow.user_version ?? Object.values(versionRow)[0] ?? 0,
+              )
+            : 0;
 
         // Wrap migrations in withTransactionAsync to ensure native stability and atomicity
         await database.withTransactionAsync(async () => {
@@ -376,11 +407,19 @@ export class SqliteDatabaseService implements IDatabaseService {
 
         this.db = database;
 
+        const finalVersionRow = await database.getFirstAsync<any>(
+          "PRAGMA user_version",
+        );
+        const finalVersion =
+          finalVersionRow != null
+            ? Number(
+                finalVersionRow.user_version ??
+                  Object.values(finalVersionRow)[0] ??
+                  0,
+              )
+            : 0;
         console.log(
-          "[SqliteDatabaseService] Database Initialized Successfully (Version: " +
-            (await this.db.getFirstAsync<any>("PRAGMA user_version;"))
-              ?.user_version +
-            ")",
+          `[SqliteDatabaseService] Database Initialized Successfully (Version: ${finalVersion}, Backend: ${Platform.OS === "web" ? "MemoryVFS" : "OPFS"})`,
         );
       } catch (error) {
         console.error(

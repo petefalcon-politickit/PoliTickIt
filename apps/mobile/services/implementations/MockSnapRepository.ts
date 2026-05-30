@@ -6,7 +6,6 @@ import { ISnapRepository } from "../interfaces/ISnapRepository";
 
 export class MockSnapRepository implements ISnapRepository {
   private fecVoteNormalizer: IFECVoteNormalizer;
-  private masterListCache: PoliSnap[] | null = null;
 
   constructor({
     fecVoteNormalizer,
@@ -21,10 +20,8 @@ export class MockSnapRepository implements ISnapRepository {
   }
 
   private getMasterList(): PoliSnap[] {
-    if (this.masterListCache) return this.masterListCache;
-
-    // Direct access to all exported arrays from both libraries
-    // We use the full library because it's the most comprehensive source
+    // No cache — reads directly from module exports so Expo Fast Refresh
+    // always picks up changes to snapLibrary.ts without needing a full restart.
     const sources = [
       SnapLibrary.allCandidateSnaps,
       SnapLibrary.accountabilitySnaps,
@@ -61,11 +58,11 @@ export class MockSnapRepository implements ISnapRepository {
       }
     });
 
-    this.masterListCache = Array.from(map.values());
+    const masterList = Array.from(map.values());
     console.log(
-      `[MockSnapRepository] Master list initialized with ${this.masterListCache.length} snaps`,
+      `[MockSnapRepository] Master list built with ${masterList.length} snaps`,
     );
-    return this.masterListCache;
+    return masterList;
   }
 
   async getSnapsByCategory(category: string): Promise<PoliSnap[]> {

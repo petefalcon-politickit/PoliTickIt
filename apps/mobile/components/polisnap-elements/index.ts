@@ -7,6 +7,7 @@
 
 import "./dashboard/aggregate-pulse";
 import "./dashboard/status-grid";
+import "./data/bill-vote";
 import "./data/consensus-ripple";
 import "./data/data-table";
 import "./data/fec-correlation-heatmap";
@@ -39,6 +40,7 @@ import "./narrative/congressional-statement";
 import "./narrative/congressional-transcript";
 import "./narrative/event-details";
 import "./narrative/insight-summary";
+import "./narrative/sentiment-summary";
 import "./visual/card-container";
 import "./visual/charts";
 import "./visual/sentiment-trend";
