@@ -1,0 +1,116 @@
+{
+  "id": "snap-hr1041-floor-debate-20260521",
+  "normRef": "NORM-20260530-090004-hr1041-floor-debate",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.1041 — Veterans 2nd Amendment Protection Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-30T09:02:30Z",
+  "sources": [
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #189 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll189.xml"
+    },
+    {
+      "name": "Congress.gov — H.R.1041",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/1041"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "House Floor Vote",
+    "representativeId": "M001199",
+    "billId": "H.R.1041",
+    "chamber": "House",
+    "voteDate": "2026-05-21",
+    "voteOutcome": "Passed",
+    "congress": "119"
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.1041",
+        "billTitle": "Veterans 2nd Amendment Protection Act — To restore Second Amendment rights of certain veterans",
+        "chamber": "House",
+        "voteOutcome": "Passed",
+        "voteDate": "May 21, 2026",
+        "congress": "119",
+        "policyArea": "Armed Forces and National Security"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 230,
+        "voteAgainst": 195,
+        "voteAbstain": 10,
+        "speakers": [
+          {
+            "bioguideId": "M001199",
+            "name": "Rep. Brian Mast",
+            "title": "R-FL · Army Combat Veteran (Amputee)",
+            "party": "Republican",
+            "position": "For",
+            "quote": "I left my legs on the battlefield in Afghanistan. The VA should not be able to strip my constitutional rights because I need help managing my finances. Veterans earned their rights. The VA does not get to take them away."
+          },
+          {
+            "bioguideId": "B001257",
+            "name": "Rep. Gus Bilirakis",
+            "title": "R-FL · House Veterans' Affairs",
+            "party": "Republican",
+            "position": "For",
+            "quote": "This is about due process. Right now, the VA can report veterans to the gun registry without a court order, without a hearing, without any judicial review. That is unconstitutional and we must fix it."
+          },
+          {
+            "bioguideId": "L000397",
+            "name": "Rep. Zoe Lofgren",
+            "title": "D-CA · House Judiciary",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "We owe veterans our deepest respect — and that means protecting them and everyone around them. Veterans with severe PTSD or TBI are at elevated risk. This bill removes the one safeguard in place. We support veterans by keeping them — and their families — safe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.1041 passed the House 230-195, largely along party lines. The bill prohibits the VA from reporting veterans to the National Instant Criminal Background Check System (NICS) solely because a fiduciary has been appointed to manage their benefits. Critics argue it removes a safety safeguard; supporters say it strips veterans of constitutional rights without judicial process. The bill now heads to the Senate.",
+        "isExpandable": true,
+        "sourceLink": "https://clerk.house.gov/evs/2026/roll189.xml"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the VA be able to restrict veterans' gun rights without a court order?",
+        "options": [
+          { "id": "court-required", "label": "No — a court must decide" },
+          { "id": "va-authority", "label": "Yes — VA should have authority" },
+          { "id": "case-by-case", "label": "Depends on the veteran's condition" },
+          { "id": "repeal-reporting", "label": "End NICS reporting entirely" }
+        ],
+        "stats": {
+          "agree": 0,
+          "disagree": 0
+        }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260530-090004-hr1041-floor-debate",
+        "serialNumber": "TT-20260530-M001199-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #189 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-30"
+      }
+    }
+  ]
+}

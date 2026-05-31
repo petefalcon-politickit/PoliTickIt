@@ -710,5 +710,13 @@ namespace PoliTickIt.Infrastructure.Persistence
             _store.TryGetValue(id, out var snap);
             return Task.FromResult(snap);
         }
+
+        public Task<PoliSnap?> FindByContentKeyAsync(string contentKey)
+        {
+            var snap = _store.Values.FirstOrDefault(s =>
+                s.Metadata?.ContentKey != null &&
+                string.Equals(s.Metadata.ContentKey, contentKey, StringComparison.OrdinalIgnoreCase));
+            return Task.FromResult(snap);
+        }
     }
 }

@@ -1,0 +1,116 @@
+{
+  "id": "snap-hr1329-floor-debate-20260521",
+  "normRef": "NORM-20260530-090003-hr1329-floor-debate",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.1329 — Smithsonian American Women's History Museum Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-30T09:02:00Z",
+  "sources": [
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #191 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll191.xml"
+    },
+    {
+      "name": "Congress.gov — H.R.1329",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/1329"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Arts, Culture, Religion",
+    "insightType": "House Floor Vote",
+    "representativeId": "B001285",
+    "billId": "H.R.1329",
+    "chamber": "House",
+    "voteDate": "2026-05-21",
+    "voteOutcome": "Failed",
+    "congress": "119"
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.1329",
+        "billTitle": "Smithsonian American Women's History Museum Act — To establish the Smithsonian American Women's History Museum",
+        "chamber": "House",
+        "voteOutcome": "Failed",
+        "voteDate": "May 21, 2026",
+        "congress": "119",
+        "policyArea": "Arts, Culture, Religion"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 201,
+        "voteAgainst": 218,
+        "voteAbstain": 16,
+        "speakers": [
+          {
+            "bioguideId": "B001285",
+            "name": "Rep. Julia Brownley",
+            "title": "D-CA · Bill Sponsor",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Women have shaped every chapter of American history — in every war, every movement, every scientific breakthrough. They deserve a permanent home on the National Mall. Voting no on this bill is voting to erase half of American history."
+          },
+          {
+            "bioguideId": "M001143",
+            "name": "Rep. Betty McCollum",
+            "title": "D-MN · House Appropriations",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "This is a bipartisan institution that celebrates American achievement. The Smithsonian is the right home for this museum. We owe this to Susan B. Anthony, Harriet Tubman, and every woman who built this nation."
+          },
+          {
+            "bioguideId": "D000626",
+            "name": "Rep. Warren Davidson",
+            "title": "R-OH · House Freedom Caucus",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "The federal government is $36 trillion in debt. Creating a new museum funded by taxpayers is not a priority. We honor women's history through our schools, our existing institutions, and private support — not a new federal monument."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.1329 failed 201-218, falling short of the 2/3 majority needed under suspension of rules. The bill would have established a new museum dedicated to American women on the National Mall as part of the Smithsonian Institution. The bill had passed the House in multiple prior sessions but never cleared the Senate. Opponents cited federal spending concerns; supporters argued the museum fills a significant historical gap.",
+        "isExpandable": true,
+        "sourceLink": "https://clerk.house.gov/evs/2026/roll191.xml"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US build a Smithsonian museum dedicated to women's history?",
+        "options": [
+          { "id": "yes-build", "label": "Yes — it's long overdue" },
+          { "id": "private-funding", "label": "Yes, but fund it privately" },
+          { "id": "other-priorities", "label": "Government has other priorities" },
+          { "id": "existing-institutions", "label": "Existing museums are enough" }
+        ],
+        "stats": {
+          "agree": 0,
+          "disagree": 0
+        }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260530-090003-hr1329-floor-debate",
+        "serialNumber": "TT-20260530-B001285-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #191 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-30"
+      }
+    }
+  ]
+}

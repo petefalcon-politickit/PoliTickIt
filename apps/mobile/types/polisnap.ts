@@ -129,6 +129,8 @@ export interface PoliSnap {
   title: string;
   type: string;
   createdAt: string;
+  /** Set to createdAt on first save; updated when content changes. Used by delta-sync. */
+  updatedAt?: string;
   sources: {
     name: string;
     url?: string;
@@ -154,6 +156,17 @@ export interface PoliSnap {
     accessLevel?: "public" | "authenticated" | "restricted";
     featureFlags?: Record<string, boolean>;
     author?: string;
+    // ── Domain entity reference fields ──────────────────────────────
+    /** Bill identifier in Congress.gov format: "H.R.1041", "S.J.Res.185" */
+    billId?: string;
+    /** Congressional chamber: "House" | "Senate" */
+    chamber?: string;
+    /** ISO-8601 date of the primary vote: "2026-05-21" */
+    voteDate?: string;
+    /** Plain-text vote outcome: "Passed", "Failed", "Agreed to (50-47)" */
+    voteOutcome?: string;
+    /** Congressional session number: "119" */
+    congress?: string;
   };
   elements: Element[];
   navigation?: {

@@ -2,11 +2,14 @@ import { AuthBackground } from "@/components/ui/auth-background";
 import { AuthCard } from "@/components/ui/auth-card";
 import { POLICY_AREAS } from "@/components/ui/representative-and-policy-area-filter-bottom-sheet";
 import { Colors, GlobalStyles, Typography } from "@/constants/theme";
+import { useAuth } from "@/contexts/auth-context";
+import { apiAuthService } from "@/services/implementations/ApiAuthService";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -29,7 +32,20 @@ const STEPS: Step[] = [
 ];
 
 export default function SignupScreen() {
+  const {
+    register,
+    verifyEmail,
+    resendVerification,
+    isLoading,
+    error,
+    clearError,
+  } = useAuth();
   const [step, setStep] = useState<Step>("ACCOUNT");
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
+  const [zipError, setZipError] = useState<string | null>(null);
+  const [zipValidating, setZipValidating] = useState(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [emailChecking, setEmailChecking] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -47,6 +63,8 @@ export default function SignupScreen() {
   const [showPassword, setShowPassword] = useState(false);
 
   const updateField = (field: string, value: any) => {
+    if (field === "zip") setZipError(null);
+    if (field === "email" || field === "confirmEmail") setEmailError(null);
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -86,6 +104,8 @@ export default function SignupScreen() {
       }
     } else if (step === "ZIP") {
       if (!formData.zip) return;
+      // ZIP validation is async — handled by handleZipContinue
+      return;
     }
     // No guards needed for INTERESTS, PARTY, or REVIEW as they are optional/confirmation steps
 
@@ -107,6 +127,62 @@ export default function SignupScreen() {
     const currentIndex = STEPS.indexOf(step);
     if (currentIndex > 0) {
       setStep(STEPS[currentIndex - 1]);
+    }
+  };
+
+  const handleAccountContinue = async () => {
+    const {
+      firstName,
+      lastName,
+      email,
+      confirmEmail,
+      password,
+      confirmPassword,
+    } = formData;
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !confirmEmail ||
+      !password ||
+      !confirmPassword
+    )
+      return;
+    if (email !== confirmEmail || password !== confirmPassword) return;
+    setEmailChecking(true);
+    setEmailError(null);
+    try {
+      const result = await apiAuthService.checkEmailAvailable(email);
+      if (!result.available) {
+        setEmailError(result.error);
+        return;
+      }
+      setStep("ZIP");
+    } catch {
+      setEmailError("Could not verify email. Please try again.");
+    } finally {
+      setEmailChecking(false);
+    }
+  };
+
+  const handleZipContinue = async () => {
+    if (formData.zip.length !== 5) {
+      setZipError("Please enter a 5-digit zip code.");
+      return;
+    }
+    setZipValidating(true);
+    setZipError(null);
+    try {
+      const result = await apiAuthService.validateZip(formData.zip);
+      if (!result.valid) {
+        setZipError(result.error);
+      } else {
+        setStep("INTERESTS");
+      }
+    } catch {
+      setZipError("Could not validate zip code. Please try again.");
+    } finally {
+      setZipValidating(false);
     }
   };
 
@@ -225,10 +301,11 @@ export default function SignupScreen() {
             !formData.password ||
             !formData.confirmPassword ||
             formData.email !== formData.confirmEmail ||
-            formData.password !== formData.confirmPassword) &&
+            formData.password !== formData.confirmPassword ||
+            emailChecking) &&
             styles.buttonDisabled,
         ]}
-        onPress={() => step === "ACCOUNT" && nextStep()}
+        onPress={handleAccountContinue}
         disabled={
           !formData.firstName ||
           !formData.lastName ||
@@ -237,11 +314,22 @@ export default function SignupScreen() {
           !formData.password ||
           !formData.confirmPassword ||
           formData.email !== formData.confirmEmail ||
-          formData.password !== formData.confirmPassword
+          formData.password !== formData.confirmPassword ||
+          emailChecking
         }
       >
-        <Text style={styles.primaryButtonText}>CONTINUE</Text>
+        {emailChecking ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.primaryButtonText}>CONTINUE</Text>
+        )}
       </TouchableOpacity>
+
+      {emailError && (
+        <Text style={{ color: "red", marginTop: 8, textAlign: "center" }}>
+          {emailError}
+        </Text>
+      )}
 
       <StepIndicator />
 
@@ -273,6 +361,7 @@ export default function SignupScreen() {
           style={[
             styles.input,
             { textAlign: "center", fontSize: 24, letterSpacing: 4 },
+            zipError ? { borderColor: "#EF4444" } : undefined,
           ]}
           placeholder="00000"
           placeholderTextColor={Colors.light.textPlaceholder}
@@ -281,14 +370,33 @@ export default function SignupScreen() {
           keyboardType="number-pad"
           maxLength={5}
         />
+        {zipError && (
+          <Text
+            style={{
+              color: "#EF4444",
+              fontSize: 13,
+              marginTop: 6,
+              textAlign: "center",
+            }}
+          >
+            {zipError}
+          </Text>
+        )}
       </View>
 
       <TouchableOpacity
-        style={[styles.primaryButton, !formData.zip && styles.buttonDisabled]}
-        onPress={() => step === "ZIP" && nextStep()}
-        disabled={!formData.zip}
+        style={[
+          styles.primaryButton,
+          (formData.zip.length !== 5 || zipValidating) && styles.buttonDisabled,
+        ]}
+        onPress={handleZipContinue}
+        disabled={formData.zip.length !== 5 || zipValidating}
       >
-        <Text style={styles.primaryButtonText}>CONTINUE</Text>
+        {zipValidating ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.primaryButtonText}>CONTINUE</Text>
+        )}
       </TouchableOpacity>
 
       <StepIndicator />
@@ -432,11 +540,36 @@ export default function SignupScreen() {
         </View>
       </View>
 
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
       <TouchableOpacity
-        style={styles.primaryButton}
-        onPress={() => step === "REVIEW" && nextStep()}
+        style={[styles.primaryButton, isLoading && styles.buttonDisabled]}
+        onPress={async () => {
+          if (step === "REVIEW" && !isLoading) {
+            try {
+              const result = await register({
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                password: formData.password,
+                zip: formData.zip,
+                interests: formData.interests,
+                party: formData.party,
+              });
+              setPendingEmail(result.email);
+              nextStep();
+            } catch {
+              // error is set in auth context
+            }
+          }
+        }}
+        disabled={isLoading}
       >
-        <Text style={styles.primaryButtonText}>CREATE ACCOUNT</Text>
+        {isLoading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.primaryButtonText}>CREATE ACCOUNT</Text>
+        )}
       </TouchableOpacity>
 
       <StepIndicator />
@@ -451,7 +584,7 @@ export default function SignupScreen() {
     <View style={styles.stepContainer}>
       <StepHeader
         title="Confirm Your Email"
-        subtitle={`We sent a verification code to ${formData.email}. Enter it below to activate your account.`}
+        subtitle={`We sent a verification code to ${pendingEmail ?? formData.email}. Enter it below to activate your account.`}
       />
 
       <View style={styles.iconWrapper}>
@@ -475,16 +608,33 @@ export default function SignupScreen() {
         />
       </View>
 
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
       <TouchableOpacity
-        style={styles.primaryButton}
-        onPress={() => step === "CONFIRM" && nextStep()}
+        style={[
+          styles.primaryButton,
+          (isLoading || formData.code.length !== 6) && styles.buttonDisabled,
+        ]}
+        onPress={() => {
+          if (step === "CONFIRM" && !isLoading && formData.code.length === 6) {
+            verifyEmail(pendingEmail ?? formData.email, formData.code);
+          }
+        }}
+        disabled={isLoading || formData.code.length !== 6}
       >
-        <Text style={styles.primaryButtonText}>ACTIVATE ACCOUNT</Text>
+        {isLoading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.primaryButtonText}>ACTIVATE ACCOUNT</Text>
+        )}
       </TouchableOpacity>
 
       <StepIndicator />
 
-      <TouchableOpacity style={styles.backLink}>
+      <TouchableOpacity
+        style={styles.backLink}
+        onPress={() => resendVerification(pendingEmail ?? formData.email)}
+      >
         <Text style={styles.backLinkText}>RESEND CODE</Text>
       </TouchableOpacity>
     </View>
@@ -630,6 +780,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 16,
     top: 16,
+  },
+  errorText: {
+    color: "#d32f2f",
+    fontSize: 13,
+    textAlign: "center",
+    marginBottom: 10,
   },
   primaryButton: {
     ...GlobalStyles.primaryButton,

@@ -1,0 +1,38 @@
+{
+  "$schema": "./mapping.schema.json",
+  "source": "Congress.gov API v3",
+  "version": "2026-05-31",
+  "description": "Maps Congress.gov API response field names to canonical SnapMetadata field names. Used by the PoliSnap mining normaliser to populate typed metadata without manual field mapping per snap.",
+  "bill": {
+    "congress": "congress",
+    "number": "billId",
+    "type": "_billTypePrefix",
+    "title": "_billTitle",
+    "policyArea.name": "policyArea",
+    "latestAction.actionDate": "voteDate",
+    "sponsors[0].bioguideId": "representativeId"
+  },
+  "vote": {
+    "chamber": "chamber",
+    "date": "voteDate",
+    "result": "voteOutcome",
+    "congress": "congress",
+    "bill.number": "_billNumber",
+    "bill.type": "_billTypePrefix"
+  },
+  "member": {
+    "bioguideId": "bioguideId",
+    "name": "name",
+    "partyName": "party",
+    "state": "state",
+    "district": "district",
+    "currentMember": "_currentMember",
+    "url": "congressGovUrl"
+  },
+  "_notes": {
+    "_billTypePrefix": "Combine bill.type + bill.number to produce canonical billId: e.g. 'hr' + '1041' → 'H.R.1041', 'sjres' + '185' → 'S.J.Res.185'",
+    "_billTitle": "Use for SnapMetadata.description or element Header.Bill data.billTitle",
+    "_currentMember": "Boolean — use to filter active vs. historical members when populating snap metadata",
+    "contentKey_convention": "Use 'bill:{billId}' pattern: e.g. 'bill:H.R.1041'. Populate SnapMetadata.ContentKey for upsert detection."
+  }
+}

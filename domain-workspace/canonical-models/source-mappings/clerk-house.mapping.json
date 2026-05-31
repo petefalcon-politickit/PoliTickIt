@@ -1,0 +1,33 @@
+{
+  "$schema": "./mapping.schema.json",
+  "source": "Clerk of the House Roll Call XML (evs format)",
+  "version": "2026-05-31",
+  "description": "Maps Clerk.House.gov roll-call XML field names to canonical SnapMetadata field names. Source URL format: https://clerk.house.gov/evs/{year}/roll{rollNumber}.xml",
+  "vote": {
+    "vote-metadata.congress": "congress",
+    "vote-metadata.session": "_session",
+    "vote-metadata.chamber": "chamber",
+    "vote-metadata.vote-date": "voteDate",
+    "vote-metadata.vote-result": "voteOutcome",
+    "vote-metadata.legis-num": "billId",
+    "vote-metadata.vote-totals.totals-by-vote.yea-total": "_voteFor",
+    "vote-metadata.vote-totals.totals-by-vote.nay-total": "_voteAgainst",
+    "vote-metadata.vote-totals.totals-by-vote.not-voting-total": "_voteAbstain"
+  },
+  "member": {
+    "legislator.@bioguideId": "bioguideId",
+    "legislator.#text": "name",
+    "legislator.@party": "party",
+    "legislator.@state": "state",
+    "legislator.vote": "position"
+  },
+  "_notes": {
+    "_session": "Congressional session (1 or 2). Not currently mapped to SnapMetadata.",
+    "_voteFor": "Map to FloorVote.VoteFor and Data.FloorDebate.voteFor element data.",
+    "_voteAgainst": "Map to FloorVote.VoteAgainst and Data.FloorDebate.voteAgainst element data.",
+    "_voteAbstain": "Map to FloorVote.VoteAbstain and Data.FloorDebate.voteAbstain element data.",
+    "position_values": "Clerk reports 'Yea'/'Nay'/'Not Voting'. Normalise 'Yea' → 'For', 'Nay' → 'Against' for FloorSpeaker.Position.",
+    "contentKey_convention": "Use 'bill:{billId}' pattern matching Congress.gov mapping. Source URL goes into snap sources array and element Provenance.url.",
+    "date_format": "Clerk returns 'DD-MMM-YYYY' (e.g. '21-May-2026'). Normalise to ISO-8601 'YYYY-MM-DD' for SnapMetadata.VoteDate."
+  }
+}

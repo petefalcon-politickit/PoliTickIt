@@ -1,29 +1,32 @@
 import { AuthBackground } from "@/components/ui/auth-background";
 import { AuthCard } from "@/components/ui/auth-card";
 import { Colors, GlobalStyles } from "@/constants/theme";
+import { useAuth } from "@/contexts/auth-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    ActivityIndicator,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 export default function LoginScreen() {
+  const { login, isLoading, error, clearError } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleContinue = () => {
     if (email && password) {
-      router.replace("/accountability");
+      login(email, password);
     }
   };
 
@@ -121,12 +124,19 @@ export default function LoginScreen() {
               </View>
             </View>
 
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
             <TouchableOpacity
-              style={styles.primaryButton}
+              style={[styles.primaryButton, isLoading && styles.buttonDisabled]}
               onPress={handleContinue}
               activeOpacity={0.8}
+              disabled={isLoading}
             >
-              <Text style={styles.primaryButtonText}>LOGIN</Text>
+              {isLoading ? (
+                <ActivityIndicator color="#fff" />
+              ) : (
+                <Text style={styles.primaryButtonText}>LOGIN</Text>
+              )}
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -235,6 +245,15 @@ const styles = StyleSheet.create({
   primaryButton: {
     ...GlobalStyles.primaryButton,
     marginBottom: 12,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  errorText: {
+    color: "#d32f2f",
+    fontSize: 13,
+    textAlign: "center",
+    marginBottom: 10,
   },
   primaryButtonText: GlobalStyles.primaryButtonText,
   secondaryButton: {
