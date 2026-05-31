@@ -1,0 +1,98 @@
+{
+  "distributionBatch": "DIST-20260530-FloorDebates-May1921",
+  "distributedAt": "2026-05-30T09:05:00Z",
+  "targetArray": "accountabilitySnaps",
+  "targetFile": "apps/mobile/constants/snapLibrary.ts",
+  "insertPosition": "prepend",
+  "snapsDistributed": [
+    {
+      "rank": 1,
+      "snapId": "snap-sjres185-floor-debate-20260519",
+      "snapFile": "SNAP-snap-sjres185-floor-debate-20260519.json",
+      "normRef": "NORM-20260530-090001-sjres185-floor-debate",
+      "spawnRef": "SPAWN-20260530-090001-sjres185-floor-debate",
+      "channels": [
+        "Representative:D000622",
+        "PolicyArea:ArmedForcesAndNationalSecurity",
+        "PoliTickIt:Accountability",
+        "FloorDebate:SJRes185",
+        "Congress:119th"
+      ],
+      "positionAfterInsert": 0
+    },
+    {
+      "rank": 2,
+      "snapId": "snap-hr2616-floor-debate-20260520",
+      "snapFile": "SNAP-snap-hr2616-floor-debate-20260520.json",
+      "normRef": "NORM-20260530-090002-hr2616-floor-debate",
+      "spawnRef": "SPAWN-20260530-090002-hr2616-floor-debate",
+      "channels": [
+        "Representative:W000798",
+        "PolicyArea:ScienceTechnologyCommunications",
+        "PoliTickIt:Accountability",
+        "FloorDebate:HR2616",
+        "Congress:119th"
+      ],
+      "positionAfterInsert": 1
+    },
+    {
+      "rank": 3,
+      "snapId": "snap-hr1329-floor-debate-20260521",
+      "snapFile": "SNAP-snap-hr1329-floor-debate-20260521.json",
+      "normRef": "NORM-20260530-090003-hr1329-floor-debate",
+      "spawnRef": "SPAWN-20260530-090003-hr1329-floor-debate",
+      "channels": [
+        "Representative:B001285",
+        "PolicyArea:ArtsCultureReligion",
+        "PoliTickIt:Accountability",
+        "FloorDebate:HR1329",
+        "Congress:119th"
+      ],
+      "positionAfterInsert": 2
+    },
+    {
+      "rank": 4,
+      "snapId": "snap-hr1041-floor-debate-20260521",
+      "snapFile": "SNAP-snap-hr1041-floor-debate-20260521.json",
+      "normRef": "NORM-20260530-090004-hr1041-floor-debate",
+      "spawnRef": "SPAWN-20260530-090004-hr1041-floor-debate",
+      "channels": [
+        "Representative:M001199",
+        "PolicyArea:ArmedForcesAndNationalSecurity",
+        "PoliTickIt:Accountability",
+        "FloorDebate:HR1041",
+        "Congress:119th"
+      ],
+      "positionAfterInsert": 3
+    },
+    {
+      "rank": 5,
+      "snapId": "snap-hr6644-floor-debate-20260520",
+      "snapFile": "SNAP-snap-hr6644-floor-debate-20260520.json",
+      "normRef": "NORM-20260530-090005-hr6644-floor-debate",
+      "spawnRef": "SPAWN-20260530-090005-hr6644-floor-debate",
+      "channels": [
+        "Representative:D000629",
+        "PolicyArea:HousingAndCommunityDevelopment",
+        "PoliTickIt:Accountability",
+        "FloorDebate:HR6644",
+        "Congress:119th"
+      ],
+      "positionAfterInsert": 4
+    }
+  ],
+  "newElementsRegistered": [
+    {
+      "elementType": "Header.Bill",
+      "componentFile": "apps/mobile/components/polisnap-elements/identity/header-bill.tsx",
+      "registeredIn": "apps/mobile/components/polisnap-elements/index.ts"
+    },
+    {
+      "elementType": "Data.FloorDebate",
+      "componentFile": "apps/mobile/components/polisnap-elements/data/data-floor-debate.tsx",
+      "registeredIn": "apps/mobile/components/polisnap-elements/index.ts"
+    }
+  ],
+  "sourceSession": "May 19-21, 2026 (fallback from May 29 Memorial Day recess)",
+  "pipelinePrompt": "apps/skill-execution/PoliSnaps/prompts/daily-floor-debates.prompt.md"
+}

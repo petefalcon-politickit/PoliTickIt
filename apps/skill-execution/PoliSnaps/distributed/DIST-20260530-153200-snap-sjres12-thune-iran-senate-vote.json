@@ -1,0 +1,16 @@
+{
+  "distId": "DIST-20260530-153200-snap-sjres12-thune-iran-senate-vote",
+  "snapId": "snap-sjres12-thune-iran-senate-vote",
+  "snapRef": "SNAP-snap-sjres12-thune-iran-senate-vote.json",
+  "distributedAt": "2026-05-30T15:32:00Z",
+  "targetArray": "accountabilitySnaps",
+  "insertPosition": 0,
+  "channelPartitions": [
+    "Representative:T000250",
+    "PolicyArea:Armed Forces and National Security",
+    "Geography:South Dakota",
+    "PoliTickIt:Accountability"
+  ],
+  "snapLibraryStatus": "prepended",
+  "warningsAtDistribution": []
+}

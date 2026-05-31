@@ -1,0 +1,44 @@
+{
+  "spawnId": "SPAWN-20260530-090005-hr6644-floor-debate",
+  "mineMode": "structured",
+  "contentSignal": "active",
+  "fetchDate": "2026-05-21",
+  "sourceSession": "119th Congress, 2nd Session — House, May 20 2026",
+  "billId": "H.R.6644",
+  "billTitle": "To increase the supply of housing in America, and for other purposes",
+  "billShortTitle": "Housing Supply and Affordability Act",
+  "chamber": "House",
+  "congress": "119",
+  "lastActionDate": "2026-05-20",
+  "voteOutcome": "Passed (concurred with Senate amendment)",
+  "policyArea": "Housing and Community Development",
+  "speakerCount": 4,
+  "speakers": [
+    {
+      "name": "Sharice Davids",
+      "representativeId": "D000629",
+      "party": "Democrat",
+      "position": "For",
+      "quote": "Housing costs are the number one economic concern for families in my district and across this country. This bill isn't perfect, but it will increase housing supply in communities that desperately need it.",
+      "summary": "Davids supported the bill as a meaningful step toward addressing the housing affordability crisis, acknowledging imperfections while emphasizing that increased supply is essential to lowering costs for working families."
+    },
+    {
+      "name": "Ann Wagner",
+      "representativeId": "W000812",
+      "party": "Republican",
+      "position": "For",
+      "quote": "Homeownership has always been part of the American Dream. When zoning barriers and regulatory red tape block new construction, families pay the price. This bill cuts through that. I urge my colleagues to support it.",
+      "summary": "Wagner framed the bill as pro-family and pro-homeownership, emphasizing zoning reform and regulatory relief as the keys to unlocking new housing construction in constrained markets."
+    },
+    {
+      "name": "Dan Crenshaw",
+      "representativeId": "C001120",
+      "party": "Republican",
+      "position": "Against",
+      "quote": "Federal interference in local zoning decisions sets a dangerous precedent. Housing is fundamentally a local issue. Washington dictating density requirements to municipalities undermines federalism and will produce unintended consequences.",
+      "summary": "Crenshaw opposed the bill's federal incentive structure for local zoning reform, arguing it crosses the line from federal incentive to federal mandate and undermines the principle of local governance over land use."
+    }
+  ],
+  "rawSource": "House Roll Call Vote #176 — 119th Congress, 2nd Session, May 20 2026. Senate passage 89-10 (March 12 2026). Source: clerk.house.gov/evs/2026/ROLL_100.asp",
+  "minedAt": "2026-05-30T09:00:05Z"
+}

@@ -1,0 +1,59 @@
+{
+  "normId": "NORM-20260530-153100-thune-iran-aumf-statement",
+  "spawnRef": "SPAWN-20260530-153000-thune-iran-aumf-statement",
+  "generatedAt": "2026-05-30T15:31:00Z",
+  "validatedRepresentativeId": "T000250",
+  "additionalRepIds": [],
+  "validatedPolicyArea": "Armed Forces and National Security",
+  "canonicalBillId": "S.J.Res.12",
+  "billTitle": "Authorization for Use of Military Force Against Iranian Military Targets",
+  "billStatus": "Passed Senate (61-37) — Pending House",
+  "lastActionDate": "2026-05-29",
+  "sponsor": "T000250",
+  "snapCategory": "Accountability",
+  "contentSignal": "active",
+  "copyrightFlag": "public-domain",
+  "sentimentEligible": true,
+  "suggestedElements": [
+    {
+      "type": "Header.Representative",
+      "confidence": "required",
+      "reason": "Single rep snap — SR-9"
+    },
+    {
+      "type": "Narrative.Congressional.Statement",
+      "confidence": "high",
+      "reason": "Direct attributed quote from official Senate floor statement present in spawn"
+    },
+    {
+      "type": "Data.BillVote",
+      "confidence": "high",
+      "reason": "Vote result available: Thune voted Yea on S.J.Res.12"
+    },
+    {
+      "type": "Narrative.Insight.Summary",
+      "confidence": "high",
+      "reason": "Bill context and legislative summary available from rawSummary"
+    },
+    {
+      "type": "Interaction.Sentiment.Pulse",
+      "confidence": "eligible",
+      "reason": "SR-13: contentSignal=active, no other Interaction.* elements, not editorial"
+    },
+    {
+      "type": "Trust.Thread",
+      "confidence": "required",
+      "reason": "sourceUrl present in spawn — senate.gov (public-domain)"
+    }
+  ],
+  "warnings": [],
+  "normalizedTitle": "Senate Vote",
+  "normalizedSubtitle": "S.J.Res.12 — Use of Military Force Against Iran",
+  "trustVerificationLevel": "Tier 3",
+  "sourceUrl": "https://www.thune.senate.gov/public/index.cfm/press-releases",
+  "sourceName": "Senator Thune Official Press Office (senate.gov)",
+  "accessDate": "2026-05-30",
+  "rawSummary": "Senate Majority Leader John Thune (R-SD) delivered a floor statement on May 28, 2026 in support of S.J.Res.12, authorizing limited use of military force against Iranian military targets. The resolution passed the Senate 61-37 on May 29, 2026. Thune voted Yea.",
+  "quote": "This is a measured and constitutionally sound response to unprovoked aggression against American personnel and assets. We have a duty to stand with our troops and make clear that America will not tolerate attacks on its people.",
+  "quoteDate": "2026-05-28"
+}

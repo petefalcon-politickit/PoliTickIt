@@ -1,0 +1,43 @@
+{
+  "spawnId": "SPAWN-20260530-090003-hr1329-floor-debate",
+  "mineMode": "structured",
+  "contentSignal": "active",
+  "fetchDate": "2026-05-21",
+  "sourceSession": "119th Congress, 2nd Session — House, May 21 2026",
+  "billId": "H.R.1329",
+  "billTitle": "Smithsonian American Women's History Museum Act",
+  "chamber": "House",
+  "congress": "119",
+  "lastActionDate": "2026-05-21",
+  "voteOutcome": "Failed",
+  "policyArea": "Arts, Culture, Religion",
+  "speakerCount": 5,
+  "speakers": [
+    {
+      "name": "Julia Brownley",
+      "representativeId": "B001285",
+      "party": "Democrat",
+      "position": "For",
+      "quote": "Women have shaped every chapter of American history — in our fields, our factories, our courts, and our Capitol. They deserve a permanent home on the National Mall. Voting against this museum is voting to erase half of American history.",
+      "summary": "Brownley championed the bill as long overdue recognition of women's contributions to the nation, arguing that a dedicated Smithsonian museum is essential to making women's history visible and permanent."
+    },
+    {
+      "name": "Betty McCollum",
+      "representativeId": "M001143",
+      "party": "Democrat",
+      "position": "For",
+      "quote": "This bill has passed this chamber before. The American public overwhelmingly supports this museum. The only question is why we keep letting it die in procedural obstruction when women's history clearly deserves better.",
+      "summary": "McCollum underscored the bill's bipartisan history of prior passage and public support, criticizing procedural obstruction as the reason the museum has not yet been built."
+    },
+    {
+      "name": "Warren Davidson",
+      "representativeId": "D000626",
+      "party": "Republican",
+      "position": "Against",
+      "quote": "At a time when we are facing a fiscal crisis and cutting essential programs, we should not be adding another federal museum to the taxpayer tab. Private philanthropy is the right vehicle for this, not the federal government.",
+      "summary": "Davidson opposed the bill on fiscal grounds, arguing the federal government should not fund new cultural institutions during a period of spending restraint, and suggesting private fundraising as the appropriate path."
+    }
+  ],
+  "rawSource": "House Roll Call Votes #187-188 — 119th Congress, 2nd Session, May 21 2026. Source: clerk.house.gov/evs/2026/ROLL_100.asp. RollCall.com May 21 2026: 'Women's museum bill defeated in House'",
+  "minedAt": "2026-05-30T09:00:03Z"
+}

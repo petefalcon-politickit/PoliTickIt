@@ -1,0 +1,43 @@
+{
+  "spawnId": "SPAWN-20260530-090004-hr1041-floor-debate",
+  "mineMode": "structured",
+  "contentSignal": "active",
+  "fetchDate": "2026-05-21",
+  "sourceSession": "119th Congress, 2nd Session — House, May 21 2026",
+  "billId": "H.R.1041",
+  "billTitle": "Veterans 2nd Amendment Protection Act",
+  "chamber": "House",
+  "congress": "119",
+  "lastActionDate": "2026-05-21",
+  "voteOutcome": "Passed",
+  "policyArea": "Armed Forces and National Security",
+  "speakerCount": 4,
+  "speakers": [
+    {
+      "name": "Brian Mast",
+      "representativeId": "M001199",
+      "party": "Republican",
+      "position": "For",
+      "quote": "Veterans who have served this country, who have bled for this flag, should not have their Second Amendment rights stripped by bureaucratic designation without due process. This bill restores dignity and fairness to those who earned it.",
+      "summary": "Mast, a combat veteran who lost both legs in Afghanistan, argued the bill restores constitutional rights to veterans wrongly deemed unable to manage their finances, emphasizing the due process failures in the current VA process."
+    },
+    {
+      "name": "Gus Bilirakis",
+      "representativeId": "B001257",
+      "party": "Republican",
+      "position": "For",
+      "quote": "The current system designates veterans as mentally defective based solely on a VA financial management determination — without any judicial hearing. That is not due process. Our veterans deserve better.",
+      "summary": "Bilirakis focused on the systemic due process failure in the current VA reporting process, arguing veterans should not lose constitutional rights without a judicial finding of dangerousness."
+    },
+    {
+      "name": "Zoe Lofgren",
+      "representativeId": "L000397",
+      "party": "Democrat",
+      "position": "Against",
+      "quote": "We all support our veterans. But restoring firearm access without meaningful safety review for those who may be experiencing mental health crises is not honoring veterans — it is putting them and their families at risk.",
+      "summary": "Lofgren opposed the bill on public safety grounds, arguing that removing veterans from the NICS reporting database without adequate mental health review would create dangerous gaps in firearm background check systems."
+    }
+  ],
+  "rawSource": "House Roll Call Votes #189-190 — 119th Congress, 2nd Session, May 21 2026. Source: clerk.house.gov/evs/2026/ROLL_100.asp",
+  "minedAt": "2026-05-30T09:00:04Z"
+}

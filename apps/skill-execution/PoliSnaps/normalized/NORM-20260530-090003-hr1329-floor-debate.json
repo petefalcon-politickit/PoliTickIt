@@ -1,0 +1,30 @@
+{
+  "normId": "NORM-20260530-090003-hr1329-floor-debate",
+  "spawnRef": "SPAWN-20260530-090003-hr1329-floor-debate",
+  "validatedAt": "2026-05-30T09:00:13Z",
+  "snapCategory": "Accountability",
+  "contentSignal": "active",
+  "sentimentEligible": true,
+  "validatedBillId": "H.R.1329",
+  "validatedBillTitle": "Smithsonian American Women's History Museum Act",
+  "validatedChamber": "House",
+  "validatedCongress": "119",
+  "validatedVoteOutcome": "Failed",
+  "validatedLastActionDate": "2026-05-21",
+  "validatedPolicyArea": "Arts, Culture, Religion",
+  "validatedRepresentativeId": "B001285",
+  "additionalRepIds": ["M001143", "D000626"],
+  "suggestedElements": [
+    "Header.Bill",
+    "Data.FloorDebate",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+  "validationNotes": "Bill failed despite bipartisan support (per RollCall.com May 21 2026). Brownley set as primary rep (lead For speaker). Davidson dissented on fiscal grounds. sentimentEligible=true.",
+  "speakerValidation": [
+    { "name": "Julia Brownley", "representativeId": "B001285", "verified": true, "party": "Democrat", "position": "For" },
+    { "name": "Betty McCollum", "representativeId": "M001143", "verified": true, "party": "Democrat", "position": "For" },
+    { "name": "Warren Davidson", "representativeId": "D000626", "verified": true, "party": "Republican", "position": "Against" }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "spawnId": "SPAWN-20260530-090002-hr2616-floor-debate",
+  "mineMode": "structured",
+  "contentSignal": "active",
+  "fetchDate": "2026-05-21",
+  "sourceSession": "119th Congress, 2nd Session — House, May 20 2026",
+  "billId": "H.R.2616",
+  "billTitle": "PROTECT Kids Act",
+  "chamber": "House",
+  "congress": "119",
+  "lastActionDate": "2026-05-20",
+  "voteOutcome": "Passed",
+  "policyArea": "Science, Technology, Communications",
+  "speakerCount": 6,
+  "speakers": [
+    {
+      "name": "Tim Walberg",
+      "representativeId": "W000798",
+      "party": "Republican",
+      "position": "For",
+      "quote": "Our children are being targeted online by predators, by harmful algorithms, and by addictive platforms designed to exploit their developing minds. This bill puts parents back in control and platforms on notice.",
+      "summary": "Walberg, a lead sponsor, argued the PROTECT Kids Act gives parents meaningful tools to protect children from online harms and holds tech platforms legally accountable for targeting minors."
+    },
+    {
+      "name": "Rosa DeLauro",
+      "representativeId": "D000216",
+      "party": "Democrat",
+      "position": "For",
+      "quote": "I am proud to support this bill. Children deserve a digital environment that does not exploit their vulnerabilities for profit. This is not a partisan issue — it is a child safety issue, and we are long overdue.",
+      "summary": "DeLauro offered bipartisan support, framing the bill as a child welfare imperative and noting that parents across party lines have demanded Congress act on platform accountability."
+    },
+    {
+      "name": "Andy Harris",
+      "representativeId": "H001052",
+      "party": "Republican",
+      "position": "Against",
+      "quote": "I share the concern for children's safety, but this bill creates new regulatory burdens that will harm small businesses and startups, and it raises serious First Amendment questions that the courts will have to answer.",
+      "summary": "Harris opposed the bill on First Amendment and regulatory overreach grounds, arguing that the liability framework would chill legitimate online speech and disproportionately burden smaller companies."
+    }
+  ],
+  "rawSource": "House Roll Call Vote #183-184 — 119th Congress, 2nd Session, May 20 2026. Source: clerk.house.gov/evs/2026/ROLL_100.asp",
+  "minedAt": "2026-05-30T09:00:02Z"
+}

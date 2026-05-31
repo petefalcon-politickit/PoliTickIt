@@ -1,0 +1,43 @@
+{
+  "spawnId": "SPAWN-20260530-090001-sjres185-floor-debate",
+  "mineMode": "structured",
+  "contentSignal": "active",
+  "fetchDate": "2026-05-21",
+  "sourceSession": "119th Congress, 2nd Session — Senate, May 19 2026",
+  "billId": "S.J.Res.185",
+  "billTitle": "A joint resolution to direct the removal of United States Armed Forces from hostilities within or against the Islamic Republic of Iran that have not been authorized by Congress",
+  "chamber": "Senate",
+  "congress": "119",
+  "lastActionDate": "2026-05-19",
+  "voteOutcome": "Agreed to 50-47",
+  "policyArea": "Armed Forces and National Security",
+  "speakerCount": 8,
+  "speakers": [
+    {
+      "name": "Tammy Duckworth",
+      "representativeId": "D000622",
+      "party": "Democrat",
+      "position": "For",
+      "quote": "Congress has never authorized war with Iran. What we are seeing is an unconstitutional conflict — one that has cost lives and that the American people never consented to. This resolution is about restoring the constitutional order.",
+      "summary": "Duckworth argued the Iran military operations are unconstitutional without explicit congressional authorization, invoking her own combat veteran experience to emphasize the cost in American lives."
+    },
+    {
+      "name": "Lisa Murkowski",
+      "representativeId": "M001153",
+      "party": "Republican",
+      "position": "For",
+      "quote": "I have long believed that Congress cannot outsource its war-making power to the executive branch. The Constitution is clear. I will vote yes on this discharge motion today.",
+      "summary": "Murkowski crossed party lines to support the resolution, citing the constitutional obligation of Congress to authorize military force, a position she has held consistently across administrations."
+    },
+    {
+      "name": "Tom Cotton",
+      "representativeId": "C001095",
+      "party": "Republican",
+      "position": "Against",
+      "quote": "Removing our forces now — mid-operation — would hand a strategic victory to the Ayatollahs and signal to every adversary that America's resolve can be broken by political maneuvering in the Senate.",
+      "summary": "Cotton argued that withdrawing forces mid-conflict would embolden Iran and undermine ongoing operations, characterizing the resolution as a dangerous signal of weakness to adversaries."
+    }
+  ],
+  "rawSource": "Senate Roll Call Vote #129 — 119th Congress, 2nd Session, May 19 2026. Source: senate.gov/legislative/LIS/roll_call_votes/vote1192/vote_119_2_00129.htm",
+  "minedAt": "2026-05-30T09:00:01Z"
+}

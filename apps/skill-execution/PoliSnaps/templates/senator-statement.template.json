@@ -1,0 +1,217 @@
+{
+  "templateId": "senator-statement",
+  "version": "1.0",
+  "description": "Single-representative position or vote snap anchored to one senator or representative. Used for named-rep accountability snaps triggered on-demand (quick-polisnap) or by event.",
+  "snapCategory": "accountabilitySnaps",
+  "runFrequency": "on-demand",
+  "maxSnapsPerRun": 1,
+  "requiredElements": [
+    "Header.Representative",
+    "Narrative.Congressional.Statement",
+    "Data.BillVote",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+
+  "snapIdPattern": "snap-{{billIdSlug}}-{{repIdSlug}}-{{eventType}}",
+
+  "channels": [
+    "Representative:{{repId}}",
+    "PolicyArea:{{policyAreaSlug}}",
+    "PoliTickIt:Accountability",
+    "Congress:{{congress}}th"
+  ],
+
+  "schema": {
+    "id": "{{snapId}}",
+    "title": "{{chamberLabel}} Vote",
+    "subtitle": "{{billId}} — {{billShortTitle}}",
+    "type": "Accountability",
+    "createdAt": "{{createdAt}}",
+    "sources": [
+      {
+        "name": "{{sourceLabel}}",
+        "url": "{{sourceUrl}}"
+      }
+    ],
+    "metadata": {
+      "policyArea": "{{policyArea}}",
+      "insightType": "{{chamberLabel}} Vote",
+      "representativeId": "{{repId}}"
+    },
+    "elements": [
+      {
+        "id": "rep-header",
+        "type": "Header.Representative",
+        "data": {
+          "id": "{{repId}}",
+          "name": "{{repFullName}}",
+          "party": "{{repParty}}",
+          "location": "{{repLocation}}",
+          "position": "{{repTitle}}",
+          "imgUri": "https://unitedstates.github.io/images/congress/225x275/{{repId}}.jpg",
+          "tags": ["{{repTag1}}"]
+        }
+      },
+      {
+        "id": "floor-statement",
+        "type": "Narrative.Congressional.Statement",
+        "data": {
+          "quote": "{{repQuote}}",
+          "speaker": "{{repFullName}}",
+          "date": "{{statementDate}}",
+          "context": "{{statementContext}}",
+          "fullTranscriptId": null
+        }
+      },
+      {
+        "id": "bill-vote",
+        "type": "Data.BillVote",
+        "data": {
+          "billName": "{{billFullTitle}}",
+          "vote": "{{repVote}}"
+        }
+      },
+      {
+        "id": "bill-context",
+        "type": "Narrative.Insight.Summary",
+        "data": {
+          "title": "About {{billId}}",
+          "text": "{{summaryText}}",
+          "isExpandable": true,
+          "sourceLink": "{{sourceUrl}}"
+        }
+      },
+      {
+        "id": "sentiment-pulse",
+        "type": "Interaction.Sentiment.Pulse",
+        "data": {
+          "title": "{{sentimentQuestion}}",
+          "options": [
+            { "id": "{{option1Id}}", "label": "{{option1Label}}" },
+            { "id": "{{option2Id}}", "label": "{{option2Label}}" },
+            { "id": "{{option3Id}}", "label": "{{option3Label}}" },
+            { "id": "{{option4Id}}", "label": "{{option4Label}}" }
+          ],
+          "stats": { "agree": 0, "disagree": 0 }
+        }
+      },
+      {
+        "id": "trust-thread",
+        "type": "Trust.Thread",
+        "data": {
+          "referenceId": "{{spawnRef}}",
+          "serialNumber": "TT-{{auditDate}}-{{repId}}-001",
+          "oracleSource": "{{sourceLabel}}",
+          "verificationLevel": "{{verificationLevel}}",
+          "auditDate": "{{auditDate}}"
+        }
+      }
+    ]
+  },
+
+  "productionSpec": {
+    "vars": {
+      "repId": {
+        "description": "Bioguide ID of the representative this snap is anchored to",
+        "source": "_polisnap-data/representatives.md",
+        "required": true
+      },
+      "repIdSlug": {
+        "description": "Lowercase bioguide for snapId",
+        "rule": "lowercase of repId: 'T000250' → 't000250'",
+        "required": true
+      },
+      "repFullName": {
+        "description": "Full name with title prefix",
+        "examples": ["Sen. John Thune", "Rep. Rosa DeLauro"],
+        "required": true
+      },
+      "repParty": {
+        "description": "Full party name",
+        "allowedValues": ["Republican", "Democrat", "Independent"],
+        "required": true
+      },
+      "repLocation": {
+        "description": "State and district if applicable",
+        "examples": ["South Dakota", "Connecticut, District 3"],
+        "required": true
+      },
+      "repTitle": {
+        "description": "Official role or position",
+        "examples": ["Senate Majority Leader", "Representative", "House Minority Whip"],
+        "required": true
+      },
+      "repTag1": {
+        "description": "Primary role tag displayed on header pill",
+        "examples": ["Senate Majority Leader", "House Armed Services"],
+        "required": false
+      },
+      "repQuote": {
+        "description": "Direct quote or close paraphrase from floor statement, press release, or official source",
+        "maxChars": 350,
+        "required": true
+      },
+      "repVote": {
+        "description": "The representative's recorded vote",
+        "allowedValues": ["Yea", "Nay", "Abstained", "Not Voting", "Present"],
+        "required": true
+      },
+      "statementDate": {
+        "description": "ISO date of the floor statement or press release (YYYY-MM-DD)",
+        "required": true
+      },
+      "statementContext": {
+        "description": "Short description of the statement context",
+        "examples": ["Senate floor statement in support of S.J.Res.12", "Press release opposing H.R.2616"],
+        "required": true
+      },
+      "eventType": {
+        "description": "Short slug for the snap ID event segment",
+        "examples": ["senate-vote", "house-vote", "floor-statement", "press-release"],
+        "required": true
+      },
+      "billId": { "description": "Official bill identifier", "required": true },
+      "billIdSlug": { "description": "URL-safe bill ID slug", "required": true },
+      "billShortTitle": { "description": "Concise subtitle title, max 80 chars", "required": true },
+      "billFullTitle": { "description": "Full official bill title", "required": true },
+      "chamberLabel": { "allowedValues": ["Senate", "House"], "required": true },
+      "congress": { "description": "Congress number", "examples": ["119"], "required": true },
+      "policyArea": { "description": "Congress.gov policy area", "source": "_polisnap-data/policy-areas.md", "required": true },
+      "policyAreaSlug": { "description": "CamelCase policy area slug", "required": true },
+      "summaryText": {
+        "description": "2-4 sentences: what the bill does, current status, why this rep's position matters",
+        "maxChars": 400,
+        "required": true
+      },
+      "sentimentQuestion": {
+        "description": "Policy-framed public opinion question, 4 options required",
+        "maxChars": 120,
+        "required": true
+      },
+      "sourceLabel": { "description": "Human-readable source label", "required": true },
+      "sourceUrl": { "description": "Source URL — official press office or roll call record", "required": true },
+      "verificationLevel": {
+        "description": "Trust.Thread verification tier",
+        "allowedValues": ["Tier 1", "Tier 2", "Tier 3", "VERIFIED"],
+        "rule": "Tier 3 for official senator/rep press offices; Tier 1 for third-party sources",
+        "required": true
+      },
+      "spawnRef": { "description": "SPAWN file ID", "pattern": "SPAWN-{timestamp}-{slug}", "required": true },
+      "auditDate": { "description": "ISO date generated (YYYY-MM-DD)", "required": true },
+      "createdAt": { "description": "ISO 8601 datetime created", "required": true }
+    },
+
+    "dataSources": {
+      "primary": "Official representative press office (senate.gov/house.gov subdomains)",
+      "secondary": "Congress.gov bill page, roll call records (senate.gov, clerk.house.gov)",
+      "fallback": "Verified news source (AP, Reuters, Roll Call, Politico)"
+    },
+
+    "fallbackRules": {
+      "onNoDirectQuote": "Use the most representative public statement from the same day. Note in NORM warnings: 'PARAPHRASED_STATEMENT'.",
+      "onNoBioguideMatch": "Block generation — this template requires a single anchored rep ID. Do not proceed without a confirmed bioguide."
+    }
+  }
+}

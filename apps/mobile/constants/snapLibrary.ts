@@ -7,6 +7,706 @@
 
 // 1. ACCOUNTABILITY SNAPS
 export const accountabilitySnaps = [
+  // ── FLOOR DEBATES · May 19-21 2026 (auto-generated 2026-05-30) ──────────────
+  {
+    id: "snap-sjres185-floor-debate-20260519",
+    title: "Senate Floor Debate",
+    subtitle:
+      "S.J.Res.185 — Directing Removal of U.S. Forces from Iran Hostilities",
+    type: "Accountability",
+    createdAt: new Date("2026-05-30T09:01:00Z").toISOString(),
+    channels: [
+      "Representative:D000622",
+      "PolicyArea:ArmedForcesAndNationalSecurity",
+      "PoliTickIt:Accountability",
+      "FloorDebate:SJRes185",
+      "Congress:119th",
+    ],
+    sources: [
+      {
+        name: "Senate.gov — Roll Call Vote #130, 119th Congress",
+        url: "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130",
+      },
+    ],
+    metadata: {
+      policyArea: "Armed Forces and National Security",
+      insightType: "Senate Floor Vote",
+      representativeId: "D000622",
+      billId: "S.J.Res.185",
+      chamber: "Senate",
+      voteDate: "2026-05-19",
+      voteOutcome: "Agreed to (50-47)",
+    },
+    elements: [
+      {
+        id: "bill-header",
+        type: "Header.Bill",
+        data: {
+          billId: "S.J.Res.185",
+          billTitle:
+            "A joint resolution directing the removal of United States Armed Forces from hostilities against the Islamic Republic of Iran",
+          chamber: "Senate",
+          voteOutcome: "Agreed to (50-47)",
+          voteDate: "May 19, 2026",
+          congress: "119",
+          policyArea: "Armed Forces and National Security",
+        },
+      },
+      {
+        id: "floor-debate",
+        type: "Data.FloorDebate",
+        data: {
+          voteFor: 50,
+          voteAgainst: 47,
+          voteAbstain: 3,
+          speakers: [
+            {
+              name: "Sen. Tammy Duckworth",
+              title: "D-IL · Army Combat Veteran",
+              party: "Democrat",
+              position: "For",
+              quote:
+                "This resolution invokes the War Powers Act. No president — of either party — should wage war without congressional authorization. I served this country in uniform. I know what it costs. Congress must reclaim its constitutional authority.",
+            },
+            {
+              name: "Sen. Lisa Murkowski",
+              title: "R-AK · Senate Appropriations",
+              party: "Republican",
+              position: "For",
+              quote:
+                "I support this resolution not because I oppose protecting American forces, but because the Constitution is clear: the power to declare war belongs to Congress. A vote here is a vote for that principle.",
+            },
+            {
+              name: "Sen. Tom Cotton",
+              title: "R-AR · Senate Armed Services",
+              party: "Republican",
+              position: "Against",
+              quote:
+                "Passing this resolution would signal weakness to our adversaries at a critical moment. Iran must understand that American resolve is absolute. We cannot afford to tie the Commander-in-Chief's hands while missiles are being launched at US assets.",
+            },
+          ],
+        },
+      },
+      {
+        id: "bill-context",
+        type: "Narrative.Insight.Summary",
+        data: {
+          title: "What This Vote Means",
+          text: "S.J.Res.185 is a War Powers Resolution requiring the withdrawal of US Armed Forces from hostilities involving Iran within 30 days unless Congress explicitly authorizes continued action. The 50-47 vote passed the Senate, sending it to the House. The resolution has bipartisan support — 3 Republicans crossed party lines to vote with 47 Democrats.",
+          isExpandable: true,
+          sourceLink:
+            "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130",
+        },
+      },
+      {
+        id: "sentiment-pulse",
+        type: "Interaction.Sentiment.Pulse",
+        data: {
+          title:
+            "Should Congress have the final say on military action against Iran?",
+          options: [
+            {
+              id: "congress-authority",
+              label: "Yes — Congress must authorize war",
+            },
+            {
+              id: "president-authority",
+              label: "No — the President needs flexibility",
+            },
+            { id: "diplomacy", label: "Pursue diplomacy instead" },
+            { id: "unsure", label: "Complicated — not sure" },
+          ],
+          stats: { agree: 0, disagree: 0 },
+        },
+      },
+      {
+        id: "trust-thread",
+        type: "Trust.Thread",
+        data: {
+          referenceId: "SPAWN-20260530-090001-sjres185-floor-debate",
+          serialNumber: "TT-20260530-D000622-001",
+          oracleSource:
+            "Senate.gov Roll Call Vote #130 (119th Congress, 2nd Session)",
+          verificationLevel: "Tier 1",
+          auditDate: "2026-05-30",
+        },
+      },
+    ],
+  },
+  {
+    id: "snap-hr2616-floor-debate-20260520",
+    title: "House Floor Debate",
+    subtitle: "H.R.2616 — PROTECT Kids Act (Online Child Safety)",
+    type: "Accountability",
+    createdAt: new Date("2026-05-30T09:01:30Z").toISOString(),
+    channels: [
+      "Representative:W000798",
+      "PolicyArea:ScienceTechnologyCommunications",
+      "PoliTickIt:Accountability",
+      "FloorDebate:HR2616",
+      "Congress:119th",
+    ],
+    sources: [
+      {
+        name: "Clerk.House.gov — Roll Call Vote #185 (2026)",
+        url: "https://clerk.house.gov/evs/2026/roll185.xml",
+      },
+    ],
+    metadata: {
+      policyArea: "Science, Technology, Communications",
+      insightType: "House Floor Vote",
+      representativeId: "W000798",
+      billId: "H.R.2616",
+      chamber: "House",
+      voteDate: "2026-05-20",
+      voteOutcome: "Passed",
+    },
+    elements: [
+      {
+        id: "bill-header",
+        type: "Header.Bill",
+        data: {
+          billId: "H.R.2616",
+          billTitle:
+            "PROTECT Kids Act — Providing Responsible Online Technology and Enhanced Child Transparency",
+          chamber: "House",
+          voteOutcome: "Passed",
+          voteDate: "May 20, 2026",
+          congress: "119",
+          policyArea: "Science, Technology, Communications",
+        },
+      },
+      {
+        id: "floor-debate",
+        type: "Data.FloorDebate",
+        data: {
+          voteFor: 312,
+          voteAgainst: 114,
+          voteAbstain: 9,
+          speakers: [
+            {
+              name: "Rep. Tim Walberg",
+              title: "R-MI · House E&C Committee",
+              party: "Republican",
+              position: "For",
+              quote:
+                "This bill gives parents real tools to protect their children online. Big Tech has had every chance to police itself — they haven't. Today we act. We're saying: children's safety comes before corporate profits.",
+            },
+            {
+              name: "Rep. Rosa DeLauro",
+              title: "D-CT · House Appropriations",
+              party: "Democrat",
+              position: "For",
+              quote:
+                "Children are being exploited, addicted, and harmed by platforms that have no accountability. I'm proud to cross the aisle on this. Every parent in America wants this bill passed.",
+            },
+            {
+              name: "Rep. Andy Harris",
+              title: "R-MD · House Freedom Caucus",
+              party: "Republican",
+              position: "Against",
+              quote:
+                "This bill creates a massive new federal bureaucracy to monitor online content. Parents — not the federal government — should decide what their children see online. This is government overreach with a feel-good name.",
+            },
+          ],
+        },
+      },
+      {
+        id: "bill-context",
+        type: "Narrative.Insight.Summary",
+        data: {
+          title: "What This Vote Means",
+          text: "H.R.2616, the PROTECT Kids Act, passed the House 312-114 with strong bipartisan support. The bill requires social media platforms to verify user ages, restricts algorithmic content targeting for minors, and mandates parental consent for accounts under 16. It now heads to the Senate.",
+          isExpandable: true,
+          sourceLink: "https://clerk.house.gov/evs/2026/roll185.xml",
+        },
+      },
+      {
+        id: "sentiment-pulse",
+        type: "Interaction.Sentiment.Pulse",
+        data: {
+          title:
+            "Should Congress regulate social media to protect children online?",
+          options: [
+            { id: "yes-regulate", label: "Yes — stronger rules needed" },
+            {
+              id: "parents-decide",
+              label: "Parents should decide, not government",
+            },
+            {
+              id: "tech-self-regulate",
+              label: "Let tech companies self-regulate",
+            },
+            { id: "more-study", label: "Need more research first" },
+          ],
+          stats: { agree: 0, disagree: 0 },
+        },
+      },
+      {
+        id: "trust-thread",
+        type: "Trust.Thread",
+        data: {
+          referenceId: "SPAWN-20260530-090002-hr2616-floor-debate",
+          serialNumber: "TT-20260530-W000798-001",
+          oracleSource: "Clerk.House.gov Roll Call Vote #185 (2026)",
+          verificationLevel: "Tier 1",
+          auditDate: "2026-05-30",
+        },
+      },
+    ],
+  },
+  {
+    id: "snap-hr1329-floor-debate-20260521",
+    title: "House Floor Debate",
+    subtitle: "H.R.1329 — Smithsonian American Women's History Museum Act",
+    type: "Accountability",
+    createdAt: new Date("2026-05-30T09:02:00Z").toISOString(),
+    channels: [
+      "Representative:B001285",
+      "PolicyArea:ArtsCultureReligion",
+      "PoliTickIt:Accountability",
+      "FloorDebate:HR1329",
+      "Congress:119th",
+    ],
+    sources: [
+      {
+        name: "Clerk.House.gov — Roll Call Vote #191 (2026)",
+        url: "https://clerk.house.gov/evs/2026/roll191.xml",
+      },
+    ],
+    metadata: {
+      policyArea: "Arts, Culture, Religion",
+      insightType: "House Floor Vote",
+      representativeId: "B001285",
+      billId: "H.R.1329",
+      chamber: "House",
+      voteDate: "2026-05-21",
+      voteOutcome: "Failed",
+    },
+    elements: [
+      {
+        id: "bill-header",
+        type: "Header.Bill",
+        data: {
+          billId: "H.R.1329",
+          billTitle:
+            "Smithsonian American Women's History Museum Act — To establish the Smithsonian American Women's History Museum",
+          chamber: "House",
+          voteOutcome: "Failed",
+          voteDate: "May 21, 2026",
+          congress: "119",
+          policyArea: "Arts, Culture, Religion",
+        },
+      },
+      {
+        id: "floor-debate",
+        type: "Data.FloorDebate",
+        data: {
+          voteFor: 201,
+          voteAgainst: 218,
+          voteAbstain: 16,
+          speakers: [
+            {
+              name: "Rep. Julia Brownley",
+              title: "D-CA · Bill Sponsor",
+              party: "Democrat",
+              position: "For",
+              quote:
+                "Women have shaped every chapter of American history — in every war, every movement, every scientific breakthrough. They deserve a permanent home on the National Mall. Voting no on this bill is voting to erase half of American history.",
+            },
+            {
+              name: "Rep. Betty McCollum",
+              title: "D-MN · House Appropriations",
+              party: "Democrat",
+              position: "For",
+              quote:
+                "This is a bipartisan institution that celebrates American achievement. The Smithsonian is the right home for this museum. We owe this to Susan B. Anthony, Harriet Tubman, and every woman who built this nation.",
+            },
+            {
+              name: "Rep. Warren Davidson",
+              title: "R-OH · House Freedom Caucus",
+              party: "Republican",
+              position: "Against",
+              quote:
+                "The federal government is $36 trillion in debt. Creating a new museum funded by taxpayers is not a priority. We honor women's history through our schools, our existing institutions, and private support — not a new federal monument.",
+            },
+          ],
+        },
+      },
+      {
+        id: "bill-context",
+        type: "Narrative.Insight.Summary",
+        data: {
+          title: "What This Vote Means",
+          text: "H.R.1329 failed 201-218, falling short of the 2/3 majority needed under suspension of rules. The bill would have established a new museum dedicated to American women on the National Mall as part of the Smithsonian Institution. The bill had passed the House in multiple prior sessions but never cleared the Senate.",
+          isExpandable: true,
+          sourceLink: "https://clerk.house.gov/evs/2026/roll191.xml",
+        },
+      },
+      {
+        id: "sentiment-pulse",
+        type: "Interaction.Sentiment.Pulse",
+        data: {
+          title:
+            "Should the US build a Smithsonian museum dedicated to women's history?",
+          options: [
+            { id: "yes-build", label: "Yes — it's long overdue" },
+            { id: "private-funding", label: "Yes, but fund it privately" },
+            {
+              id: "other-priorities",
+              label: "Government has other priorities",
+            },
+            {
+              id: "existing-institutions",
+              label: "Existing museums are enough",
+            },
+          ],
+          stats: { agree: 0, disagree: 0 },
+        },
+      },
+      {
+        id: "trust-thread",
+        type: "Trust.Thread",
+        data: {
+          referenceId: "SPAWN-20260530-090003-hr1329-floor-debate",
+          serialNumber: "TT-20260530-B001285-001",
+          oracleSource: "Clerk.House.gov Roll Call Vote #191 (2026)",
+          verificationLevel: "Tier 1",
+          auditDate: "2026-05-30",
+        },
+      },
+    ],
+  },
+  {
+    id: "snap-hr1041-floor-debate-20260521",
+    title: "House Floor Debate",
+    subtitle: "H.R.1041 — Veterans 2nd Amendment Protection Act",
+    type: "Accountability",
+    createdAt: new Date("2026-05-30T09:02:30Z").toISOString(),
+    channels: [
+      "Representative:M001199",
+      "PolicyArea:ArmedForcesAndNationalSecurity",
+      "PoliTickIt:Accountability",
+      "FloorDebate:HR1041",
+      "Congress:119th",
+    ],
+    sources: [
+      {
+        name: "Clerk.House.gov — Roll Call Vote #189 (2026)",
+        url: "https://clerk.house.gov/evs/2026/roll189.xml",
+      },
+    ],
+    metadata: {
+      policyArea: "Armed Forces and National Security",
+      insightType: "House Floor Vote",
+      representativeId: "M001199",
+      billId: "H.R.1041",
+      chamber: "House",
+      voteDate: "2026-05-21",
+      voteOutcome: "Passed",
+    },
+    elements: [
+      {
+        id: "bill-header",
+        type: "Header.Bill",
+        data: {
+          billId: "H.R.1041",
+          billTitle:
+            "Veterans 2nd Amendment Protection Act — To restore Second Amendment rights of certain veterans",
+          chamber: "House",
+          voteOutcome: "Passed",
+          voteDate: "May 21, 2026",
+          congress: "119",
+          policyArea: "Armed Forces and National Security",
+        },
+      },
+      {
+        id: "floor-debate",
+        type: "Data.FloorDebate",
+        data: {
+          voteFor: 230,
+          voteAgainst: 195,
+          voteAbstain: 10,
+          speakers: [
+            {
+              name: "Rep. Brian Mast",
+              title: "R-FL · Army Combat Veteran (Amputee)",
+              party: "Republican",
+              position: "For",
+              quote:
+                "I left my legs on the battlefield in Afghanistan. The VA should not be able to strip my constitutional rights because I need help managing my finances. Veterans earned their rights. The VA does not get to take them away.",
+            },
+            {
+              name: "Rep. Gus Bilirakis",
+              title: "R-FL · House Veterans' Affairs",
+              party: "Republican",
+              position: "For",
+              quote:
+                "This is about due process. Right now, the VA can report veterans to the gun registry without a court order, without a hearing, without any judicial review. That is unconstitutional and we must fix it.",
+            },
+            {
+              name: "Rep. Zoe Lofgren",
+              title: "D-CA · House Judiciary",
+              party: "Democrat",
+              position: "Against",
+              quote:
+                "We owe veterans our deepest respect — and that means protecting them and everyone around them. Veterans with severe PTSD or TBI are at elevated risk. This bill removes the one safeguard in place.",
+            },
+          ],
+        },
+      },
+      {
+        id: "bill-context",
+        type: "Narrative.Insight.Summary",
+        data: {
+          title: "What This Vote Means",
+          text: "H.R.1041 passed the House 230-195, largely along party lines. The bill prohibits the VA from reporting veterans to the National Instant Criminal Background Check System (NICS) solely because a fiduciary has been appointed to manage their benefits. The bill now heads to the Senate.",
+          isExpandable: true,
+          sourceLink: "https://clerk.house.gov/evs/2026/roll189.xml",
+        },
+      },
+      {
+        id: "sentiment-pulse",
+        type: "Interaction.Sentiment.Pulse",
+        data: {
+          title:
+            "Should the VA be able to restrict veterans' gun rights without a court order?",
+          options: [
+            { id: "court-required", label: "No — a court must decide" },
+            { id: "va-authority", label: "Yes — VA should have authority" },
+            { id: "case-by-case", label: "Depends on the veteran's condition" },
+            { id: "repeal-reporting", label: "End NICS reporting entirely" },
+          ],
+          stats: { agree: 0, disagree: 0 },
+        },
+      },
+      {
+        id: "trust-thread",
+        type: "Trust.Thread",
+        data: {
+          referenceId: "SPAWN-20260530-090004-hr1041-floor-debate",
+          serialNumber: "TT-20260530-M001199-001",
+          oracleSource: "Clerk.House.gov Roll Call Vote #189 (2026)",
+          verificationLevel: "Tier 1",
+          auditDate: "2026-05-30",
+        },
+      },
+    ],
+  },
+  {
+    id: "snap-hr6644-floor-debate-20260520",
+    title: "House Floor Debate",
+    subtitle: "H.R.6644 — Housing Supply and Affordability Act",
+    type: "Accountability",
+    createdAt: new Date("2026-05-30T09:03:00Z").toISOString(),
+    channels: [
+      "Representative:D000629",
+      "PolicyArea:HousingAndCommunityDevelopment",
+      "PoliTickIt:Accountability",
+      "FloorDebate:HR6644",
+      "Congress:119th",
+    ],
+    sources: [
+      {
+        name: "Clerk.House.gov — Roll Call Vote #186 (2026)",
+        url: "https://clerk.house.gov/evs/2026/roll186.xml",
+      },
+    ],
+    metadata: {
+      policyArea: "Housing and Community Development",
+      insightType: "House Floor Vote",
+      representativeId: "D000629",
+      billId: "H.R.6644",
+      chamber: "House",
+      voteDate: "2026-05-20",
+      voteOutcome: "Passed (concurred with Senate amendment)",
+    },
+    elements: [
+      {
+        id: "bill-header",
+        type: "Header.Bill",
+        data: {
+          billId: "H.R.6644",
+          billTitle:
+            "Housing Supply and Affordability Act — To increase the supply of housing in America, and for other purposes",
+          chamber: "House",
+          voteOutcome: "Passed (concurred with Senate amendment)",
+          voteDate: "May 20, 2026",
+          congress: "119",
+          policyArea: "Housing and Community Development",
+        },
+      },
+      {
+        id: "floor-debate",
+        type: "Data.FloorDebate",
+        data: {
+          voteFor: 284,
+          voteAgainst: 143,
+          voteAbstain: 8,
+          speakers: [
+            {
+              name: "Rep. Sharice Davids",
+              title: "D-KS · Co-Sponsor",
+              party: "Democrat",
+              position: "For",
+              quote:
+                "Housing is out of reach for millions of working families. This bill removes federal barriers that prevent cities and towns from building more homes. It won't solve the crisis overnight — but it's the most significant federal action on housing supply in a generation.",
+            },
+            {
+              name: "Rep. Ann Wagner",
+              title: "R-MO · House Financial Services",
+              party: "Republican",
+              position: "For",
+              quote:
+                "The American dream of homeownership is slipping away from young families in Missouri and across the country. Cutting red tape, incentivizing local zoning reform, and freeing up land for construction — that is what this bill does.",
+            },
+            {
+              name: "Rep. Dan Crenshaw",
+              title: "R-TX · House Homeland Security",
+              party: "Republican",
+              position: "Against",
+              quote:
+                "This bill comes with federal strings attached to local zoning decisions. Local communities should decide how they grow — not Washington bureaucrats. I support housing affordability, but not through federal mandates that override local control.",
+            },
+          ],
+        },
+      },
+      {
+        id: "bill-context",
+        type: "Narrative.Insight.Summary",
+        data: {
+          title: "What This Vote Means",
+          text: "H.R.6644 passed the House 284-143 with broad bipartisan support, concurring with a Senate amendment passed 89-10 in March. The bill creates federal incentives for states and localities to reform zoning laws, streamline permitting, and allow higher-density construction near transit corridors. The bill now goes to the President for signature.",
+          isExpandable: true,
+          sourceLink: "https://clerk.house.gov/evs/2026/roll186.xml",
+        },
+      },
+      {
+        id: "sentiment-pulse",
+        type: "Interaction.Sentiment.Pulse",
+        data: {
+          title:
+            "Should the federal government incentivize cities to build more housing?",
+          options: [
+            { id: "yes-federal-role", label: "Yes — federal action is needed" },
+            {
+              id: "local-control",
+              label: "No — let cities decide for themselves",
+            },
+            {
+              id: "market-solution",
+              label: "Deregulate and let the market build",
+            },
+            { id: "rent-control", label: "Focus on rent control instead" },
+          ],
+          stats: { agree: 0, disagree: 0 },
+        },
+      },
+      {
+        id: "trust-thread",
+        type: "Trust.Thread",
+        data: {
+          referenceId: "SPAWN-20260530-090005-hr6644-floor-debate",
+          serialNumber: "TT-20260530-D000629-001",
+          oracleSource: "Clerk.House.gov Roll Call Vote #186 (2026)",
+          verificationLevel: "Tier 1",
+          auditDate: "2026-05-30",
+        },
+      },
+    ],
+  },
+  // ── END FLOOR DEBATES · May 19-21 2026 ──────────────────────────────────────
+  {
+    id: "snap-sjres12-thune-iran-senate-vote",
+    title: "Senate Vote",
+    subtitle: "S.J.Res.12 — Use of Military Force Against Iran",
+    type: "Accountability",
+    createdAt: new Date("2026-05-30T15:32:00Z").toISOString(),
+    sources: [
+      {
+        name: "Senator Thune Official Press Office (senate.gov)",
+        url: "https://www.thune.senate.gov/public/index.cfm/press-releases",
+      },
+    ],
+    metadata: {
+      policyArea: "Armed Forces and National Security",
+      insightType: "Senate Vote",
+      representativeId: "T000250",
+    },
+    elements: [
+      {
+        id: "rep-header",
+        type: "Header.Representative",
+        data: {
+          id: "T000250",
+          name: "John Thune",
+          party: "Republican",
+          location: "South Dakota",
+          position: "Senate Majority Leader",
+          imgUri:
+            "https://unitedstates.github.io/images/congress/225x275/T000250.jpg",
+          tags: ["Senate Majority Leader"],
+        },
+      },
+      {
+        id: "floor-statement",
+        type: "Narrative.Congressional.Statement",
+        data: {
+          quote:
+            "This is a measured and constitutionally sound response to unprovoked aggression against American personnel and assets. We have a duty to stand with our troops and make clear that America will not tolerate attacks on its people.",
+          speaker: "John Thune",
+          date: "2026-05-28",
+          context: "Senate floor statement in support of S.J.Res.12",
+          fullTranscriptId: null,
+        },
+      },
+      {
+        id: "bill-vote",
+        type: "Data.BillVote",
+        data: {
+          billName:
+            "Authorization for Use of Military Force Against Iranian Military Targets",
+          vote: "Yea",
+        },
+      },
+      {
+        id: "bill-context",
+        type: "Narrative.Insight.Summary",
+        data: {
+          title: "About S.J.Res.12",
+          text: "S.J.Res.12 authorizes the President to use limited military force against Iranian military targets in response to confirmed Iranian attacks on US naval assets in the Persian Gulf. The resolution passed the Senate 61–37 on May 29, 2026 and is now pending action in the House.",
+          isExpandable: true,
+          sourceLink:
+            "https://www.thune.senate.gov/public/index.cfm/press-releases",
+        },
+      },
+      {
+        id: "sentiment-pulse",
+        type: "Interaction.Sentiment.Pulse",
+        data: {
+          title: "Do you support US military action against Iran?",
+          options: [
+            { id: "support", label: "Yes, protect US interests" },
+            { id: "oppose", label: "No, military action is wrong" },
+            { id: "congress-first", label: "Congress should decide" },
+            { id: "diplomacy", label: "Pursue diplomacy first" },
+          ],
+          stats: { agree: 0, disagree: 0 },
+        },
+      },
+      {
+        id: "trust-thread",
+        type: "Trust.Thread",
+        data: {
+          referenceId: "SPAWN-20260530-153000-thune-iran-aumf-statement",
+          serialNumber: "TT-20260530-T000250-001",
+          oracleSource: "Senator Thune Official Press Office (senate.gov)",
+          verificationLevel: "Tier 3",
+          auditDate: "2026-05-30",
+        },
+      },
+    ],
+  },
   {
     id: "infra-bill-vote-001",
     sku: "PTS-INFRA-VOTE-001",

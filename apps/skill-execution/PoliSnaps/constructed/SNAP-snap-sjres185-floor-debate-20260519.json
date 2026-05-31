@@ -1,0 +1,112 @@
+{
+  "id": "snap-sjres185-floor-debate-20260519",
+  "normRef": "NORM-20260530-090001-sjres185-floor-debate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.J.Res.185 — Directing Removal of U.S. Forces from Iran Hostilities",
+  "type": "Accountability",
+  "createdAt": "2026-05-30T09:01:00Z",
+  "sources": [
+    {
+      "name": "Senate.gov — Roll Call Vote #130, 119th Congress",
+      "url": "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130"
+    },
+    {
+      "name": "Congress.gov — S.J.Res.185",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-joint-resolution/185"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "D000622",
+    "billId": "S.J.Res.185",
+    "chamber": "Senate",
+    "voteDate": "2026-05-19",
+    "voteOutcome": "Agreed to (50-47)"
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.J.Res.185",
+        "billTitle": "A joint resolution directing the removal of United States Armed Forces from hostilities against the Islamic Republic of Iran",
+        "chamber": "Senate",
+        "voteOutcome": "Agreed to (50-47)",
+        "voteDate": "May 19, 2026",
+        "congress": "119",
+        "policyArea": "Armed Forces and National Security"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 50,
+        "voteAgainst": 47,
+        "voteAbstain": 3,
+        "speakers": [
+          {
+            "name": "Sen. Tammy Duckworth",
+            "title": "D-IL · Army Combat Veteran",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "This resolution invokes the War Powers Act. No president — of either party — should wage war without congressional authorization. I served this country in uniform. I know what it costs. Congress must reclaim its constitutional authority."
+          },
+          {
+            "name": "Sen. Lisa Murkowski",
+            "title": "R-AK · Senate Appropriations",
+            "party": "Republican",
+            "position": "For",
+            "quote": "I support this resolution not because I oppose protecting American forces, but because the Constitution is clear: the power to declare war belongs to Congress. A vote here is a vote for that principle."
+          },
+          {
+            "name": "Sen. Tom Cotton",
+            "title": "R-AR · Senate Armed Services",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Passing this resolution would signal weakness to our adversaries at a critical moment. Iran must understand that American resolve is absolute. We cannot afford to tie the Commander-in-Chief's hands while missiles are being launched at US assets."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.J.Res.185 is a War Powers Resolution requiring the withdrawal of US Armed Forces from hostilities involving Iran within 30 days unless Congress explicitly authorizes continued action. The 50-47 vote passed the Senate, sending it to the House. The resolution has bipartisan support — 3 Republicans crossed party lines to vote with 47 Democrats.",
+        "isExpandable": true,
+        "sourceLink": "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Congress have the final say on military action against Iran?",
+        "options": [
+          { "id": "congress-authority", "label": "Yes — Congress must authorize war" },
+          { "id": "president-authority", "label": "No — the President needs flexibility" },
+          { "id": "diplomacy", "label": "Pursue diplomacy instead" },
+          { "id": "unsure", "label": "Complicated — not sure" }
+        ],
+        "stats": {
+          "agree": 0,
+          "disagree": 0
+        }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260530-090001-sjres185-floor-debate",
+        "serialNumber": "TT-20260530-D000622-001",
+        "oracleSource": "Senate.gov Roll Call Vote #130 (119th Congress, 2nd Session)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-30"
+      }
+    }
+  ]
+}

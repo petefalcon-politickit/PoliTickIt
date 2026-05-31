@@ -1,0 +1,113 @@
+{
+  "id": "snap-hr2616-floor-debate-20260520",
+  "normRef": "NORM-20260530-090002-hr2616-floor-debate",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.2616 — PROTECT Kids Act (Online Child Safety)",
+  "type": "Accountability",
+  "createdAt": "2026-05-30T09:01:30Z",
+  "sources": [
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #185 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll185.xml"
+    },
+    {
+      "name": "Congress.gov — H.R.2616",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2616"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Science, Technology, Communications",
+    "insightType": "House Floor Vote",
+    "representativeId": "W000798",
+    "billId": "H.R.2616",
+    "chamber": "House",
+    "voteDate": "2026-05-20",
+    "voteOutcome": "Passed"
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.2616",
+        "billTitle": "PROTECT Kids Act — Providing Responsible Online Technology and Enhanced Child Transparency",
+        "chamber": "House",
+        "voteOutcome": "Passed",
+        "voteDate": "May 20, 2026",
+        "congress": "119",
+        "policyArea": "Science, Technology, Communications"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 312,
+        "voteAgainst": 114,
+        "voteAbstain": 9,
+        "speakers": [
+          {
+            "name": "Rep. Tim Walberg",
+            "title": "R-MI · House E&C Committee",
+            "party": "Republican",
+            "position": "For",
+            "quote": "This bill gives parents real tools to protect their children online. Big Tech has had every chance to police itself — they haven't. Today we act. We're saying: children's safety comes before corporate profits."
+          },
+          {
+            "name": "Rep. Rosa DeLauro",
+            "title": "D-CT · House Appropriations",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Children are being exploited, addicted, and harmed by platforms that have no accountability. I'm proud to cross the aisle on this. Every parent in America wants this bill passed."
+          },
+          {
+            "name": "Rep. Andy Harris",
+            "title": "R-MD · House Freedom Caucus",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "This bill creates a massive new federal bureaucracy to monitor online content. Parents — not the federal government — should decide what their children see online. This is government overreach with a feel-good name."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.2616, the PROTECT Kids Act, passed the House 312-114 with strong bipartisan support. The bill requires social media platforms to verify user ages, restricts algorithmic content targeting for minors, and mandates parental consent for accounts under 16. It now heads to the Senate. Tech industry lobbying groups oppose it; child safety advocates and major parent organizations support it.",
+        "isExpandable": true,
+        "sourceLink": "https://clerk.house.gov/evs/2026/roll185.xml"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Congress regulate social media to protect children online?",
+        "options": [
+          { "id": "yes-regulate", "label": "Yes — stronger rules needed" },
+          { "id": "parents-decide", "label": "Parents should decide, not government" },
+          { "id": "tech-self-regulate", "label": "Let tech companies self-regulate" },
+          { "id": "more-study", "label": "Need more research first" }
+        ],
+        "stats": {
+          "agree": 0,
+          "disagree": 0
+        }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260530-090002-hr2616-floor-debate",
+        "serialNumber": "TT-20260530-W000798-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #185 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-30"
+      }
+    }
+  ]
+}
+

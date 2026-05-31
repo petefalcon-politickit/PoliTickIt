@@ -1,0 +1,91 @@
+{
+  "id": "snap-sjres12-thune-iran-senate-vote",
+  "normRef": "NORM-20260530-153100-thune-iran-aumf-statement",
+  "title": "Senate Vote",
+  "subtitle": "S.J.Res.12 — Use of Military Force Against Iran",
+  "type": "Accountability",
+  "createdAt": "2026-05-30T15:32:00Z",
+  "sources": [
+    {
+      "name": "Senator Thune Official Press Office (senate.gov)",
+      "url": "https://www.thune.senate.gov/public/index.cfm/press-releases"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "Senate Vote",
+    "representativeId": "T000250"
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "T000250",
+        "name": "John Thune",
+        "party": "Republican",
+        "location": "South Dakota",
+        "position": "Senate Majority Leader",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/T000250.jpg",
+        "tags": ["Senate Majority Leader"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "This is a measured and constitutionally sound response to unprovoked aggression against American personnel and assets. We have a duty to stand with our troops and make clear that America will not tolerate attacks on its people.",
+        "speaker": "John Thune",
+        "date": "2026-05-28",
+        "context": "Senate floor statement in support of S.J.Res.12",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "Authorization for Use of Military Force Against Iranian Military Targets",
+        "vote": "Yea"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About S.J.Res.12",
+        "text": "S.J.Res.12 authorizes the President to use limited military force against Iranian military targets in response to confirmed Iranian attacks on US naval assets in the Persian Gulf. The resolution passed the Senate 61–37 on May 29, 2026 and is now pending action in the House.",
+        "isExpandable": true,
+        "sourceLink": "https://www.thune.senate.gov/public/index.cfm/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Do you support US military action against Iran?",
+        "options": [
+          { "id": "support", "label": "Yes, protect US interests" },
+          { "id": "oppose", "label": "No, military action is wrong" },
+          { "id": "congress-first", "label": "Congress should decide" },
+          { "id": "diplomacy", "label": "Pursue diplomacy first" }
+        ],
+        "stats": {
+          "agree": 0,
+          "disagree": 0
+        }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260530-153000-thune-iran-aumf-statement",
+        "serialNumber": "TT-20260530-T000250-001",
+        "oracleSource": "Senator Thune Official Press Office (senate.gov)",
+        "verificationLevel": "Tier 3",
+        "auditDate": "2026-05-30"
+      }
+    }
+  ]
+}

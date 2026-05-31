@@ -1,0 +1,30 @@
+{
+  "normId": "NORM-20260530-090005-hr6644-floor-debate",
+  "spawnRef": "SPAWN-20260530-090005-hr6644-floor-debate",
+  "validatedAt": "2026-05-30T09:00:15Z",
+  "snapCategory": "Accountability",
+  "contentSignal": "active",
+  "sentimentEligible": true,
+  "validatedBillId": "H.R.6644",
+  "validatedBillTitle": "Housing Supply and Affordability Act",
+  "validatedChamber": "House",
+  "validatedCongress": "119",
+  "validatedVoteOutcome": "Passed (concurred with Senate amendment)",
+  "validatedLastActionDate": "2026-05-20",
+  "validatedPolicyArea": "Housing and Community Development",
+  "validatedRepresentativeId": "D000629",
+  "additionalRepIds": ["W000812", "C001120"],
+  "suggestedElements": [
+    "Header.Bill",
+    "Data.FloorDebate",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+  "validationNotes": "Bipartisan housing bill; Senate passed 89-10 March 12 2026, House concurred May 20. Davids set as primary rep (Democrat For speaker). Crenshaw dissented on federalism grounds. sentimentEligible=true.",
+  "speakerValidation": [
+    { "name": "Sharice Davids", "representativeId": "D000629", "verified": true, "party": "Democrat", "position": "For" },
+    { "name": "Ann Wagner", "representativeId": "W000812", "verified": true, "party": "Republican", "position": "For" },
+    { "name": "Dan Crenshaw", "representativeId": "C001120", "verified": true, "party": "Republican", "position": "Against" }
+  ]
+}

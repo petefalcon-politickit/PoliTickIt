@@ -1,0 +1,30 @@
+{
+  "normId": "NORM-20260530-090001-sjres185-floor-debate",
+  "spawnRef": "SPAWN-20260530-090001-sjres185-floor-debate",
+  "validatedAt": "2026-05-30T09:00:11Z",
+  "snapCategory": "Accountability",
+  "contentSignal": "active",
+  "sentimentEligible": true,
+  "validatedBillId": "S.J.Res.185",
+  "validatedBillTitle": "A joint resolution to direct the removal of United States Armed Forces from hostilities within or against the Islamic Republic of Iran that have not been authorized by Congress",
+  "validatedChamber": "Senate",
+  "validatedCongress": "119",
+  "validatedVoteOutcome": "Agreed to 50-47",
+  "validatedLastActionDate": "2026-05-19",
+  "validatedPolicyArea": "Armed Forces and National Security",
+  "validatedRepresentativeId": "D000622",
+  "additionalRepIds": ["M001153", "C001095"],
+  "suggestedElements": [
+    "Header.Bill",
+    "Data.FloorDebate",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+  "validationNotes": "Bipartisan 50-47 vote. Murkowski (R-AK), Collins (R-ME), Cassidy (R-LA) among Republican crossovers. Primary rep set to Duckworth (D-IL) as lead For speaker. sentimentEligible=true because contentSignal=active.",
+  "speakerValidation": [
+    { "name": "Tammy Duckworth", "representativeId": "D000622", "verified": true, "party": "Democrat", "position": "For" },
+    { "name": "Lisa Murkowski", "representativeId": "M001153", "verified": true, "party": "Republican", "position": "For" },
+    { "name": "Tom Cotton", "representativeId": "C001095", "verified": true, "party": "Republican", "position": "Against" }
+  ]
+}

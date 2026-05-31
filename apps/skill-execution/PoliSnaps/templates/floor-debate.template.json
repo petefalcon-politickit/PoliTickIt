@@ -1,0 +1,312 @@
+{
+  "templateId": "floor-debate",
+  "version": "1.1",
+  "description": "Daily congressional floor vote with structured For/Against speaker debate, vote tally bar, and sentiment pulse.",
+  "snapCategory": "accountabilitySnaps",
+  "runFrequency": "daily (session days only)",
+  "maxSnapsPerRun": 5,
+  "requiredElements": [
+    "Header.Bill",
+    "Data.FloorDebate",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+
+  "snapIdPattern": "snap-{{billIdSlug}}-floor-debate-{{voteDate}}",
+
+  "channels": [
+    "Representative:{{primaryRepId}}",
+    "PolicyArea:{{policyAreaSlug}}",
+    "PoliTickIt:Accountability",
+    "FloorDebate:{{billIdSlug}}",
+    "Congress:{{congress}}th"
+  ],
+
+  "schema": {
+    "id": "{{snapId}}",
+    "title": "{{chamberLabel}} Floor Debate",
+    "subtitle": "{{billId}} — {{billShortTitle}}",
+    "type": "Accountability",
+    "createdAt": "{{createdAt}}",
+    "sources": [
+      {
+        "name": "{{sourceLabel}}",
+        "url": "{{sourceUrl}}"
+      }
+    ],
+    "metadata": {
+      "policyArea": "{{policyArea}}",
+      "insightType": "{{chamberLabel}} Floor Vote",
+      "representativeId": "{{primaryRepId}}",
+      "billId": "{{billId}}",
+      "chamber": "{{chamber}}",
+      "voteDate": "{{voteDate}}",
+      "voteOutcome": "{{voteOutcome}}"
+    },
+    "elements": [
+      {
+        "id": "bill-header",
+        "type": "Header.Bill",
+        "data": {
+          "billId": "{{billId}}",
+          "billTitle": "{{billFullTitle}}",
+          "chamber": "{{chamber}}",
+          "voteOutcome": "{{voteOutcome}}",
+          "voteDate": "{{voteDateFormatted}}",
+          "congress": "{{congress}}",
+          "policyArea": "{{policyArea}}"
+        }
+      },
+      {
+        "id": "floor-debate",
+        "type": "Data.FloorDebate",
+        "data": {
+          "voteFor": "{{voteFor}}",
+          "voteAgainst": "{{voteAgainst}}",
+          "voteAbstain": "{{voteAbstain}}",
+          "speakers": [
+            {
+              "name": "{{speaker1Name}}",
+              "title": "{{speaker1Title}}",
+              "party": "{{speaker1Party}}",
+              "position": "For",
+              "quote": "{{speaker1Quote}}"
+            },
+            {
+              "name": "{{speaker2Name}}",
+              "title": "{{speaker2Title}}",
+              "party": "{{speaker2Party}}",
+              "position": "For",
+              "quote": "{{speaker2Quote}}"
+            },
+            {
+              "name": "{{speaker3Name}}",
+              "title": "{{speaker3Title}}",
+              "party": "{{speaker3Party}}",
+              "position": "Against",
+              "quote": "{{speaker3Quote}}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "bill-context",
+        "type": "Narrative.Insight.Summary",
+        "data": {
+          "title": "What This Vote Means",
+          "text": "{{summaryText}}",
+          "isExpandable": true,
+          "sourceLink": "{{sourceUrl}}"
+        }
+      },
+      {
+        "id": "sentiment-pulse",
+        "type": "Interaction.Sentiment.Pulse",
+        "data": {
+          "title": "{{sentimentQuestion}}",
+          "options": [
+            { "id": "{{option1Id}}", "label": "{{option1Label}}" },
+            { "id": "{{option2Id}}", "label": "{{option2Label}}" },
+            { "id": "{{option3Id}}", "label": "{{option3Label}}" },
+            { "id": "{{option4Id}}", "label": "{{option4Label}}" }
+          ],
+          "stats": { "agree": 0, "disagree": 0 }
+        }
+      },
+      {
+        "id": "trust-thread",
+        "type": "Trust.Thread",
+        "data": {
+          "referenceId": "{{spawnRef}}",
+          "serialNumber": "TT-{{auditDate}}-{{primaryRepId}}-001",
+          "oracleSource": "{{sourceLabel}}",
+          "verificationLevel": "Tier 1",
+          "auditDate": "{{auditDate}}"
+        }
+      }
+    ]
+  },
+
+  "productionSpec": {
+    "vars": {
+      "billId": {
+        "description": "Official bill identifier",
+        "examples": ["H.R.2616", "S.J.Res.185", "S.1234"],
+        "source": "Congress.gov or roll call record header",
+        "required": true
+      },
+      "billIdSlug": {
+        "description": "URL-safe bill ID for snapId and channel strings",
+        "rule": "lowercase, remove dots and spaces: 'H.R.2616' → 'hr2616', 'S.J.Res.185' → 'sjres185'",
+        "required": true
+      },
+      "billShortTitle": {
+        "description": "Concise subtitle-length bill title (max 80 chars)",
+        "rule": "Use the popular name if one exists (e.g. 'PROTECT Kids Act'); fall back to a compressed version of the official title",
+        "required": true
+      },
+      "billFullTitle": {
+        "description": "Full official bill title as it appears in Congress.gov",
+        "source": "Congress.gov bill page",
+        "required": true
+      },
+      "chamber": {
+        "description": "Originating chamber of the vote",
+        "allowedValues": ["Senate", "House"],
+        "required": true
+      },
+      "chamberLabel": {
+        "description": "Human-readable chamber label",
+        "allowedValues": ["Senate", "House"],
+        "required": true
+      },
+      "voteOutcome": {
+        "description": "Short outcome string, include vote count",
+        "examples": ["Passed (312-114)", "Failed (201-218)", "Agreed to (50-47)", "Passed (concurred with Senate amendment)"],
+        "required": true
+      },
+      "voteDate": {
+        "description": "ISO date of the vote (YYYY-MM-DD)",
+        "source": "Roll call record",
+        "required": true
+      },
+      "voteDateFormatted": {
+        "description": "Human-readable vote date",
+        "examples": ["May 20, 2026"],
+        "required": true
+      },
+      "congress": {
+        "description": "Congress number as integer string",
+        "examples": ["119", "118"],
+        "required": true
+      },
+      "policyArea": {
+        "description": "Congress.gov policy area string",
+        "source": "_polisnap-data/policy-areas.md",
+        "required": true
+      },
+      "policyAreaSlug": {
+        "description": "CamelCase slug of policyArea for channel string",
+        "rule": "Remove spaces and punctuation, capitalize each word: 'Armed Forces and National Security' → 'ArmedForcesAndNationalSecurity'",
+        "required": true
+      },
+      "primaryRepId": {
+        "description": "Bioguide ID of the primary FOR speaker (use sponsor or leading proponent)",
+        "source": "_polisnap-data/representatives.md",
+        "required": true
+      },
+      "voteFor": {
+        "description": "Number of Yea/Aye votes",
+        "type": "integer",
+        "source": "senate.gov roll call XML OR clerk.house.gov roll call XML",
+        "required": true
+      },
+      "voteAgainst": {
+        "description": "Number of Nay/No votes",
+        "type": "integer",
+        "source": "same roll call record",
+        "required": true
+      },
+      "voteAbstain": {
+        "description": "Number of Not Voting / Present / Abstain votes",
+        "type": "integer",
+        "source": "same roll call record",
+        "default": 0,
+        "required": false
+      },
+      "speaker1Name": {
+        "description": "Full name of first FOR speaker (typically bill sponsor or committee chair)",
+        "required": true
+      },
+      "speaker1Title": {
+        "description": "Party abbreviation, state, and role (e.g. 'R-MI · House E&C Committee')",
+        "required": true
+      },
+      "speaker1Party": {
+        "description": "Full party name",
+        "allowedValues": ["Republican", "Democrat", "Independent"],
+        "required": true
+      },
+      "speaker1Quote": {
+        "description": "Direct floor quote, max 220 characters. Must be an actual quote or closely paraphrased from the Congressional Record.",
+        "maxChars": 220,
+        "required": true
+      },
+      "speaker2Name": {
+        "description": "Full name of second FOR speaker — ideally cross-party to show bipartisanship",
+        "rule": "Prefer a speaker from the opposite party to speaker1 when bipartisan support exists",
+        "required": true
+      },
+      "speaker2Title": { "description": "Same format as speaker1Title", "required": true },
+      "speaker2Party": { "description": "Full party name", "allowedValues": ["Republican", "Democrat", "Independent"], "required": true },
+      "speaker2Quote": { "description": "Direct floor quote, max 220 chars", "maxChars": 220, "required": true },
+      "speaker3Name": {
+        "description": "Full name of the AGAINST speaker (opposition voice)",
+        "rule": "Must be from the opposing side. If vote was bipartisan, use a notable dissenter.",
+        "required": true
+      },
+      "speaker3Title": { "description": "Same format as speaker1Title", "required": true },
+      "speaker3Party": { "description": "Full party name", "allowedValues": ["Republican", "Democrat", "Independent"], "required": true },
+      "speaker3Quote": { "description": "Direct floor quote, max 220 chars", "maxChars": 220, "required": true },
+      "summaryText": {
+        "description": "Neutral 2-4 sentence summary: what the bill does, vote margin, notable crossovers, next step.",
+        "rule": "Neutral framing. Include vote count. Note any bipartisan crossover. State next legislative step (sent to Senate / signed / vetoed).",
+        "maxChars": 400,
+        "required": true
+      },
+      "sentimentQuestion": {
+        "description": "Policy-framed public opinion question (NOT 'did you like this vote'). Must be answerable by any constituent regardless of party.",
+        "rule": "Frame as a policy outcome question. 4 options required. Options must span the realistic opinion space.",
+        "maxChars": 120,
+        "required": true
+      },
+      "sourceLabel": {
+        "description": "Human-readable source label for Trust.Thread and sources[] array",
+        "examples": ["Senate.gov — Roll Call Vote #130, 119th Congress", "Clerk.House.gov — Roll Call Vote #185 (2026)"],
+        "required": true
+      },
+      "sourceUrl": {
+        "description": "Direct URL to the official roll call record",
+        "examples": [
+          "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130",
+          "https://clerk.house.gov/evs/2026/roll185.xml"
+        ],
+        "required": true
+      },
+      "spawnRef": {
+        "description": "SPAWN file ID this snap traces back to",
+        "pattern": "SPAWN-{timestamp}-{slug}",
+        "required": true
+      },
+      "auditDate": {
+        "description": "ISO date this snap was audited/generated (YYYY-MM-DD)",
+        "required": true
+      },
+      "createdAt": {
+        "description": "ISO 8601 datetime this snap was created",
+        "required": true
+      }
+    },
+
+    "speakerSelectionRules": [
+      "speaker1: Primary sponsor or committee chair who led floor management of the bill (position: For)",
+      "speaker2: Ideally a cross-party co-sponsor or notable bipartisan supporter (position: For). If no crossover exists, use a second prominent supporter from same party.",
+      "speaker3: The most prominent or articulate dissenter who spoke against (position: Against)"
+    ],
+
+    "dataSources": {
+      "senate": "https://www.senate.gov/legislative/LIS/roll_call_lists/",
+      "house": "https://clerk.house.gov/evs/{year}/",
+      "congressGov": "https://www.congress.gov/bill/{congress}th-congress/{chamber}-{type}/{number}",
+      "fallback": "rollcall.com, govtrack.us for vote summaries"
+    },
+
+    "fallbackRules": {
+      "onRecess": "Use most recent active session within 14 calendar days. Display advisory: 'No floor activity on {date} — showing most recent session ({fallbackDate})'.",
+      "onNoVote": "Skip bill, replace with next ranked bill from the same session. Minimum 3 snaps per run.",
+      "onApiFailure": "Fall back to direct scraping of senate.gov or clerk.house.gov XML roll call files.",
+      "onNoBioguideMatch": "Log warning in NORM file. Use first speaker's bioguide as primaryRepId. Do not block snap generation."
+    }
+  }
+}

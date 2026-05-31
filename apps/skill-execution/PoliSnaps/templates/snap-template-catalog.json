@@ -1,0 +1,79 @@
+{
+  "version": "1.1",
+  "lastUpdated": "2026-05-30",
+  "description": "Registry of all canonical PoliSnap structural templates. Each entry maps a templateId to its template file. The polisnap-generator skill checks this catalog before constructing a snap — if a match is found, the template is used as the structural scaffold.",
+
+  "lookupStrategy": {
+    "primary": "explicitTemplateId — check NORM file for 'templateId' field",
+    "secondary": "signatureHash — compute by joining NORM's suggestedElements[] with '|' separator in order; compare against each entry's signatureHash",
+    "tertiary": "snapCategory + contentType — fuzzy match by category and first element type",
+    "onNoMatch": "AUTO_GENERATE — derive a new template from the snap being constructed, save to templates/, register here"
+  },
+
+  "templates": [
+    {
+      "templateId": "floor-debate",
+      "version": "1.1",
+      "description": "Daily congressional floor vote with For/Against speaker debate, vote tally bar, policy summary, sentiment pulse, and provenance footer.",
+      "snapCategory": "accountabilitySnaps",
+      "chamberScope": ["Senate", "House"],
+      "contentType": "FloorVote",
+      "usedBy": [
+        "daily-floor-debates.prompt.md"
+      ],
+      "requiredElements": [
+        "Header.Bill",
+        "Data.FloorDebate",
+        "Narrative.Insight.Summary",
+        "Interaction.Sentiment.Pulse",
+        "Trust.Thread"
+      ],
+      "signatureHash": "Header.Bill|Data.FloorDebate|Narrative.Insight.Summary|Interaction.Sentiment.Pulse|Trust.Thread",
+      "snapIdPattern": "snap-{{billIdSlug}}-floor-debate-{{voteDate}}",
+      "runFrequency": "daily (session days only)",
+      "maxSnapsPerRun": 5,
+      "templateFile": "floor-debate.template.json",
+      "addedDate": "2026-05-30",
+      "exampleSnaps": [
+        "snap-hr2616-floor-debate-2026-05-19",
+        "snap-sjres185-floor-debate-2026-05-20",
+        "snap-s123-floor-debate-2026-05-21"
+      ]
+    },
+    {
+      "templateId": "senator-statement",
+      "version": "1.0",
+      "description": "Single-representative position or vote snap anchored to one named senator or representative. Includes floor statement quote, bill vote badge, context summary, sentiment poll, and provenance footer.",
+      "snapCategory": "accountabilitySnaps",
+      "chamberScope": ["Senate", "House"],
+      "contentType": "RepStatement",
+      "usedBy": [
+        "quick-polisnap.prompt.md"
+      ],
+      "requiredElements": [
+        "Header.Representative",
+        "Narrative.Congressional.Statement",
+        "Data.BillVote",
+        "Narrative.Insight.Summary",
+        "Interaction.Sentiment.Pulse",
+        "Trust.Thread"
+      ],
+      "signatureHash": "Header.Representative|Narrative.Congressional.Statement|Data.BillVote|Narrative.Insight.Summary|Interaction.Sentiment.Pulse|Trust.Thread",
+      "snapIdPattern": "snap-{{billIdSlug}}-{{repIdSlug}}-{{eventType}}",
+      "runFrequency": "on-demand",
+      "maxSnapsPerRun": 1,
+      "templateFile": "senator-statement.template.json",
+      "addedDate": "2026-05-30",
+      "exampleSnaps": [
+        "snap-sjres12-thune-iran-senate-vote"
+      ]
+    }
+  ],
+
+  "autoGenerationRules": {
+    "deriveTemplateIdFrom": "First element type + contentType inferred from NORM metadata. Example: NORM with Header.Bill → 'bill-{contentSlug}'",
+    "templateFileNamingPattern": "{{templateId}}.template.json",
+    "registrationRequired": "YES — any auto-generated template MUST be registered in this catalog before the snap is written",
+    "approvalNote": "Auto-generated template creation MUST be included in the Step 4 approval summary presented to the user. The template file is written as part of the approved file batch."
+  }
+}

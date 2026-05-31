@@ -1,0 +1,30 @@
+{
+  "normId": "NORM-20260530-090002-hr2616-floor-debate",
+  "spawnRef": "SPAWN-20260530-090002-hr2616-floor-debate",
+  "validatedAt": "2026-05-30T09:00:12Z",
+  "snapCategory": "Accountability",
+  "contentSignal": "active",
+  "sentimentEligible": true,
+  "validatedBillId": "H.R.2616",
+  "validatedBillTitle": "PROTECT Kids Act",
+  "validatedChamber": "House",
+  "validatedCongress": "119",
+  "validatedVoteOutcome": "Passed",
+  "validatedLastActionDate": "2026-05-20",
+  "validatedPolicyArea": "Science, Technology, Communications",
+  "validatedRepresentativeId": "W000798",
+  "additionalRepIds": ["D000216", "H001052"],
+  "suggestedElements": [
+    "Header.Bill",
+    "Data.FloorDebate",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+  "validationNotes": "Bipartisan child safety bill, passed House. Walberg set as primary rep (lead Republican sponsor). Harris dissented on First Amendment grounds. sentimentEligible=true.",
+  "speakerValidation": [
+    { "name": "Tim Walberg", "representativeId": "W000798", "verified": true, "party": "Republican", "position": "For" },
+    { "name": "Rosa DeLauro", "representativeId": "D000216", "verified": true, "party": "Democrat", "position": "For" },
+    { "name": "Andy Harris", "representativeId": "H001052", "verified": true, "party": "Republican", "position": "Against" }
+  ]
+}

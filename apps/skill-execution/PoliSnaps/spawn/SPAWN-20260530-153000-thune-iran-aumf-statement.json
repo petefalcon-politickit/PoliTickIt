@@ -1,0 +1,25 @@
+{
+  "spawnId": "SPAWN-20260530-153000-thune-iran-aumf-statement",
+  "generatedAt": "2026-05-30T15:30:00Z",
+  "mineMode": "freeform",
+  "contentSignal": "active",
+  "copyrightFlag": "public-domain",
+  "topic": "Senate Majority Leader Thune floor statement supporting S.J.Res.12 — AUMF authorization for military action against Iran",
+  "repMentions": ["John Thune"],
+  "billReferences": ["S.J.Res.12"],
+  "sourceUrl": "https://www.thune.senate.gov/public/index.cfm/press-releases",
+  "sourceName": "Senator Thune Official Press Office (senate.gov)",
+  "accessDate": "2026-05-30",
+  "rawTitle": "Majority Leader Thune Floor Statement: Authorization for Use of Military Force Against Iran",
+  "rawSummary": "Senate Majority Leader John Thune (R-SD) delivered a floor statement on May 28, 2026 in support of S.J.Res.12, a joint resolution authorizing limited use of military force against Iranian military targets following confirmed Iranian attacks on US naval assets in the Persian Gulf. Thune called the authorization 'a measured and constitutionally sound response to unprovoked aggression against American personnel and assets.' He urged bipartisan support, citing the constitutional obligation of Congress to formally authorize military engagement. The resolution passed the Senate 61–37 on May 29, 2026. Thune voted Yea.",
+  "quotes": [
+    {
+      "quoteFlag": true,
+      "quoteSpeaker": "John Thune",
+      "quoteText": "This is a measured and constitutionally sound response to unprovoked aggression against American personnel and assets. We have a duty to stand with our troops and make clear that America will not tolerate attacks on its people.",
+      "quoteDate": "2026-05-28",
+      "quoteSourceUrl": "https://www.thune.senate.gov/public/index.cfm/press-releases"
+    }
+  ],
+  "additionalSources": []
+}

@@ -1,0 +1,30 @@
+{
+  "normId": "NORM-20260530-090004-hr1041-floor-debate",
+  "spawnRef": "SPAWN-20260530-090004-hr1041-floor-debate",
+  "validatedAt": "2026-05-30T09:00:14Z",
+  "snapCategory": "Accountability",
+  "contentSignal": "active",
+  "sentimentEligible": true,
+  "validatedBillId": "H.R.1041",
+  "validatedBillTitle": "Veterans 2nd Amendment Protection Act",
+  "validatedChamber": "House",
+  "validatedCongress": "119",
+  "validatedVoteOutcome": "Passed",
+  "validatedLastActionDate": "2026-05-21",
+  "validatedPolicyArea": "Armed Forces and National Security",
+  "validatedRepresentativeId": "M001199",
+  "additionalRepIds": ["B001257", "L000397"],
+  "suggestedElements": [
+    "Header.Bill",
+    "Data.FloorDebate",
+    "Narrative.Insight.Summary",
+    "Interaction.Sentiment.Pulse",
+    "Trust.Thread"
+  ],
+  "validationNotes": "Bill passed; Mast set as primary rep (combat veteran For speaker). Lofgren dissented on gun safety grounds. sentimentEligible=true.",
+  "speakerValidation": [
+    { "name": "Brian Mast", "representativeId": "M001199", "verified": true, "party": "Republican", "position": "For" },
+    { "name": "Gus Bilirakis", "representativeId": "B001257", "verified": true, "party": "Republican", "position": "For" },
+    { "name": "Zoe Lofgren", "representativeId": "L000397", "verified": true, "party": "Democrat", "position": "Against" }
+  ]
+}
