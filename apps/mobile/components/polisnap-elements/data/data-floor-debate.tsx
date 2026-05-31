@@ -1,7 +1,6 @@
 import { ComponentFactory } from "@/components/factories/component-factory";
 import { ThemedText } from "@/components/themed-text";
 import { Colors, Spacing, Typography } from "@/constants/theme";
-import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
@@ -56,12 +55,6 @@ export const DataFloorDebate = ({ data }: any) => {
           {forSpeakers.length > 0 && (
             <View style={styles.speakerGroup}>
               <View style={styles.positionLabel}>
-                <Ionicons
-                  name="checkmark-circle"
-                  size={12}
-                  color="#15803D"
-                  style={{ marginRight: 4 }}
-                />
                 <ThemedText style={[styles.positionText, { color: "#15803D" }]}>
                   IN SUPPORT
                 </ThemedText>
@@ -74,12 +67,6 @@ export const DataFloorDebate = ({ data }: any) => {
           {againstSpeakers.length > 0 && (
             <View style={[styles.speakerGroup, { marginTop: Spacing.sm }]}>
               <View style={styles.positionLabel}>
-                <Ionicons
-                  name="close-circle"
-                  size={12}
-                  color="#B91C1C"
-                  style={{ marginRight: 4 }}
-                />
                 <ThemedText style={[styles.positionText, { color: "#B91C1C" }]}>
                   IN OPPOSITION
                 </ThemedText>
@@ -107,20 +94,10 @@ const SpeakerCard = ({
 }) => {
   const { name, title, quote, party } = speaker || {};
   const accentColor = position === "For" ? "#15803D" : "#B91C1C";
-  const isRep = party?.toLowerCase().startsWith("r");
-  const isDem = party?.toLowerCase().startsWith("d");
-  const partyColor = isRep
-    ? "#D0021B"
-    : isDem
-      ? "#164269"
-      : Colors.light.textGray;
 
   return (
     <View style={styles.speakerCard}>
       <View style={styles.speakerHeader}>
-        {party && (
-          <View style={[styles.partyDot, { backgroundColor: partyColor }]} />
-        )}
         <View style={{ flex: 1 }}>
           <ThemedText style={styles.speakerName}>{name}</ThemedText>
           {title && (
@@ -206,10 +183,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase" as any,
   },
   speakerCard: {
-    marginBottom: Spacing.xs,
-    paddingLeft: 8,
-    borderLeftWidth: 2,
-    borderLeftColor: Colors.light.border,
+    marginBottom: Spacing.md,
   },
   speakerHeader: {
     flexDirection: "row",

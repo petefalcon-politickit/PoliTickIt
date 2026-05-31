@@ -31,7 +31,6 @@ export const accountabilitySnaps = [
     metadata: {
       policyArea: "Armed Forces and National Security",
       insightType: "Senate Floor Vote",
-      representativeId: "D000622",
       billId: "S.J.Res.185",
       chamber: "Senate",
       voteDate: "2026-05-19",
@@ -94,8 +93,6 @@ export const accountabilitySnaps = [
           title: "What This Vote Means",
           text: "S.J.Res.185 is a War Powers Resolution requiring the withdrawal of US Armed Forces from hostilities involving Iran within 30 days unless Congress explicitly authorizes continued action. The 50-47 vote passed the Senate, sending it to the House. The resolution has bipartisan support — 3 Republicans crossed party lines to vote with 47 Democrats.",
           isExpandable: true,
-          sourceLink:
-            "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130",
         },
       },
       {
@@ -124,11 +121,15 @@ export const accountabilitySnaps = [
         type: "Trust.Thread",
         data: {
           referenceId: "SPAWN-20260530-090001-sjres185-floor-debate",
-          serialNumber: "TT-20260530-D000622-001",
-          oracleSource:
-            "Senate.gov Roll Call Vote #130 (119th Congress, 2nd Session)",
-          verificationLevel: "Tier 1",
-          auditDate: "2026-05-30",
+          serialNumber: "TT-20260530-sjres185-001",
+          verificationLevel: "Tier 3",
+          sources: [
+            {
+              name: "Senate.gov Roll Call Vote #130 (119th Congress, 2nd Session)",
+              url: "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130",
+              auditDate: "2026-05-30",
+            },
+          ],
         },
       },
     ],
@@ -155,7 +156,6 @@ export const accountabilitySnaps = [
     metadata: {
       policyArea: "Science, Technology, Communications",
       insightType: "House Floor Vote",
-      representativeId: "W000798",
       billId: "H.R.2616",
       chamber: "House",
       voteDate: "2026-05-20",
@@ -218,7 +218,6 @@ export const accountabilitySnaps = [
           title: "What This Vote Means",
           text: "H.R.2616, the PROTECT Kids Act, passed the House 312-114 with strong bipartisan support. The bill requires social media platforms to verify user ages, restricts algorithmic content targeting for minors, and mandates parental consent for accounts under 16. It now heads to the Senate.",
           isExpandable: true,
-          sourceLink: "https://clerk.house.gov/evs/2026/roll185.xml",
         },
       },
       {
@@ -247,10 +246,15 @@ export const accountabilitySnaps = [
         type: "Trust.Thread",
         data: {
           referenceId: "SPAWN-20260530-090002-hr2616-floor-debate",
-          serialNumber: "TT-20260530-W000798-001",
-          oracleSource: "Clerk.House.gov Roll Call Vote #185 (2026)",
-          verificationLevel: "Tier 1",
-          auditDate: "2026-05-30",
+          serialNumber: "TT-20260530-hr2616-001",
+          verificationLevel: "Tier 3",
+          sources: [
+            {
+              name: "Clerk.House.gov — Roll Call Vote #185 (2026)",
+              url: "https://clerk.house.gov/evs/2026/roll185.xml",
+              auditDate: "2026-05-30",
+            },
+          ],
         },
       },
     ],
@@ -277,7 +281,6 @@ export const accountabilitySnaps = [
     metadata: {
       policyArea: "Arts, Culture, Religion",
       insightType: "House Floor Vote",
-      representativeId: "B001285",
       billId: "H.R.1329",
       chamber: "House",
       voteDate: "2026-05-21",
@@ -340,7 +343,6 @@ export const accountabilitySnaps = [
           title: "What This Vote Means",
           text: "H.R.1329 failed 201-218, falling short of the 2/3 majority needed under suspension of rules. The bill would have established a new museum dedicated to American women on the National Mall as part of the Smithsonian Institution. The bill had passed the House in multiple prior sessions but never cleared the Senate.",
           isExpandable: true,
-          sourceLink: "https://clerk.house.gov/evs/2026/roll191.xml",
         },
       },
       {
@@ -369,10 +371,15 @@ export const accountabilitySnaps = [
         type: "Trust.Thread",
         data: {
           referenceId: "SPAWN-20260530-090003-hr1329-floor-debate",
-          serialNumber: "TT-20260530-B001285-001",
-          oracleSource: "Clerk.House.gov Roll Call Vote #191 (2026)",
-          verificationLevel: "Tier 1",
-          auditDate: "2026-05-30",
+          serialNumber: "TT-20260530-hr1329-001",
+          verificationLevel: "Tier 3",
+          sources: [
+            {
+              name: "Clerk.House.gov — Roll Call Vote #191 (2026)",
+              url: "https://clerk.house.gov/evs/2026/roll191.xml",
+              auditDate: "2026-05-30",
+            },
+          ],
         },
       },
     ],
@@ -399,7 +406,6 @@ export const accountabilitySnaps = [
     metadata: {
       policyArea: "Armed Forces and National Security",
       insightType: "House Floor Vote",
-      representativeId: "M001199",
       billId: "H.R.1041",
       chamber: "House",
       voteDate: "2026-05-21",
@@ -462,7 +468,6 @@ export const accountabilitySnaps = [
           title: "What This Vote Means",
           text: "H.R.1041 passed the House 230-195, largely along party lines. The bill prohibits the VA from reporting veterans to the National Instant Criminal Background Check System (NICS) solely because a fiduciary has been appointed to manage their benefits. The bill now heads to the Senate.",
           isExpandable: true,
-          sourceLink: "https://clerk.house.gov/evs/2026/roll189.xml",
         },
       },
       {
@@ -485,10 +490,15 @@ export const accountabilitySnaps = [
         type: "Trust.Thread",
         data: {
           referenceId: "SPAWN-20260530-090004-hr1041-floor-debate",
-          serialNumber: "TT-20260530-M001199-001",
-          oracleSource: "Clerk.House.gov Roll Call Vote #189 (2026)",
-          verificationLevel: "Tier 1",
-          auditDate: "2026-05-30",
+          serialNumber: "TT-20260530-hr1041-001",
+          verificationLevel: "Tier 3",
+          sources: [
+            {
+              name: "Clerk.House.gov — Roll Call Vote #189 (2026)",
+              url: "https://clerk.house.gov/evs/2026/roll189.xml",
+              auditDate: "2026-05-30",
+            },
+          ],
         },
       },
     ],
@@ -515,7 +525,6 @@ export const accountabilitySnaps = [
     metadata: {
       policyArea: "Housing and Community Development",
       insightType: "House Floor Vote",
-      representativeId: "D000629",
       billId: "H.R.6644",
       chamber: "House",
       voteDate: "2026-05-20",
@@ -578,7 +587,6 @@ export const accountabilitySnaps = [
           title: "What This Vote Means",
           text: "H.R.6644 passed the House 284-143 with broad bipartisan support, concurring with a Senate amendment passed 89-10 in March. The bill creates federal incentives for states and localities to reform zoning laws, streamline permitting, and allow higher-density construction near transit corridors. The bill now goes to the President for signature.",
           isExpandable: true,
-          sourceLink: "https://clerk.house.gov/evs/2026/roll186.xml",
         },
       },
       {
@@ -607,10 +615,15 @@ export const accountabilitySnaps = [
         type: "Trust.Thread",
         data: {
           referenceId: "SPAWN-20260530-090005-hr6644-floor-debate",
-          serialNumber: "TT-20260530-D000629-001",
-          oracleSource: "Clerk.House.gov Roll Call Vote #186 (2026)",
-          verificationLevel: "Tier 1",
-          auditDate: "2026-05-30",
+          serialNumber: "TT-20260530-hr6644-001",
+          verificationLevel: "Tier 3",
+          sources: [
+            {
+              name: "Clerk.House.gov — Roll Call Vote #186 (2026)",
+              url: "https://clerk.house.gov/evs/2026/roll186.xml",
+              auditDate: "2026-05-30",
+            },
+          ],
         },
       },
     ],
@@ -676,8 +689,6 @@ export const accountabilitySnaps = [
           title: "About S.J.Res.12",
           text: "S.J.Res.12 authorizes the President to use limited military force against Iranian military targets in response to confirmed Iranian attacks on US naval assets in the Persian Gulf. The resolution passed the Senate 61–37 on May 29, 2026 and is now pending action in the House.",
           isExpandable: true,
-          sourceLink:
-            "https://www.thune.senate.gov/public/index.cfm/press-releases",
         },
       },
       {
@@ -699,10 +710,15 @@ export const accountabilitySnaps = [
         type: "Trust.Thread",
         data: {
           referenceId: "SPAWN-20260530-153000-thune-iran-aumf-statement",
-          serialNumber: "TT-20260530-T000250-001",
-          oracleSource: "Senator Thune Official Press Office (senate.gov)",
+          serialNumber: "TT-20260530-sjres12-001",
           verificationLevel: "Tier 3",
-          auditDate: "2026-05-30",
+          sources: [
+            {
+              name: "Senator Thune Official Press Office (senate.gov)",
+              url: "https://www.thune.senate.gov/public/index.cfm/press-releases",
+              auditDate: "2026-05-30",
+            },
+          ],
         },
       },
     ],

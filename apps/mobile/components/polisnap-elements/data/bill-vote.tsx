@@ -21,9 +21,7 @@ export const DataBillVote = ({ data, presentation, extraProps }: any) => {
 
   return (
     <View style={styles.container}>
-      <ThemedText style={styles.billName}>
-        {billName || "American Infrastructure and Jobs Act of 2026"}
-      </ThemedText>
+      <ThemedText style={styles.billName}>{billName}</ThemedText>
       <View style={styles.voteContainer}>
         <ThemedText style={styles.repName}>
           {representativeName ? `${representativeName}'s vote:` : "Vote:"}
@@ -41,12 +39,12 @@ export const DataBillVote = ({ data, presentation, extraProps }: any) => {
 const styles = StyleSheet.create({
   container: {
     ...GlobalStyles.metricContainer,
-    borderRadius: 8,
+    borderRadius: 4,
   },
   billName: {
-    fontSize: Typography.sizes.md,
-    fontWeight: "bold",
-    marginBottom: Spacing.sm,
+    fontSize: Typography.sizes.sm,
+    fontWeight: Typography.weights.bold,
+    marginBottom: Spacing.xs,
   },
   voteContainer: {
     flexDirection: "row",
@@ -58,9 +56,8 @@ const styles = StyleSheet.create({
     color: Colors.light.textSecondary,
   },
   voteBubble: {
-    paddingVertical: Spacing.xs,
     paddingHorizontal: Spacing.md,
-    borderRadius: 15,
+    borderRadius: 4,
   },
   yea: {
     backgroundColor: "rgba(46, 204, 113, 0.1)",

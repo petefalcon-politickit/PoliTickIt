@@ -6,14 +6,6 @@ const projectRoot = __dirname;
 // The workspace root is two levels up from apps/mobile
 const workspaceRoot = path.resolve(projectRoot, "../..");
 
-// expo-router's Babel plugin determines the app directory from EXPO_ROUTER_APP_ROOT.
-// In a monorepo release build, RNGP passes --project-root=workspaceRoot to expo CLI,
-// so expo-router would look for routes at workspaceRoot/app (wrong).
-// Fix: always point it to the absolute path of apps/mobile/app before transforms run.
-if (!process.env.EXPO_ROUTER_APP_ROOT) {
-  process.env.EXPO_ROUTER_APP_ROOT = path.join(projectRoot, "app");
-}
-
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(projectRoot);
 
@@ -27,6 +19,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 // 3. Fix for hoisted 'expo' package resolution errors in monorepos
+const fs = require("fs");
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   // If expo/AppEntry or some other entry point is looking for "../App" or "../../App"
   // redirect it to our local index.js

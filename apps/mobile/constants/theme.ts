@@ -986,13 +986,13 @@ const PulseGlobalStyles = {
 const Fonts = Typography.fonts;
 
 export {
-    BorderRadius,
-    Colors,
-    Fonts,
-    PulseGlobalStyles as GlobalStyles,
-    Shadows,
-    Spacing,
-    Typography
+  BorderRadius,
+  Colors,
+  Fonts,
+  PulseGlobalStyles as GlobalStyles,
+  Shadows,
+  Spacing,
+  Typography
 };
 
 // ============================================================================

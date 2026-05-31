@@ -19,7 +19,16 @@ export const TrustThread = ({ value: data, presentation }: any) => {
     verificationLevel,
     oracleSource,
     auditDate,
+    sources,
   } = data || {};
+
+  // Normalise to sources array — supports both old single-source and new multi-source formats
+  const resolvedSources: { name: string; url?: string; auditDate?: string }[] =
+    Array.isArray(sources) && sources.length > 0
+      ? sources
+      : oracleSource
+        ? [{ name: oracleSource, auditDate }]
+        : [];
 
   const attributes = presentation?.attributes || {};
   const fontSizeOffset = attributes.fontSizeOffset || 0;
@@ -60,6 +69,13 @@ export const TrustThread = ({ value: data, presentation }: any) => {
               {verificationLevel || "VERIFIED"}
             </ThemedText>
           </View>
+          {resolvedSources.length > 1 && (
+            <View style={styles.sourcesCountBadge}>
+              <ThemedText style={styles.sourcesCountText}>
+                {resolvedSources.length} SOURCES
+              </ThemedText>
+            </View>
+          )}
           <View style={styles.serialGroup}>
             <ThemedText style={styles.trustLabel}>
               SECURE TRUST THREAD™
@@ -87,48 +103,61 @@ export const TrustThread = ({ value: data, presentation }: any) => {
 
       {isExpanded && (
         <View style={styles.content}>
-          <View style={styles.row}>
-            <View style={styles.column}>
-              <ThemedText
-                style={[styles.label, { fontSize: getScaledSize(8, false, 0) }]}
-              >
-                ORACLE SOURCE
-              </ThemedText>
-              <ThemedText
-                style={[
-                  styles.value,
-                  {
-                    fontSize: getScaledSize(10, false, 0),
-                    marginTop: -5,
-                  },
-                ]}
-              >
-                {oracleSource || "System"}
-              </ThemedText>
+          {resolvedSources.map((src, index) => (
+            <View
+              key={index}
+              style={[styles.row, index > 0 && styles.sourceRowDivider]}
+            >
+              <View style={styles.column}>
+                <ThemedText
+                  style={[
+                    styles.label,
+                    { fontSize: getScaledSize(8, false, 0) },
+                  ]}
+                >
+                  {resolvedSources.length > 1
+                    ? `SOURCE ${index + 1}`
+                    : "ORACLE SOURCE"}
+                </ThemedText>
+                <ThemedText
+                  style={[
+                    styles.value,
+                    {
+                      fontSize: getScaledSize(10, false, 0),
+                      marginTop: -5,
+                    },
+                  ]}
+                >
+                  {src.name || "System"}
+                </ThemedText>
+              </View>
+              <View style={styles.columnRight}>
+                <ThemedText
+                  style={[
+                    styles.label,
+                    {
+                      fontSize: getScaledSize(8, false, 0),
+                      textAlign: "right",
+                    },
+                  ]}
+                >
+                  AUDIT DATE
+                </ThemedText>
+                <ThemedText
+                  style={[
+                    styles.value,
+                    {
+                      fontSize: getScaledSize(10, false, 0),
+                      textAlign: "right",
+                      marginTop: -5,
+                    },
+                  ]}
+                >
+                  {src.auditDate || auditDate || "Recent"}
+                </ThemedText>
+              </View>
             </View>
-            <View style={styles.columnRight}>
-              <ThemedText
-                style={[
-                  styles.label,
-                  { fontSize: getScaledSize(8, false, 0), textAlign: "right" },
-                ]}
-              >
-                AUDIT DATE
-              </ThemedText>
-              <ThemedText
-                style={[
-                  styles.value,
-                  {
-                    fontSize: getScaledSize(10, false, 0),
-                    textAlign: "right",
-                    marginTop: -5,
-                  },
-                ]}
-              >
-                {auditDate || "Recent"}
-              </ThemedText>
-            </View>
-          </View>
+          ))}
         </View>
       )}
     </View>
@@ -212,6 +241,26 @@ const styles = StyleSheet.create({
   value: {
     fontWeight: "500",
     color: Colors.light.textSecondary,
+  },
+  sourcesCountBadge: {
+    backgroundColor: "#EFF6FF",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: "#BFDBFE",
+  },
+  sourcesCountText: {
+    fontSize: 8,
+    fontWeight: "700",
+    color: "#3B82F6",
+    letterSpacing: 0.5,
+  },
+  sourceRowDivider: {
+    marginTop: 6,
+    paddingTop: 6,
+    borderTopWidth: 0.5,
+    borderTopColor: "#E2E8F0",
   },
 });
 

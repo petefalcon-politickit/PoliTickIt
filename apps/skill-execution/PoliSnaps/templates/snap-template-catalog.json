@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "lastUpdated": "2026-05-30",
   "description": "Registry of all canonical PoliSnap structural templates. Each entry maps a templateId to its template file. The polisnap-generator skill checks this catalog before constructing a snap — if a match is found, the template is used as the structural scaffold.",
 
@@ -66,6 +66,34 @@
       "addedDate": "2026-05-30",
       "exampleSnaps": [
         "snap-sjres12-thune-iran-senate-vote"
+      ]
+    },
+    {
+      "templateId": "rep-full-speech",
+      "version": "1.0",
+      "description": "Individual representative's full floor speech or congressional statement — produced as a drill-down child snap from a parent floor-debate snap. Appears as a standalone snap in the Accountability feed AND is navigable via tap from the parent snap's speaker entry.",
+      "snapCategory": "accountabilitySnaps",
+      "chamberScope": ["Senate", "House"],
+      "contentType": "RepFullSpeech",
+      "usedBy": [
+        "drill-down-detection (auto-spawned from floor-debate mining)"
+      ],
+      "requiredElements": [
+        "Header.Representative",
+        "Narrative.Congressional.Statement",
+        "Metric.Progress.Stepper",
+        "Interaction.Sentiment.Pulse",
+        "Trust.Thread"
+      ],
+      "signatureHash": "Header.Representative|Narrative.Congressional.Statement|Metric.Progress.Stepper|Interaction.Sentiment.Pulse|Trust.Thread",
+      "snapIdPattern": "snap-{{repLastName}}-{{billIdSlug}}-full-speech",
+      "runFrequency": "on-demand (spawned during drill-down detection)",
+      "maxSnapsPerRun": 1,
+      "templateFile": "rep-full-speech.template.json",
+      "addedDate": "2026-05-30",
+      "exampleSnaps": [
+        "snap-walberg-hr2616-full-speech",
+        "snap-pallone-hr2616-full-speech"
       ]
     }
   ],

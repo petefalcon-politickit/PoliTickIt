@@ -6,6 +6,7 @@
   "runFrequency": "daily (session days only)",
   "maxSnapsPerRun": 5,
   "requiredElements": [
+
     "Header.Bill",
     "Data.FloorDebate",
     "Narrative.Insight.Summary",
@@ -96,8 +97,7 @@
         "data": {
           "title": "What This Vote Means",
           "text": "{{summaryText}}",
-          "isExpandable": true,
-          "sourceLink": "{{sourceUrl}}"
+          "isExpandable": true
         }
       },
       {
@@ -119,10 +119,15 @@
         "type": "Trust.Thread",
         "data": {
           "referenceId": "{{spawnRef}}",
-          "serialNumber": "TT-{{auditDate}}-{{primaryRepId}}-001",
-          "oracleSource": "{{sourceLabel}}",
-          "verificationLevel": "Tier 1",
-          "auditDate": "{{auditDate}}"
+          "serialNumber": "TT-{{auditDate}}-{{billIdSlug}}-001",
+          "verificationLevel": "{{verificationLevel}}",
+          "sources": [
+            {
+              "name": "{{sourceLabel}}",
+              "url": "{{sourceUrl}}",
+              "auditDate": "{{auditDate}}"
+            }
+          ]
         }
       }
     ]
@@ -262,16 +267,23 @@
         "required": true
       },
       "sourceLabel": {
-        "description": "Human-readable source label for Trust.Thread and sources[] array",
+        "description": "Human-readable source label for Trust.Thread sources[].name",
         "examples": ["Senate.gov — Roll Call Vote #130, 119th Congress", "Clerk.House.gov — Roll Call Vote #185 (2026)"],
         "required": true
       },
       "sourceUrl": {
-        "description": "Direct URL to the official roll call record",
+        "description": "Direct URL to the official roll call record — goes into Trust.Thread sources[].url ONLY (not in any other element)",
         "examples": [
           "https://www.senate.gov/legislative/LIS/roll_call_lists/roll_call_vote_cfm.cfm?congress=119&session=2&vote=00130",
           "https://clerk.house.gov/evs/2026/roll185.xml"
         ],
+        "required": true
+      },
+      "verificationLevel": {
+        "description": "Trust verification level for Trust.Thread",
+        "allowedValues": ["Tier 1", "Tier 2", "Tier 3", "VERIFIED"],
+        "rule": "Use 'Tier 3' for primary government sources (congress.gov, senate.gov, clerk.house.gov). Use 'VERIFIED' when combining multiple primary-government sources.",
+        "default": "Tier 3",
         "required": true
       },
       "spawnRef": {
