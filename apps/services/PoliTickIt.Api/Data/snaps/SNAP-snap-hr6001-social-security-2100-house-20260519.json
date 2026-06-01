@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr6001-social-security-2100-house-20260519",
+  "normRef": "NORM-20260531-150000-hr6001-social-security-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.6001 — Social Security 2100: A Sacred Trust Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T15:00:00Z",
+  "updatedAt": "2026-05-31T15:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.6001",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/6001"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #188 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll188.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr6001-social-security-2100-floor-20260519",
+    "policyArea": "Social Welfare",
+    "insightType": "House Floor Vote",
+    "representativeId": "L000557",
+    "billId": "H.R.6001",
+    "chamber": "House",
+    "voteDate": "2026-05-19",
+    "voteOutcome": "Failed (208-225)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "A bill to strengthen Social Security for 75 years by raising the payroll tax cap on high earners narrowly failed in the House, despite polling showing 80% public support for the measure.",
+    "schemaVersion": "1.1",
+    "keywords": ["Social Security", "retirement", "payroll tax", "Social Security 2100", "Social Security Trust Fund", "seniors", "solvency"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.6001",
+        "billTitle": "Social Security 2100: A Sacred Trust Act — Raising payroll tax cap on earnings over $400K to extend solvency through 2100",
+        "chamber": "House",
+        "voteOutcome": "Failed (208-225)",
+        "voteDate": "May 19, 2026",
+        "congress": "119",
+        "policyArea": "Social Welfare"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 208,
+        "voteAgainst": 225,
+        "voteAbstain": 2,
+        "speakers": [
+          {
+            "bioguideId": "L000557",
+            "name": "Rep. John Larson",
+            "title": "D-CT · House Ways and Means",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Social Security will be insolvent in eight years without action. Eight years. That means a 23% across-the-board benefit cut for 70 million Americans — including veterans, the disabled, and every retiree in this country. This bill asks people who earn more than $400,000 a year to contribute to the program that kept their grandparents out of poverty. That is not radical. That is arithmetic."
+          },
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Franklin Roosevelt called Social Security a sacred trust. We are in this chamber today because Republicans would rather cut benefits than ask billionaires to pay the same Social Security tax rate as a schoolteacher. A teacher in Connecticut pays Social Security taxes on every dollar she earns. Jeff Bezos stops paying after his first $160,000. That is the system Republicans want to protect."
+          },
+          {
+            "bioguideId": "J000299",
+            "name": "Rep. Mike Johnson",
+            "title": "R-LA · House Speaker",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Social Security faces a structural math problem. Raising taxes on job creators does not fix the math — it damages the economy that funds Social Security. We need to modernize the program through sensible reforms to the retirement age and benefit calculations that reflect a 2026 life expectancy, not a 1935 one. Tax hikes are not reform. They are delay."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.6001 failed 208-225. The bill would have extended Social Security solvency to 2100 by applying the payroll tax to wages above $400,000 (currently capped at $168,600), increasing benefits by roughly $200/month, and creating a new minimum benefit of 125% of the poverty line. The Social Security Trustees project the Trust Fund will be depleted by 2033 without action, triggering automatic 23% benefit cuts.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/6001"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "How should Congress fix Social Security's funding gap?",
+        "options": [
+          { "id": "raise-cap", "label": "Raise the payroll tax cap on high earners" },
+          { "id": "raise-age", "label": "Gradually raise the retirement age" },
+          { "id": "reduce-benefits", "label": "Reduce benefits for high-income retirees" },
+          { "id": "combination", "label": "A combination of all of the above" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-150000-hr6001-social-security-house",
+        "serialNumber": "TT-20260531-L000557-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #188 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

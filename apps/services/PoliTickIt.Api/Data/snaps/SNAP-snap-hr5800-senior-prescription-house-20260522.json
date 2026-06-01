@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr5800-senior-prescription-house-20260522",
+  "normRef": "NORM-20260531-150400-hr5800-senior-prescription-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.5800 — Seniors Prescription Drug Access Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T15:04:00Z",
+  "updatedAt": "2026-05-31T15:04:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.5800",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/5800"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #194 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll194.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr5800-seniors-prescription-drug-access-20260522",
+    "policyArea": "Social Welfare",
+    "insightType": "House Floor Vote",
+    "representativeId": "C001139",
+    "billId": "H.R.5800",
+    "chamber": "House",
+    "voteDate": "2026-05-22",
+    "voteOutcome": "Passed (229-204)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "A bipartisan bill capping out-of-pocket prescription drug costs for Medicare beneficiaries at $2,000 per year and requiring drug manufacturers to pay rebates when prices rise faster than inflation passed the House.",
+    "schemaVersion": "1.1",
+    "keywords": ["Medicare", "prescription drugs", "out-of-pocket cap", "drug pricing", "seniors", "inflation rebates", "Medicare Part D"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.5800",
+        "billTitle": "Seniors Prescription Drug Access Act — Capping Medicare Part D out-of-pocket costs at $2,000/year and requiring inflation rebates",
+        "chamber": "House",
+        "voteOutcome": "Passed (229-204)",
+        "voteDate": "May 22, 2026",
+        "congress": "119",
+        "policyArea": "Social Welfare"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 229,
+        "voteAgainst": 204,
+        "voteAbstain": 2,
+        "speakers": [
+          {
+            "bioguideId": "C001139",
+            "name": "Rep. Kat Cammack",
+            "title": "R-FL · House Energy and Commerce",
+            "party": "Republican",
+            "position": "For",
+            "quote": "My constituents in north Florida are on fixed incomes. They are rationing insulin. They are cutting pills in half. They are choosing between their heart medication and their electricity bill. This bill says: if you have Medicare, you will never pay more than $2,000 per year for your prescriptions. That is a promise to every senior that we have their back."
+          },
+          {
+            "bioguideId": "C001136",
+            "name": "Rep. Jasmine Crockett",
+            "title": "D-TX · House Oversight",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "The pharmaceutical industry spent $400 million lobbying against this bill. $400 million. You know why? Because this bill will save seniors $25 billion over the next decade. Every dollar they lobbied is a dollar seniors would have kept in their pockets. I am proud to vote for this."
+          },
+          {
+            "bioguideId": "J000289",
+            "name": "Rep. Jim Jordan",
+            "title": "R-OH · House Judiciary Chair",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Price controls are always government's first answer and always the wrong answer. We have seen this movie before. When government tells drug companies what they can charge, drug companies invest less in R&D. The treatments that don't exist because of this bill will cost more lives than the co-pays this bill reduces."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.5800 passed 229-204, with 26 Republicans joining all Democrats. The bill caps Medicare Part D out-of-pocket drug costs at $2,000 annually (down from current unlimited exposure), requires manufacturers to pay rebates when prices increase faster than inflation, and restructures the catastrophic coverage phase to reduce cost sharing. The bill now advances to the Senate.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/5800"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Medicare cap how much seniors pay for prescriptions each year?",
+        "options": [
+          { "id": "yes-support", "label": "Yes — no senior should ration medication" },
+          { "id": "yes-but-costs", "label": "Yes, but I worry about the cost to taxpayers" },
+          { "id": "market-solution", "label": "No — competition, not caps, brings prices down" },
+          { "id": "innovation-risk", "label": "No — price caps threaten drug innovation" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-150400-hr5800-senior-prescription-house",
+        "serialNumber": "TT-20260531-C001139-002",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #194 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

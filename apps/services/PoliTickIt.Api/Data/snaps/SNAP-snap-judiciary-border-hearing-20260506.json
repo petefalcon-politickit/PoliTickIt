@@ -1,0 +1,118 @@
+{
+  "id": "snap-judiciary-border-hearing-20260506",
+  "normRef": "NORM-20260531-110300-judiciary-border-hearing",
+  "title": "House Committee Hearing",
+  "subtitle": "House Judiciary Committee — Border Surge and Cartel Operations",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T11:03:00Z",
+  "updatedAt": "2026-05-31T11:03:00Z",
+  "sources": [
+    {
+      "name": "House Judiciary Committee — Hearing Record (May 6, 2026)",
+      "url": "https://judiciary.house.gov/hearings"
+    },
+    {
+      "name": "CBP Enforcement Statistics — FY2026",
+      "url": "https://www.cbp.gov/newsroom/stats/cbp-enforcement-statistics"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-judiciary-border-surge-hearing-20260506",
+    "policyArea": "Immigration",
+    "insightType": "House Committee Hearing",
+    "representativeId": "J000289",
+    "chamber": "House",
+    "voteDate": "2026-05-06",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "House Judiciary held a hearing on record-high border crossings and cartel operations, hearing from CBP commissioners, former Border Patrol chiefs, and experts on asylum fraud.",
+    "schemaVersion": "1.1",
+    "keywords": ["border surge", "cartels", "CBP", "fentanyl", "asylum fraud", "immigration enforcement"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-JUDICIARY-20260506",
+        "billTitle": "Hearing: The Border Crisis — Cartel Operations, Fentanyl Trafficking, and the State of Border Security",
+        "chamber": "House",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 6, 2026",
+        "congress": "119",
+        "policyArea": "Immigration"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000289",
+            "name": "Rep. Jim Jordan",
+            "title": "R-OH · House Judiciary Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "CBP's own data shows 315,000 gotaways in the last fiscal year alone — people who crossed illegally and were not apprehended. We don't know who they are. We don't know why they came. We have a 2,000-mile border that the administration functionally surrendered to cartels. Today's hearing is about getting the truth on the record."
+          },
+          {
+            "bioguideId": "J000298",
+            "name": "Rep. Pramila Jayapal",
+            "title": "D-WA · House Judiciary",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "We have heard hours of testimony about border crossings. We have heard nothing about the 1.5 million undocumented immigrants in this country who have lived here for over a decade, paid taxes, raised American citizens, and are now terrified of mass deportation. This hearing is designed to build a case for cruelty, not for policy."
+          },
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "Fentanyl entering this country flows 90% through legal ports of entry — not between walls, through tunnels, or over fences. If Congress is serious about the overdose crisis, we need more scanners at ports of entry, more interdiction funding, and to hold pharmaceutical companies accountable for the opioid epidemic they created."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The House Judiciary Committee held a six-hour hearing on May 6, 2026 with testimony from CBP Commissioner Troy Miller, former Border Patrol Chief Rodney Scott, and immigration policy experts from the Heritage Foundation and American Immigration Council. The hearing was called to build the evidentiary record for S.3317, the Border Security and Immigration Reform Act, which passed the Senate May 17.",
+        "isExpandable": true,
+        "sourceLink": "https://judiciary.house.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "What is the biggest immigration challenge facing the US?",
+        "options": [
+          { "id": "illegal-crossings", "label": "Illegal crossings and enforcement" },
+          { "id": "fentanyl", "label": "Fentanyl and drug trafficking" },
+          { "id": "asylum-backlog", "label": "Asylum backlog — 3M+ cases pending" },
+          { "id": "undocumented-residents", "label": "Path forward for long-term undocumented residents" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-110300-judiciary-border-hearing",
+        "serialNumber": "TT-20260531-J000289-003",
+        "oracleSource": "House Judiciary Committee Hearing Record (May 6, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

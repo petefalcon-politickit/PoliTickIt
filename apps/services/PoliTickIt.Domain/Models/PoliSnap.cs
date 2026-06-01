@@ -84,6 +84,16 @@ public class SnapMetadata
 
     /// <summary>Congressional session number as string: "119".</summary>
     public string? Congress { get; set; }
+
+    // ── Policy Area ──────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Canonical slug ID from the Congress.gov policy area taxonomy,
+    /// e.g. "economics-and-public-finance". Set by <c>IPolicyAreaNormalizer</c>
+    /// during ingestion. Used for interest-based feed filtering.
+    /// Null when the raw label could not be resolved to a known taxonomy entry.
+    /// </summary>
+    public string? PolicyAreaId { get; set; }
 }
 
 public class SnapNavigation

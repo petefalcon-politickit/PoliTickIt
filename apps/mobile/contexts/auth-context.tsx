@@ -11,6 +11,7 @@ import React, {
     useEffect,
     useState,
 } from "react";
+import { useServices } from "./service-provider";
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -24,6 +25,7 @@ interface AuthContextType {
   verifyEmail: (email: string, code: string) => Promise<void>;
   resendVerification: (email: string) => Promise<void>;
   logout: () => Promise<void>;
+  deleteAccount: (password: string) => Promise<void>;
   clearError: () => void;
 }
 
@@ -35,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { apiSyncService } = useServices();
 
   // Restore session from AsyncStorage on mount
   useEffect(() => {
@@ -42,6 +45,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       .initialize()
       .then((storedUser) => {
         setUser(storedUser);
+        if (storedUser) {
+          // Reinstall guard: hydrate SQLite follow state from Cosmos
+          apiSyncService.syncFollowState().catch(() => {});
+        }
       })
       .catch(() => {
         setUser(null);
@@ -51,19 +58,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       });
   }, []);
 
-  const login = useCallback(async (email: string, password: string) => {
-    setError(null);
-    setIsLoading(true);
-    try {
-      const loggedInUser = await apiAuthService.login(email, password);
-      setUser(loggedInUser);
-      router.replace("/accountability");
-    } catch (err: any) {
-      setError(err.message ?? "Login failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const login = useCallback(
+    async (email: string, password: string) => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const loggedInUser = await apiAuthService.login(email, password);
+        setUser(loggedInUser);
+        // Reinstall guard: hydrate SQLite follow state from Cosmos after fresh login
+        apiSyncService.syncFollowState().catch(() => {});
+        router.replace("/accountability");
+      } catch (err: any) {
+        setError(err.message ?? "Login failed. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [apiSyncService],
+  );
 
   const register = useCallback(async (payload: RegisterPayload) => {
     setError(null);
@@ -110,6 +122,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     router.replace("/login");
   }, []);
 
+  const deleteAccount = useCallback(async (password: string) => {
+    setError(null);
+    setIsLoading(true);
+    try {
+      await apiAuthService.deleteAccount(password);
+      setUser(null);
+      router.replace("/login");
+    } catch (err: any) {
+      setError(err.message ?? "Could not delete account. Please try again.");
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   const clearError = useCallback(() => setError(null), []);
 
   return (
@@ -124,6 +151,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         verifyEmail,
         resendVerification,
         logout,
+        deleteAccount,
         clearError,
       }}
     >

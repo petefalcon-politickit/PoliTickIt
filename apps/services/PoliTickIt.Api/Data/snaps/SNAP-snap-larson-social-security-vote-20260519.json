@@ -1,0 +1,104 @@
+{
+  "id": "snap-larson-social-security-vote-20260519",
+  "normRef": "NORM-20260531-150200-larson-social-security-vote",
+  "title": "Representative Vote",
+  "subtitle": "H.R.6001 — Rep. John Larson · For",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T15:02:00Z",
+  "updatedAt": "2026-05-31T15:02:00Z",
+  "sources": [
+    {
+      "name": "Rep. John Larson Official Statement",
+      "url": "https://larson.house.gov/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #188 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll188.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-larson-hr6001-for-vote-20260519",
+    "policyArea": "Social Welfare",
+    "insightType": "House Floor Vote",
+    "representativeId": "L000557",
+    "billId": "H.R.6001",
+    "chamber": "House",
+    "voteDate": "2026-05-19",
+    "voteOutcome": "Failed (208-225)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. John Larson, the lead sponsor of Social Security 2100 through multiple Congresses, voted for his own bill and delivered an impassioned floor speech after it narrowly failed.",
+    "schemaVersion": "1.1",
+    "keywords": ["Social Security", "John Larson", "Social Security 2100", "retirement security", "payroll tax", "Trust Fund solvency"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "L000557",
+        "name": "John Larson",
+        "party": "Democrat",
+        "location": "Connecticut",
+        "position": "Representative · CT-1 · House Ways and Means",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/L000557.jpg",
+        "tags": ["House Ways and Means", "Social Security Caucus"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "I have introduced this bill in seven consecutive Congresses. Every time, we have been told to wait. Wait for a better moment. Wait for a different majority. Wait for the stars to align. Meanwhile, the Trust Fund gets eight years closer to depletion. I am done waiting. Every member of this House who voted no today will have to answer to every senior in their district when their Social Security check is 23% smaller. I will be introducing this bill again in the next Congress. And the next. Until America keeps the promise it made to its workers.",
+        "speaker": "John Larson",
+        "date": "2026-05-19",
+        "context": "House floor statement after H.R.6001 failed 208-225",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "Social Security 2100: A Sacred Trust Act",
+        "vote": "Yea"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "Rep. Larson's Social Security 2100 Campaign",
+        "text": "Rep. Larson has been the primary champion of Social Security 2100 legislation since 2019. The bill has consistently attracted more than 180 Democratic co-sponsors in each Congress but has never received a Republican vote. The Social Security Trustees project the Trust Fund will be depleted by 2033, triggering automatic 23% benefit cuts for all recipients.",
+        "isExpandable": true,
+        "sourceLink": "https://larson.house.gov/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Is Social Security's solvency crisis urgent enough to require immediate action?",
+        "options": [
+          { "id": "yes-now", "label": "Yes — Congress must act before 2033" },
+          { "id": "yes-but-reform", "label": "Yes, but reform the program, don't just add taxes" },
+          { "id": "monitor", "label": "Monitor it — there's time before a crisis" },
+          { "id": "no-crisis", "label": "The 'crisis' is overstated by both sides" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-150200-larson-social-security-vote",
+        "serialNumber": "TT-20260531-L000557-002",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #188 (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

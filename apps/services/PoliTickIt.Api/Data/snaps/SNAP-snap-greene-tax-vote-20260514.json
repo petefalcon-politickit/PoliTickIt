@@ -1,0 +1,104 @@
+{
+  "id": "snap-greene-tax-vote-20260514",
+  "normRef": "NORM-20260531-100400-greene-tax-vote",
+  "title": "Representative Vote",
+  "subtitle": "H.R.1040 — Rep. Marjorie Taylor Greene · For",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T10:04:00Z",
+  "updatedAt": "2026-05-31T10:04:00Z",
+  "sources": [
+    {
+      "name": "Rep. Marjorie Taylor Greene Official Statement",
+      "url": "https://mgt.house.gov/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #183 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll183.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-greene-hr1040-for-vote-20260514",
+    "policyArea": "Taxation",
+    "insightType": "House Floor Vote",
+    "representativeId": "G000596",
+    "billId": "H.R.1040",
+    "chamber": "House",
+    "voteDate": "2026-05-14",
+    "voteOutcome": "Failed (187-244)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. Marjorie Taylor Greene was a vocal supporter of the flat tax bill, arguing that eliminating the current tax code would free Americans from IRS overreach.",
+    "schemaVersion": "1.1",
+    "keywords": ["flat tax", "IRS", "tax reform", "Marjorie Taylor Greene", "simplification"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "G000596",
+        "name": "Marjorie Taylor Greene",
+        "party": "Republican",
+        "location": "Georgia",
+        "position": "Representative · GA-14",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/G000596.jpg",
+        "tags": ["House Oversight", "House Budget"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "The IRS is a politically weaponized agency that targets conservatives and terrorizes small business owners. A flat tax eliminates the code they use to punish political enemies and gives every American the same simple, fair rate. This bill is about freedom — and I will always vote for freedom.",
+        "speaker": "Marjorie Taylor Greene",
+        "date": "2026-05-14",
+        "context": "House floor statement explaining vote in favor of H.R.1040",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "Flat Tax Act",
+        "vote": "Yea"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About H.R.1040",
+        "text": "H.R.1040 proposed replacing all federal income tax brackets with a single 17% flat rate. It failed 187-244 — not enough Republican support to pass, as 57 GOP members joined all Democrats in opposition citing the $2.9 trillion projected revenue shortfall over ten years.",
+        "isExpandable": true,
+        "sourceLink": "https://mgt.house.gov/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Is the IRS being used as a political weapon?",
+        "options": [
+          { "id": "yes-reform", "label": "Yes — major reform is needed" },
+          { "id": "yes-oversight", "label": "Possibly — stronger oversight needed" },
+          { "id": "no-myth", "label": "No — this is a political myth" },
+          { "id": "complicated", "label": "Some cases, but not systematic" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-100400-greene-tax-vote",
+        "serialNumber": "TT-20260531-G000596-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #183 (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

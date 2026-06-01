@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr2244-ndaa-house-20260515",
+  "normRef": "NORM-20260531-080000-hr2244-ndaa-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.2244 — National Defense Authorization Act FY2027",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T08:00:00Z",
+  "updatedAt": "2026-05-31T08:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.2244",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2244"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #201 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll201.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr2244-ndaa-floor-debate-20260515",
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "House Floor Vote",
+    "representativeId": "W000437",
+    "billId": "H.R.2244",
+    "chamber": "House",
+    "voteDate": "2026-05-15",
+    "voteOutcome": "Passed (218-210)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Congress voted on the defense budget for FY2027, which sets military spending levels and policy priorities for the US armed forces.",
+    "schemaVersion": "1.1",
+    "keywords": ["NDAA", "defense budget", "military spending", "FY2027", "armed forces"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.2244",
+        "billTitle": "National Defense Authorization Act for Fiscal Year 2027 — Authorizing appropriations for defense activities",
+        "chamber": "House",
+        "voteOutcome": "Passed (218-210)",
+        "voteDate": "May 15, 2026",
+        "congress": "119",
+        "policyArea": "Armed Forces and National Security"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 218,
+        "voteAgainst": 210,
+        "voteAbstain": 7,
+        "speakers": [
+          {
+            "bioguideId": "W000437",
+            "name": "Sen. Roger Wicker",
+            "title": "R-MS · Senate Armed Services Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "This NDAA funds the most capable military in the world at a time when adversaries are watching every move we make. We cannot afford to underfund readiness, and this bill ensures our troops have everything they need to deter conflict and win if deterrence fails."
+          },
+          {
+            "bioguideId": "R000122",
+            "name": "Sen. Jack Reed",
+            "title": "D-RI · Senate Armed Services Ranking Member",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "I support strong national defense and I support this bill. Our troops deserve the best equipment, the best training, and the best care when they come home. This authorization does that — and it does so with meaningful oversight provisions this chamber fought hard to include."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "We are spending ourselves into oblivion. A bloated defense budget is not a defense strategy. This bill adds hundreds of billions to a deficit that is already threatening the financial stability of this nation. True national security starts with a solvent government."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.2244 authorizes $923 billion in defense spending for FY2027, a 3.2% increase over the prior year. The bill funds pay raises for service members, procurement of next-generation aircraft, and expanded cyber operations. It passed largely along party lines with most Democrats voting against specific provisions limiting Pentagon diversity programs.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/2244"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Congress increase defense spending to $923 billion?",
+        "options": [
+          { "id": "increase", "label": "Yes — national security is the priority" },
+          { "id": "hold", "label": "Hold spending flat" },
+          { "id": "cut", "label": "Cut and reduce the deficit" },
+          { "id": "redirect", "label": "Redirect to domestic programs" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-080000-hr2244-ndaa-house",
+        "serialNumber": "TT-20260531-W000437-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #201 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

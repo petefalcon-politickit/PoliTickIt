@@ -10,10 +10,11 @@ using Microsoft.Azure.Cosmos;
 using PoliTickIt.Domain.Interfaces;
 using PoliTickIt.Infrastructure.Persistence;
 using PoliTickIt.Infrastructure.Security;
-using PoliTickIt.Infrastructure.District;
-using PoliTickIt.Infrastructure.Email;
+using PoliTickIt.Infrastructure.District;using PoliTickIt.Infrastructure.Email;
 using PoliTickIt.Infrastructure.Representatives;
 using PoliTickIt.Infrastructure.Trending;
+using PoliTickIt.Infrastructure.PolicyAreas;
+using PoliTickIt.Ingestion.Normalization.PolicyAreas;
 using PoliTickIt.Api.BackgroundServices;
 using PoliTickIt.Ingestion.Providers;
 using PoliTickIt.Ingestion.Services;
@@ -27,7 +28,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "PoliTickIt API", Version = "v1" });
@@ -103,6 +103,8 @@ builder.Services.AddSingleton<CosmosClient>(sp =>
 
 builder.Services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 builder.Services.AddSingleton<IUserRepository, CosmosUserRepository>();
+builder.Services.AddSingleton<IUserFollowsRepository, CosmosUserFollowsRepository>();
+builder.Services.AddSingleton<IUserInterestFollowsRepository, CosmosUserInterestFollowsRepository>();
 builder.Services.AddSingleton<ITokenService, JwtTokenService>();
 
 // ── Email Service ─────────────────────────────────────────────────────────────
@@ -117,6 +119,12 @@ builder.Services.Configure<CongressApiOptions>(
     builder.Configuration.GetSection("OracleSettings:Congress"));
 builder.Services.AddSingleton<IRepresentativeStore, CongressMemberStore>();
 builder.Services.AddHostedService<RepresentativesHydrationService>();
+
+// ── Policy Area Taxonomy ──────────────────────────────────────────────────────
+// IPolicyAreaStore: in-memory; seeded at startup from hardcoded Congress.gov taxonomy.
+// IPolicyAreaNormalizer: normalizes free-text provider labels → canonical slugs.
+builder.Services.AddSingleton<IPolicyAreaStore, PolicyAreaStore>();
+builder.Services.AddSingleton<IPolicyAreaNormalizer, PolicyAreaNormalizer>();
 
 // ── Trending Service ──────────────────────────────────────────────────────────
 builder.Services.AddSingleton<ITrendingService, ChannelTrendingService>();
@@ -209,7 +217,6 @@ await NormalizationInitializer.InitializeNormalizationAsync(
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
@@ -232,46 +239,10 @@ app.MapGet("/api/snaps/registry", async (ISnapRepository repository) =>
 .WithName("GetSnapRegistry")
 .WithOpenApi();
 
-app.MapGet("/api/snaps/{id}", async (string id, ISnapRepository repository) =>
-{
-    var snap = await repository.GetSnapByIdAsync(id);
-    return snap is not null ? Results.Ok(snap) : Results.NotFound();
-})
-.WithName("GetSnapById")
-.WithOpenApi();
+// NOTE: GET /api/snaps/{id} is handled by SnapsController.GetById — no minimal API duplicate needed.
 
-// Minimal API Endpoints for Representative Distribution (RSP Protocol)
-app.MapGet("/api/representatives/registry", async (ICanonicalEntityRepository<CanonicalRepresentative> repository) =>
-{
-    var reps = await repository.GetAllAsync();
-    return Results.Ok(reps.Select(r => new {
-        id = r.Id.ToString(),
-        name = r.FullName,
-        state = r.State,
-        party = r.Party,
-        position = r.Chamber,
-        profileImage = "" // Managed by mobile client fallback if empty
-    }));
-})
-.WithName("GetRepresentativeRegistry")
-.WithOpenApi();
-
-app.MapGet("/api/representatives/{id}", async (Guid id, ICanonicalEntityRepository<CanonicalRepresentative> repository) =>
-{
-    var rep = await repository.GetAsync(id);
-    if (rep == null) return Results.NotFound();
-    
-    return Results.Ok(new {
-        id = rep.Id.ToString(),
-        name = rep.FullName,
-        state = rep.State,
-        party = rep.Party,
-        position = rep.Chamber,
-        profileImage = ""
-    });
-})
-.WithName("GetRepresentativeById")
-.WithOpenApi();
+// NOTE: /api/representatives/registry and /api/representatives/{bioguideId}
+// are handled by RepresentativesController (CongressMemberStore, BioguideId-keyed).
 
 // Minimal API Endpoints for Civic Participation (CPAP Protocol)
 app.MapPost("/api/participation/audit", async ([FromBody] dynamic payload) =>

@@ -7,5 +7,5 @@ public sealed class CosmosSettings
     public string AccountEndpoint { get; set; } = string.Empty;
     public string AccountKey { get; set; } = string.Empty;
     public string DatabaseId { get; set; } = "PoliTickIt";
-    public string UserContainerId { get; set; } = "UserLogin";
+    public string UserContainerId { get; set; } = "User";
 }

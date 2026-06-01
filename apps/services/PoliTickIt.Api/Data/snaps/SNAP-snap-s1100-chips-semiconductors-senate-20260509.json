@@ -1,0 +1,120 @@
+{
+  "id": "snap-s1100-chips-semiconductors-senate-20260509",
+  "normRef": "NORM-20260531-100200-s1100-chips-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.1100 — American Semiconductor Independence Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T10:02:00Z",
+  "updatedAt": "2026-05-31T10:02:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.1100",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1100"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #102 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s1100-chips-semiconductors-floor-20260509",
+    "policyArea": "Economics and Public Finance",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "C001098",
+    "billId": "S.1100",
+    "chamber": "Senate",
+    "voteDate": "2026-05-09",
+    "voteOutcome": "Passed (72-27)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate voted to invest $52 billion in domestic semiconductor manufacturing to reduce US dependence on Taiwan and China for computer chips critical to defense, cars, and electronics.",
+    "schemaVersion": "1.1",
+    "keywords": ["semiconductors", "CHIPS Act", "manufacturing", "China", "Taiwan", "supply chain", "national security"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.1100",
+        "billTitle": "American Semiconductor Independence Act — $52B for domestic chip manufacturing to reduce reliance on foreign supply chains",
+        "chamber": "Senate",
+        "voteOutcome": "Passed (72-27)",
+        "voteDate": "May 9, 2026",
+        "congress": "119",
+        "policyArea": "Economics and Public Finance"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 72,
+        "voteAgainst": 27,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "93% of the world's most advanced semiconductor manufacturing is in Taiwan. If China takes Taiwan, America loses access to the chips that power every weapon system, every aircraft, every communication network we have. This is not industrial policy — this is survival policy."
+          },
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP",
+            "party": "Independent",
+            "position": "For",
+            "quote": "For the first time in my career, I agree with Senator Cruz on something. We cannot allow profit-chasing corporations to offshore our entire manufacturing base to authoritarian regimes. This bill brings manufacturing jobs home and protects American workers."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Fifty-two billion dollars in corporate welfare for the richest tech companies in the world. Intel and TSMC are not struggling startups. They do not need taxpayer subsidies. Let the market determine where chips are made — and stop picking winners with borrowed money."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.1100 passed 72-27 with strong bipartisan support. It provides $52 billion in grants and tax incentives for US semiconductor fabrication facilities, $24 billion in R&D funding for next-generation chip technology, and export controls on advanced chip technology to China. Intel, TSMC, and Samsung have already announced domestic fab investments contingent on the bill's passage.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/1100"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US subsidize domestic semiconductor manufacturing?",
+        "options": [
+          { "id": "yes-security", "label": "Yes — national security requires it" },
+          { "id": "yes-jobs", "label": "Yes — brings manufacturing jobs home" },
+          { "id": "no-welfare", "label": "No — it's corporate welfare" },
+          { "id": "no-tariffs", "label": "Use tariffs instead of subsidies" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-100200-s1100-chips-senate",
+        "serialNumber": "TT-20260531-C001098-001",
+        "oracleSource": "Senate.gov Roll Call Vote #102 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

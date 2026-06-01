@@ -22,8 +22,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using PoliTickIt.Api.Auth;
-using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.Validation;
 using PoliTickIt.Domain.Models;
+using PoliTickIt.Domain.Interfaces;
 
 namespace PoliTickIt.Api.Controllers;
 
@@ -373,6 +374,32 @@ public sealed class AuthController : ControllerBase
     }
 
     // ──────────────────────────────────────────────────────────────────────────
+    // DELETE /api/auth/account  [Authorize]
+    // Permanently deletes the authenticated user's account after password
+    // confirmation. Invalidates all tokens before deletion.
+    // ──────────────────────────────────────────────────────────────────────────
+    [HttpDelete("account")]
+    [Authorize]
+    public async Task<IActionResult> DeleteAccount([FromBody] DeleteAccountRequest req)
+    {
+        var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+                  ?? User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!Guid.TryParse(userId, out var id))
+            return Unauthorized();
+
+        var user = await _users.FindByIdAsync(id);
+        if (user is null)
+            return NotFound(new { error = "Account not found." });
+
+        if (!_hasher.Verify(req.Password, user.PasswordHash))
+            return BadRequest(new { error = "Incorrect password." });
+
+        await _users.DeleteAsync(user);
+        return Ok(new { deleted = true });
+    }
+
+    // ──────────────────────────────────────────────────────────────────────────
     // Helpers
     // ──────────────────────────────────────────────────────────────────────────
     private AuthResponse BuildAuthResponse(AppUser user, string refreshToken) =>
@@ -396,7 +423,7 @@ public sealed record RegisterRequest(
     [Required] string FirstName,
     [Required] string LastName,
     [Required][EmailAddress] string Email,
-    [Required][MinLength(8)] string Password,
+    [Required][StrongPassword] string Password,
     [Required] string Zip,
     List<string>? Interests,
     string? Party);
@@ -438,7 +465,10 @@ public sealed record ForgotPasswordRequest(
 public sealed record ResetPasswordRequest(
     [Required][EmailAddress] string Email,
     [Required][StringLength(6, MinimumLength = 6)] string Code,
-    [Required][MinLength(8)] string NewPassword);
+    [Required][StrongPassword] string NewPassword);
+
+public sealed record DeleteAccountRequest(
+    [Required] string Password);
 
 public sealed record UpdateProfileRequest(
     string? FirstName,

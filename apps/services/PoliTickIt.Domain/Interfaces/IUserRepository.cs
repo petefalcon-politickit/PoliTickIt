@@ -16,4 +16,5 @@ public interface IUserRepository
     Task<AppUser?> FindByIdAsync(Guid id);
     Task AddAsync(AppUser user);
     Task UpdateAsync(AppUser user);
+    Task DeleteAsync(AppUser user);
 }

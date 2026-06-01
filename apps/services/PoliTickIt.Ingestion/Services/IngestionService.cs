@@ -11,15 +11,18 @@ public class IngestionService : IIngestionService
     private readonly IEnumerable<IDataSourceProvider> _providers;
     private readonly ISnapRepository _snapRepository;
     private readonly IManifestorMaintenanceService _maintenance;
+    private readonly IPolicyAreaNormalizer _policyAreaNormalizer;
 
     public IngestionService(
-        IEnumerable<IDataSourceProvider> providers, 
+        IEnumerable<IDataSourceProvider> providers,
         ISnapRepository snapRepository,
-        IManifestorMaintenanceService maintenance)
+        IManifestorMaintenanceService maintenance,
+        IPolicyAreaNormalizer policyAreaNormalizer)
     {
         _providers = providers;
         _snapRepository = snapRepository;
         _maintenance = maintenance;
+        _policyAreaNormalizer = policyAreaNormalizer;
     }
 
     public async Task<IEnumerable<PoliSnap>> RunIngestionAsync()
@@ -49,6 +52,9 @@ public class IngestionService : IIngestionService
         }
 
         // Logic here for deduplication, normalization, and persistence
+        // Normalize policy area labels → canonical taxonomy slugs + channel tags
+        _policyAreaNormalizer.NormalizeSnaps(allSnaps);
+
         await _snapRepository.SaveSnapsAsync(allSnaps);
 
         // 3. Post-Ingestion Audit & Catalog Sync

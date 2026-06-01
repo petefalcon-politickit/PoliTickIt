@@ -1,0 +1,120 @@
+{
+  "id": "snap-s3100-medicare-solvency-senate-20260521",
+  "normRef": "NORM-20260531-150100-s3100-medicare-solvency-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.3100 — Medicare Long-Term Solvency and Modernization Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T15:01:00Z",
+  "updatedAt": "2026-05-31T15:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.3100",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3100"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #116 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s3100-medicare-solvency-modernization-20260521",
+    "policyArea": "Social Welfare",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "S000033",
+    "billId": "S.3100",
+    "chamber": "Senate",
+    "voteDate": "2026-05-21",
+    "voteOutcome": "Failed (47-52)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "A Medicare solvency bill that would have extended the Part A Trust Fund by 25 years through a combination of Medicare drug pricing savings and new revenue failed in the Senate.",
+    "schemaVersion": "1.1",
+    "keywords": ["Medicare", "Medicare Part A", "Trust Fund", "solvency", "seniors", "drug pricing", "Medicare reform"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.3100",
+        "billTitle": "Medicare Long-Term Solvency and Modernization Act — Extending Medicare Part A Trust Fund solvency through 2050",
+        "chamber": "Senate",
+        "voteDate": "May 21, 2026",
+        "voteOutcome": "Failed (47-52)",
+        "congress": "119",
+        "policyArea": "Social Welfare"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 47,
+        "voteAgainst": 52,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP Chair",
+            "party": "Independent",
+            "position": "For",
+            "quote": "Medicare will not be able to pay full benefits in six years. Six years. This is not a hypothetical crisis. This is a fiscal reality that every actuarial agency agrees on. This bill saves Medicare by negotiating drug prices the way every other wealthy country does and asking the wealthiest Americans to pay into the program they benefit from. Voting against it is voting to let Medicare collapse."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Judiciary",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Twelve pharmaceutical companies made $150 billion in combined profit last year. Seven of those companies raised prices faster than inflation while Medicare paid whatever they demanded. This bill says: if you want Medicare as your customer, you negotiate like every other customer in the world. That savings alone extends the Trust Fund by 15 years."
+          },
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "The correct answer to Medicare's solvency crisis is not government price controls on drug innovation. Every drug that does not get developed because of price controls is a cancer patient who doesn't get a cure. The correct answer is structural reform — means testing, efficiency, and a sustainable benefit structure for a 2026 demographic, not a 1965 one."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.3100 failed 47-52. The bill combined Medicare drug negotiation savings with a new surtax on investment income above $400,000, projected to extend Part A Trust Fund solvency from 2030 to 2050. The Medicare Trustees' most recent report confirmed the Trust Fund will be depleted by 2031 without legislative action, triggering automatic benefit reductions.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/3100"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "How should Congress address Medicare's funding crisis?",
+        "options": [
+          { "id": "drug-prices", "label": "Negotiate drug prices to save money" },
+          { "id": "new-revenue", "label": "New taxes on high earners to fund it" },
+          { "id": "reduce-benefits", "label": "Means-test or reduce some benefits" },
+          { "id": "privatize", "label": "Transition to private insurance with subsidies" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-150100-s3100-medicare-solvency-senate",
+        "serialNumber": "TT-20260531-S000033-002",
+        "oracleSource": "Senate.gov Roll Call Vote #116 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "snap-help-insulin-hearing-20260510",
+  "normRef": "NORM-20260531-090300-help-insulin-hearing",
+  "title": "Senate Committee Hearing",
+  "subtitle": "Senate HELP Committee — Insulin Pricing and Affordability",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T09:03:00Z",
+  "updatedAt": "2026-05-31T09:03:00Z",
+  "sources": [
+    {
+      "name": "Senate HELP Committee — Hearing Record (May 10, 2026)",
+      "url": "https://www.help.senate.gov/hearings"
+    },
+    {
+      "name": "JAMA — Insulin Pricing in the United States (2025)",
+      "url": "https://jamanetwork.com"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-help-insulin-hearing-20260510",
+    "policyArea": "Health",
+    "insightType": "Senate Committee Hearing",
+    "representativeId": "S000033",
+    "chamber": "Senate",
+    "voteDate": "2026-05-10",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Senate HELP Committee heard testimony from diabetes patients, doctors, and pharmaceutical executives about why insulin prices remain unaffordable for millions of Americans.",
+    "schemaVersion": "1.1",
+    "keywords": ["insulin", "diabetes", "drug prices", "healthcare", "testimony", "pharmaceutical industry"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-HELP-20260510",
+        "billTitle": "Hearing: Why Do Americans Pay 10x More for Insulin Than Canadians?",
+        "chamber": "Senate",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 10, 2026",
+        "congress": "119",
+        "policyArea": "Health"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · HELP Committee Chair",
+            "party": "Independent",
+            "position": "For",
+            "quote": "Novo Nordisk charges $300 for a vial of insulin in America. The same product in Canada: $30. In Germany: $9. The CEO of Novo Nordisk is in this room. I would like him to explain to the millions of Americans who ration insulin how that pricing is justified."
+          },
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce",
+            "party": "Republican",
+            "position": "For",
+            "quote": "This is an issue that cuts across party lines. Texans with Type 1 diabetes are rationing insulin and dying. I don't care which party solves this problem — I want it solved. Every option should be on the table, including greater transparency and real competition."
+          },
+          {
+            "bioguideId": "R000122",
+            "name": "Sen. Jack Reed",
+            "title": "D-RI · Senate Armed Services",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "We have testimony today from a nurse in Rhode Island who has watched three patients die from insulin rationing in the past year. Not in a developing country. In the richest nation in the history of the world. The committee will not leave this hearing without a plan."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The Senate HELP Committee heard testimony on May 10, 2026 from pharmaceutical executives, endocrinologists, and diabetes patients including a diabetic teenager who detailed nearly dying after rationing insulin at $18/hour minimum wage. Senators from both parties expressed urgency. The hearing set the stage for floor votes on insulin price caps and Medicare negotiation bills.",
+        "isExpandable": true,
+        "sourceLink": "https://www.help.senate.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the government cap the price of insulin?",
+        "options": [
+          { "id": "yes-cap", "label": "Yes — no one should die over insulin costs" },
+          { "id": "yes-negotiate", "label": "Let Medicare negotiate the price" },
+          { "id": "no-competition", "label": "Increase competition instead of price caps" },
+          { "id": "no-intervention", "label": "No government intervention in pricing" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-090300-help-insulin-hearing",
+        "serialNumber": "TT-20260531-S000033-002",
+        "oracleSource": "Senate HELP Committee Hearing Record (May 10, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

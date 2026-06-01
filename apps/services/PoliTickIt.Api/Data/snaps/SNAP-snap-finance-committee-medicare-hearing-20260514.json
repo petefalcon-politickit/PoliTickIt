@@ -1,0 +1,118 @@
+{
+  "id": "snap-finance-committee-medicare-hearing-20260514",
+  "normRef": "NORM-20260531-150300-finance-committee-medicare-hearing",
+  "title": "Senate Committee Hearing",
+  "subtitle": "Senate Finance Committee — Medicare Solvency and Long-Term Funding",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T15:03:00Z",
+  "updatedAt": "2026-05-31T15:03:00Z",
+  "sources": [
+    {
+      "name": "Senate Finance Committee — Hearing Record (May 14, 2026)",
+      "url": "https://finance.senate.gov/hearings"
+    },
+    {
+      "name": "Medicare Trustees Report 2026",
+      "url": "https://www.cms.gov/research-statistics-data-and-systems/statistics-trends-and-reports/reportstrustfunds"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-finance-committee-medicare-solvency-hearing-20260514",
+    "policyArea": "Social Welfare",
+    "insightType": "Senate Committee Hearing",
+    "representativeId": "S001184",
+    "chamber": "Senate",
+    "voteDate": "2026-05-14",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate Finance Committee heard from Medicare Trustees and CMS officials on the program's projected insolvency by 2031 and the range of legislative options for extending solvency.",
+    "schemaVersion": "1.1",
+    "keywords": ["Medicare", "Medicare Trust Fund", "solvency", "Finance Committee", "CMS", "Medicare Trustees", "healthcare spending"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-FINANCE-COMMITTEE-20260514",
+        "billTitle": "Hearing: Medicare at the Crossroads — Trust Fund Solvency and the Path to 2050",
+        "chamber": "Senate",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 14, 2026",
+        "congress": "119",
+        "policyArea": "Social Welfare"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "S001184",
+            "name": "Sen. Tim Scott",
+            "title": "R-SC · Senate Finance",
+            "party": "Republican",
+            "position": "For",
+            "quote": "The Trustees say 2031. That is five years of Congresses — ten elections — away. Every Congress that kicks this can down the road is one Congress closer to catastrophe. I would rather be one of the legislators who fixed Social Security and Medicare than one of the legislators who broke a promise to every senior who counted on it. The math has to work."
+          },
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP",
+            "party": "Independent",
+            "position": "For",
+            "quote": "The CMS administrator just told this committee that without action, 65 million Medicare beneficiaries will face benefit cuts of up to 11% in 2031. I want every senator to hear that: 11% cut to Medicare. For people who are already choosing between medication and groceries. The question before this committee is simple — do we act or do we let that happen?"
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Medicare spends more than $1 trillion a year. 30% of that spending is estimated to be waste, fraud, and abuse. Before we raise anyone's taxes, before we cut anyone's benefits, we should find and eliminate that $300 billion in fraud. I have introduced legislation to do exactly that in every Congress. Not once has it been brought to a vote."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The Senate Finance Committee held this hearing on May 14, 2026 with testimony from the CMS Administrator, the Social Security and Medicare Trustee Board's public trustee, and the CBO Director. Key findings: Medicare Part A Trust Fund depletes in 2031; a combination of 4.8% payroll tax increase or 16% benefit cut would restore 75-year solvency; drug negotiation savings alone extend solvency by 7 years.",
+        "isExpandable": true,
+        "sourceLink": "https://finance.senate.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "How concerned are you about Medicare's funding?",
+        "options": [
+          { "id": "very-concerned", "label": "Very — I depend on it or have family who does" },
+          { "id": "concerned", "label": "Concerned — Congress needs to act soon" },
+          { "id": "somewhat", "label": "Somewhat — they'll figure it out" },
+          { "id": "not-concerned", "label": "Not concerned — the crisis is exaggerated" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-150300-finance-committee-medicare-hearing",
+        "serialNumber": "TT-20260531-S001184-002",
+        "oracleSource": "Senate Finance Committee Hearing Record (May 14, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

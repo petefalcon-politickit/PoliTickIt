@@ -1,0 +1,104 @@
+{
+  "id": "snap-massie-background-checks-vote-20260518",
+  "normRef": "NORM-20260531-140200-massie-background-checks-vote",
+  "title": "Representative Vote",
+  "subtitle": "H.R.5122 — Rep. Thomas Massie · Against",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T14:02:00Z",
+  "updatedAt": "2026-05-31T14:02:00Z",
+  "sources": [
+    {
+      "name": "Rep. Thomas Massie Official Statement",
+      "url": "https://massie.house.gov/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #186 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll186.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-massie-hr5122-against-vote-20260518",
+    "policyArea": "Crime and Law Enforcement",
+    "insightType": "House Floor Vote",
+    "representativeId": "M001184",
+    "billId": "H.R.5122",
+    "chamber": "House",
+    "voteDate": "2026-05-18",
+    "voteOutcome": "Passed (230-204)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. Thomas Massie, one of Congress's most consistent Second Amendment absolutists, voted against the background checks bill and delivered a widely shared floor speech arguing it was unconstitutional.",
+    "schemaVersion": "1.1",
+    "keywords": ["Thomas Massie", "Second Amendment", "background checks", "gun rights", "constitutional rights", "NICS"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "M001184",
+        "name": "Thomas Massie",
+        "party": "Republican",
+        "location": "Kentucky",
+        "position": "Representative · KY-4",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/M001184.jpg",
+        "tags": ["House Oversight", "House Transportation", "Second Amendment Caucus"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "The Second Amendment says shall not be infringed. It does not say 'shall not be infringed unless a background check database flags you.' A constitutional right that requires government permission is not a right — it is a privilege. We do not require a background check to publish a newspaper, to assemble, or to worship. The founders listed the right to bear arms alongside those rights for a reason. I will never vote to make the exercise of a constitutional right conditional on government approval.",
+        "speaker": "Thomas Massie",
+        "date": "2026-05-18",
+        "context": "House floor statement opposing H.R.5122, Bipartisan Background Checks Act",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "Bipartisan Background Checks Act of 2026",
+        "vote": "Nay"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "Rep. Massie's Record on Gun Legislation",
+        "text": "Rep. Massie has voted against every gun control measure that has come to a House vote since his first term. He is the co-founder of the Second Amendment Caucus and has consistently argued that any federal firearm restriction is unconstitutional regardless of public support or legislative intent. He was one of 204 House members to vote against H.R.5122.",
+        "isExpandable": true,
+        "sourceLink": "https://massie.house.gov/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Is requiring a background check an infringement of the 2nd Amendment?",
+        "options": [
+          { "id": "yes-infringement", "label": "Yes — it's a permitting scheme for a constitutional right" },
+          { "id": "no-reasonable", "label": "No — it's a reasonable public safety regulation" },
+          { "id": "supreme-court", "label": "The Supreme Court should decide" },
+          { "id": "depends", "label": "Depends on how the database is administered" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-140200-massie-background-checks-vote",
+        "serialNumber": "TT-20260531-M001184-002",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #186 (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

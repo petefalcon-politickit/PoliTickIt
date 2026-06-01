@@ -1,5 +1,6 @@
 import { asClass, createContainer, InjectionMode } from "awilix";
 import { ApiCorrelationRepository } from "./implementations/ApiCorrelationRepository";
+import { ApiInterestRepository } from "./implementations/ApiInterestRepository";
 import { ApiParticipationRepository } from "./implementations/ApiParticipationRepository";
 import { ApiRepresentativeRepository } from "./implementations/ApiRepresentativeRepository";
 import { ApiSnapRepository } from "./implementations/ApiSnapRepository";
@@ -48,6 +49,7 @@ export interface IServices {
   zkVerificationService: ZkVerificationService;
   apiVerificationRepository: ApiVerificationRepository;
   agencyRepository: SqliteAgencyRepository;
+  apiInterestRepository: ApiInterestRepository;
   omniFeedProvider: OmniFeedProvider;
   settingsProvider: any;
   cdpProvider: SqliteCDPProvider;
@@ -108,6 +110,7 @@ container.register({
     ? asClass(MockVerificationService).singleton()
     : asClass(ZkVerificationService).singleton(),
   agencyRepository: asClass(SqliteAgencyRepository).singleton(),
+  apiInterestRepository: asClass(ApiInterestRepository).singleton(),
   omniFeedProvider: asClass(OmniFeedProvider).singleton(),
   settingsProvider: asClass(SqliteCDPProvider).singleton(),
   cdpProvider: asClass(SqliteCDPProvider).singleton(),

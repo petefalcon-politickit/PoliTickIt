@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr3750-lng-export-house-20260523",
+  "normRef": "NORM-20260531-120400-hr3750-lng-export-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.3750 — LNG Export Expansion and Allied Energy Security Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T12:04:00Z",
+  "updatedAt": "2026-05-31T12:04:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.3750",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/3750"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #193 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll193.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr3750-lng-export-expansion-floor-20260523",
+    "policyArea": "Energy",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000299",
+    "billId": "H.R.3750",
+    "chamber": "House",
+    "voteDate": "2026-05-23",
+    "voteOutcome": "Passed (228-207)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The House passed a bill to expand US liquefied natural gas exports to European and Asian allies, framed as a national security measure to reduce their dependence on Russian energy.",
+    "schemaVersion": "1.1",
+    "keywords": ["LNG", "natural gas", "exports", "Russia", "European energy", "national security", "energy geopolitics"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.3750",
+        "billTitle": "LNG Export Expansion and Allied Energy Security Act — Fast-tracking LNG terminal permits and long-term export contracts with allies",
+        "chamber": "House",
+        "voteOutcome": "Passed (228-207)",
+        "voteDate": "May 23, 2026",
+        "congress": "119",
+        "policyArea": "Energy"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 228,
+        "voteAgainst": 207,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000299",
+            "name": "Rep. Mike Johnson",
+            "title": "R-LA · House Speaker",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Germany paid Vladimir Putin $100 billion for natural gas while he was invading Ukraine. Poland is still 40% dependent on Russian pipeline gas. American LNG can end that dependence permanently — and it is already the cleanest natural gas on the market. This is American energy funding allied freedom."
+          },
+          {
+            "bioguideId": "C001139",
+            "name": "Rep. Kat Cammack",
+            "title": "R-FL",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Louisiana and Florida LNG terminals are ready to ship. This bill removes the regulatory bottleneck that has delayed permits for years. Every tanker we send to Europe is Russian pipeline gas that doesn't get bought. This is how you win energy geopolitics without firing a shot."
+          },
+          {
+            "bioguideId": "O000172",
+            "name": "Rep. Alexandria Ocasio-Cortez",
+            "title": "D-NY · House Oversight",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "Expanding LNG exports does not weaken Putin — it adds decades of natural gas infrastructure to an economy we need to decarbonize by 2050. Europe needs clean energy investment, not a 30-year LNG contract that locks them into fossil fuels. We can export clean energy technology and hydrogen. We do not have to export the problem."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.3750 passed 228-207, with eight Democrats from LNG-producing states joining Republicans. The bill fast-tracks FERC and DOE permits for six pending LNG terminals, authorizes 30-year long-term export contracts with NATO allies, and designates certain exports as national security priorities exempt from standard environmental review timelines.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/3750"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US export natural gas to European allies?",
+        "options": [
+          { "id": "yes-security", "label": "Yes — energy security is national security" },
+          { "id": "yes-limited", "label": "Yes, but with climate protections and limits" },
+          { "id": "no-climate", "label": "No — it delays Europe's clean energy transition" },
+          { "id": "hydrogen", "label": "Export green hydrogen instead of LNG" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-120400-hr3750-lng-export-house",
+        "serialNumber": "TT-20260531-J000299-002",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #193 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

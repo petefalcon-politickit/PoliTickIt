@@ -1,0 +1,118 @@
+{
+  "id": "snap-edu-committee-school-choice-hearing-20260509",
+  "normRef": "NORM-20260531-130200-edu-committee-school-choice-hearing",
+  "title": "House Committee Hearing",
+  "subtitle": "House Education Committee — School Choice, Charter Schools, and Public Education Funding",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T13:02:00Z",
+  "updatedAt": "2026-05-31T13:02:00Z",
+  "sources": [
+    {
+      "name": "House Education and the Workforce Committee — Hearing Record (May 9, 2026)",
+      "url": "https://edworkforce.house.gov/hearings"
+    },
+    {
+      "name": "National Center for Education Statistics — School Choice Report (2026)",
+      "url": "https://nces.ed.gov/pubsearch"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-edu-committee-school-choice-hearing-20260509",
+    "policyArea": "Education",
+    "insightType": "House Committee Hearing",
+    "representativeId": "C001136",
+    "chamber": "House",
+    "voteDate": "2026-05-09",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The House Education Committee held a divided hearing on school choice, with Republicans pointing to charter school outcomes and Democrats citing evidence of public school defunding in choice states.",
+    "schemaVersion": "1.1",
+    "keywords": ["school choice", "charter schools", "public schools", "education funding", "Title I", "vouchers", "NCES"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-EDU-COMMITTEE-20260509",
+        "billTitle": "Hearing: School Choice in America — Outcomes, Equity, and the Future of Public Education Funding",
+        "chamber": "House",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 9, 2026",
+        "congress": "119",
+        "policyArea": "Education"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000299",
+            "name": "Rep. Mike Johnson",
+            "title": "R-LA · House Speaker",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Arizona saw reading scores rise across the board — including in public schools — after implementing universal school choice. Competition works. When public schools know families can leave, they improve. The evidence is not ambiguous. School choice benefits every student, whether they use it or not."
+          },
+          {
+            "bioguideId": "C001136",
+            "name": "Rep. Jasmine Crockett",
+            "title": "D-TX · House Judiciary",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "I pulled the NCES data on Texas. Districts that lost the most enrollment to school choice programs also saw the largest cuts in arts programs, counselors, and special education aides — because those kids don't leave, but the dollars do. Cherry-picking test scores from Arizona ignores what happened to the kids left behind in Arizona's Title I schools."
+          },
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "There are 6.7 million students with disabilities in American public schools. Private schools are not required to serve them. No voucher program has ever adequately served a child with complex learning disabilities — because private schools can and do turn them away. Any honest school choice conversation must start with: what happens to the students private schools reject?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The House Education and the Workforce Committee heard five hours of testimony on May 9, 2026 from school principals, education researchers, and parental rights advocates. The hearing was held in preparation for H.R.1822. Republican members highlighted NAEP score improvements in choice states; Democratic members presented data showing declining special education services and arts programs in high-choice districts.",
+        "isExpandable": true,
+        "sourceLink": "https://edworkforce.house.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Does school choice improve education outcomes?",
+        "options": [
+          { "id": "yes-clearly", "label": "Yes — competition improves all schools" },
+          { "id": "yes-for-some", "label": "For some students, yes — not systemically" },
+          { "id": "no-harms", "label": "No — it harms underfunded public schools" },
+          { "id": "more-data", "label": "Not enough evidence yet to decide" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-130200-edu-committee-school-choice-hearing",
+        "serialNumber": "TT-20260531-C001136-001",
+        "oracleSource": "House Education and the Workforce Committee Hearing Record (May 9, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

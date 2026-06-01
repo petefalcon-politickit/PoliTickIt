@@ -1,0 +1,120 @@
+{
+  "id": "snap-s4100-border-wall-senate-20260520",
+  "normRef": "NORM-20260531-110100-s4100-border-wall-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.4100 — Border Infrastructure and Wall Completion Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T11:01:00Z",
+  "updatedAt": "2026-05-31T11:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.4100",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/4100"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #115 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s4100-border-wall-authorization-20260520",
+    "policyArea": "Immigration",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "P000603",
+    "billId": "S.4100",
+    "chamber": "Senate",
+    "voteDate": "2026-05-20",
+    "voteOutcome": "Failed (49-50)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "A closely watched Senate vote on completing the southern border wall failed by a single vote, exposing deep divisions even within the Republican caucus over the cost and effectiveness of physical barriers.",
+    "schemaVersion": "1.1",
+    "keywords": ["border wall", "immigration", "southern border", "infrastructure", "national security", "DHS"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.4100",
+        "billTitle": "Border Infrastructure and Wall Completion Act — $18B to complete and maintain 900 miles of southern border barrier",
+        "chamber": "Senate",
+        "voteOutcome": "Failed (49-50)",
+        "voteDate": "May 20, 2026",
+        "congress": "119",
+        "policyArea": "Immigration"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 49,
+        "voteAgainst": 50,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Judiciary",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Every section of the wall that was built saw illegal crossings drop by 90%. This is proven technology. This is proven law enforcement. One senator blocking this bill has failed every family in a Texas border town who has watched cartels turn their home into a highway for fentanyl."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Eighteen billion dollars for a wall that drug cartels cross with tunnels, drones, and corrupt officials. I want a secure border as much as anyone — but we should spend that money on technology, sensors, and personnel that actually stop fentanyl, not on a symbol. This is a $18 billion photo op."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Judiciary",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "This bill borrows $18 billion for an infrastructure project that CBP's own data shows does not reduce overall border crossings. Comprehensive immigration reform and addressing root causes of migration will achieve more than any wall — at a fraction of the cost."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.4100 failed 49-50, with Sen. Rand Paul casting the deciding vote against. The bill sought to fund completion of 900 miles of remaining southern border barrier at a cost of $18 billion. One Republican vote against the bill — combined with unanimous Democratic opposition — was enough to defeat it. The result was widely seen as a setback for the administration's border infrastructure agenda.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/4100"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US complete the southern border wall?",
+        "options": [
+          { "id": "yes-complete", "label": "Yes — it works and deters crossings" },
+          { "id": "tech-first", "label": "Technology and personnel, not a wall" },
+          { "id": "no-reform", "label": "No — fix immigration law instead" },
+          { "id": "combination", "label": "Wall plus legal reform together" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-110100-s4100-border-wall-senate",
+        "serialNumber": "TT-20260531-P000603-001",
+        "oracleSource": "Senate.gov Roll Call Vote #115 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "snap-s2780-cyber-senate-20260512",
+  "normRef": "NORM-20260531-080100-s2780-cyber-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.2780 — Defending America's Cyber Infrastructure Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T08:01:00Z",
+  "updatedAt": "2026-05-31T08:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.2780",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2780"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #112 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s2780-cyber-floor-debate-20260512",
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "W000437",
+    "billId": "S.2780",
+    "chamber": "Senate",
+    "voteDate": "2026-05-12",
+    "voteOutcome": "Passed (67-32)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate voted to strengthen federal defenses against cyberattacks on critical infrastructure like power grids, water systems, and financial networks.",
+    "schemaVersion": "1.1",
+    "keywords": ["cybersecurity", "critical infrastructure", "national security", "CISA", "cyber defense"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.2780",
+        "billTitle": "Defending America's Cyber Infrastructure Act — Strengthening federal cyber defenses against state-sponsored attacks",
+        "chamber": "Senate",
+        "voteOutcome": "Passed (67-32)",
+        "voteDate": "May 12, 2026",
+        "congress": "119",
+        "policyArea": "Armed Forces and National Security"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 67,
+        "voteAgainst": 32,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "W000437",
+            "name": "Sen. Roger Wicker",
+            "title": "R-MS · Senate Armed Services Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "China and Russia are probing our power grid, our water systems, and our financial networks every single day. This is not a hypothetical threat. This bill gives CISA the resources and authority to defend America in the cyber domain before the lights go out."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Judiciary",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "This is rare bipartisan action that our national security demands. Cyberattacks on American infrastructure do not ask for your party registration. I urge every colleague to support this legislation."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "This bill expands government surveillance of private networks under the guise of cybersecurity. We should be cautious about giving federal agencies unprecedented access to private sector systems. Liberty requires that we ask hard questions even about bills with good intentions."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.2780 passed the Senate 67-32 with bipartisan support. It allocates $4.2 billion to CISA for cyber defense programs, mandates 48-hour breach reporting for critical infrastructure operators, and authorizes offensive cyber operations against state-sponsored attack networks. The bill now moves to the House.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/2780"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the federal government have greater authority over private sector cyber defenses?",
+        "options": [
+          { "id": "yes-security", "label": "Yes — national security requires it" },
+          { "id": "yes-voluntary", "label": "Yes, but keep it voluntary" },
+          { "id": "no-privacy", "label": "No — protects privacy and liberty" },
+          { "id": "private-sector", "label": "Private sector should lead" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-080100-s2780-cyber-senate",
+        "serialNumber": "TT-20260531-W000437-002",
+        "oracleSource": "Senate.gov Roll Call Vote #112 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

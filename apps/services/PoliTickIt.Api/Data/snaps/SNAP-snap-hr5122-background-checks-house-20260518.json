@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr5122-background-checks-house-20260518",
+  "normRef": "NORM-20260531-140000-hr5122-background-checks-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.5122 — Bipartisan Background Checks Act of 2026",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T14:00:00Z",
+  "updatedAt": "2026-05-31T14:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.5122",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/5122"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #186 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll186.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr5122-bipartisan-background-checks-floor-20260518",
+    "policyArea": "Crime and Law Enforcement",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000294",
+    "billId": "H.R.5122",
+    "chamber": "House",
+    "voteDate": "2026-05-18",
+    "voteOutcome": "Passed (230-204)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The House passed a bill requiring universal background checks for all commercial gun sales, including private sales at gun shows and online, closing the 'gun show loophole.'",
+    "schemaVersion": "1.1",
+    "keywords": ["background checks", "gun control", "Second Amendment", "gun show loophole", "NICS", "firearms", "gun violence"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.5122",
+        "billTitle": "Bipartisan Background Checks Act of 2026 — Requiring NICS checks for all commercial firearm sales including gun shows and online",
+        "chamber": "House",
+        "voteOutcome": "Passed (230-204)",
+        "voteDate": "May 18, 2026",
+        "congress": "119",
+        "policyArea": "Crime and Law Enforcement"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 230,
+        "voteAgainst": 204,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "90% of Americans — including 80% of gun owners — support universal background checks. The only thing standing between this commonsense policy and law has been money from the gun lobby. Today, this House did what the American people have demanded. The Senate must follow."
+          },
+          {
+            "bioguideId": "C001136",
+            "name": "Rep. Jasmine Crockett",
+            "title": "D-TX · House Judiciary",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "I represent a district in Texas where gun violence is a daily reality. The ATF traced thousands of crime guns to private sales that bypassed background checks. Every one of those guns was purchased by someone who knew they couldn't pass a background check. This bill closes that door."
+          },
+          {
+            "bioguideId": "M001184",
+            "name": "Rep. Thomas Massie",
+            "title": "R-KY · House Oversight",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "The Constitution says shall not be infringed. A background check is permission from the government to exercise a constitutional right. We do not require a background check to vote, to speak, or to practice religion. The Second Amendment does not have an asterisk."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.5122 passed 230-204 with 26 Republicans joining all Democrats. It requires NICS background checks for all commercial firearm transfers, including gun show sales, online sales, and private transfers conducted through a federally licensed dealer. Purely private sales between individuals who already know each other would remain exempt. The bill now faces a tougher path in the Senate, where 60 votes are needed to advance.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/5122"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should universal background checks be required for all gun sales?",
+        "options": [
+          { "id": "yes-all", "label": "Yes — all sales, no exceptions" },
+          { "id": "yes-commercial", "label": "Yes, for commercial sales — not private gifts" },
+          { "id": "no-constitutional", "label": "No — it infringes on 2nd Amendment rights" },
+          { "id": "enforce-existing", "label": "Enforce existing background check law first" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-140000-hr5122-background-checks-house",
+        "serialNumber": "TT-20260531-J000294-002",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #186 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "id": "snap-massie-ndaa-vote-20260515",
+  "normRef": "NORM-20260531-080200-massie-ndaa-vote",
+  "title": "Representative Vote",
+  "subtitle": "H.R.2244 — Rep. Thomas Massie · Against",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T08:02:00Z",
+  "updatedAt": "2026-05-31T08:02:00Z",
+  "sources": [
+    {
+      "name": "Rep. Massie Official Press Release",
+      "url": "https://massie.house.gov/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #201 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll201.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-massie-hr2244-against-vote-20260515",
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "House Floor Vote",
+    "representativeId": "M001184",
+    "billId": "H.R.2244",
+    "chamber": "House",
+    "voteDate": "2026-05-15",
+    "voteOutcome": "Passed (218-210)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. Thomas Massie broke with his party and voted against the defense bill, citing concerns about unsustainable spending and lack of fiscal restraint.",
+    "schemaVersion": "1.1",
+    "keywords": ["NDAA", "defense spending", "fiscal responsibility", "Thomas Massie", "dissent"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "M001184",
+        "name": "Thomas Massie",
+        "party": "Republican",
+        "location": "Kentucky",
+        "position": "Representative · KY-4",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/M001184.jpg",
+        "tags": ["House Armed Services", "Libertarian-leaning"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "I ran on a platform of fiscal sanity. This NDAA does not reflect fiscal sanity. We are adding nearly a trillion dollars per year to a military budget while our national debt accelerates past $37 trillion. I will not vote to bankrupt America in the name of defense.",
+        "speaker": "Thomas Massie",
+        "date": "2026-05-15",
+        "context": "House floor statement explaining vote against H.R.2244",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "National Defense Authorization Act for Fiscal Year 2027",
+        "vote": "Nay"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About H.R.2244",
+        "text": "H.R.2244 authorizes $923 billion for defense in FY2027. It passed 218-210, with Massie among a small group of fiscal conservatives who crossed party lines to oppose the bill. Supporters argue the increase is necessary to counter China and Russia; critics point to rising national debt now exceeding $37 trillion.",
+        "isExpandable": true,
+        "sourceLink": "https://massie.house.gov/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should fiscal concerns override defense spending increases?",
+        "options": [
+          { "id": "fiscal-first", "label": "Yes — the debt is also a national security threat" },
+          { "id": "defense-first", "label": "No — defense spending can't be compromised" },
+          { "id": "cut-elsewhere", "label": "Cut other programs to fund defense" },
+          { "id": "balanced", "label": "Find a balanced approach" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-080200-massie-ndaa-vote",
+        "serialNumber": "TT-20260531-M001184-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #201 (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

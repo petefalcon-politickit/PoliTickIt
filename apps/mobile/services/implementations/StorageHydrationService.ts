@@ -1,4 +1,3 @@
-import { interests, representatives } from "@/constants/mockData";
 import {
     accountabilitySnaps,
     allCandidateSnaps,
@@ -18,34 +17,24 @@ import {
 } from "@/constants/snapLibrary";
 import { IDatabaseService } from "../interfaces/IDatabaseService";
 import { IForensicSignalCoordinator } from "../interfaces/IForensicSignalCoordinator";
-import { SqliteAgencyRepository } from "./SqliteAgencyRepository";
-import { SqliteRepresentativeRepository } from "./SqliteRepresentativeRepository";
 import { SqliteSnapRepository } from "./SqliteSnapRepository";
 
 export class StorageHydrationService {
   private db: IDatabaseService;
   private sqliteRepo: SqliteSnapRepository;
-  private repRepo: SqliteRepresentativeRepository;
-  private agencyRepo: SqliteAgencyRepository;
   private forensicCoordinator: IForensicSignalCoordinator;
 
   constructor({
     databaseService,
     sqliteSnapRepository,
-    representativeRepository,
-    agencyRepository,
     forensicSignalCoordinator,
   }: {
     databaseService: IDatabaseService;
     sqliteSnapRepository: SqliteSnapRepository;
-    representativeRepository: SqliteRepresentativeRepository;
-    agencyRepository: SqliteAgencyRepository;
     forensicSignalCoordinator: IForensicSignalCoordinator;
   }) {
     this.db = databaseService;
     this.sqliteRepo = sqliteSnapRepository;
-    this.repRepo = representativeRepository;
-    this.agencyRepo = agencyRepository;
     this.forensicCoordinator = forensicSignalCoordinator;
   }
 
@@ -87,47 +76,7 @@ export class StorageHydrationService {
         `[StorageHydrationService] Sync complete. Verified ${allSnaps.length} snaps in local SQLite storage.`,
       );
 
-      // --- NEW: Sync System Entities ---
-      console.log("[StorageHydrationService] Synchronizing System Entities...");
-
-      for (const rep of representatives) {
-        try {
-          await this.repRepo.saveRepresentative(rep);
-        } catch (e) {
-          console.error(
-            `[StorageHydrationService] Failed to save representative ${rep.id}:`,
-            e,
-          );
-        }
-      }
-
-      for (const interest of interests) {
-        try {
-          await this.agencyRepo.saveAgency({
-            id: interest.id,
-            name: interest.name,
-            description: interest.description || "",
-            image_url: interest.image,
-            is_following: (interest as any).isSelected || false,
-            metadata: {
-              constituentCount: Math.floor(Math.random() * 5000) + 1000,
-              activityPulse: Math.floor(Math.random() * 100),
-              lastAuditDate: "2026-01-29",
-            },
-          });
-        } catch (e) {
-          console.error(
-            `[StorageHydrationService] Failed to save agency ${interest.id}:`,
-            e,
-          );
-        }
-      }
-
-      console.log(
-        `[StorageHydrationService] System Entity Sync complete. (${representatives.length} Reps, ${interests.length} Policy Areas)`,
-      );
-
-      // --- NEW: Seed Participation History if empty ---
+      // --- Seed Participation History if empty ---
       const historyCheck = await this.db.execute(
         "SELECT COUNT(*) as count FROM participation_log",
       );

@@ -1,0 +1,104 @@
+{
+  "id": "snap-jayapal-immigration-vote-20260517",
+  "normRef": "NORM-20260531-110200-jayapal-immigration-vote",
+  "title": "Representative Vote",
+  "subtitle": "S.3317 — Rep. Pramila Jayapal · Against",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T11:02:00Z",
+  "updatedAt": "2026-05-31T11:02:00Z",
+  "sources": [
+    {
+      "name": "Rep. Pramila Jayapal Official Statement",
+      "url": "https://jayapal.house.gov/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — H.R.3317 Companion Vote (2026)",
+      "url": "https://clerk.house.gov/evs/2026"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-jayapal-s3317-against-vote-20260517",
+    "policyArea": "Immigration",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000298",
+    "billId": "H.R.3317",
+    "chamber": "House",
+    "voteDate": "2026-05-17",
+    "voteOutcome": "Passed (225-210)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. Pramila Jayapal, chair of the Progressive Caucus, voted against the border security bill and led progressive opposition, calling it anti-refugee and unconstitutional.",
+    "schemaVersion": "1.1",
+    "keywords": ["immigration", "asylum", "refugee", "border security", "Pramila Jayapal", "Progressive Caucus", "human rights"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "J000298",
+        "name": "Pramila Jayapal",
+        "party": "Democrat",
+        "location": "Washington State",
+        "position": "Representative · WA-7 · Progressive Caucus Chair",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/J000298.jpg",
+        "tags": ["House Judiciary", "Progressive Caucus", "Immigration"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "I came to this country as an immigrant. I know what it means to fear deportation. This bill would make it illegal to seek asylum if you fled gang violence — violence that the United States fueled with weapons and foreign policy for decades. We do not get to create the conditions that force people to flee and then criminalize them for fleeing. I will not vote for cruelty dressed up as security.",
+        "speaker": "Pramila Jayapal",
+        "date": "2026-05-17",
+        "context": "House floor statement explaining vote against H.R.3317, the companion to the Senate border bill",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "Border Security and Immigration Reform Act",
+        "vote": "Nay"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Vote",
+        "text": "The House passed the companion bill H.R.3317 225-210, with only one Democrat joining Republicans. Rep. Jayapal was a leading opposition voice, organizing Progressive Caucus members and circulating a whip letter signed by 85 members calling specific asylum bar provisions 'unconstitutional and in direct conflict with the 1951 Refugee Convention.'",
+        "isExpandable": true,
+        "sourceLink": "https://jayapal.house.gov/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US accept asylum seekers fleeing gang violence?",
+        "options": [
+          { "id": "yes-all", "label": "Yes — violence is violence regardless of source" },
+          { "id": "case-by-case", "label": "Yes, but on a verified case-by-case basis" },
+          { "id": "no-limit", "label": "No — current system is being abused" },
+          { "id": "reform-system", "label": "Reform the definition of refugee first" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-110200-jayapal-immigration-vote",
+        "serialNumber": "TT-20260531-J000298-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

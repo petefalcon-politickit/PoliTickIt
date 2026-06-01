@@ -27,4 +27,10 @@ export interface IRepresentativeRepository {
    * Toggles the following status of a representative
    */
   toggleFollow(id: string, isFollowing: boolean): Promise<void>;
+
+  /**
+   * RSP Protocol — Pull the user's followed-representative list from the backend
+   * and apply it to local SQLite state. Used after reinstall/fresh sync.
+   */
+  syncFollowingFromBackend(): Promise<void>;
 }

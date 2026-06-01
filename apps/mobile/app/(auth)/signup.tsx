@@ -4,6 +4,7 @@ import { POLICY_AREAS } from "@/components/ui/representative-and-policy-area-fil
 import { Colors, GlobalStyles, Typography } from "@/constants/theme";
 import { useAuth } from "@/contexts/auth-context";
 import { apiAuthService } from "@/services/implementations/ApiAuthService";
+import { validatePassword } from "@/utils/passwordValidation";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { router } from "expo-router";
@@ -46,6 +47,7 @@ export default function SignupScreen() {
   const [zipValidating, setZipValidating] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [emailChecking, setEmailChecking] = useState(false);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -65,6 +67,8 @@ export default function SignupScreen() {
   const updateField = (field: string, value: any) => {
     if (field === "zip") setZipError(null);
     if (field === "email" || field === "confirmEmail") setEmailError(null);
+    if (field === "password" || field === "confirmPassword")
+      setPasswordError(null);
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -148,7 +152,17 @@ export default function SignupScreen() {
       !confirmPassword
     )
       return;
-    if (email !== confirmEmail || password !== confirmPassword) return;
+    if (email !== confirmEmail) return;
+    const check = validatePassword(password);
+    if (!check.valid) {
+      setPasswordError(check.error);
+      return;
+    }
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match.");
+      return;
+    }
+    setPasswordError(null);
     setEmailChecking(true);
     setEmailError(null);
     try {
@@ -328,6 +342,12 @@ export default function SignupScreen() {
       {emailError && (
         <Text style={{ color: "red", marginTop: 8, textAlign: "center" }}>
           {emailError}
+        </Text>
+      )}
+
+      {passwordError && (
+        <Text style={{ color: "red", marginTop: 8, textAlign: "center" }}>
+          {passwordError}
         </Text>
       )}
 

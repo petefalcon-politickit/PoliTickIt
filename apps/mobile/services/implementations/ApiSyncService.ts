@@ -1,7 +1,9 @@
-import { IRepresentativeRepository } from "../interfaces/IRepresentativeRepository";
 import { ISnapRepository } from "../interfaces/ISnapRepository";
 import { ApiCorrelationRepository } from "./ApiCorrelationRepository";
+import { ApiInterestRepository } from "./ApiInterestRepository";
 import { ApiParticipationRepository } from "./ApiParticipationRepository";
+import { ApiRepresentativeRepository } from "./ApiRepresentativeRepository";
+import { SqliteAgencyRepository } from "./SqliteAgencyRepository";
 import { SqliteCorrelationRepository } from "./SqliteCorrelationRepository";
 import { SqliteParticipationRepository } from "./SqliteParticipationRepository";
 import { SqliteRepresentativeRepository } from "./SqliteRepresentativeRepository";
@@ -10,12 +12,14 @@ import { SqliteSnapRepository } from "./SqliteSnapRepository";
 export class ApiSyncService {
   private apiSnapRepo: ISnapRepository;
   private sqliteSnapRepo: SqliteSnapRepository;
-  private apiRepRepo: IRepresentativeRepository;
+  private apiRepRepo: ApiRepresentativeRepository;
   private sqliteRepRepo: SqliteRepresentativeRepository;
   private apiCorrelationRepo: ApiCorrelationRepository;
   private sqliteCorrelationRepo: SqliteCorrelationRepository;
   private apiParticipationRepo: ApiParticipationRepository;
   private sqliteParticipationRepo: SqliteParticipationRepository;
+  private apiInterestRepo: ApiInterestRepository;
+  private sqliteAgencyRepo: SqliteAgencyRepository;
 
   constructor({
     apiSnapRepository,
@@ -26,15 +30,19 @@ export class ApiSyncService {
     sqliteCorrelationRepository,
     apiParticipationRepository,
     sqliteParticipationRepository,
+    apiInterestRepository,
+    agencyRepository,
   }: {
     apiSnapRepository: ISnapRepository;
     sqliteSnapRepository: SqliteSnapRepository;
-    apiRepresentativeRepository: IRepresentativeRepository;
+    apiRepresentativeRepository: ApiRepresentativeRepository;
     sqliteRepresentativeRepository: SqliteRepresentativeRepository;
     apiCorrelationRepository: ApiCorrelationRepository;
     sqliteCorrelationRepository: SqliteCorrelationRepository;
     apiParticipationRepository: ApiParticipationRepository;
     sqliteParticipationRepository: SqliteParticipationRepository;
+    apiInterestRepository: ApiInterestRepository;
+    agencyRepository: SqliteAgencyRepository;
   }) {
     this.apiSnapRepo = apiSnapRepository;
     this.sqliteSnapRepo = sqliteSnapRepository;
@@ -44,6 +52,8 @@ export class ApiSyncService {
     this.sqliteCorrelationRepo = sqliteCorrelationRepository;
     this.apiParticipationRepo = apiParticipationRepository;
     this.sqliteParticipationRepo = sqliteParticipationRepository;
+    this.apiInterestRepo = apiInterestRepository;
+    this.sqliteAgencyRepo = agencyRepository;
   }
 
   /**
@@ -78,6 +88,34 @@ export class ApiSyncService {
           await this.sqliteRepRepo.upsertSovereign(rep);
         }
         totalCount += remoteReps.length;
+      }
+
+      // 2b. RSP Follow Restore — pull user's followed-rep list and apply to SQLite.
+      //     This ensures that after reinstall, follow state is fully restored from Cosmos.
+      try {
+        const followedIds = await this.apiRepRepo.getFollowingIds();
+        await this.sqliteRepRepo.bulkSetFollowing(followedIds);
+        console.log(
+          `[ApiSyncService] RSP Follow Restore: applied ${followedIds.length} followed reps.`,
+        );
+      } catch (followErr) {
+        // Non-fatal: user may not be logged in (guest mode). Follow state stays as-is.
+        console.warn("[ApiSyncService] RSP Follow Restore skipped:", followErr);
+      }
+
+      // 2c. Interest Follow Restore — pull user's followed policy-area IDs from Cosmos.
+      try {
+        const followedInterestIds =
+          await this.apiInterestRepo.getFollowingIds();
+        await this.sqliteAgencyRepo.bulkSetFollowing(followedInterestIds);
+        console.log(
+          `[ApiSyncService] Interest Follow Restore: applied ${followedInterestIds.length} followed interests.`,
+        );
+      } catch (followErr) {
+        console.warn(
+          "[ApiSyncService] Interest Follow Restore skipped:",
+          followErr,
+        );
       }
 
       // 3. Sync Financial Pulse Correlations (FPP Protocol)
@@ -118,6 +156,30 @@ export class ApiSyncService {
     } catch (error) {
       console.error("[ApiSyncService] Sync failed:", error);
       return { success: false, count: 0 };
+    }
+  }
+
+  /**
+   * Lightweight follow-state restore for reps and interests.
+   * Called after login and session restore so reinstalled apps immediately
+   * reflect the user's Cosmos-backed follow list without a full data sync.
+   * Silently no-ops when unauthenticated (getFollowingIds returns []).
+   */
+  async syncFollowState(): Promise<void> {
+    try {
+      const [repIds, interestIds] = await Promise.all([
+        this.apiRepRepo.getFollowingIds(),
+        this.apiInterestRepo.getFollowingIds(),
+      ]);
+      await Promise.all([
+        this.sqliteRepRepo.bulkSetFollowing(repIds),
+        this.sqliteAgencyRepo.bulkSetFollowing(interestIds),
+      ]);
+      console.log(
+        `[ApiSyncService] Follow restore: ${repIds.length} reps, ${interestIds.length} interests.`,
+      );
+    } catch (error) {
+      console.warn("[ApiSyncService] syncFollowState failed:", error);
     }
   }
 }

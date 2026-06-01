@@ -1,0 +1,120 @@
+{
+  "id": "snap-s1842-climate-resilience-senate-20260516",
+  "normRef": "NORM-20260531-120000-s1842-climate-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.1842 — Climate Resilience and Clean Energy Investment Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T12:00:00Z",
+  "updatedAt": "2026-05-31T12:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.1842",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1842"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #108 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s1842-climate-resilience-clean-energy-20260516",
+    "policyArea": "Energy",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "W000802",
+    "billId": "S.1842",
+    "chamber": "Senate",
+    "voteDate": "2026-05-16",
+    "voteOutcome": "Failed (48-51)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "A sweeping climate and clean energy bill failed in the Senate, with its $450 billion price tag and renewable energy mandates driving opposition from moderates on both sides.",
+    "schemaVersion": "1.1",
+    "keywords": ["climate change", "clean energy", "solar", "wind", "carbon emissions", "IRA", "renewable energy", "fossil fuels"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.1842",
+        "billTitle": "Climate Resilience and Clean Energy Investment Act — $450B for renewable energy, grid modernization, and climate adaptation",
+        "chamber": "Senate",
+        "voteOutcome": "Failed (48-51)",
+        "voteDate": "May 16, 2026",
+        "congress": "119",
+        "policyArea": "Energy"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 48,
+        "voteAgainst": 51,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Environment Chair",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "The 12 hottest years in recorded history have all been in the last 15 years. Insurance companies are exiting states. Wildfires now burn year-round. Hurricanes are category 4 before they would have been category 2. We can pay now — or we can pay catastrophically later. This bill is the cheapest climate insurance policy ever written."
+          },
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP",
+            "party": "Independent",
+            "position": "For",
+            "quote": "Let me be clear: the fossil fuel industry has known about the consequences of carbon emissions since the 1970s and they hid it. They paid politicians to deny it. They are still paying. The difference between a $450 billion climate investment and doing nothing is the difference between a livable planet and economic collapse."
+          },
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Texas produces more wind energy than any state in the nation — and we did it without 450 billion dollars in government subsidies. Real energy policy trusts markets, not bureaucrats picking winners. This bill would destroy affordable energy in pursuit of an environmental ideology that has failed everywhere it has been tried."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.1842 failed 48-51, blocked by three Democratic moderates from fossil fuel states joining all Republicans. The bill would have invested $450 billion in solar, wind, and grid modernization, established a clean electricity standard requiring 80% carbon-free power by 2035, and funded climate adaptation for coastal communities. The defeat leaves US climate policy in limbo ahead of an international summit.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/1842"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US make a major federal investment in clean energy?",
+        "options": [
+          { "id": "yes-urgent", "label": "Yes — climate change is urgent and costly" },
+          { "id": "yes-smaller", "label": "Yes, but a smaller, targeted bill" },
+          { "id": "no-market", "label": "No — let markets drive energy transition" },
+          { "id": "no-deficit", "label": "No — can't afford $450B right now" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-120000-s1842-climate-senate",
+        "serialNumber": "TT-20260531-W000802-001",
+        "oracleSource": "Senate.gov Roll Call Vote #108 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

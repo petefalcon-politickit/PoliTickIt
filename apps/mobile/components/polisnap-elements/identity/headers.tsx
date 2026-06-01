@@ -3,8 +3,11 @@ import { ThemedText } from "@/components/themed-text";
 import { Colors, Spacing, Typography } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import React from "react";
+import React, { useState } from "react";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
+
+const CONGRESS_CDN_BASE = "https://unitedstates.github.io/images/congress/225x275";
+const REP_PLACEHOLDER = require("@/assets/images/empty-flag.png");
 
 /**
  * Shared Pill Component for Headers
@@ -65,6 +68,8 @@ export const HeaderRepresentative = ({
   navigationService,
   extraProps,
 }: any) => {
+  const [imgFailed, setImgFailed] = useState(false);
+
   const {
     id,
     context,
@@ -97,18 +102,27 @@ export const HeaderRepresentative = ({
   const locationString =
     location || (state ? (district ? `${state} • ${district}` : state) : null);
 
+  // Image resolution order:
+  //   1. imgUri (legacy / explicit)
+  //   2. imageUrl (API response field)
+  //   3. GitHub CDN derived from BioguideId
+  //   4. Local placeholder (on load error)
+  const resolvedImageUri = imgFailed
+    ? REP_PLACEHOLDER
+    : imgUri ||
+      imageUrl ||
+      (effectiveId ? `${CONGRESS_CDN_BASE}/${effectiveId}.jpg` : null) ||
+      REP_PLACEHOLDER;
+
   const Content = (
     <View style={styles.container}>
       <Image
-        source={
-          imgUri ||
-          imageUrl ||
-          `https://ui-avatars.com/api/?name=${cleanName || "Rep"}&background=CBD5E0&color=4A5568`
-        }
+        source={resolvedImageUri}
         style={styles.avatar}
         contentFit="cover"
         transition={200}
         cachePolicy="memory-disk"
+        onError={() => setImgFailed(true)}
       />
       <View style={styles.content}>
         <View style={styles.headerTopRow}>

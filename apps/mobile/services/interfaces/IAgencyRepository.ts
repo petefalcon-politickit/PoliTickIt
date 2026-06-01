@@ -37,6 +37,12 @@ export interface IAgencyRepository {
   toggleFollow(id: string, isFollowing: boolean): Promise<void>;
 
   /**
+   * Bulk-sets follow state from the backend on reinstall/restore.
+   * Sets is_following=1 for each id in followedIds, 0 for all others.
+   */
+  bulkSetFollowing(followedIds: string[]): Promise<void>;
+
+  /**
    * Deletes an agency from the local database.
    */
   deleteAgency(id: string): Promise<void>;

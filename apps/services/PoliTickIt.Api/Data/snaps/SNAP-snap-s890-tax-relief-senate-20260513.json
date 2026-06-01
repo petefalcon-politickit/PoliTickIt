@@ -1,0 +1,120 @@
+{
+  "id": "snap-s890-tax-relief-senate-20260513",
+  "normRef": "NORM-20260531-100100-s890-tax-relief-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.890 — Tax Relief for Working Families Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T10:01:00Z",
+  "updatedAt": "2026-05-31T10:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.890",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/890"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #105 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s890-tax-relief-working-families-20260513",
+    "policyArea": "Taxation",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "S001184",
+    "billId": "S.890",
+    "chamber": "Senate",
+    "voteDate": "2026-05-13",
+    "voteOutcome": "Passed (56-43)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate passed a bill expanding the Child Tax Credit and Earned Income Tax Credit while restoring some business tax provisions from the 2017 tax law.",
+    "schemaVersion": "1.1",
+    "keywords": ["Child Tax Credit", "EITC", "tax relief", "working families", "child poverty", "R&D expensing"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.890",
+        "billTitle": "Tax Relief for Working Families Act — Expanding the Child Tax Credit and restoring business R&D expensing",
+        "chamber": "Senate",
+        "voteOutcome": "Passed (56-43)",
+        "voteDate": "May 13, 2026",
+        "congress": "119",
+        "policyArea": "Taxation"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 56,
+        "voteAgainst": 43,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "S001184",
+            "name": "Sen. Tim Scott",
+            "title": "R-SC · Senate Finance",
+            "party": "Republican",
+            "position": "For",
+            "quote": "I grew up in poverty. The Earned Income Tax Credit changed my family's trajectory. This bill makes the EITC and the Child Tax Credit more accessible, keeps more money in the hands of working Americans, and restores business tax incentives that drive the innovation keeping us competitive with China."
+          },
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP",
+            "party": "Independent",
+            "position": "For",
+            "quote": "The Child Tax Credit expansion in this bill will lift an estimated 3.5 million children out of poverty. That is not a left-wing idea or a right-wing idea — that is a moral obligation. I support this bill and urge every senator to do the same."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Any tax bill that does not come with matching spending cuts simply borrows money from our children and calls it relief. We are passing the cost of today's generosity to the next generation. That is not relief — it is a debt sentence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.890 passed 56-43 with bipartisan support. The bill expands the Child Tax Credit to $2,100 per child, increases the Earned Income Tax Credit for childless workers, and restores 100% first-year expensing for R&D investments that expired in 2022. CBO estimates the package costs $78 billion over ten years, offset partially by closing several corporate loopholes.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/890"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Congress expand the Child Tax Credit?",
+        "options": [
+          { "id": "yes-poverty", "label": "Yes — reduces child poverty immediately" },
+          { "id": "yes-if-paid", "label": "Yes, but only if offset by spending cuts" },
+          { "id": "no-deficit", "label": "No — adds to the national debt" },
+          { "id": "go-further", "label": "Go further — make it fully refundable" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-100100-s890-tax-relief-senate",
+        "serialNumber": "TT-20260531-S001184-001",
+        "oracleSource": "Senate.gov Roll Call Vote #105 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

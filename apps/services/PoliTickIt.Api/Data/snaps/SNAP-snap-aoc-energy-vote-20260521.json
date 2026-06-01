@@ -1,0 +1,104 @@
+{
+  "id": "snap-aoc-energy-vote-20260521",
+  "normRef": "NORM-20260531-120200-aoc-energy-vote",
+  "title": "Representative Vote",
+  "subtitle": "H.R.3050 — Rep. Alexandria Ocasio-Cortez · Against",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T12:02:00Z",
+  "updatedAt": "2026-05-31T12:02:00Z",
+  "sources": [
+    {
+      "name": "Rep. Alexandria Ocasio-Cortez Official Statement",
+      "url": "https://ocasio-cortez.house.gov/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #189 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll189.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-aoc-hr3050-against-vote-20260521",
+    "policyArea": "Energy",
+    "insightType": "House Floor Vote",
+    "representativeId": "O000172",
+    "billId": "H.R.3050",
+    "chamber": "House",
+    "voteDate": "2026-05-21",
+    "voteOutcome": "Passed (220-215)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. AOC was the most vocal House opponent of H.R.3050, making the climate and economic case against expanding fossil fuel production in a floor speech that became widely circulated.",
+    "schemaVersion": "1.1",
+    "keywords": ["Alexandria Ocasio-Cortez", "climate change", "fossil fuels", "energy policy", "Green New Deal", "drilling"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "O000172",
+        "name": "Alexandria Ocasio-Cortez",
+        "party": "Democrat",
+        "location": "New York",
+        "position": "Representative · NY-14",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/O000172.jpg",
+        "tags": ["House Oversight", "House Financial Services", "Progressive Caucus"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "When Exxon's own scientists warned in 1982 that burning their product would heat the planet, Exxon chose to fund denial campaigns instead of changing course. Today we are being asked to give Exxon more drilling rights on federal land. I reject that premise. Every dollar we invest in fossil fuel infrastructure is a dollar we're betting that the IPCC is wrong and Exxon was right. I am not making that bet with my constituents' lives.",
+        "speaker": "Alexandria Ocasio-Cortez",
+        "date": "2026-05-21",
+        "context": "House floor statement opposing H.R.3050, the American Energy Independence and Production Act",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "American Energy Independence and Production Act",
+        "vote": "Nay"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About H.R.3050",
+        "text": "H.R.3050 passed 220-215. AOC was one of the most vocal opponents, citing both climate science and her argument that domestic oil production does not lower retail gas prices, which are set globally. Her floor speech was shared over 2 million times on social media within 24 hours of the vote.",
+        "isExpandable": true,
+        "sourceLink": "https://ocasio-cortez.house.gov/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Does expanding domestic oil production lower gas prices?",
+        "options": [
+          { "id": "yes-supply", "label": "Yes — more supply means lower prices" },
+          { "id": "partially", "label": "Somewhat — but global markets set the price" },
+          { "id": "no-profits", "label": "No — companies keep the profit, not consumers" },
+          { "id": "wrong-question", "label": "Wrong question — we should electrify transport" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-120200-aoc-energy-vote",
+        "serialNumber": "TT-20260531-O000172-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #189 (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

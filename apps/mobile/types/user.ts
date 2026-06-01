@@ -9,12 +9,22 @@ export interface User {
 
 export interface Representative {
   id: string;
+  /** BioguideId (e.g. "M001184"). Same value as `id` when coming from the API. */
+  bioguideId?: string;
   name: string;
-  position: string;
+  /** "House" | "Senate" | legacy position string */
+  chamber?: string;
+  /** @deprecated Use `chamber` — retained for backward compat with mock/SQLite data */
+  position?: string;
+  /** Government tier: "Federal" (Congress), "State" (state legislators), "District" (local) */
+  level?: "Federal" | "State" | "District";
   state: string;
   district?: string;
   party: string;
+  /** Absolute URL to representative photo (GitHub CDN or images.politickit.com). */
   profileImage: string;
+  /** Raw imageUrl returned from API — aliased to profileImage during mapping. */
+  imageUrl?: string;
   contact?: string;
   biography?: string;
   committees?: string[];

@@ -1,0 +1,120 @@
+{
+  "id": "snap-s3317-border-security-senate-20260517",
+  "normRef": "NORM-20260531-110000-s3317-border-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.3317 — Border Security and Immigration Reform Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T11:00:00Z",
+  "updatedAt": "2026-05-31T11:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.3317",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3317"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #110 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s3317-border-security-immigration-floor-20260517",
+    "policyArea": "Immigration",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "C001098",
+    "billId": "S.3317",
+    "chamber": "Senate",
+    "voteDate": "2026-05-17",
+    "voteOutcome": "Passed (55-44)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate passed sweeping border security legislation that expands detention capacity, funds additional border agents, and overhauls the asylum process.",
+    "schemaVersion": "1.1",
+    "keywords": ["immigration", "border security", "asylum", "detention", "border patrol", "Title 42"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.3317",
+        "billTitle": "Border Security and Immigration Reform Act — Funding 15,000 new border agents, expanding detention, and reforming the asylum system",
+        "chamber": "Senate",
+        "voteOutcome": "Passed (55-44)",
+        "voteDate": "May 17, 2026",
+        "congress": "119",
+        "policyArea": "Immigration"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 55,
+        "voteAgainst": 44,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Judiciary",
+            "party": "Republican",
+            "position": "For",
+            "quote": "The border is not secure. Eight million people have entered this country illegally in four years. Texas border communities are overwhelmed. This bill finally gives Border Patrol the resources, the personnel, and the legal authority to enforce the laws that already exist. It is overdue."
+          },
+          {
+            "bioguideId": "T000250",
+            "name": "Sen. John Thune",
+            "title": "R-SD · Senate Majority Leader",
+            "party": "Republican",
+            "position": "For",
+            "quote": "This is the most comprehensive border security legislation in a generation. It is also a reform bill — it creates faster legal pathways for legitimate asylum seekers and invests in processing infrastructure so we never again have a humanitarian crisis at the border."
+          },
+          {
+            "bioguideId": "S000148",
+            "name": "Sen. Chuck Schumer",
+            "title": "D-NY · Senate Minority Leader",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "This bill is a political document, not a border security document. It cuts legal immigration pathways, bans asylum categories the law requires us to consider, and would separate families fleeing documented gang violence. Real reform requires balance — this is a political sledgehammer."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.3317 passed 55-44 with six Democratic senators joining all Republicans. The bill appropriates $38 billion for border security, including 15,000 new CBP agents, expanded detention facilities, and a new fast-track asylum adjudication system targeting a 90-day decision timeline. Critics argue it also bars asylum claims from people fleeing gang violence and certain domestic abuse situations.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/3317"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "What is your top immigration priority?",
+        "options": [
+          { "id": "secure-border", "label": "Secure the border first, then reform" },
+          { "id": "legal-pathways", "label": "Create more legal immigration pathways" },
+          { "id": "comprehensive", "label": "Comprehensive reform — both at once" },
+          { "id": "enforce-law", "label": "Enforce existing laws, no new legislation" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-110000-s3317-border-senate",
+        "serialNumber": "TT-20260531-C001098-002",
+        "oracleSource": "Senate.gov Roll Call Vote #110 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

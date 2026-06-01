@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr3050-energy-independence-house-20260521",
+  "normRef": "NORM-20260531-120100-hr3050-energy-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.3050 — American Energy Independence and Production Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T12:01:00Z",
+  "updatedAt": "2026-05-31T12:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.3050",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/3050"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #189 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll189.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr3050-energy-independence-floor-20260521",
+    "policyArea": "Energy",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000299",
+    "billId": "H.R.3050",
+    "chamber": "House",
+    "voteDate": "2026-05-21",
+    "voteOutcome": "Passed (220-215)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The House narrowly passed a bill expanding oil and gas drilling permits, fast-tracking LNG export terminals, and reversing Biden-era energy regulations, with Republicans arguing it cuts energy costs.",
+    "schemaVersion": "1.1",
+    "keywords": ["energy independence", "oil and gas", "LNG", "drilling permits", "energy costs", "fossil fuels", "regulations"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.3050",
+        "billTitle": "American Energy Independence and Production Act — Expanding federal drilling permits and fast-tracking LNG export infrastructure",
+        "chamber": "House",
+        "voteOutcome": "Passed (220-215)",
+        "voteDate": "May 21, 2026",
+        "congress": "119",
+        "policyArea": "Energy"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 220,
+        "voteAgainst": 215,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000299",
+            "name": "Rep. Mike Johnson",
+            "title": "R-LA · House Speaker",
+            "party": "Republican",
+            "position": "For",
+            "quote": "American energy independence means Americans are not held hostage by OPEC, by Putin, or by supply chains we don't control. Every barrel of oil we produce here is one less barrel that funds a foreign adversary. This bill lowers gas prices at the pump and strengthens our national security simultaneously."
+          },
+          {
+            "bioguideId": "O000172",
+            "name": "Rep. Alexandria Ocasio-Cortez",
+            "title": "D-NY · House Oversight",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "The last time we had record domestic oil production, gas was still $3.50 a gallon because oil companies set global prices, not domestic production levels. This bill doesn't lower gas prices — it increases oil company profits. And it will guarantee we miss every climate target we have committed to internationally."
+          },
+          {
+            "bioguideId": "C001139",
+            "name": "Rep. Kat Cammack",
+            "title": "R-FL",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Energy poverty is a real crisis in this country. Florida families are paying $400 a month more for utilities than they were four years ago. Affordable, reliable energy is not optional — it is a fundamental necessity. This bill gets government out of the way and lets American ingenuity produce the energy we need."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.3050 passed 220-215, with no Democrats voting in favor. It streamlines federal oil and gas drilling permits, requires the Interior Department to hold quarterly offshore lease sales, and waives several environmental review requirements for LNG export terminals under construction. Critics note the EIA projects the bill would increase domestic production by 400,000 barrels/day while having minimal impact on retail gas prices, which are set by global markets.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/3050"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "What should be America's energy priority?",
+        "options": [
+          { "id": "drill-more", "label": "Increase domestic oil and gas production" },
+          { "id": "transition", "label": "Transition to renewables as fast as possible" },
+          { "id": "all-above", "label": "All of the above — all-of-the-above strategy" },
+          { "id": "efficiency", "label": "Focus on energy efficiency and conservation" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-120100-hr3050-energy-house",
+        "serialNumber": "TT-20260531-J000299-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #189 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

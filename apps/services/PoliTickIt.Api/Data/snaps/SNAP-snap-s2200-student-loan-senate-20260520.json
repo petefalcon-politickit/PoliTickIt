@@ -1,0 +1,120 @@
+{
+  "id": "snap-s2200-student-loan-senate-20260520",
+  "normRef": "NORM-20260531-130100-s2200-student-loan-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.2200 — Student Loan Relief and Accountability Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T13:01:00Z",
+  "updatedAt": "2026-05-31T13:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.2200",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2200"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #114 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s2200-student-loan-relief-accountability-20260520",
+    "policyArea": "Education",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "S000033",
+    "billId": "S.2200",
+    "chamber": "Senate",
+    "voteDate": "2026-05-20",
+    "voteOutcome": "Failed (46-53)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "A bill to cap student loan payments at 5% of discretionary income and provide automatic forgiveness after 20 years failed in the Senate, with fiscal cost concerns driving most opposition.",
+    "schemaVersion": "1.1",
+    "keywords": ["student loans", "student debt", "loan forgiveness", "income-driven repayment", "higher education", "SAVE plan"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.2200",
+        "billTitle": "Student Loan Relief and Accountability Act — Capping repayments at 5% of income and forgiving remaining debt after 20 years",
+        "chamber": "Senate",
+        "voteDate": "May 20, 2026",
+        "voteOutcome": "Failed (46-53)",
+        "congress": "119",
+        "policyArea": "Education"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 46,
+        "voteAgainst": 53,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP",
+            "party": "Independent",
+            "position": "For",
+            "quote": "45 million Americans are carrying $1.7 trillion in student debt. Teachers in this country are paying $800 a month on loans taken out to earn the degree that lets them serve our children. We are literally making it financially punishing to pursue public service. This bill says: go be a teacher, a social worker, a nurse — and we've got your back."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Judiciary",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "The student debt crisis is an economic crisis. When 35-year-olds cannot buy houses because they are still paying off degrees they earned in 2012, the entire housing market and consumer economy suffers. This is not charity — it is economic stimulus targeted at the demographic most crushed by rising costs."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "This bill tells every plumber, every electrician, every contractor who chose a trade over a four-year college: your choice was wise, but you still have to pay for the philosophy degrees of people who made a different choice. I'm against taxing tradespeople to subsidize six-figure degrees with no job market."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.2200 failed 46-53. The bill would have codified income-driven repayment at 5% of discretionary income and mandated forgiveness of remaining balances after 20 years (10 for public service workers). The CBO scored the bill at $540 billion over ten years. Seven Democrats in competitive states joined all Republicans in opposition over fiscal concerns.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/2200"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "What should Congress do about student loan debt?",
+        "options": [
+          { "id": "forgive-all", "label": "Forgive all federal student debt" },
+          { "id": "cap-repayment", "label": "Cap repayments at % of income only" },
+          { "id": "fix-costs", "label": "Fix college costs, don't forgive past debt" },
+          { "id": "nothing", "label": "Nothing — borrowers should repay what they owe" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-130100-s2200-student-loan-senate",
+        "serialNumber": "TT-20260531-S000033-001",
+        "oracleSource": "Senate.gov Roll Call Vote #114 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

@@ -51,4 +51,21 @@ export class SqliteAgencyRepository
   async deleteAgency(id: string): Promise<void> {
     return this.delete(id);
   }
+
+  /**
+   * RSP Follow Restore — sets is_following=1 for each id in followedIds
+   * and is_following=0 for all others. Used after reinstall.
+   */
+  async bulkSetFollowing(followedIds: string[]): Promise<void> {
+    if (followedIds.length === 0) {
+      await this.db.execute("UPDATE policy_areas SET is_following = 0", []);
+      return;
+    }
+    const placeholders = followedIds.map(() => "?").join(", ");
+    await this.db.execute(
+      `UPDATE policy_areas
+         SET is_following = CASE WHEN id IN (${placeholders}) THEN 1 ELSE 0 END`,
+      followedIds,
+    );
+  }
 }

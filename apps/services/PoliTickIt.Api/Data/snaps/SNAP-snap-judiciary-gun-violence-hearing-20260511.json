@@ -1,0 +1,118 @@
+{
+  "id": "snap-judiciary-gun-violence-hearing-20260511",
+  "normRef": "NORM-20260531-140300-judiciary-gun-violence-hearing",
+  "title": "Senate Committee Hearing",
+  "subtitle": "Senate Judiciary Committee — Gun Violence and Firearms Policy in America",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T14:03:00Z",
+  "updatedAt": "2026-05-31T14:03:00Z",
+  "sources": [
+    {
+      "name": "Senate Judiciary Committee — Hearing Record (May 11, 2026)",
+      "url": "https://judiciary.senate.gov/hearings"
+    },
+    {
+      "name": "CDC WISQARS Firearm Mortality Data (2026)",
+      "url": "https://www.cdc.gov/injury/wisqars"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-judiciary-gun-violence-firearms-hearing-20260511",
+    "policyArea": "Crime and Law Enforcement",
+    "insightType": "Senate Committee Hearing",
+    "representativeId": "W000802",
+    "chamber": "Senate",
+    "voteDate": "2026-05-11",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate Judiciary Committee heard expert testimony on gun violence statistics, red flag law effectiveness, and competing legislative approaches to reducing firearm deaths.",
+    "schemaVersion": "1.1",
+    "keywords": ["gun violence", "red flag laws", "Second Amendment", "firearm deaths", "background checks", "Judiciary Committee", "CDC data"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-SENATE-JUDICIARY-20260511",
+        "billTitle": "Hearing: The State of Gun Violence in America — Data, Policy, and Pathways Forward",
+        "chamber": "Senate",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 11, 2026",
+        "congress": "119",
+        "policyArea": "Crime and Law Enforcement"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Judiciary",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "The United States has 4.2 firearm deaths per 100,000 people. Canada has 2.1. Australia has 1.0. Germany has 0.9. These countries are not less free than we are. They are not less armed — they are less dead. The difference is policy, not culture. Policy choices are reversible."
+          },
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Judiciary",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Every mass shooting in the past decade — every single one — was carried out by someone who either passed a background check or obtained their weapon illegally. The answer is not to burden 330 million law-abiding Americans. The answer is mental health intervention, school security, and prosecuting existing gun laws that go unenforced."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "63% of gun deaths in America are suicides. If we actually cared about saving lives instead of political posturing, we would be talking about mental health funding and crisis hotlines — not making it harder for law-abiding people to protect their families. The data doesn't support the legislation being pushed here."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The Senate Judiciary Committee held this hearing on May 11, 2026 ahead of expected votes on both background check legislation and the school safety bill. Witnesses included a CDC epidemiologist, a survivor of the Uvalde shooting, a constitutional law scholar, and the executive director of Gun Owners of America. The hearing lasted six hours and produced no consensus but built the legislative record for subsequent floor votes.",
+        "isExpandable": true,
+        "sourceLink": "https://judiciary.senate.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "How should Congress address gun violence?",
+        "options": [
+          { "id": "background-checks", "label": "Universal background checks" },
+          { "id": "mental-health", "label": "Mental health funding and red flag laws" },
+          { "id": "enforcement", "label": "Enforce existing laws more aggressively" },
+          { "id": "no-federal", "label": "Leave it to states — no federal gun laws" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-140300-judiciary-gun-violence-hearing",
+        "serialNumber": "TT-20260531-W000802-002",
+        "oracleSource": "Senate Judiciary Committee Hearing Record (May 11, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

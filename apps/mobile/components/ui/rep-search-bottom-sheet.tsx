@@ -3,89 +3,95 @@ import { useThemeColor } from "@/hooks/use-theme-color";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useRef, useState } from "react";
 import {
-    Modal,
-    PanResponder,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Modal,
+  PanResponder,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 interface RepSearchBottomSheetProps {
   isVisible: boolean;
   onClose: () => void;
-  onApply: (filters: {
-    searchQuery: string;
-    govLevel: string;
-    selectedStates: string[];
-    followingOnly: boolean;
-  }) => void;
-  initialFilters: {
-    searchQuery: string;
-    govLevel: string;
-    selectedStates: string[];
-    followingOnly: boolean;
-  };
+  onApply: (filters: RepFilters) => void;
+  initialFilters: RepFilters;
+}
+
+export interface RepFilters {
+  searchQuery: string;
+  region: string;
+  chamber: string;
+  party: string;
+  selectedStates: string[];
+  followingOnly: boolean;
+  sortBy: "firstName" | "lastName";
 }
 
 const STATES = [
   "All",
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-  "District of Columbia",
+  "AK",
+  "AL",
+  "AR",
+  "AZ",
+  "CA",
+  "CO",
+  "CT",
+  "DC",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "IA",
+  "ID",
+  "IL",
+  "IN",
+  "KS",
+  "KY",
+  "LA",
+  "MA",
+  "MD",
+  "ME",
+  "MI",
+  "MN",
+  "MO",
+  "MS",
+  "MT",
+  "NC",
+  "ND",
+  "NE",
+  "NH",
+  "NJ",
+  "NM",
+  "NV",
+  "NY",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VA",
+  "VT",
+  "WA",
+  "WI",
+  "WV",
+  "WY",
 ];
 
-const GOV_LEVELS = ["All", "Federal", "State", "County"];
+const REGIONS = ["All", "Federal", "State", "District"] as const;
+const CHAMBERS = ["All", "Senate", "House"] as const;
+const PARTIES = ["All", "Republican", "Democratic", "Independent"] as const;
+const SORT_OPTIONS: { label: string; value: RepFilters["sortBy"] }[] = [
+  { label: "First Name", value: "firstName" },
+  { label: "Last Name", value: "lastName" },
+];
 
 export const RepSearchBottomSheet: React.FC<RepSearchBottomSheetProps> = ({
   isVisible,
@@ -94,12 +100,17 @@ export const RepSearchBottomSheet: React.FC<RepSearchBottomSheetProps> = ({
   initialFilters,
 }) => {
   const [searchQuery, setSearchQuery] = useState(initialFilters.searchQuery);
-  const [govLevel, setGovLevel] = useState(initialFilters.govLevel);
+  const [region, setRegion] = useState(initialFilters.region);
+  const [chamber, setChamber] = useState(initialFilters.chamber);
+  const [party, setParty] = useState(initialFilters.party);
   const [selectedStates, setSelectedStates] = useState<string[]>(
     initialFilters.selectedStates,
   );
   const [followingOnly, setFollowingOnly] = useState(
     initialFilters.followingOnly,
+  );
+  const [sortBy, setSortBy] = useState<RepFilters["sortBy"]>(
+    initialFilters.sortBy,
   );
 
   const overlayColor = useThemeColor({}, "overlay");
@@ -115,15 +126,26 @@ export const RepSearchBottomSheet: React.FC<RepSearchBottomSheetProps> = ({
   ).current;
 
   const handleApply = () => {
-    onApply({ searchQuery, govLevel, selectedStates, followingOnly });
+    onApply({
+      searchQuery,
+      region,
+      chamber,
+      party,
+      selectedStates,
+      followingOnly,
+      sortBy,
+    });
     onClose();
   };
 
   const handleReset = () => {
     setSearchQuery("");
-    setGovLevel("All");
+    setRegion("All");
+    setChamber("All");
+    setParty("All");
     setSelectedStates(["All"]);
     setFollowingOnly(false);
+    setSortBy("firstName");
   };
 
   const toggleState = (st: string) => {
@@ -191,7 +213,7 @@ export const RepSearchBottomSheet: React.FC<RepSearchBottomSheetProps> = ({
               </View>
             </View>
 
-            {/* Following Toggle */}
+            {/* Watchlist */}
             <View style={styles.section}>
               <Text style={styles.sectionLabel}>Watchlist</Text>
               <View style={styles.chipContainer}>
@@ -224,33 +246,102 @@ export const RepSearchBottomSheet: React.FC<RepSearchBottomSheetProps> = ({
               </View>
             </View>
 
-            {/* Gov Level */}
+            {/* Level */}
             <View style={styles.section}>
-              <Text style={styles.sectionLabel}>Government Branch</Text>
+              <Text style={styles.sectionLabel}>Level</Text>
               <View style={styles.chipContainer}>
-                {GOV_LEVELS.map((level) => (
+                {REGIONS.map((r) => (
                   <TouchableOpacity
-                    key={level}
-                    onPress={() => setGovLevel(level)}
-                    style={[
-                      styles.chip,
-                      govLevel === level && styles.activeChip,
-                    ]}
+                    key={r}
+                    onPress={() => setRegion(r)}
+                    style={[styles.chip, region === r && styles.activeChip]}
                   >
                     <Text
                       style={[
                         styles.chipText,
-                        govLevel === level && styles.activeChipText,
+                        region === r && styles.activeChipText,
                       ]}
                     >
-                      {level}
+                      {r === "All" ? "All Levels" : r}
                     </Text>
                   </TouchableOpacity>
                 ))}
               </View>
             </View>
 
-            {/* States */}
+            {/* Chamber */}
+            <View style={styles.section}>
+              <Text style={styles.sectionLabel}>Chamber</Text>
+              <View style={styles.chipContainer}>
+                {CHAMBERS.map((c) => (
+                  <TouchableOpacity
+                    key={c}
+                    onPress={() => setChamber(c)}
+                    style={[styles.chip, chamber === c && styles.activeChip]}
+                  >
+                    <Text
+                      style={[
+                        styles.chipText,
+                        chamber === c && styles.activeChipText,
+                      ]}
+                    >
+                      {c === "All" ? "All Chambers" : c}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+
+            {/* Party */}
+            <View style={styles.section}>
+              <Text style={styles.sectionLabel}>Party</Text>
+              <View style={styles.chipContainer}>
+                {PARTIES.map((p) => (
+                  <TouchableOpacity
+                    key={p}
+                    onPress={() => setParty(p)}
+                    style={[styles.chip, party === p && styles.activeChip]}
+                  >
+                    <Text
+                      style={[
+                        styles.chipText,
+                        party === p && styles.activeChipText,
+                      ]}
+                    >
+                      {p === "All" ? "All Parties" : p}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+
+            {/* Sort By */}
+            <View style={styles.section}>
+              <Text style={styles.sectionLabel}>Sort By</Text>
+              <View style={styles.chipContainer}>
+                {SORT_OPTIONS.map((opt) => (
+                  <TouchableOpacity
+                    key={opt.value}
+                    onPress={() => setSortBy(opt.value)}
+                    style={[
+                      styles.chip,
+                      sortBy === opt.value && styles.activeChip,
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.chipText,
+                        sortBy === opt.value && styles.activeChipText,
+                      ]}
+                    >
+                      {opt.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+
+            {/* State / Territory */}
             <View style={styles.section}>
               <Text style={styles.sectionLabel}>State / Territory</Text>
               <View style={styles.chipContainer}>

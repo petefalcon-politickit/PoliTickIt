@@ -1,0 +1,118 @@
+{
+  "id": "snap-ways-means-tax-hearing-20260507",
+  "normRef": "NORM-20260531-100300-ways-means-tax-hearing",
+  "title": "House Committee Hearing",
+  "subtitle": "House Ways & Means Committee — Expiring Tax Provisions and Fiscal Impact",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T10:03:00Z",
+  "updatedAt": "2026-05-31T10:03:00Z",
+  "sources": [
+    {
+      "name": "House Ways and Means Committee — Hearing Record (May 7, 2026)",
+      "url": "https://waysandmeans.house.gov/hearings"
+    },
+    {
+      "name": "Congressional Budget Office — TCJA Extension Fiscal Analysis (2026)",
+      "url": "https://www.cbo.gov/publication"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-ways-means-tax-hearing-20260507",
+    "policyArea": "Taxation",
+    "insightType": "House Committee Hearing",
+    "representativeId": "J000289",
+    "chamber": "House",
+    "voteDate": "2026-05-07",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "House Ways & Means Committee examined what happens when 2017 Trump tax cuts expire in 2025 and heard testimony on their fiscal and economic impact.",
+    "schemaVersion": "1.1",
+    "keywords": ["TCJA", "tax cuts", "expiring provisions", "deficit", "tax policy", "2025 cliff"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-WAYS-MEANS-20260507",
+        "billTitle": "Hearing: The Coming Tax Cliff — Expiring TCJA Provisions and the Path Forward",
+        "chamber": "House",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 7, 2026",
+        "congress": "119",
+        "policyArea": "Taxation"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000289",
+            "name": "Rep. Jim Jordan",
+            "title": "R-OH · House Judiciary Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "If we do nothing, 90% of American taxpayers will see a tax increase in 2026. The standard deduction gets cut in half. The child tax credit drops from $2,000 to $1,000. This is not a tax debate — this is a family budget emergency that Congress created and Congress must fix."
+          },
+          {
+            "bioguideId": "O000172",
+            "name": "Rep. Alexandria Ocasio-Cortez",
+            "title": "D-NY · House Oversight",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "Extending the TCJA fully would add $3.7 trillion to the national debt over ten years. We should absolutely protect the middle-class provisions — but the top-bracket cuts that primarily benefit millionaires and billionaires should expire as scheduled. We don't need to borrow from our children to cut taxes for people who don't need it."
+          },
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Democrats have been consistent: protect working families from a tax increase. Extend the middle-class provisions. Let the provisions that benefit only the ultra-wealthy expire. A deal is available if Republicans are willing to negotiate instead of demanding a full extension that benefits their donors."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The House Ways and Means Committee heard testimony from the CBO Director, Treasury Department officials, and outside economists on May 7, 2026 regarding the expiration of 23 TCJA provisions. If Congress does not act, the standard deduction reverts from $14,600 to $7,550, the top marginal rate increases from 37% to 39.6%, and the estate tax exemption drops from $13.6M to $6.8M.",
+        "isExpandable": true,
+        "sourceLink": "https://waysandmeans.house.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Which TCJA provisions should Congress extend?",
+        "options": [
+          { "id": "all", "label": "All of them — no tax increases" },
+          { "id": "middle-class", "label": "Middle-class provisions only" },
+          { "id": "none", "label": "Let them all expire to reduce the deficit" },
+          { "id": "new-bill", "label": "Start fresh with new tax reform" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-100300-ways-means-tax-hearing",
+        "serialNumber": "TT-20260531-J000289-002",
+        "oracleSource": "House Ways and Means Committee Hearing Record (May 7, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

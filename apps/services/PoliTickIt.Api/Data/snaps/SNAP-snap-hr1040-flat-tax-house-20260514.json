@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr1040-flat-tax-house-20260514",
+  "normRef": "NORM-20260531-100000-hr1040-flat-tax-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.1040 — Flat Tax Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T10:00:00Z",
+  "updatedAt": "2026-05-31T10:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.1040",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/1040"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #183 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll183.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr1040-flat-tax-floor-debate-20260514",
+    "policyArea": "Taxation",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000289",
+    "billId": "H.R.1040",
+    "chamber": "House",
+    "voteDate": "2026-05-14",
+    "voteOutcome": "Failed (187-244)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Congress voted on a proposal to replace the current income tax system with a single flat rate of 17% for all Americans, eliminating most deductions.",
+    "schemaVersion": "1.1",
+    "keywords": ["flat tax", "tax reform", "IRS", "income tax", "fiscal policy", "deductions"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.1040",
+        "billTitle": "Flat Tax Act — Replacing the federal income tax with a 17% flat rate and eliminating the IRS as currently structured",
+        "chamber": "House",
+        "voteOutcome": "Failed (187-244)",
+        "voteDate": "May 14, 2026",
+        "congress": "119",
+        "policyArea": "Taxation"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 187,
+        "voteAgainst": 244,
+        "voteAbstain": 4,
+        "speakers": [
+          {
+            "bioguideId": "J000289",
+            "name": "Rep. Jim Jordan",
+            "title": "R-OH · House Judiciary Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "The current tax code is 77,000 pages long. Nobody understands it. The IRS uses it as a weapon against political enemies. A flat tax of 17% lets every American file on a postcard and eliminates an agency that has become a tool of political persecution."
+          },
+          {
+            "bioguideId": "O000172",
+            "name": "Rep. Alexandria Ocasio-Cortez",
+            "title": "D-NY · House Oversight",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "A flat tax is a massive tax cut for the rich and a tax increase for everyone else. A billionaire paying 17% and a teacher paying 17% is not fairness — it is math that benefits the billionaire. This bill would blow a $3 trillion hole in the deficit to give Jeff Bezos a tax break."
+          },
+          {
+            "bioguideId": "G000596",
+            "name": "Rep. Marjorie Taylor Greene",
+            "title": "R-GA · House Oversight",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Americans spend 6.5 billion hours a year complying with the tax code. That is time Americans could spend with their families, building businesses, and creating jobs. Simplification is not radical — it is long overdue."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.1040 failed 187-244. The bill would have replaced all federal individual income tax brackets with a single 17% rate and eliminated most deductions except for a generous personal exemption. The CBO estimated it would reduce federal revenue by $2.9 trillion over ten years. Fifty-seven Republicans joined all Democrats in opposition, citing deficit concerns.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/1040"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US replace its tax code with a flat tax?",
+        "options": [
+          { "id": "yes-flat", "label": "Yes — simplicity and fairness" },
+          { "id": "yes-simpler", "label": "Simplify but keep some progressivity" },
+          { "id": "no-regressive", "label": "No — it benefits the wealthy" },
+          { "id": "no-deficit", "label": "No — the deficit impact is too large" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-100000-hr1040-flat-tax-house",
+        "serialNumber": "TT-20260531-J000289-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #183 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

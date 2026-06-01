@@ -5,22 +5,26 @@ import { MultiToggle } from "@/components/ui/multi-toggle";
 import { currentUser } from "@/constants/mockData";
 import { Colors, GlobalStyles, Spacing, Typography } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
+import { useAuth } from "@/contexts/auth-context";
 import { useServices } from "@/contexts/service-provider";
 import { VerificationTier } from "@/services/interfaces/IVerificationService";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    FlatList,
-    StyleSheet,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function ProfileScreen() {
   const { contributionCredits, dossierStats } = useActivity();
   const { omniFeedProvider, verificationService } = useServices();
+  const { deleteAccount } = useAuth();
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState("dossier");
@@ -28,6 +32,9 @@ export default function ProfileScreen() {
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [historyEndReached, setHistoryEndReached] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState<any>(null);
+  const [deletePassword, setDeletePassword] = useState("");
+  const [showDeleteInput, setShowDeleteInput] = useState(false);
+  const [deletingAccount, setDeletingAccount] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -236,6 +243,91 @@ export default function ProfileScreen() {
               color={Colors.light.textPlaceholder}
             />
           </View>
+        </View>
+
+        {/* Danger Zone */}
+        <View style={styles.dangerZone}>
+          <ThemedText style={styles.dangerZoneTitle}>DANGER ZONE</ThemedText>
+          {!showDeleteInput ? (
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => {
+                Alert.alert(
+                  "Delete Account",
+                  "This will permanently delete your account and all your data. This cannot be undone.",
+                  [
+                    { text: "Cancel", style: "cancel" },
+                    {
+                      text: "Delete",
+                      style: "destructive",
+                      onPress: () => setShowDeleteInput(true),
+                    },
+                  ],
+                );
+              }}
+            >
+              <Ionicons name="trash-outline" size={16} color="#EF4444" />
+              <ThemedText style={styles.deleteButtonText}>
+                DELETE ACCOUNT
+              </ThemedText>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.deleteConfirmSection}>
+              <ThemedText style={styles.deleteConfirmLabel}>
+                Enter your password to confirm
+              </ThemedText>
+              <TextInput
+                style={styles.deletePasswordInput}
+                placeholder="Password"
+                placeholderTextColor={Colors.light.textPlaceholder}
+                secureTextEntry
+                value={deletePassword}
+                onChangeText={setDeletePassword}
+                autoFocus
+              />
+              <View style={styles.deleteConfirmRow}>
+                <TouchableOpacity
+                  style={styles.deleteCancelBtn}
+                  onPress={() => {
+                    setShowDeleteInput(false);
+                    setDeletePassword("");
+                  }}
+                >
+                  <ThemedText style={styles.deleteCancelText}>
+                    Cancel
+                  </ThemedText>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.deleteConfirmBtn,
+                    (!deletePassword || deletingAccount) && { opacity: 0.5 },
+                  ]}
+                  disabled={!deletePassword || deletingAccount}
+                  onPress={async () => {
+                    setDeletingAccount(true);
+                    try {
+                      await deleteAccount(deletePassword);
+                    } catch (err: any) {
+                      Alert.alert(
+                        "Error",
+                        err.message ?? "Could not delete account.",
+                      );
+                      setDeletingAccount(false);
+                      setDeletePassword("");
+                    }
+                  }}
+                >
+                  {deletingAccount ? (
+                    <ActivityIndicator size="small" color="#FFF" />
+                  ) : (
+                    <ThemedText style={styles.deleteConfirmBtnText}>
+                      DELETE
+                    </ThemedText>
+                  )}
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
         </View>
       </View>
     );
@@ -482,5 +574,77 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontWeight: "800",
     color: "#16A34A",
+  },
+  dangerZone: {
+    marginTop: Spacing.md,
+    borderWidth: 1,
+    borderColor: "#FECACA",
+    borderRadius: 8,
+    padding: Spacing.md,
+    backgroundColor: "#FFF5F5",
+    gap: Spacing.sm,
+  },
+  dangerZoneTitle: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#EF4444",
+    letterSpacing: 1,
+  },
+  deleteButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
+    paddingVertical: Spacing.sm,
+  },
+  deleteButtonText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#EF4444",
+    letterSpacing: 0.5,
+  },
+  deleteConfirmSection: {
+    gap: Spacing.sm,
+  },
+  deleteConfirmLabel: {
+    fontSize: 13,
+    color: Colors.light.textSecondary,
+  },
+  deletePasswordInput: {
+    borderWidth: 1,
+    borderColor: "#FECACA",
+    borderRadius: 6,
+    padding: 12,
+    fontSize: 14,
+    backgroundColor: "#FFFFFF",
+  },
+  deleteConfirmRow: {
+    flexDirection: "row",
+    gap: Spacing.sm,
+  },
+  deleteCancelBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
+    alignItems: "center",
+  },
+  deleteCancelText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: Colors.light.textSecondary,
+  },
+  deleteConfirmBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 6,
+    backgroundColor: "#EF4444",
+    alignItems: "center",
+  },
+  deleteConfirmBtnText: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: "#FFFFFF",
+    letterSpacing: 1,
   },
 });

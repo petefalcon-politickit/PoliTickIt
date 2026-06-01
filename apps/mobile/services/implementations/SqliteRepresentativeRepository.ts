@@ -16,8 +16,10 @@ export class SqliteRepresentativeRepository
           const meta = row.metadata_json ? JSON.parse(row.metadata_json) : {};
           return {
             id: row.id,
+            bioguideId: row.id,
             name: row.name,
-            position: row.position,
+            chamber: row.chamber ?? row.position ?? undefined,
+            position: row.position ?? row.chamber ?? undefined,
             party: row.party,
             state: row.state,
             district: row.district,
@@ -31,6 +33,7 @@ export class SqliteRepresentativeRepository
           const {
             id,
             name,
+            chamber,
             position,
             party,
             state,
@@ -38,16 +41,21 @@ export class SqliteRepresentativeRepository
             profileImage,
             biography,
             isFollowing,
+            bioguideId,
+            imageUrl,
             ...meta
           } = rep;
+          const effectiveChamber = chamber ?? position ?? null;
           return {
             query: `INSERT OR REPLACE INTO representatives (
-              id, name, position, party, state, district, profile_image, biography, is_following, metadata_json
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              id, name, position, chamber, party, state, district,
+              profile_image, biography, is_following, metadata_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             params: [
               id,
               name,
-              position,
+              effectiveChamber,
+              effectiveChamber,
               party,
               state,
               district || null,
@@ -76,29 +84,34 @@ export class SqliteRepresentativeRepository
 
   /**
    * RSP Implementation: Sovereign Upsert
-   * Updates core representative data from backend but PRESERVES local 'is_following' state.
+   * Updates core representative data from the backend but PRESERVES local `is_following` state.
    */
   async upsertSovereign(rep: Representative): Promise<void> {
     const {
       id,
       name,
+      chamber,
       position,
       party,
       state,
       district,
       profileImage,
       biography,
-      isFollowing, // ignored for update
+      isFollowing, // intentionally NOT written — sovereignty rule
+      bioguideId,
+      imageUrl,
       ...meta
     } = rep;
+    const effectiveChamber = chamber ?? position ?? null;
 
     await this.db.execute(
       `INSERT INTO representatives (
-        id, name, position, party, state, district, profile_image, biography, metadata_json
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        id, name, position, chamber, party, state, district, profile_image, biography, metadata_json
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(id) DO UPDATE SET
         name = excluded.name,
         position = excluded.position,
+        chamber = excluded.chamber,
         party = excluded.party,
         state = excluded.state,
         district = excluded.district,
@@ -108,7 +121,8 @@ export class SqliteRepresentativeRepository
       [
         id,
         name,
-        position,
+        effectiveChamber,
+        effectiveChamber,
         party,
         state,
         district || null,
@@ -124,5 +138,27 @@ export class SqliteRepresentativeRepository
       "UPDATE representatives SET is_following = ? WHERE id = ?",
       [isFollowing ? 1 : 0, id],
     );
+  }
+
+  /**
+   * RSP Follow Restore — sets is_following=1 for each id in `followedIds` and
+   * is_following=0 for all others. Used after reinstall to restore follow state
+   * from the user's Cosmos-backed follow list.
+   */
+  async bulkSetFollowing(followedIds: string[]): Promise<void> {
+    if (followedIds.length === 0) {
+      await this.db.execute("UPDATE representatives SET is_following = 0", []);
+      return;
+    }
+    const placeholders = followedIds.map(() => "?").join(", ");
+    await this.db.execute(
+      `UPDATE representatives
+         SET is_following = CASE WHEN id IN (${placeholders}) THEN 1 ELSE 0 END`,
+      followedIds,
+    );
+  }
+
+  async syncFollowingFromBackend(): Promise<void> {
+    // No-op on the SQLite repo: ApiSyncService coordinates the full restore flow.
   }
 }

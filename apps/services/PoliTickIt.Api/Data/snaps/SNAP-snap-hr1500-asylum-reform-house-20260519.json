@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr1500-asylum-reform-house-20260519",
+  "normRef": "NORM-20260531-110400-hr1500-asylum-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.1500 — Asylum Process Reform and Fairness Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T11:04:00Z",
+  "updatedAt": "2026-05-31T11:04:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.1500",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/1500"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #187 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll187.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr1500-asylum-reform-floor-20260519",
+    "policyArea": "Immigration",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000294",
+    "billId": "H.R.1500",
+    "chamber": "House",
+    "voteDate": "2026-05-19",
+    "voteOutcome": "Passed (226-209)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Congress voted on a bill that would require asylum applicants to apply at official ports of entry only and cap annual asylum grants at 50,000, down from current unlimited processing.",
+    "schemaVersion": "1.1",
+    "keywords": ["asylum", "immigration reform", "ports of entry", "refugee", "USCIS", "immigration court"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.1500",
+        "billTitle": "Asylum Process Reform and Fairness Act — Requiring port-of-entry applications and capping asylum grants at 50,000 annually",
+        "chamber": "House",
+        "voteOutcome": "Passed (226-209)",
+        "voteDate": "May 19, 2026",
+        "congress": "119",
+        "policyArea": "Immigration"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 226,
+        "voteAgainst": 209,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000299",
+            "name": "Rep. Mike Johnson",
+            "title": "R-LA · House Speaker",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Our immigration courts have a backlog of 3.2 million cases. The average case takes seven years to resolve. This bill restores order by requiring people to come to a legal port of entry — not to cross illegally and then claim asylum as a loophole to stay. It is not anti-immigrant. It is pro-rule-of-law."
+          },
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "Federal law, passed by this Congress, says a person may apply for asylum regardless of how they entered the country. This bill would require Congress to violate its own statute and the international treaties the United States signed. You cannot reform the asylum system by making it illegal to seek asylum."
+          },
+          {
+            "bioguideId": "C001136",
+            "name": "Rep. Jasmine Crockett",
+            "title": "D-TX · House Judiciary",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "I represent a border district. I talk to asylum seekers. Many of them have documentation proving they face death if returned. A 50,000-person cap does not care about the quality of your claim — it just slams the door when a quota is met. We are talking about human lives, not spreadsheets."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.1500 passed the House 226-209 along near-party-line vote. The bill requires all asylum applications to be filed at official ports of entry only, creates an annual cap of 50,000 asylum grants, and mandates completion of credible fear screenings within 10 days. Constitutional law scholars have flagged potential conflicts with the 1980 Refugee Act, which contains no cap on asylum grants.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/1500"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should there be a cap on annual asylum grants?",
+        "options": [
+          { "id": "yes-50k", "label": "Yes — 50,000 is reasonable" },
+          { "id": "yes-higher", "label": "Cap it, but higher than 50,000" },
+          { "id": "no-cap", "label": "No — claims should be judged on merit" },
+          { "id": "ports-only", "label": "Ports of entry only, no cap needed" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-110400-hr1500-asylum-house",
+        "serialNumber": "TT-20260531-J000294-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #187 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

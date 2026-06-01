@@ -314,6 +314,30 @@ export class ApiAuthService {
     }
   }
 
+  async deleteAccount(password: string): Promise<void> {
+    if (!this.accessToken) throw new Error("Not authenticated.");
+    const res = await fetch(`${BASE_URL}/account`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+      body: JSON.stringify({ password }),
+    });
+    if (res.status === 401) {
+      // Try refresh once
+      const refreshed = await this.refreshSession();
+      if (!refreshed) throw new Error("Session expired. Please log in again.");
+      return this.deleteAccount(password);
+    }
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error ?? "Could not delete account.");
+    }
+    // Wipe local session
+    await this.logout();
+  }
+
   async getRepresentatives(
     state: string,
     district: string,

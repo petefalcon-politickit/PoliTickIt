@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr5500-medicaid-work-req-house-20260522",
+  "normRef": "NORM-20260531-090200-hr5500-medicaid-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.5500 — Medicaid Work Requirements and Integrity Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T09:02:00Z",
+  "updatedAt": "2026-05-31T09:02:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.5500",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/5500"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #208 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll208.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr5500-medicaid-work-req-floor-20260522",
+    "policyArea": "Health",
+    "insightType": "House Floor Vote",
+    "representativeId": "J000299",
+    "billId": "H.R.5500",
+    "chamber": "House",
+    "voteDate": "2026-05-22",
+    "voteOutcome": "Passed (221-214)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Congress voted to require able-bodied Medicaid recipients to work, volunteer, or participate in job training to keep their health coverage.",
+    "schemaVersion": "1.1",
+    "keywords": ["Medicaid", "work requirements", "healthcare", "welfare reform", "fiscal"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.5500",
+        "billTitle": "Medicaid Work Requirements and Integrity Act — Conditioning Medicaid eligibility on work, education, or community service",
+        "chamber": "House",
+        "voteOutcome": "Passed (221-214)",
+        "voteDate": "May 22, 2026",
+        "congress": "119",
+        "policyArea": "Health"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 221,
+        "voteAgainst": 214,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "J000299",
+            "name": "Rep. Mike Johnson",
+            "title": "R-LA · Speaker of the House",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Medicaid was designed as a safety net, not a permanent lifestyle. We are asking one thing of able-bodied adults: participate in your community, go to school, or work. This restores the program's integrity and ensures resources go to those who truly cannot help themselves."
+          },
+          {
+            "bioguideId": "J000294",
+            "name": "Rep. Hakeem Jeffries",
+            "title": "D-NY · House Minority Leader",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "This bill will strip healthcare from millions of working Americans who are between jobs, caring for a sick family member, or living in communities where jobs simply do not exist. Republicans are not saving Medicaid — they are gutting it while calling it reform."
+          },
+          {
+            "bioguideId": "C001136",
+            "name": "Rep. Jasmine Crockett",
+            "title": "D-TX · House Oversight",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "The data is unambiguous: work requirements do not increase employment — they create paperwork barriers that cause people to lose coverage while their employment status doesn't change. Arkansas tried this. Coverage dropped 18,000 people. Jobs didn't increase. This is cruelty dressed as policy."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.5500 passed 221-214 strictly along party lines. It requires Medicaid recipients aged 19-55 who are not pregnant, disabled, or primary caregivers to document at least 80 hours per month of work, education, job training, or community service. CBO estimates 4.5 million people could lose coverage within three years of implementation.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/5500"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Medicaid require able-bodied adults to work or volunteer?",
+        "options": [
+          { "id": "yes-responsibility", "label": "Yes — encourage self-sufficiency" },
+          { "id": "yes-exceptions", "label": "Yes, with strong hardship exemptions" },
+          { "id": "no-access", "label": "No — healthcare is a right, not a reward" },
+          { "id": "no-practical", "label": "No — the data shows it doesn't work" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-090200-hr5500-medicaid-house",
+        "serialNumber": "TT-20260531-J000299-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #208 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

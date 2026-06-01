@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import container from "../services/container";
+import { ApiInterestRepository } from "../services/implementations/ApiInterestRepository";
+import { ApiRepresentativeRepository } from "../services/implementations/ApiRepresentativeRepository";
 import { IAgencyRepository } from "../services/interfaces/IAgencyRepository";
 import { ICivicIntelligenceService } from "../services/interfaces/ICivicIntelligenceService";
 import { IFeedEnricher } from "../services/interfaces/IFeedEnricher";
@@ -29,6 +31,8 @@ interface ServiceContextType {
   hapticService: IHapticService;
   feedEnricher: IFeedEnricher;
   apiSyncService: any;
+  apiRepresentativeRepository: ApiRepresentativeRepository;
+  apiInterestRepository: ApiInterestRepository;
 }
 
 const ServiceContext = createContext<ServiceContextType | undefined>(undefined);
@@ -55,6 +59,10 @@ export const ServiceProvider: React.FC<{ children: React.ReactNode }> = ({
     hapticService: container.resolve("hapticService"),
     feedEnricher: container.resolve("feedEnricher"),
     apiSyncService: container.resolve("apiSyncService"),
+    apiRepresentativeRepository: container.resolve(
+      "apiRepresentativeRepository",
+    ),
+    apiInterestRepository: container.resolve("apiInterestRepository"),
   };
 
   useEffect(() => {

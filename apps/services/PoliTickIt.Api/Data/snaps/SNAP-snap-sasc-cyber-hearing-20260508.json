@@ -1,0 +1,118 @@
+{
+  "id": "snap-sasc-cyber-hearing-20260508",
+  "normRef": "NORM-20260531-080300-sasc-cyber-hearing",
+  "title": "Senate Committee Hearing",
+  "subtitle": "Senate Armed Services Committee — Cyber Warfare & Critical Infrastructure",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T08:03:00Z",
+  "updatedAt": "2026-05-31T08:03:00Z",
+  "sources": [
+    {
+      "name": "Senate Armed Services Committee — Hearing Record (May 8, 2026)",
+      "url": "https://www.armed-services.senate.gov/hearings"
+    },
+    {
+      "name": "CISA — Cyber Threat Landscape Report 2026",
+      "url": "https://www.cisa.gov/resources-tools/reports"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-sasc-cyber-hearing-20260508",
+    "policyArea": "Armed Forces and National Security",
+    "insightType": "Senate Committee Hearing",
+    "representativeId": "W000437",
+    "chamber": "Senate",
+    "voteDate": "2026-05-08",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Senate Armed Services Committee heard testimony from military and intelligence officials about the growing threat of cyberattacks on US critical infrastructure.",
+    "schemaVersion": "1.1",
+    "keywords": ["cybersecurity", "hearing", "CISA", "China", "Russia", "critical infrastructure", "testimony"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-SASC-20260508",
+        "billTitle": "Hearing: State of US Cyber Defenses — Threats to Critical Infrastructure",
+        "chamber": "Senate",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 8, 2026",
+        "congress": "119",
+        "policyArea": "Armed Forces and National Security"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "W000437",
+            "name": "Sen. Roger Wicker",
+            "title": "R-MS · Committee Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "The witnesses today have confirmed what we feared: our adversaries have already pre-positioned malware inside US power grids. This is not preparation — it is an act of aggression in slow motion. We must treat it accordingly."
+          },
+          {
+            "bioguideId": "R000122",
+            "name": "Sen. Jack Reed",
+            "title": "D-RI · Ranking Member",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "I want to thank the witnesses for their candid testimony. The classified briefing this morning was alarming. What I can say publicly is that the threat is real, it is here, and it is growing. We owe the American people a serious legislative response."
+          },
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce",
+            "party": "Republican",
+            "position": "For",
+            "quote": "China's cyber capabilities have advanced further than most Americans realize. We need to stop treating this as an IT problem and start treating it as a national security emergency. The private sector cannot defend America alone against a state actor with unlimited resources."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The Senate Armed Services Committee convened on May 8, 2026 to receive testimony from the Director of CISA, the Commander of US Cyber Command, and the Director of National Intelligence. Classified testimony in closed session preceded the open hearing. The hearing was called in response to intelligence reports of Chinese state-sponsored malware discovered embedded in US electrical grid control systems.",
+        "isExpandable": true,
+        "sourceLink": "https://www.armed-services.senate.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "How concerned are you about cyberattacks on US infrastructure?",
+        "options": [
+          { "id": "very-concerned", "label": "Very — it's an existential threat" },
+          { "id": "concerned", "label": "Concerned but manageable" },
+          { "id": "overstated", "label": "The threat is overstated" },
+          { "id": "uninformed", "label": "I need to learn more" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-080300-sasc-cyber-hearing",
+        "serialNumber": "TT-20260531-W000437-003",
+        "oracleSource": "Senate Armed Services Committee Hearing Record (May 8, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "snap-energy-committee-offshore-hearing-20260512",
+  "normRef": "NORM-20260531-120300-energy-committee-offshore-hearing",
+  "title": "Senate Committee Hearing",
+  "subtitle": "Senate Energy Committee — Offshore Drilling Safety and Revenue Sharing",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T12:03:00Z",
+  "updatedAt": "2026-05-31T12:03:00Z",
+  "sources": [
+    {
+      "name": "Senate Energy and Natural Resources Committee — Hearing Record (May 12, 2026)",
+      "url": "https://energy.senate.gov/hearings"
+    },
+    {
+      "name": "Bureau of Safety and Environmental Enforcement (BSEE) Report (2026)",
+      "url": "https://www.bsee.gov/newsroom/latest-news"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-energy-committee-offshore-drilling-hearing-20260512",
+    "policyArea": "Energy",
+    "insightType": "Senate Committee Hearing",
+    "representativeId": "C001098",
+    "chamber": "Senate",
+    "voteDate": "2026-05-12",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate Energy Committee examined offshore drilling safety post-Deepwater Horizon and explored expanded Gulf and Atlantic drilling revenue sharing with coastal states.",
+    "schemaVersion": "1.1",
+    "keywords": ["offshore drilling", "Gulf of Mexico", "revenue sharing", "BSEE", "energy safety", "Deepwater Horizon", "coastal states"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "HEARING-ENERGY-COMMITTEE-20260512",
+        "billTitle": "Hearing: Offshore Energy Safety, Revenue Sharing, and Expanded Outer Continental Shelf Development",
+        "chamber": "Senate",
+        "voteOutcome": "Informational Hearing",
+        "voteDate": "May 12, 2026",
+        "congress": "119",
+        "policyArea": "Energy"
+      }
+    },
+    {
+      "id": "testimony",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 0,
+        "voteAgainst": 0,
+        "voteAbstain": 0,
+        "speakers": [
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce",
+            "party": "Republican",
+            "position": "For",
+            "quote": "The Gulf of Mexico produces 15% of American oil and gas. Revenue from federal offshore leases funds everything from national parks to schools. Expanding that footprint to the Atlantic and Pacific — where we have not drilled in decades — would generate hundreds of billions in new federal revenue without raising taxes on a single American."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Environment",
+            "party": "Democrat",
+            "position": "Against",
+            "quote": "I represent Rhode Island. My constituents fish those Atlantic waters. They run tourism businesses. The Deepwater Horizon spill caused $65 billion in economic damage. There is no revenue sharing arrangement worth enough to compensate a fishing community destroyed by a blowout. Some resources are not for sale."
+          },
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate HELP",
+            "party": "Independent",
+            "position": "Against",
+            "quote": "We are literally discussing how to extract more of the resource that is causing wildfires, floods, and economic devastation while the IPCC says we have eight years to change course. The right hearing would be how fast we can transition to the clean energy that already costs less per kilowatt-hour than fossil fuels."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hearing-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About This Hearing",
+        "text": "The Senate Energy and Natural Resources Committee held a four-hour hearing on May 12, 2026 examining the state of offshore drilling safety regulations, BSEE enforcement capacity, and the economic case for expanded revenue sharing with Gulf Coast states. The hearing was preparatory for H.R.3050 and companion Senate legislation to expand OCS drilling.",
+        "isExpandable": true,
+        "sourceLink": "https://energy.senate.gov/hearings"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should the US expand offshore oil drilling?",
+        "options": [
+          { "id": "yes-atlantic", "label": "Yes — including new Atlantic areas" },
+          { "id": "yes-gulf", "label": "Yes, but only in existing Gulf areas" },
+          { "id": "no-risk", "label": "No — environmental risk is too high" },
+          { "id": "no-transition", "label": "No — invest that capital in renewables instead" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-120300-energy-committee-offshore-hearing",
+        "serialNumber": "TT-20260531-C001098-003",
+        "oracleSource": "Senate Energy and Natural Resources Committee Hearing Record (May 12, 2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

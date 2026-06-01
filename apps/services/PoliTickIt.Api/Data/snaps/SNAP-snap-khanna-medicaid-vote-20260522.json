@@ -1,0 +1,104 @@
+{
+  "id": "snap-khanna-medicaid-vote-20260522",
+  "normRef": "NORM-20260531-090400-khanna-medicaid-vote",
+  "title": "Representative Vote",
+  "subtitle": "H.R.5500 — Rep. Ro Khanna · Against",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T09:04:00Z",
+  "updatedAt": "2026-05-31T09:04:00Z",
+  "sources": [
+    {
+      "name": "Rep. Khanna Official Statement",
+      "url": "https://khanna.house.gov/media/press-releases"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #208 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll208.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "rep-khanna-hr5500-against-vote-20260522",
+    "policyArea": "Health",
+    "insightType": "House Floor Vote",
+    "representativeId": "K000389",
+    "billId": "H.R.5500",
+    "chamber": "House",
+    "voteDate": "2026-05-22",
+    "voteOutcome": "Passed (221-214)",
+    "congress": "119",
+    "applicationTier": "Tier2",
+    "headerElementId": "rep-header",
+    "laymanSummary": "Rep. Ro Khanna voted against the Medicaid work requirements bill and issued a detailed statement citing economic research showing work requirements do not improve employment outcomes.",
+    "schemaVersion": "1.1",
+    "keywords": ["Medicaid", "work requirements", "healthcare", "Ro Khanna", "Silicon Valley", "economic data"]
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "K000389",
+        "name": "Ro Khanna",
+        "party": "Democrat",
+        "location": "California",
+        "position": "Representative · CA-17",
+        "imgUri": "https://unitedstates.github.io/images/congress/225x275/K000389.jpg",
+        "tags": ["House Armed Services", "House Oversight"]
+      }
+    },
+    {
+      "id": "floor-statement",
+      "type": "Narrative.Congressional.Statement",
+      "data": {
+        "quote": "I represent Silicon Valley, where automation is eliminating the jobs this bill assumes exist. Work requirements make sense in theory but fail in practice. The data from every state that has tried this is unambiguous: coverage drops, employment doesn't rise, and administrative costs soar. We cannot let ideology override evidence.",
+        "speaker": "Ro Khanna",
+        "date": "2026-05-22",
+        "context": "House floor statement explaining vote against H.R.5500",
+        "fullTranscriptId": null
+      }
+    },
+    {
+      "id": "bill-vote",
+      "type": "Data.BillVote",
+      "data": {
+        "billName": "Medicaid Work Requirements and Integrity Act",
+        "vote": "Nay"
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "About H.R.5500",
+        "text": "H.R.5500 passed 221-214 requiring able-bodied Medicaid recipients aged 19-55 to complete 80 hours of work, education, or community service per month. Proponents argue it promotes self-sufficiency; the CBO estimates 4.5 million people would lose coverage in three years. No Democratic votes supported the bill.",
+        "isExpandable": true,
+        "sourceLink": "https://khanna.house.gov/media/press-releases"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Do work requirements help or hurt the people they target?",
+        "options": [
+          { "id": "help", "label": "Help — encourages independence" },
+          { "id": "neutral", "label": "Neutral — depends on implementation" },
+          { "id": "hurt-practical", "label": "Hurt — creates bureaucratic barriers" },
+          { "id": "hurt-moral", "label": "Hurt — healthcare shouldn't be conditional" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-090400-khanna-medicaid-vote",
+        "serialNumber": "TT-20260531-K000389-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #208 (2026)",
+        "verificationLevel": "Tier 2",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

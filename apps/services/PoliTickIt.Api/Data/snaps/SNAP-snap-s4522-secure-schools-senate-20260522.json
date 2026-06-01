@@ -1,0 +1,120 @@
+{
+  "id": "snap-s4522-secure-schools-senate-20260522",
+  "normRef": "NORM-20260531-140100-s4522-secure-schools-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.4522 — Secure Our Schools and Communities Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T14:01:00Z",
+  "updatedAt": "2026-05-31T14:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.4522",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/4522"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #117 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s4522-secure-schools-communities-floor-20260522",
+    "policyArea": "Crime and Law Enforcement",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "W000437",
+    "billId": "S.4522",
+    "chamber": "Senate",
+    "voteDate": "2026-05-22",
+    "voteOutcome": "Passed (65-34)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "With bipartisan support, the Senate passed school safety legislation funding threat assessment programs, mental health resources, and physical security upgrades at K-12 schools.",
+    "schemaVersion": "1.1",
+    "keywords": ["school safety", "school shootings", "mental health", "threat assessment", "red flag laws", "campus security", "gun violence prevention"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.4522",
+        "billTitle": "Secure Our Schools and Communities Act — $12B for threat assessment, mental health, and school physical security",
+        "chamber": "Senate",
+        "voteOutcome": "Passed (65-34)",
+        "voteDate": "May 22, 2026",
+        "congress": "119",
+        "policyArea": "Crime and Law Enforcement"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 65,
+        "voteAgainst": 34,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "W000437",
+            "name": "Sen. Roger Wicker",
+            "title": "R-MS · Senate Armed Services Chair",
+            "party": "Republican",
+            "position": "For",
+            "quote": "I have grandchildren in public school. This bill does what works: threat assessment teams that identify students in crisis before they act, mental health counselors who can intervene, and hardened entry points that give responders time to react. This is not a gun debate. This is a school safety debate. We can agree on school safety."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Judiciary",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "School shootings have killed more American students than combat has killed American soldiers in every war since Korea combined. This bill is overdue by twenty years. It is not sufficient — we still need to address how those shooters got their weapons — but it is a critical first step and I am proud to vote for it."
+          },
+          {
+            "bioguideId": "P000603",
+            "name": "Sen. Rand Paul",
+            "title": "R-KY · Senate",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Local school safety is a local decision, funded by local tax dollars, responsive to local communities. When Washington funds school security, Washington sets the standards — and those standards include data collection on students, surveillance systems, and mental health screenings that I would not want conducted on my children without my consent."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.4522 passed 65-34 with strong bipartisan support — one of the most cross-partisan gun-related votes in years. The bill appropriates $12 billion over five years for behavioral threat assessment training in all US schools, mental health counselor grants, and physical security upgrades. Unlike the background checks bill, it contains no firearm restrictions, which enabled Republican support.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/4522"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "What is the most effective approach to school safety?",
+        "options": [
+          { "id": "mental-health", "label": "Mental health resources and early intervention" },
+          { "id": "physical-security", "label": "Physical security — hardened buildings, armed staff" },
+          { "id": "gun-restrictions", "label": "Restrict access to certain firearms" },
+          { "id": "comprehensive", "label": "All of the above working together" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-140100-s4522-secure-schools-senate",
+        "serialNumber": "TT-20260531-W000437-001",
+        "oracleSource": "Senate.gov Roll Call Vote #117 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

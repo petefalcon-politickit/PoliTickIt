@@ -1,0 +1,120 @@
+{
+  "id": "snap-hr4891-drug-pricing-house-20260518",
+  "normRef": "NORM-20260531-090000-hr4891-drug-pricing-house",
+  "title": "House Floor Debate",
+  "subtitle": "H.R.4891 — Prescription Drug Price Transparency Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T09:00:00Z",
+  "updatedAt": "2026-05-31T09:00:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — H.R.4891",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/4891"
+    },
+    {
+      "name": "Clerk.House.gov — Roll Call Vote #187 (2026)",
+      "url": "https://clerk.house.gov/evs/2026/roll187.xml"
+    }
+  ],
+  "metadata": {
+    "contentKey": "house-hr4891-drug-pricing-floor-debate-20260518",
+    "policyArea": "Health",
+    "insightType": "House Floor Vote",
+    "representativeId": "C001139",
+    "billId": "H.R.4891",
+    "chamber": "House",
+    "voteDate": "2026-05-18",
+    "voteOutcome": "Passed (241-190)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "Congress voted to require pharmaceutical companies to publicly disclose how they set drug prices and justify large price increases.",
+    "schemaVersion": "1.1",
+    "keywords": ["drug prices", "healthcare", "pharmaceutical", "transparency", "insulin", "Medicare"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "H.R.4891",
+        "billTitle": "Prescription Drug Price Transparency Act — Requiring drug makers to justify price increases above inflation",
+        "chamber": "House",
+        "voteOutcome": "Passed (241-190)",
+        "voteDate": "May 18, 2026",
+        "congress": "119",
+        "policyArea": "Health"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 241,
+        "voteAgainst": 190,
+        "voteAbstain": 4,
+        "speakers": [
+          {
+            "bioguideId": "C001139",
+            "name": "Rep. Kat Cammack",
+            "title": "R-FL · House Energy and Commerce",
+            "party": "Republican",
+            "position": "For",
+            "quote": "Americans pay three to ten times more for the same prescription drugs than people in Canada or Germany. Drug companies have no obligation to explain why. This bill fixes that. Transparency is not socialism — it is accountability."
+          },
+          {
+            "bioguideId": "O000172",
+            "name": "Rep. Alexandria Ocasio-Cortez",
+            "title": "D-NY · House Oversight",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "Insulin costs $3 to produce. Manufacturers charge $300. That is not a free market — that is an extraction racket. This bill is a first step toward ending the price gouging that is killing Americans who ration their medication."
+          },
+          {
+            "bioguideId": "J000289",
+            "name": "Rep. Jim Jordan",
+            "title": "R-OH · House Judiciary Chair",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Price controls in any form reduce innovation. Pharmaceutical companies invest billions in research and development. If we tell them what they can charge, we are telling them what they can discover. The next cancer cure dies in committee with this kind of legislation."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "H.R.4891 passed 241-190 with notable bipartisan support — 52 Republicans joined all Democrats to pass the bill. It requires pharmaceutical manufacturers to submit annual price justification reports to HHS for any drug whose price increases exceed CPI inflation. Companies refusing to comply face civil penalties. Critics argue it creates a path to de facto price controls.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/house-bill/4891"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should drug companies be required to justify price increases?",
+        "options": [
+          { "id": "yes-accountability", "label": "Yes — prices are out of control" },
+          { "id": "yes-limited", "label": "Transparency yes, price caps no" },
+          { "id": "no-innovation", "label": "No — it will harm drug development" },
+          { "id": "go-further", "label": "Go further — cap prices directly" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-090000-hr4891-drug-pricing-house",
+        "serialNumber": "TT-20260531-C001139-001",
+        "oracleSource": "Clerk.House.gov Roll Call Vote #187 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

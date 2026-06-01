@@ -1,0 +1,120 @@
+{
+  "id": "snap-s2105-medicare-drug-senate-20260516",
+  "normRef": "NORM-20260531-090100-s2105-medicare-drug-senate",
+  "title": "Senate Floor Debate",
+  "subtitle": "S.2105 — Medicare Drug Negotiation Enhancement Act",
+  "type": "Accountability",
+  "createdAt": "2026-05-31T09:01:00Z",
+  "updatedAt": "2026-05-31T09:01:00Z",
+  "sources": [
+    {
+      "name": "Congress.gov — S.2105",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2105"
+    },
+    {
+      "name": "Senate.gov — Roll Call Vote #108 (2026)",
+      "url": "https://www.senate.gov/legislative/votes/roll_call_vote.htm"
+    }
+  ],
+  "metadata": {
+    "contentKey": "senate-s2105-medicare-drug-floor-debate-20260516",
+    "policyArea": "Health",
+    "insightType": "Senate Floor Vote",
+    "representativeId": "S000033",
+    "billId": "S.2105",
+    "chamber": "Senate",
+    "voteDate": "2026-05-16",
+    "voteOutcome": "Failed (48-51)",
+    "congress": "119",
+    "applicationTier": "Tier1",
+    "headerElementId": "bill-header",
+    "laymanSummary": "The Senate narrowly defeated a bill that would have expanded Medicare's power to negotiate lower drug prices directly with pharmaceutical companies.",
+    "schemaVersion": "1.1",
+    "keywords": ["Medicare", "drug negotiation", "prescription drugs", "healthcare costs", "pharmaceutical"]
+  },
+  "elements": [
+    {
+      "id": "bill-header",
+      "type": "Header.Bill",
+      "data": {
+        "billId": "S.2105",
+        "billTitle": "Medicare Drug Negotiation Enhancement Act — Expanding Medicare's authority to negotiate prices on all covered drugs",
+        "chamber": "Senate",
+        "voteOutcome": "Failed (48-51)",
+        "voteDate": "May 16, 2026",
+        "congress": "119",
+        "policyArea": "Health"
+      }
+    },
+    {
+      "id": "floor-debate",
+      "type": "Data.FloorDebate",
+      "data": {
+        "voteFor": 48,
+        "voteAgainst": 51,
+        "voteAbstain": 1,
+        "speakers": [
+          {
+            "bioguideId": "S000033",
+            "name": "Sen. Bernie Sanders",
+            "title": "I-VT · Senate Health, Education, Labor, and Pensions",
+            "party": "Independent",
+            "position": "For",
+            "quote": "The American people pay the highest drug prices in the world. Medicare covers 67 million Americans. It would be the largest purchaser of drugs on the planet — and yet we are legally prohibited from negotiating prices. That is corruption written into law, and this bill ends it."
+          },
+          {
+            "bioguideId": "W000802",
+            "name": "Sen. Sheldon Whitehouse",
+            "title": "D-RI · Senate Finance",
+            "party": "Democrat",
+            "position": "For",
+            "quote": "The VA negotiates drug prices. The Department of Defense negotiates drug prices. Every major government health program in the world negotiates drug prices — except Medicare. This is not a radical idea. It is what every other developed nation does."
+          },
+          {
+            "bioguideId": "C001098",
+            "name": "Sen. Ted Cruz",
+            "title": "R-TX · Senate Commerce",
+            "party": "Republican",
+            "position": "Against",
+            "quote": "Government price setting kills innovation. The United States is responsible for most of the world's new drugs precisely because our market rewards discovery. Destroy that incentive and the next Alzheimer's cure, the next cancer breakthrough, never gets developed. This bill is short-sighted and dangerous."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bill-context",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "title": "What This Vote Means",
+        "text": "S.2105 failed 48-51, falling short of the 50 votes needed for passage. The bill would have expanded the Inflation Reduction Act's drug negotiation provisions from 10 drugs per year to all Medicare-covered drugs. Three Democratic senators joined all Republicans in opposition, citing concerns about effects on pharmaceutical innovation and industry investment.",
+        "isExpandable": true,
+        "sourceLink": "https://www.congress.gov/bill/119th-congress/senate-bill/2105"
+      }
+    },
+    {
+      "id": "sentiment-pulse",
+      "type": "Interaction.Sentiment.Pulse",
+      "data": {
+        "title": "Should Medicare negotiate prices on all prescription drugs?",
+        "options": [
+          { "id": "yes-all", "label": "Yes — lower prices for all Medicare drugs" },
+          { "id": "yes-limited", "label": "Yes, but only for common drugs" },
+          { "id": "no-innovation", "label": "No — it would harm drug development" },
+          { "id": "market-solution", "label": "Let the market drive prices down" }
+        ],
+        "stats": { "agree": 0, "disagree": 0 }
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "SPAWN-20260531-090100-s2105-medicare-drug-senate",
+        "serialNumber": "TT-20260531-S000033-001",
+        "oracleSource": "Senate.gov Roll Call Vote #108 (2026)",
+        "verificationLevel": "Tier 1",
+        "auditDate": "2026-05-31"
+      }
+    }
+  ]
+}

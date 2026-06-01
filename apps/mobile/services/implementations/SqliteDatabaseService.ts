@@ -403,6 +403,33 @@ export class SqliteDatabaseService implements IDatabaseService {
             `);
             await database.runAsync("PRAGMA user_version = 21");
           }
+
+          // Migration 22: RSP Chamber Column — enables House/Senate filter in settings
+          if (currentVersion < 22) {
+            console.log(
+              "[SqliteDatabaseService] Applying Migration 22: Adding chamber column to representatives...",
+            );
+            try {
+              await database.runAsync(
+                "ALTER TABLE representatives ADD COLUMN chamber TEXT",
+              );
+            } catch (e) {
+              // Column may already exist if schema was created fresh with chamber
+              console.log(
+                "[SqliteDatabaseService] chamber column might already exist, skipping...",
+              );
+            }
+            try {
+              await database.runAsync(
+                "CREATE INDEX IF NOT EXISTS idx_representatives_chamber ON representatives(chamber)",
+              );
+            } catch (e) {
+              console.log(
+                "[SqliteDatabaseService] chamber index already exists.",
+              );
+            }
+            await database.runAsync("PRAGMA user_version = 22");
+          }
         });
 
         this.db = database;

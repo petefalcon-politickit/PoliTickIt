@@ -67,6 +67,13 @@ public sealed class CosmosUserRepository : IUserRepository
         await _container.UpsertItemAsync(doc, new PartitionKey(user.Email));
     }
 
+    public async Task DeleteAsync(AppUser user)
+    {
+        await _container.DeleteItemAsync<CosmosUserDocument>(
+            id: user.Email,
+            partitionKey: new PartitionKey(user.Email));
+    }
+
     // ── Private helpers ───────────────────────────────────────────────────────
 
     private async Task<AppUser?> QueryByEmailAsync(string email)
@@ -113,6 +120,8 @@ internal sealed class CosmosUserDocument
     public bool isEmailVerified { get; set; } = false;
     public string? verificationCode { get; set; }
     public DateTime? verificationCodeExpiry { get; set; }
+    public string? passwordResetCode { get; set; }
+    public DateTime? passwordResetCodeExpiry { get; set; }
 
     public static CosmosUserDocument FromAppUser(AppUser u) => new()
     {
@@ -134,6 +143,8 @@ internal sealed class CosmosUserDocument
         isEmailVerified = u.IsEmailVerified,
         verificationCode = u.VerificationCode,
         verificationCodeExpiry = u.VerificationCodeExpiry,
+        passwordResetCode = u.PasswordResetCode,
+        passwordResetCodeExpiry = u.PasswordResetCodeExpiry,
     };
 
     public AppUser ToAppUser() => new()
@@ -154,5 +165,7 @@ internal sealed class CosmosUserDocument
         IsEmailVerified = isEmailVerified,
         VerificationCode = verificationCode,
         VerificationCodeExpiry = verificationCodeExpiry,
+        PasswordResetCode = passwordResetCode,
+        PasswordResetCodeExpiry = passwordResetCodeExpiry,
     };
 }

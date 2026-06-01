@@ -87,15 +87,9 @@ const settingsItems: SettingsItem[] = [
     route: "settings-reps",
   },
   {
-    id: "settings-interests",
-    title: "Interests",
-    subtitle: "Select topics you care about",
-    route: "settings-interests",
-  },
-  {
     id: "settings-agencies",
-    title: "Agencies",
-    subtitle: "Stay updated on agencies",
+    title: "Interests",
+    subtitle: "Select policy areas you care about",
     route: "settings-agencies",
   },
   {
