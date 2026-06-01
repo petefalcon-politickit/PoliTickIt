@@ -125,7 +125,10 @@ const SettingsAgenciesScreen = () => {
       }));
 
       // Write resolved follow state back to SQLite so offline reads are accurate.
-      if (apiItems.length > 0 && (serverFollowedIds.length > 0 || savedLocal.length === 0)) {
+      if (
+        apiItems.length > 0 &&
+        (serverFollowedIds.length > 0 || savedLocal.length === 0)
+      ) {
         agencyRepository.bulkSetFollowing(serverFollowedIds).catch(() => {});
       }
 

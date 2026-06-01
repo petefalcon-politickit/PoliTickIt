@@ -230,15 +230,15 @@ await NormalizationInitializer.InitializeNormalizationAsync(
 
 // Configure the HTTP request pipeline.
 // Swagger available in Development and Staging; disable in Production once stable.
-if (!app.Environment.IsProduction())
-{
+//if (!app.Environment.IsProduction())
+//{
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "PoliTickIt API v1");
         options.RoutePrefix = "swagger";
     });
-}
+//}
 
 app.UseCors("AllowAll");
 app.UseAuthentication();
