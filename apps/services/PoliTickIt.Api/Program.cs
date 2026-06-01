@@ -229,7 +229,8 @@ await NormalizationInitializer.InitializeNormalizationAsync(
     repRepo, billRepo, committeeRepo, donorRepo, index);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Swagger available in Development and Staging; disable in Production once stable.
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options =>
