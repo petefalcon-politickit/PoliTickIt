@@ -282,7 +282,7 @@ export default function SettingsRepsScreen() {
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={Colors.light.primary} />
-          <Text style={styles.loadingText}>Loading representativesâ€¦</Text>
+          <Text style={styles.loadingText}>Loading representatives…</Text>
         </View>
       ) : (
         <FlatList

@@ -116,13 +116,16 @@ const SettingsAgenciesScreen = () => {
           ? serverSet.has(id)
           : (localMap.get(id) ?? false);
 
-      const merged = apiItems.map((item) => ({
+      // If API returned nothing (offline/down), fall back to local SQLite data.
+      const sourceItems = apiItems.length > 0 ? apiItems : savedLocal;
+
+      const merged = sourceItems.map((item) => ({
         ...item,
         is_following: followMap(item.id),
       }));
 
       // Write resolved follow state back to SQLite so offline reads are accurate.
-      if (serverFollowedIds.length > 0 || savedLocal.length === 0) {
+      if (apiItems.length > 0 && (serverFollowedIds.length > 0 || savedLocal.length === 0)) {
         agencyRepository.bulkSetFollowing(serverFollowedIds).catch(() => {});
       }
 
