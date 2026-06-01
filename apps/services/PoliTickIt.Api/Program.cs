@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using Azure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -25,6 +26,19 @@ using PoliTickIt.Ingestion.Normalization.Models;
 using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ── Azure App Configuration + Key Vault (non-Development only) ────────────────
+// Local dev: secrets come from appsettings.Development.json (gitignored).
+// Azure:     non-secret config from Politickit-AC, secrets from Politickit-KV,
+//            both accessed via the Web App's System-Assigned Managed Identity.
+if (!builder.Environment.IsDevelopment())
+{
+    var credential = new ManagedIdentityCredential();
+    builder.Configuration.AddAzureAppConfiguration(options =>
+        options
+            .Connect(new Uri("https://Politickit-AC.azconfig.io"), credential)
+            .ConfigureKeyVault(kv => kv.SetCredential(credential)));
+}
 
 // Add services to the container.
 builder.Services.AddControllers();

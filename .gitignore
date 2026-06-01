@@ -54,3 +54,7 @@ app-example
 # ASP.NET secrets — never commit real keys; use dotnet user-secrets or Azure Key Vault
 apps/services/PoliTickIt.Api/appsettings.Development.json
 apps/services/PoliTickIt.Api/appsettings.Production.json
+
+# Publish profile credentials (contain deployment passwords)
+*.pubxml.user
+ServiceDependencies/
