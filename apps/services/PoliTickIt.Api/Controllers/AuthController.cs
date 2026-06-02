@@ -44,6 +44,7 @@ public sealed class AuthController : ControllerBase
     private readonly IDistrictLookupService _districtLookup;
     private readonly IRepresentativeStore _repStore;
     private readonly IUserFollowsRepository _userFollows;
+    private readonly IUserInterestFollowsRepository _interestFollows;
     private readonly JwtSettings _jwt;
 
     public AuthController(
@@ -54,6 +55,7 @@ public sealed class AuthController : ControllerBase
         IDistrictLookupService districtLookup,
         IRepresentativeStore repStore,
         IUserFollowsRepository userFollows,
+        IUserInterestFollowsRepository interestFollows,
         IOptions<JwtSettings> jwtOptions)
     {
         _users = users;
@@ -63,6 +65,7 @@ public sealed class AuthController : ControllerBase
         _districtLookup = districtLookup;
         _repStore = repStore;
         _userFollows = userFollows;
+        _interestFollows = interestFollows;
         _jwt = jwtOptions.Value;
     }
 
@@ -173,6 +176,21 @@ public sealed class AuthController : ControllerBase
         {
             // Log but don't surface — the account is already activated
             Console.WriteLine($"[VerifyEmail] auto-follow seeding failed: {ex.Message}");
+        }
+        // ─────────────────────────────────────────────────────────────────────
+
+        // ── Onboarding: seed interest follows from registration choices ────────
+        // Best-effort — a failure must not block account activation.
+        try
+        {
+            foreach (var slug in user.Interests)
+            {
+                await _interestFollows.FollowAsync(user.Email, slug);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[VerifyEmail] interest seeding failed: {ex.Message}");
         }
         // ─────────────────────────────────────────────────────────────────────
 

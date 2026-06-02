@@ -1,9 +1,9 @@
 import { calculateRationalSentiment } from "../../../../libs/intelligence/forensic-signal";
 import { IDatabaseService } from "../interfaces/IDatabaseService";
 import {
-    ForensicSignal,
-    IForensicSignalCoordinator,
-    ImpactMetrics,
+  ForensicSignal,
+  IForensicSignalCoordinator,
+  ImpactMetrics,
 } from "../interfaces/IForensicSignalCoordinator";
 import { IHapticService } from "../interfaces/IHapticService";
 import { IUserLedgerService } from "../interfaces/IUserLedgerService";
@@ -35,7 +35,9 @@ export class ForensicSignalCoordinator implements IForensicSignalCoordinator {
     this.verification = verificationService;
     this.userLedger = userLedgerService;
     this.haptics = hapticService;
-    this.init();
+    this.init().catch((err) =>
+      console.warn("[ForensicSignalCoordinator] init failed:", err?.message),
+    );
   }
 
   private async init() {
@@ -256,8 +258,15 @@ export class ForensicSignalCoordinator implements IForensicSignalCoordinator {
   }
 
   private notify() {
-    this.getImpactMetrics().then((metrics) => {
-      this.listeners.forEach((l) => l(metrics));
-    });
+    this.getImpactMetrics()
+      .then((metrics) => {
+        this.listeners.forEach((l) => l(metrics));
+      })
+      .catch((err) =>
+        console.warn(
+          "[ForensicSignalCoordinator] notify failed:",
+          err?.message,
+        ),
+      );
   }
 }
