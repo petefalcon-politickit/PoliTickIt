@@ -341,4 +341,102 @@ trackAction("screen", "insight_dashboard_view", { tierLevel });
 
 ---
 
+## 9. Validation Scenarios
+
+### Prerequisite: Reset state
+
+Run the app fresh (or clear app data) so the watchlist is empty and SQLite is on migration 23.
+
+---
+
+### Test 1 — Add to Watchlist (Context sync)
+
+1. Navigate to the **Accountability** or **Knowledge** feed
+2. Tap the **bookmark icon** on any snap card → icon fills/highlights
+3. Without navigating away, tap the same snap's **ActionCard** (ellipsis/more) — the watchlist toggle should already show "Remove from Watchlist" (shared context state)
+4. Navigate to **Watchlist → Tracked Items** tab → the snap appears
+
+**Pass criteria:** Both Path A (bookmark icon) and Path B (ActionCard) reflect the same state without a reload.
+
+---
+
+### Test 2 — Filter Sheet (Tracked tab)
+
+1. On the Watchlist screen, tap the **search/filter icon** in the header
+2. **Tab 1 "Watchlist"** should show:
+   - "Sort By" → Newest First / Oldest First chips
+   - "Filter by Category" → 38 policy area chips, scrollable
+3. Select **2–3 categories** → tap "Apply Filters"
+4. Tracked Items list should narrow to only snaps in those categories
+5. Empty state should show **"Clear Filters"** button when filters are active and nothing matches
+6. Tap **Tab 2 "Alerts"** → should show "Push Alerts Coming Soon" placeholder
+
+---
+
+### Test 3 — Insight Dashboard: Tier Gate (Tier 1 user)
+
+1. Use a **new account** with 0 participation credits
+2. Go to **Watchlist → Insight Dashboard** tab
+3. Should show the gate screen: lock icon + "Intelligence Locked" + "Boost Participation Capital" button
+4. Tap the button → **ParticipationStatusModal** should open
+
+**Pass criteria:** No crash, gate screen renders cleanly.
+
+---
+
+### Test 4 — Insight Dashboard: Analytics (Tier 2+ user)
+
+1. Use an account with **1,000+ participation credits** (or temporarily lower the threshold in `ForensicSignalCoordinator` for testing)
+2. First, bookmark **5–8 snaps** across at least 3 different policy areas
+3. Go to **Watchlist → Insight Dashboard**
+4. Should show:
+   - Tier badge (e.g. "Engagement Access")
+   - 3 stat cards: Tracked count, Reps count, Categories count
+   - Policy Area Breakdown bars — top 6 categories with proportional fill bars
+   - "Sentiment Trend Analysis" tease card (locked, shows "Influence" badge)
+
+**Pass criteria:** Counts match what you bookmarked. Bars are proportional.
+
+---
+
+### Test 5 — Cloud Sync (requires API running)
+
+1. Start the API (`dotnet run`)
+2. Add 2 snaps to watchlist while **offline** (airplane mode)
+3. Re-enable network → pull-to-refresh on Watchlist screen
+4. Check API: `GET http://10.0.0.252:5000/api/watchlist` (with Bearer token) → `snapIds` array should contain both snaps
+5. Verify SQLite: `synced = 1` on both rows
+
+**Quick manual API test:**
+
+```bash
+# Get token from login, then:
+curl -X GET http://10.0.0.252:5000/api/watchlist \
+  -H "Authorization: Bearer <token>"
+
+curl -X POST http://10.0.0.252:5000/api/watchlist/snap-001 \
+  -H "Authorization: Bearer <token>"
+```
+
+---
+
+### Test 6 — Cross-device sync
+
+1. Bookmark 3 snaps on **Device A** (sync fires automatically after each add)
+2. Log into the **same account** on Device B (fresh install)
+3. On Device B, navigate to Watchlist → the 3 snaps from Device A should appear (pulled from server on mount)
+
+---
+
+### Edge Cases
+
+| Scenario                                                 | Expected                                                 |
+| -------------------------------------------------------- | -------------------------------------------------------- |
+| Bookmark snap, immediately check Insight Dashboard stats | Count updates without reload (same `watchedSnaps` state) |
+| Filter by category with no matching snaps                | Empty state + "Clear Filters" button                     |
+| Unauthenticated user → `syncToCloud()`                   | Silent no-op, no crash, warning logged                   |
+| API returns 401 mid-sync                                 | Token refresh attempted, then retry once                 |
+
+---
+
 _PoliTickIt · Intelligence at the Constituent Level_

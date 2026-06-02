@@ -430,6 +430,32 @@ export class SqliteDatabaseService implements IDatabaseService {
             }
             await database.runAsync("PRAGMA user_version = 22");
           }
+
+          // Migration 23: Watchlist Sync Tracking — enables cloud sync state per item
+          if (currentVersion < 23) {
+            console.log(
+              "[SqliteDatabaseService] Applying Migration 23: Adding synced/syncedAt to watchlist...",
+            );
+            try {
+              await database.runAsync(
+                "ALTER TABLE watchlist ADD COLUMN synced INTEGER DEFAULT 0",
+              );
+            } catch (e) {
+              console.log(
+                "[SqliteDatabaseService] watchlist.synced column already exists, skipping...",
+              );
+            }
+            try {
+              await database.runAsync(
+                "ALTER TABLE watchlist ADD COLUMN syncedAt TEXT",
+              );
+            } catch (e) {
+              console.log(
+                "[SqliteDatabaseService] watchlist.syncedAt column already exists, skipping...",
+              );
+            }
+            await database.runAsync("PRAGMA user_version = 23");
+          }
         });
 
         this.db = database;

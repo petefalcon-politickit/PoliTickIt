@@ -3,6 +3,7 @@ import { ThemedText } from "@/components/themed-text";
 import { PulseLogoSignalRipple } from "@/components/ui/pulse-logo-signal-ripple";
 import { Colors, Spacing } from "@/constants/theme";
 import { useServices } from "@/contexts/service-provider";
+import { useWatchlist } from "@/contexts/watchlist-context";
 import { useTelemetry } from "@/hooks/use-telemetry";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
@@ -20,28 +21,23 @@ export const ActionCardMolecule = ({ data, extraProps }: any) => {
   const { snapId } = extraProps || {};
 
   const { trackAction } = useTelemetry();
+  const { navigationService, omniFeedProvider, forensicSignalCoordinator } =
+    useServices();
   const {
-    navigationService,
-    watchlistService,
-    omniFeedProvider,
-    forensicSignalCoordinator,
-  } = useServices();
-  const [isWatched, setIsWatched] = useState(false);
+    isWatched: ctxIsWatched,
+    addToWatchlist,
+    removeFromWatchlist,
+  } = useWatchlist();
+  const isWatchlistAction = actionType === "watchlist";
+  const isWatched = isWatchlistAction && snapId ? ctxIsWatched(snapId) : false;
   const [isSubmitted, setIsSubmitted] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   const isCollective = label?.toLowerCase().includes("collective");
-  const isWatchlistAction = actionType === "watchlist";
 
   useEffect(() => {
-    const checkWatchStatus = async () => {
-      if (isWatchlistAction && snapId && watchlistService) {
-        const watched = await watchlistService.isWatched(snapId);
-        setIsWatched(watched);
-      }
-    };
-    checkWatchStatus();
-  }, [snapId, isWatchlistAction, watchlistService]);
+    // isWatched is now derived from WatchlistContext — no per-card query needed
+  }, [snapId, isWatchlistAction]);
 
   const triggerSuccessAnimation = () => {
     Animated.sequence([
@@ -68,11 +64,9 @@ export const ActionCardMolecule = ({ data, extraProps }: any) => {
 
     if (isWatchlistAction && snapId) {
       if (isWatched) {
-        await watchlistService.removeFromWatchlist(snapId);
-        setIsWatched(false);
+        await removeFromWatchlist(snapId);
       } else {
-        await watchlistService.addToWatchlist(snapId);
-        setIsWatched(true);
+        await addToWatchlist(snapId);
         // Reward for adding to watchlist
         await forensicSignalCoordinator.emitSignal({
           type: "pulse",
@@ -120,7 +114,7 @@ export const ActionCardMolecule = ({ data, extraProps }: any) => {
         onPress={handlePress}
         activeOpacity={0.7}
       >
-        {publisherImage && (
+        {!!publisherImage && (
           <Image
             source={{ uri: publisherImage }}
             style={styles.publisherImage}

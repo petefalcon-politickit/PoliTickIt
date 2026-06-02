@@ -119,6 +119,7 @@ builder.Services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 builder.Services.AddSingleton<IUserRepository, CosmosUserRepository>();
 builder.Services.AddSingleton<IUserFollowsRepository, CosmosUserFollowsRepository>();
 builder.Services.AddSingleton<IUserInterestFollowsRepository, CosmosUserInterestFollowsRepository>();
+builder.Services.AddSingleton<IUserWatchlistRepository, CosmosUserWatchlistRepository>();
 builder.Services.AddSingleton<ITokenService, JwtTokenService>();
 
 // ── Email Service ─────────────────────────────────────────────────────────────

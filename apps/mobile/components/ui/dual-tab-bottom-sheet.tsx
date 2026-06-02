@@ -7,6 +7,7 @@ import {
     PanResponder,
     Platform,
     StyleSheet,
+    Text,
     TouchableOpacity,
     View,
 } from "react-native";

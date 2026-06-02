@@ -18,6 +18,7 @@ import { PARTICIPATION_TIERS } from "@/constants/participation";
 import { Colors, GlobalStyles, Spacing, Typography } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
 import { ServiceProvider, useServices } from "@/contexts/service-provider";
+import { useWatchlist } from "@/contexts/watchlist-context";
 import { useTelemetry } from "@/hooks/use-telemetry";
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
@@ -183,10 +184,10 @@ export const PoliSnapItem = ({
     navigationService,
     forensicSignalCoordinator,
     hapticService,
-    watchlistService,
   } = useServices();
   const { trackAction } = useTelemetry();
-  const [isWatched, setIsWatched] = useState(false);
+  const { isWatched: ctxIsWatched, addToWatchlist, removeFromWatchlist } = useWatchlist();
+  const isWatched = ctxIsWatched(snap.id);
 
   useEffect(() => {
     // Pulse Logging: Record high-frequency dwell/entry pulse
@@ -204,23 +205,18 @@ export const PoliSnapItem = ({
     }
 
     const checkWatchStatus = async () => {
-      if (watchlistService && snap.id) {
-        const watched = await watchlistService.isWatched(snap.id);
-        setIsWatched(watched);
-      }
+      // isWatched is now derived from WatchlistContext — no per-card query needed
     };
     checkWatchStatus();
-  }, [snap.id, watchlistService, forensicSignalCoordinator]);
+  }, [snap.id, forensicSignalCoordinator]);
 
   const toggleWatchlist = async () => {
     hapticService.triggerMediumImpact();
     if (isWatched) {
-      await watchlistService.removeFromWatchlist(snap.id);
-      setIsWatched(false);
+      await removeFromWatchlist(snap.id);
       await trackAction(snap.id, "watchlist_remove");
     } else {
-      await watchlistService.addToWatchlist(snap.id);
-      setIsWatched(true);
+      await addToWatchlist(snap.id);
       await trackAction(snap.id, "watchlist_add");
     }
   };

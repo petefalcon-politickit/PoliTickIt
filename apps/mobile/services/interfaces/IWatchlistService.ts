@@ -29,4 +29,12 @@ export interface IWatchlistService {
    * @param snapId The ID of the snap to check.
    */
   isWatched(snapId: string): Promise<boolean>;
+
+  /**
+   * syncToCloud
+   * Pushes all unsynced local watchlist items to the API and marks them synced.
+   * Pulls the server list and merges any server-only items into SQLite.
+   * Silent no-op if unauthenticated or offline.
+   */
+  syncToCloud(): Promise<void>;
 }

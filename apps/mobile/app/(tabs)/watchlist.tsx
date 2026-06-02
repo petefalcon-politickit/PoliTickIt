@@ -1,9 +1,11 @@
+import { InsightDashboardView } from "@/components/insight-dashboard-view";
 import PoliTickItHeader from "@/components/navigation/header";
 import { PoliSnapCollection } from "@/components/polisnap-renderer";
 import { ThemedText } from "@/components/themed-text";
 import { DashboardBackground } from "@/components/ui/dashboard-background";
 import { DualTabBottomSheet } from "@/components/ui/dual-tab-bottom-sheet";
 import { ParticipationStatusModal } from "@/components/ui/participation-status-modal";
+import { POLICY_AREAS } from "@/components/ui/representative-and-policy-area-filter-bottom-sheet";
 import { Colors, GlobalStyles, Spacing, Typography } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
 import { useServices } from "@/contexts/service-provider";
@@ -30,8 +32,10 @@ export default function WatchlistScreen() {
   const [watchedSnaps, setWatchedSnaps] = useState<PoliSnap[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const { omniFeedProvider, watchlistService, snapRepository, hapticService } =
-    useServices();
+  // Filter state
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
+  const { watchlistService, snapRepository, hapticService } = useServices();
   const { refreshCounts } = useActivity();
 
   const loadWatchlist = useCallback(
@@ -40,17 +44,8 @@ export default function WatchlistScreen() {
       else setIsRefreshing(true);
 
       try {
-        let snaps: PoliSnap[] = [];
-        if (activeTab === "insights") {
-          const result = await omniFeedProvider.getSnaps({
-            category: "trending",
-          });
-          snaps = result.snaps;
-        } else {
-          const ids = await watchlistService.getWatchedIds();
-          snaps = await snapRepository.getSnapsByIds(ids);
-        }
-
+        const ids = await watchlistService.getWatchedIds();
+        const snaps = await snapRepository.getSnapsByIds(ids);
         setWatchedSnaps(snaps);
       } catch (error) {
         console.error("Failed to load watchlist:", error);
@@ -59,7 +54,7 @@ export default function WatchlistScreen() {
         setIsRefreshing(false);
       }
     },
-    [omniFeedProvider, watchlistService, snapRepository, activeTab],
+    [watchlistService, snapRepository],
   );
 
   const onRefresh = useCallback(async () => {
@@ -68,9 +63,16 @@ export default function WatchlistScreen() {
   }, [loadWatchlist, refreshCounts, hapticService]);
 
   const filteredSnaps = useMemo(() => {
-    // Categorization logic is now handled by the WatchlistProvider
-    return watchedSnaps;
-  }, [watchedSnaps]);
+    let snaps = watchedSnaps;
+    if (selectedCategories.length > 0) {
+      snaps = snaps.filter((s) =>
+        selectedCategories.includes(s.metadata?.policyArea ?? ""),
+      );
+    }
+    return sortOrder === "asc"
+      ? [...snaps].sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+      : [...snaps].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }, [watchedSnaps, selectedCategories, sortOrder]);
 
   // Reload whenever user navigates to this screen
   useFocusEffect(
@@ -79,10 +81,16 @@ export default function WatchlistScreen() {
     }, [loadWatchlist]),
   );
 
-  // Reload when tab changes
-  React.useEffect(() => {
-    loadWatchlist(true);
-  }, [activeTab]);
+  const toggleCategory = useCallback((id: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id],
+    );
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    setSelectedCategories([]);
+    setSortOrder("desc");
+  }, []);
 
   return (
     <DashboardBackground>
@@ -131,6 +139,11 @@ export default function WatchlistScreen() {
               Syncing Intelligence...
             </ThemedText>
           </View>
+        ) : activeTab === "insights" ? (
+          <InsightDashboardView
+            watchedSnaps={watchedSnaps}
+            onBoostPress={() => setParticipationModalVisible(true)}
+          />
         ) : (
           <ScrollView
             contentContainerStyle={[
@@ -151,34 +164,27 @@ export default function WatchlistScreen() {
               <View style={styles.emptyContainer}>
                 <View style={styles.emptyIconContainer}>
                   <Ionicons
-                    name={
-                      activeTab === "insights"
-                        ? "analytics-outline"
-                        : "bookmark-outline"
-                    }
+                    name="bookmark-outline"
                     size={48}
                     color={Colors.light.textMuted}
                   />
                 </View>
                 <ThemedText style={styles.emptyTitle}>
-                  {activeTab === "insights"
-                    ? "Limited Signal Volume"
-                    : "Your Watchlist is Empty"}
+                  Your Watchlist is Empty
                 </ThemedText>
                 <ThemedText style={styles.emptySubtext}>
-                  {activeTab === "insights"
-                    ? "Collective Signal dashboards require higher 'Community Capital' levels. Share insights or participate in audits to boost your Capital and unlock deep-tier legislative forecasting."
+                  {selectedCategories.length > 0
+                    ? "No tracked items match the active filters."
                     : "Bookmark insights from the Accountability or Knowledge screens to track them here."}
                 </ThemedText>
-
-                {activeTab === "insights" && (
+                {selectedCategories.length > 0 && (
                   <TouchableOpacity
                     style={styles.actionButton}
-                    onPress={() => setParticipationModalVisible(true)}
+                    onPress={clearFilters}
                   >
-                    <Ionicons name="flash-outline" size={20} color="white" />
+                    <Ionicons name="close-outline" size={20} color="white" />
                     <ThemedText style={styles.actionButtonText}>
-                      Boost Participation Capital
+                      Clear Filters
                     </ThemedText>
                   </TouchableOpacity>
                 )}
@@ -192,8 +198,86 @@ export default function WatchlistScreen() {
           onClose={() => setFilterVisible(false)}
           tabOneLabel="Watchlist"
           tabTwoLabel="Alerts"
-          renderTabOne={() => <View />}
-          renderTabTwo={() => <View />}
+          renderTabOne={() => (
+            <ScrollView
+              contentContainerStyle={filterStyles.sheetContent}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* Sort section */}
+              <ThemedText style={filterStyles.sectionLabel}>Sort By</ThemedText>
+              <View style={filterStyles.chipContainer}>
+                {(
+                  [
+                    { value: "desc", label: "Newest First" },
+                    { value: "asc", label: "Oldest First" },
+                  ] as const
+                ).map((opt) => (
+                  <TouchableOpacity
+                    key={opt.value}
+                    style={[
+                      filterStyles.chip,
+                      sortOrder === opt.value && filterStyles.activeChip,
+                    ]}
+                    onPress={() => setSortOrder(opt.value)}
+                  >
+                    <ThemedText
+                      style={[
+                        filterStyles.chipText,
+                        sortOrder === opt.value && filterStyles.activeChipText,
+                      ]}
+                    >
+                      {opt.label}
+                    </ThemedText>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              {/* Category section */}
+              <ThemedText style={filterStyles.sectionLabel}>
+                Filter by Category
+              </ThemedText>
+              <View style={filterStyles.chipContainer}>
+                {POLICY_AREAS.map((pa) => {
+                  const active = selectedCategories.includes(pa.id);
+                  return (
+                    <TouchableOpacity
+                      key={pa.id}
+                      style={[
+                        filterStyles.chip,
+                        active && filterStyles.activeChip,
+                      ]}
+                      onPress={() => toggleCategory(pa.id)}
+                    >
+                      <ThemedText
+                        style={[
+                          filterStyles.chipText,
+                          active && filterStyles.activeChipText,
+                        ]}
+                      >
+                        {pa.label}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </ScrollView>
+          )}
+          renderTabTwo={() => (
+            <View style={filterStyles.alertsPlaceholder}>
+              <Ionicons
+                name="notifications-outline"
+                size={40}
+                color={Colors.light.textMuted}
+              />
+              <ThemedText style={filterStyles.alertsTitle}>
+                Push Alerts Coming Soon
+              </ThemedText>
+              <ThemedText style={filterStyles.alertsSubtext}>
+                You'll be able to set per-snap and per-representative alerts
+                when this feature launches.
+              </ThemedText>
+            </View>
+          )}
           onApply={() => setFilterVisible(false)}
         />
 
@@ -303,5 +387,68 @@ const styles = StyleSheet.create({
     fontSize: Typography.sizes.base,
     color: Colors.light.textSecondary,
     fontWeight: Typography.weights.medium,
+  },
+});
+
+const filterStyles = StyleSheet.create({
+  sheetContent: {
+    padding: Spacing.lg,
+    gap: Spacing.md,
+    paddingBottom: Spacing["2xl"],
+  },
+  sectionLabel: {
+    fontSize: Typography.sizes.sm,
+    fontWeight: Typography.weights.semibold,
+    color: Colors.light.textSecondary,
+    textTransform: "uppercase",
+    letterSpacing: 0.6,
+    marginTop: Spacing.sm,
+    marginBottom: 4,
+  },
+  chipContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  chip: {
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: Colors.light.border,
+  },
+  activeChip: {
+    backgroundColor: Colors.light.primary,
+    borderColor: Colors.light.primary,
+  },
+  chipText: {
+    fontSize: Typography.sizes.sm,
+    color: Colors.light.textSecondary,
+    fontWeight: Typography.weights.medium,
+  },
+  activeChipText: {
+    color: "#FFF",
+    fontWeight: Typography.weights.bold,
+  },
+  alertsPlaceholder: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: Spacing.xl,
+    gap: Spacing.md,
+    opacity: 0.6,
+  },
+  alertsTitle: {
+    fontSize: Typography.sizes.base,
+    fontWeight: Typography.weights.semibold,
+    color: Colors.light.text,
+    textAlign: "center",
+  },
+  alertsSubtext: {
+    fontSize: Typography.sizes.sm,
+    color: Colors.light.textSecondary,
+    textAlign: "center",
+    lineHeight: 20,
   },
 });

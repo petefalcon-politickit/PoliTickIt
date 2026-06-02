@@ -15,6 +15,7 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { DrawerProvider } from "@/contexts/drawer-context";
 import { PresentationProvider } from "@/contexts/PresentationContext";
 import { ServiceProvider } from "@/contexts/service-provider";
+import { WatchlistProvider } from "@/contexts/watchlist-context";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useProtectedRoute } from "@/hooks/use-protected-route";
 import { View } from "react-native";
@@ -34,6 +35,7 @@ export default function RootLayout() {
           <AuthProvider>
             <NavigationGuard>
               <ActivityProvider>
+                <WatchlistProvider>
                 <DrawerProvider>
                   <ThemeProvider
                     value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
@@ -57,6 +59,7 @@ export default function RootLayout() {
                     <StatusBar style="auto" />
                   </ThemeProvider>
                 </DrawerProvider>
+                </WatchlistProvider>
               </ActivityProvider>
             </NavigationGuard>
           </AuthProvider>
