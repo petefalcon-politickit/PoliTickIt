@@ -47,10 +47,12 @@ public sealed class CongressMemberStore : IRepresentativeStore
     public IReadOnlyList<CongressMember> GetForDistrict(string state, string district)
     {
         var s = state.ToUpperInvariant();
+        // Normalize district: strip leading zeros so "04" matches "4" (index keys use int.ToString())
+        var d = int.TryParse(district, out var n) ? n.ToString() : district;
         var result = new List<CongressMember>();
 
         // House reps for this specific district
-        if (_index.TryGetValue($"{s}:{district}", out var house))
+        if (_index.TryGetValue($"{s}:{d}", out var house))
             result.AddRange(house);
 
         // Both senators for this state

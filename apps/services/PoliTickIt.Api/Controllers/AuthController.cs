@@ -7,12 +7,17 @@
 //
 // ENDPOINTS:
 //   POST /api/auth/register              — Create account (unverified)
-//   POST /api/auth/verify-email          — Verify code → issue JWT tokens
+//   POST /api/auth/verify-email          — Verify code → issue JWT tokens + seed rep follows
 //   POST /api/auth/resend-verification   — Re-send verification code
 //   POST /api/auth/login                 — Authenticate → JWT + refresh token
 //   POST /api/auth/refresh               — Rotate access + refresh token
 //   POST /api/auth/logout                — Invalidate refresh token
 //   GET  /api/auth/me                    — Return authenticated user profile [Authorize]
+//
+// ONBOARDING:
+//   On first email verification, district reps are auto-followed via
+//   IRepresentativeStore.GetForDistrict + IUserFollowsRepository.FollowAsync.
+//   Best-effort — a Cosmos failure does not block account activation.
 // ─────────────────────────────────────────────────────────────────────────────
 
 using System.ComponentModel.DataAnnotations;
@@ -37,6 +42,8 @@ public sealed class AuthController : ControllerBase
     private readonly ITokenService _tokens;
     private readonly IEmailService _email;
     private readonly IDistrictLookupService _districtLookup;
+    private readonly IRepresentativeStore _repStore;
+    private readonly IUserFollowsRepository _userFollows;
     private readonly JwtSettings _jwt;
 
     public AuthController(
@@ -45,6 +52,8 @@ public sealed class AuthController : ControllerBase
         ITokenService tokens,
         IEmailService email,
         IDistrictLookupService districtLookup,
+        IRepresentativeStore repStore,
+        IUserFollowsRepository userFollows,
         IOptions<JwtSettings> jwtOptions)
     {
         _users = users;
@@ -52,6 +61,8 @@ public sealed class AuthController : ControllerBase
         _tokens = tokens;
         _email = email;
         _districtLookup = districtLookup;
+        _repStore = repStore;
+        _userFollows = userFollows;
         _jwt = jwtOptions.Value;
     }
 
@@ -143,7 +154,30 @@ public sealed class AuthController : ControllerBase
 
         await _users.UpdateAsync(user);
 
-        return Ok(BuildAuthResponse(user, refreshToken));
+        // ── Onboarding: auto-follow district reps ─────────────────────────────
+        // Best-effort — a Cosmos failure must not block account activation.
+        var seededIds = new List<string>();
+        try
+        {
+            if (_repStore.IsHydrated && !string.IsNullOrEmpty(user.State))
+            {
+                var reps = _repStore.GetForDistrict(user.State, user.District);
+                foreach (var rep in reps)
+                {
+                    await _userFollows.FollowAsync(user.Email, rep.BioguideId);
+                    seededIds.Add(rep.BioguideId);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log but don't surface — the account is already activated
+            Console.WriteLine($"[VerifyEmail] auto-follow seeding failed: {ex.Message}");
+        }
+        // ─────────────────────────────────────────────────────────────────────
+
+        var authResponse = BuildAuthResponse(user, refreshToken);
+        return Ok(authResponse with { InitialFollowedIds = seededIds });
     }
 
     // ──────────────────────────────────────────────────────────────────────────
@@ -412,7 +446,8 @@ public sealed class AuthController : ControllerBase
                 Name: user.FullName,
                 Email: user.Email,
                 State: user.State,
-                District: user.District));
+                District: user.District),
+            InitialFollowedIds: null);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -450,7 +485,8 @@ public sealed record AuthResponse(
     string AccessToken,
     string RefreshToken,
     int ExpiresIn,
-    UserSummary User);
+    UserSummary User,
+    List<string>? InitialFollowedIds = null);
 
 public sealed record UserSummary(
     string Id,

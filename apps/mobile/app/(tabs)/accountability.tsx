@@ -12,8 +12,10 @@ import { useActivity } from "@/contexts/activity-context";
 import { useServices } from "@/contexts/service-provider";
 import { PoliSnap } from "@/types/polisnap";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useCallback, useEffect, useState } from "react";
 import {
+    Animated,
     Platform,
     RefreshControl,
     ScrollView,
@@ -25,6 +27,30 @@ import {
 
 // Accountability Screen Component
 export default function AccountabilityScreen() {
+  const [showWelcomeBanner, setShowWelcomeBanner] = useState(false);
+  const bannerOpacity = React.useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    AsyncStorage.getItem("@politickit:showWelcomeBanner")
+      .then((val) => {
+        if (val === "1") {
+          setShowWelcomeBanner(true);
+          AsyncStorage.removeItem("@politickit:showWelcomeBanner").catch(
+            () => {},
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const dismissBanner = useCallback(() => {
+    Animated.timing(bannerOpacity, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setShowWelcomeBanner(false));
+  }, [bannerOpacity]);
+
   const [filterVisible, setFilterVisible] = useState(false);
   const [snaps, setSnaps] = useState<PoliSnap[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -275,6 +301,29 @@ export default function AccountabilityScreen() {
           </TouchableOpacity>
         </View>
 
+        {showWelcomeBanner && (
+          <Animated.View
+            style={[styles.welcomeBanner, { opacity: bannerOpacity }]}
+          >
+            <Ionicons
+              name="people-outline"
+              size={20}
+              color={Colors.light.primary}
+              style={styles.welcomeBannerIcon}
+            />
+            <Text style={styles.welcomeBannerText}>
+              Your federal representatives have been followed automatically
+              based on your district.
+            </Text>
+            <TouchableOpacity
+              onPress={dismissBanner}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            >
+              <Ionicons name="close" size={18} color={Colors.light.textMuted} />
+            </TouchableOpacity>
+          </Animated.View>
+        )}
+
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           refreshControl={
@@ -317,6 +366,28 @@ export default function AccountabilityScreen() {
 }
 
 const styles = StyleSheet.create({
+  welcomeBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: Colors.light.backgroundSecondary,
+    borderLeftWidth: 3,
+    borderLeftColor: Colors.light.primary,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    marginHorizontal: Spacing.md,
+    marginTop: Spacing.sm,
+    borderRadius: 6,
+    gap: Spacing.sm,
+  },
+  welcomeBannerIcon: {
+    flexShrink: 0,
+  },
+  welcomeBannerText: {
+    flex: 1,
+    fontSize: Typography.sizes.sm,
+    color: Colors.light.textSlate,
+    lineHeight: 18,
+  },
   scrollContent: {
     paddingTop: Spacing.md,
     paddingBottom: Spacing["2xl"],

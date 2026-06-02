@@ -27,7 +27,7 @@ const DEFAULT_FILTERS: RepFilters = {
   chamber: "All",
   party: "All",
   selectedStates: ["All"],
-  followingOnly: false,
+  followingOnly: true,
   sortBy: "firstName",
 };
 

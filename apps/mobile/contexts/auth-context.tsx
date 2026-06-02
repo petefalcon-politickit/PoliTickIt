@@ -3,6 +3,7 @@ import {
     AuthUser,
     RegisterPayload,
 } from "@/services/implementations/ApiAuthService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import React, {
     createContext,
@@ -91,19 +92,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, []);
 
-  const verifyEmail = useCallback(async (email: string, code: string) => {
-    setError(null);
-    setIsLoading(true);
-    try {
-      const verifiedUser = await apiAuthService.verifyEmail(email, code);
-      setUser(verifiedUser);
-      router.replace("/accountability");
-    } catch (err: any) {
-      setError(err.message ?? "Verification failed. Please check your code.");
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const verifyEmail = useCallback(
+    async (email: string, code: string) => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const verifiedUser = await apiAuthService.verifyEmail(email, code);
+        setUser(verifiedUser);
+        // Seed SQLite follow state from the Cosmos follows just created on the API
+        apiSyncService.syncFollowState().catch(() => {});
+        // Flag for welcome banner — AsyncStorage survives tab pre-mounting
+        await AsyncStorage.setItem("@politickit:showWelcomeBanner", "1").catch(
+          () => {},
+        );
+        router.replace("/accountability");
+      } catch (err: any) {
+        setError(err.message ?? "Verification failed. Please check your code.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [apiSyncService],
+  );
 
   const resendVerification = useCallback(async (email: string) => {
     setError(null);
