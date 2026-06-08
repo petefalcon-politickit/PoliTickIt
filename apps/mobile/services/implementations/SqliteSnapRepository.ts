@@ -22,8 +22,10 @@ export class SqliteSnapRepository
           metadata: JSON.parse(row.metadata_json || "{}"),
         }),
         saver: (snap: PoliSnap) => ({
-          query: `INSERT OR REPLACE INTO snaps (id, sku, title, type, createdAt, metadata_json, sources_json, cached_at) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`,
+          query: `INSERT OR REPLACE INTO snaps
+            (id, sku, title, type, createdAt, metadata_json, sources_json, cached_at,
+             correlation_key, process_step, process_stage, parent_snap_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?, ?, ?, ?)`,
           params: [
             snap.id,
             snap.sku,
@@ -32,6 +34,10 @@ export class SqliteSnapRepository
             snap.createdAt,
             JSON.stringify(snap.metadata || {}),
             JSON.stringify(snap.sources || []),
+            snap.correlationKey ?? null,
+            snap.processStep ?? null,
+            snap.processStage ?? null,
+            snap.parentSnapId ?? null,
           ],
         }),
       },
@@ -213,6 +219,20 @@ export class SqliteSnapRepository
         data: JSON.parse(el.data_json || "{}"),
         presentation: JSON.parse(el.presentation_json || "{}"),
       })),
+      correlationKey: row.correlation_key ?? undefined,
+      processStep: row.process_step ?? undefined,
+      processStage: row.process_stage ?? undefined,
+      parentSnapId: row.parent_snap_id ?? undefined,
     } as PoliSnap;
+  }
+
+  async getByCorrelationKey(correlationKey: string): Promise<PoliSnap[]> {
+    const rows = await this.db.execute(
+      `SELECT * FROM snaps
+       WHERE correlation_key = ?
+       ORDER BY COALESCE(process_step, 999) ASC, createdAt ASC`,
+      [correlationKey],
+    );
+    return Promise.all(rows.map((row: any) => this.mapRowToSnap(row)));
   }
 }

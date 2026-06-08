@@ -191,4 +191,14 @@ export interface PoliSnap {
   isRetracted?: boolean;
   /** ISO-8601 timestamp when the snap was retracted. Populated only if isRetracted is true. */
   retractedAt?: string;
+
+  // ── Process Correlation ───────────────────────────────────────────────────────
+  /** Groups all snaps in the same political process. e.g. "bill:H.R.1041". */
+  correlationKey?: string;
+  /** ID of the root snap. Null if this snap is the root. */
+  parentSnapId?: string;
+  /** Ordinal process step. Meaning defined per snap type. */
+  processStep?: number;
+  /** Human-readable stage label verbatim from source. e.g. "In Committee". */
+  processStage?: string;
 }

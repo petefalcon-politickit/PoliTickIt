@@ -21,5 +21,17 @@ namespace PoliTickIt.Domain.Interfaces
         /// Includes tombstones (<c>IsRetracted = true</c>) so mobile clients can evict.
         /// </summary>
         Task<IEnumerable<PoliSnap>> GetDeltaAsync(DateTimeOffset since);
+
+        /// <summary>
+        /// Returns all snaps sharing the given correlation key,
+        /// ordered by ProcessStep ASC then CreatedAt ASC.
+        /// </summary>
+        Task<IEnumerable<PoliSnap>> GetByCorrelationKeyAsync(string correlationKey);
+
+        /// <summary>
+        /// Returns snaps whose Channels list contains at least one of the given channels.
+        /// Ordered newest first. Capped at <paramref name="limit"/>.
+        /// </summary>
+        Task<IEnumerable<PoliSnap>> GetByChannelsAsync(IEnumerable<string> channels, int limit = 100);
     }
 }

@@ -38,6 +38,10 @@ public sealed class SnapBuilder
     private string? _representativeId;
     private string? _theme;
     private string? _locale;
+    private string? _correlationKey;
+    private string? _parentSnapId;
+    private int? _processStep;
+    private string? _processStage;
     private readonly List<string> _channels = new();
     private readonly List<Source> _sources = new();
     private readonly List<SnapElement> _elements = new();
@@ -75,6 +79,30 @@ public sealed class SnapBuilder
     public SnapBuilder WithContentKey(string? contentKey)
     {
         _contentKey = contentKey;
+        return this;
+    }
+
+    public SnapBuilder WithCorrelationKey(string? correlationKey)
+    {
+        _correlationKey = correlationKey;
+        return this;
+    }
+
+    public SnapBuilder WithParentSnapId(string? parentSnapId)
+    {
+        _parentSnapId = parentSnapId;
+        return this;
+    }
+
+    public SnapBuilder WithProcessStep(int? step)
+    {
+        _processStep = step;
+        return this;
+    }
+
+    public SnapBuilder WithProcessStage(string? stage)
+    {
+        _processStage = stage;
         return this;
     }
 
@@ -213,6 +241,10 @@ public sealed class SnapBuilder
             Locale = _locale,
             CreatedAt = now,
             UpdatedAt = now,
+            CorrelationKey = _correlationKey,
+            ParentSnapId = _parentSnapId,
+            ProcessStep = _processStep,
+            ProcessStage = _processStage,
             Metadata = new SnapMetadata
             {
                 PolicyArea = _policyArea,

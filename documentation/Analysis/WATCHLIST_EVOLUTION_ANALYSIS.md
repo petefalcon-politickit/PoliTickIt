@@ -18,26 +18,26 @@ This document is the complete implementation reference for the Watchlist Evoluti
 
 ### Key Files for This Initiative
 
-| File | Purpose |
-|---|---|
-| `apps/services/PoliTickIt.Domain/Models/PoliSnap.cs` | Core domain model — add correlation fields here |
-| `apps/services/PoliTickIt.Domain/Interfaces/ISnapRepository.cs` | Repository contract — add query methods here |
-| `apps/services/PoliTickIt.Domain/CanonicalModel/ISnapSchemaRegistry.cs` | SnapSchema record definition |
-| `apps/services/PoliTickIt.Ingestion/Schema/SnapSchemaRegistry.cs` | Registered snap type schemas |
-| `apps/services/PoliTickIt.Ingestion/Schema/SnapBuilder.cs` | Fluent builder — add `.WithCorrelationKey()` etc. here |
-| `apps/services/PoliTickIt.Ingestion/Providers/CongressionalActivityProvider.cs` | Reference provider for correlation wiring |
-| `apps/services/PoliTickIt.Api/Controllers/SnapsController.cs` | Add `GET /api/snaps/process/{key}` here |
-| `apps/services/PoliTickIt.Api/Controllers/WatchlistController.cs` | Add process watch endpoints here |
-| `apps/services/PoliTickIt.Infrastructure/Persistence/LocalFileSnapRepository.cs` | Add `GetByCorrelationKeyAsync` here |
-| `apps/services/PoliTickIt.Infrastructure/Persistence/InMemorySnapRepository.cs` | Add `GetByCorrelationKeyAsync` here |
-| `apps/mobile/types/polisnap.ts` | TypeScript snap model — mirror correlation fields here |
-| `apps/mobile/types/watched-process.ts` | New file — WatchedProcess TypeScript type |
-| `apps/mobile/services/implementations/SqliteDatabaseService.ts` | Add Migrations 26 + 27 here |
-| `apps/mobile/services/implementations/SqliteSnapRepository.ts` | Add `getByCorrelationKey()` and update saver |
-| `apps/mobile/services/implementations/WatchlistService.ts` | Reference pattern for WatchedProcessService |
-| `apps/mobile/app/(tabs)/watchlist.tsx` | Watchlist screen — restructure tabs here |
-| `apps/mobile/services/container.ts` | DI container — register new service here |
-| `apps/mobile/contexts/service-provider.tsx` | Add new service to context type and resolution |
+| File                                                                             | Purpose                                                |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `apps/services/PoliTickIt.Domain/Models/PoliSnap.cs`                             | Core domain model — add correlation fields here        |
+| `apps/services/PoliTickIt.Domain/Interfaces/ISnapRepository.cs`                  | Repository contract — add query methods here           |
+| `apps/services/PoliTickIt.Domain/CanonicalModel/ISnapSchemaRegistry.cs`          | SnapSchema record definition                           |
+| `apps/services/PoliTickIt.Ingestion/Schema/SnapSchemaRegistry.cs`                | Registered snap type schemas                           |
+| `apps/services/PoliTickIt.Ingestion/Schema/SnapBuilder.cs`                       | Fluent builder — add `.WithCorrelationKey()` etc. here |
+| `apps/services/PoliTickIt.Ingestion/Providers/CongressionalActivityProvider.cs`  | Reference provider for correlation wiring              |
+| `apps/services/PoliTickIt.Api/Controllers/SnapsController.cs`                    | Add `GET /api/snaps/process/{key}` here                |
+| `apps/services/PoliTickIt.Api/Controllers/WatchlistController.cs`                | Add process watch endpoints here                       |
+| `apps/services/PoliTickIt.Infrastructure/Persistence/LocalFileSnapRepository.cs` | Add `GetByCorrelationKeyAsync` here                    |
+| `apps/services/PoliTickIt.Infrastructure/Persistence/InMemorySnapRepository.cs`  | Add `GetByCorrelationKeyAsync` here                    |
+| `apps/mobile/types/polisnap.ts`                                                  | TypeScript snap model — mirror correlation fields here |
+| `apps/mobile/types/watched-process.ts`                                           | New file — WatchedProcess TypeScript type              |
+| `apps/mobile/services/implementations/SqliteDatabaseService.ts`                  | Add Migrations 26 + 27 here                            |
+| `apps/mobile/services/implementations/SqliteSnapRepository.ts`                   | Add `getByCorrelationKey()` and update saver           |
+| `apps/mobile/services/implementations/WatchlistService.ts`                       | Reference pattern for WatchedProcessService            |
+| `apps/mobile/app/(tabs)/watchlist.tsx`                                           | Watchlist screen — restructure tabs here               |
+| `apps/mobile/services/container.ts`                                              | DI container — register new service here               |
+| `apps/mobile/contexts/service-provider.tsx`                                      | Add new service to context type and resolution         |
 
 ---
 
@@ -47,23 +47,23 @@ PoliTickIt currently supports adding a single `PoliSnap` to a watchlist. This wo
 
 ### 1.1 Concrete Examples of the Gap
 
-| User Intent | What They Add Today | What They Actually Need |
-|---|---|---|
-| Follow a bill through Congress | Adds the `BillActivity` intro snap | All subsequent snaps: votes, amendments, debate, final passage |
-| Track an open cabinet seat | Adds a `CommitteeHearing` snap | All snaps in the confirmation process: nomination, hearing, vote |
-| Monitor an Executive Order | Adds the initial `ExecutiveOrder` snap | Amendments, agency implementation rules, legal challenges |
-| Watch a FEC contribution pattern | Adds one `FecContribution` snap | All contributions from the same donor to the same rep |
-| Track a local zoning decision | Adds one `MunicipalMotion` snap | Public comment period, council vote, final ruling |
-| Follow a judicial appointment | Adds one snap | All hearing snaps, committee vote, Senate confirmation vote |
+| User Intent                      | What They Add Today                    | What They Actually Need                                          |
+| -------------------------------- | -------------------------------------- | ---------------------------------------------------------------- |
+| Follow a bill through Congress   | Adds the `BillActivity` intro snap     | All subsequent snaps: votes, amendments, debate, final passage   |
+| Track an open cabinet seat       | Adds a `CommitteeHearing` snap         | All snaps in the confirmation process: nomination, hearing, vote |
+| Monitor an Executive Order       | Adds the initial `ExecutiveOrder` snap | Amendments, agency implementation rules, legal challenges        |
+| Watch a FEC contribution pattern | Adds one `FecContribution` snap        | All contributions from the same donor to the same rep            |
+| Track a local zoning decision    | Adds one `MunicipalMotion` snap        | Public comment period, council vote, final ruling                |
+| Follow a judicial appointment    | Adds one snap                          | All hearing snaps, committee vote, Senate confirmation vote      |
 
 The current watchlist is a **bookmark list**. What users need is a **process tracker**.
 
 ### 1.2 The Two Distinct Features
 
-| Feature | Name | What It Is |
-|---|---|---|
-| **F1** | **Snap Bookmarks** | Save a specific snap to revisit it. Short-lived, personal, flat list. Already exists — no changes required. |
-| **F2** | **Process Trackers** | Watch a political process and automatically see all related snaps as they are generated. Long-lived, structured, requires snap correlation. This is the new work. |
+| Feature | Name                 | What It Is                                                                                                                                                        |
+| ------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **F1**  | **Snap Bookmarks**   | Save a specific snap to revisit it. Short-lived, personal, flat list. Already exists — no changes required.                                                       |
+| **F2**  | **Process Trackers** | Watch a political process and automatically see all related snaps as they are generated. Long-lived, structured, requires snap correlation. This is the new work. |
 
 F1 and F2 are **additive**. The existing bookmark watchlist is completely unchanged.
 
@@ -81,23 +81,23 @@ F1 and F2 are **additive**. The existing bookmark watchlist is completely unchan
 
 Examples spanning every level of government and domain:
 
-| Domain | CorrelationKey | ProcessType |
-|---|---|---|
-| Federal bill | `bill:H.R.1041` | `BillActivity` |
-| Executive order | `eo:14110` | `ExecutiveOrder` |
-| Cabinet nomination | `cabinet:AG-2026` | `CabinetNomination` |
-| Senate confirmation | `confirmation:D000622` | `CommitteeHearing` |
-| FEC donor pattern | `fec-donor:C001234:S000148` | `FecContribution` |
-| Federal grant | `grant:OPP-2026-NSF-001` | `GrantPulse` |
-| Ethics investigation | `ethics:OCE-2026-042` | `EthicsCommittee` |
-| State bill | `state-bill:TX-HB-1234` | `StateLegislation` |
-| County ordinance | `ordinance:TX-Travis-2026-012` | `CountyOrdinance` |
-| City council motion | `motion:Austin-TX-2026-CM-088` | `MunicipalMotion` |
-| School board action | `schoolboard:AISD-2026-04` | `SchoolBoardAction` |
-| Local election | `election:TX-HD-50-2026` | `LocalElection` |
-| Ballot measure | `ballot:TX-Prop12-2026` | `BallotMeasure` |
-| Judicial appointment | `judicial:SCOTUS-2026-seat1` | `JudicialNomination` |
-| Any future concept | `{type}:{stableId}` | Any registered snap type |
+| Domain               | CorrelationKey                 | ProcessType              |
+| -------------------- | ------------------------------ | ------------------------ |
+| Federal bill         | `bill:H.R.1041`                | `BillActivity`           |
+| Executive order      | `eo:14110`                     | `ExecutiveOrder`         |
+| Cabinet nomination   | `cabinet:AG-2026`              | `CabinetNomination`      |
+| Senate confirmation  | `confirmation:D000622`         | `CommitteeHearing`       |
+| FEC donor pattern    | `fec-donor:C001234:S000148`    | `FecContribution`        |
+| Federal grant        | `grant:OPP-2026-NSF-001`       | `GrantPulse`             |
+| Ethics investigation | `ethics:OCE-2026-042`          | `EthicsCommittee`        |
+| State bill           | `state-bill:TX-HB-1234`        | `StateLegislation`       |
+| County ordinance     | `ordinance:TX-Travis-2026-012` | `CountyOrdinance`        |
+| City council motion  | `motion:Austin-TX-2026-CM-088` | `MunicipalMotion`        |
+| School board action  | `schoolboard:AISD-2026-04`     | `SchoolBoardAction`      |
+| Local election       | `election:TX-HD-50-2026`       | `LocalElection`          |
+| Ballot measure       | `ballot:TX-Prop12-2026`        | `BallotMeasure`          |
+| Judicial appointment | `judicial:SCOTUS-2026-seat1`   | `JudicialNomination`     |
+| Any future concept   | `{type}:{stableId}`            | Any registered snap type |
 
 ### 2.2 Why This Is Extensible
 
@@ -134,39 +134,42 @@ The existing `SnapMetadata` class uses a mix of typed properties (`BillId`, `Rep
 ### 3.1 What Exists (Do Not Re-implement)
 
 **Schema system**:
+
 - `ISnapSchemaRegistry` / `SnapSchemaRegistry` — 5 registered snap types
 - `SnapBuilder` — fluent builder with `ForType`, `WithTitle`, `WithContentKey`, `AddChannel`, `AddElement`, `Build`
 - `ISnapMapper<TSource>` — per-provider typed mapping contract
 - `SnapSchema` record: `Type`, `RequiredElements`, `RequiredChannelPrefixes`, `DefaultTtl`
 
 **Repository**:
+
 - `ISnapRepository`: `SaveSnapAsync`, `GetAllSnapsAsync`, `GetSnapByIdAsync`, `FindByContentKeyAsync`, `GetDeltaAsync`
 - `LocalFileSnapRepository` + `InMemorySnapRepository` — both use a `Dictionary<string, PoliSnap> _store`
 
 **Watchlist (F1 — fully working)**:
+
 - SQLite table: `watchlist (snap_id, createdAt, synced, syncedAt)`
 - `IWatchlistService` / `WatchlistService` — get/add/remove/isWatched/syncToCloud
 - `WatchlistController` — GET/POST/DELETE `/api/watchlist/{snapId}`
 
 ### 3.2 Gaps to Fill by Phase
 
-| Gap | Phase |
-|---|---|
-| `CorrelationKey`, `ParentSnapId`, `ProcessStep`, `ProcessStage` on `PoliSnap` | W1 |
-| `IsProcessOriented`, `CorrelationKeyFormat` on `SnapSchema` | W1 |
-| `.WithCorrelationKey()` etc. on `SnapBuilder` | W1 |
-| `WatchedProcess` domain model + `IWatchedProcessRepository` | W1 |
-| `GetByCorrelationKeyAsync`, `GetByChannelsAsync` on `ISnapRepository` | W1 |
-| SQLite Migrations 26 + 27 | W1 |
-| `getByCorrelationKey()` on `SqliteSnapRepository` + saver update | W1 |
-| Correlation wired in all Oracle provider mappers | W2 |
-| `GET /api/snaps/process/{correlationKey}` | W3 |
-| `GET/POST/DELETE /api/watchlist/processes/{correlationKey}` | W3 |
-| `LocalFileWatchedProcessRepository` | W3 |
-| `IWatchedProcessService` / `WatchedProcessService` | W4 |
-| DI + context registration | W4 |
-| Watchlist screen tabs restructure + `ProcessTrackerCard` | W5 |
-| "Track Process" button in `PoliSnapRenderer` | W5 |
+| Gap                                                                           | Phase |
+| ----------------------------------------------------------------------------- | ----- |
+| `CorrelationKey`, `ParentSnapId`, `ProcessStep`, `ProcessStage` on `PoliSnap` | W1    |
+| `IsProcessOriented`, `CorrelationKeyFormat` on `SnapSchema`                   | W1    |
+| `.WithCorrelationKey()` etc. on `SnapBuilder`                                 | W1    |
+| `WatchedProcess` domain model + `IWatchedProcessRepository`                   | W1    |
+| `GetByCorrelationKeyAsync`, `GetByChannelsAsync` on `ISnapRepository`         | W1    |
+| SQLite Migrations 26 + 27                                                     | W1    |
+| `getByCorrelationKey()` on `SqliteSnapRepository` + saver update              | W1    |
+| Correlation wired in all Oracle provider mappers                              | W2    |
+| `GET /api/snaps/process/{correlationKey}`                                     | W3    |
+| `GET/POST/DELETE /api/watchlist/processes/{correlationKey}`                   | W3    |
+| `LocalFileWatchedProcessRepository`                                           | W3    |
+| `IWatchedProcessService` / `WatchedProcessService`                            | W4    |
+| DI + context registration                                                     | W4    |
+| Watchlist screen tabs restructure + `ProcessTrackerCard`                      | W5    |
+| "Track Process" button in `PoliSnapRenderer`                                  | W5    |
 
 ---
 
@@ -321,24 +324,24 @@ No changes to `Build()` — correlation fields are always optional.
 
 Update the 5 existing schemas in `SnapSchemaRegistry.cs` to declare correlation metadata. Because `IsProcessOriented` and `CorrelationKeyFormat` are optional named parameters on the record, this is a non-breaking additive change:
 
-| Schema | IsProcessOriented | CorrelationKeyFormat |
-|---|---|---|
-| `ExecutiveOrder` | `true` | `"eo:{EoNumber}"` |
-| `BillActivity` | `true` | `"bill:{BillNumber}"` |
-| `FecContribution` | `true` | `"fec-donor:{DonorId}:{RepBioguide}"` |
-| `StagnationSentinel` | `false` | `null` |
-| `GrantPulse` | `true` | `"grant:{OpportunityId}"` |
+| Schema               | IsProcessOriented | CorrelationKeyFormat                  |
+| -------------------- | ----------------- | ------------------------------------- |
+| `ExecutiveOrder`     | `true`            | `"eo:{EoNumber}"`                     |
+| `BillActivity`       | `true`            | `"bill:{BillNumber}"`                 |
+| `FecContribution`    | `true`            | `"fec-donor:{DonorId}:{RepBioguide}"` |
+| `StagnationSentinel` | `false`           | `null`                                |
+| `GrantPulse`         | `true`            | `"grant:{OpportunityId}"`             |
 
 New schemas for future providers (register when the provider is built):
 
-| Schema | IsProcessOriented | CorrelationKeyFormat |
-|---|---|---|
-| `CommitteeHearing` | `true` | `"hearing:{CommitteeCode}-{Congress}"` |
-| `CabinetNomination` | `true` | `"cabinet:{RoleCode}-{Year}"` |
-| `StateLegislation` | `true` | `"state-bill:{StateCode}-{BillNumber}"` |
-| `CountyOrdinance` | `true` | `"ordinance:{StateCode}-{County}-{Year}-{Seq}"` |
-| `MunicipalMotion` | `true` | `"motion:{CitySlug}-{Year}-{Seq}"` |
-| `JudicialNomination` | `true` | `"judicial:{CourtCode}-{Year}-{Seat}"` |
+| Schema               | IsProcessOriented | CorrelationKeyFormat                            |
+| -------------------- | ----------------- | ----------------------------------------------- |
+| `CommitteeHearing`   | `true`            | `"hearing:{CommitteeCode}-{Congress}"`          |
+| `CabinetNomination`  | `true`            | `"cabinet:{RoleCode}-{Year}"`                   |
+| `StateLegislation`   | `true`            | `"state-bill:{StateCode}-{BillNumber}"`         |
+| `CountyOrdinance`    | `true`            | `"ordinance:{StateCode}-{County}-{Year}-{Seq}"` |
+| `MunicipalMotion`    | `true`            | `"motion:{CitySlug}-{Year}-{Seq}"`              |
+| `JudicialNomination` | `true`            | `"judicial:{CourtCode}-{Year}-{Seat}"`          |
 
 ---
 
@@ -429,6 +432,7 @@ public sealed class LocalFileWatchedProcessRepository : IWatchedProcessRepositor
 ### 8.1 Rule for All Providers
 
 Every `ISnapMapper<TSource>` whose snap type has `IsProcessOriented = true` MUST:
+
 - Call `.WithCorrelationKey(...)` with a value derived deterministically from a source DTO field.
 - Call `.WithProcessStep(...)` using a static lookup table (not an if-chain, not AI).
 - Call `.WithProcessStage(...)` with the verbatim label from the source data.
@@ -602,9 +606,9 @@ export interface WatchedProcess {
   correlationKey: string;
   displayName: string;
   processType: string;
-  watchedSince: string;       // ISO-8601
+  watchedSince: string; // ISO-8601
   notifyOnUpdate: boolean;
-  lastViewedAt?: string;      // ISO-8601 — null until user opens the tracker
+  lastViewedAt?: string; // ISO-8601 — null until user opens the tracker
 }
 ```
 
@@ -617,26 +621,36 @@ Add to `SqliteDatabaseService.ts` inside the second `withTransactionAsync` block
 ```typescript
 // Migration 26: Snap correlation fields
 if (currentVersion < 26) {
-  console.log("[SqliteDatabaseService] Applying Migration 26: Snap correlation fields...");
+  console.log(
+    "[SqliteDatabaseService] Applying Migration 26: Snap correlation fields...",
+  );
   for (const sql of [
     "ALTER TABLE snaps ADD COLUMN correlation_key TEXT",
     "ALTER TABLE snaps ADD COLUMN process_step INTEGER",
     "ALTER TABLE snaps ADD COLUMN process_stage TEXT",
     "ALTER TABLE snaps ADD COLUMN parent_snap_id TEXT",
   ]) {
-    try { await database.runAsync(sql); } catch { /* column may already exist */ }
+    try {
+      await database.runAsync(sql);
+    } catch {
+      /* column may already exist */
+    }
   }
   try {
     await database.runAsync(
-      "CREATE INDEX IF NOT EXISTS idx_snaps_correlation ON snaps(correlation_key)"
+      "CREATE INDEX IF NOT EXISTS idx_snaps_correlation ON snaps(correlation_key)",
     );
-  } catch { /* index may already exist */ }
+  } catch {
+    /* index may already exist */
+  }
   await database.runAsync("PRAGMA user_version = 26");
 }
 
 // Migration 27: Watched processes table
 if (currentVersion < 27) {
-  console.log("[SqliteDatabaseService] Applying Migration 27: Watched processes table...");
+  console.log(
+    "[SqliteDatabaseService] Applying Migration 27: Watched processes table...",
+  );
   await database.execAsync(`
     CREATE TABLE IF NOT EXISTS watched_processes (
       id TEXT PRIMARY KEY,
@@ -664,9 +678,9 @@ The `saver` in the constructor must persist the four new fields:
 
 ```typescript
 saver: (snap: PoliSnap) => ({
-  query: `INSERT OR REPLACE INTO snaps 
+  query: `INSERT OR REPLACE INTO snaps
     (id, sku, title, type, createdAt, metadata_json, sources_json, cached_at,
-     correlation_key, process_step, process_stage, parent_snap_id) 
+     correlation_key, process_step, process_stage, parent_snap_id)
     VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), ?, ?, ?, ?)`,
   params: [
     snap.id, snap.sku, snap.title, snap.type, snap.createdAt,
@@ -721,7 +735,11 @@ import { WatchedProcess } from "@/types/watched-process";
 
 export interface IWatchedProcessService {
   getWatchedProcesses(): Promise<WatchedProcess[]>;
-  watchProcess(correlationKey: string, displayName: string, processType: string): Promise<boolean>;
+  watchProcess(
+    correlationKey: string,
+    displayName: string,
+    processType: string,
+  ): Promise<boolean>;
   unwatchProcess(correlationKey: string): Promise<boolean>;
   isWatching(correlationKey: string): Promise<boolean>;
   getSnapsForProcess(correlationKey: string): Promise<PoliSnap[]>;
@@ -781,21 +799,33 @@ New tabs: `insights` / `tracked` / `processes`
 The `tracked` tab renders the existing flat snap list unchanged. The `processes` tab is new.
 
 New state:
+
 ```typescript
 const [watchedProcesses, setWatchedProcesses] = useState<WatchedProcess[]>([]);
-const [processSnaps, setProcessSnaps] = useState<Record<string, PoliSnap[]>>({});
-const { watchlistService, watchedProcessService, snapRepository, hapticService } = useServices();
+const [processSnaps, setProcessSnaps] = useState<Record<string, PoliSnap[]>>(
+  {},
+);
+const {
+  watchlistService,
+  watchedProcessService,
+  snapRepository,
+  hapticService,
+} = useServices();
 ```
 
 Load on focus (add alongside existing `loadWatchlist`):
+
 ```typescript
 const loadProcesses = useCallback(async () => {
   const processes = await watchedProcessService.getWatchedProcesses();
   setWatchedProcesses(processes);
   const snapMap: Record<string, PoliSnap[]> = {};
-  await Promise.all(processes.map(async (p) => {
-    snapMap[p.correlationKey] = await watchedProcessService.getSnapsForProcess(p.correlationKey);
-  }));
+  await Promise.all(
+    processes.map(async (p) => {
+      snapMap[p.correlationKey] =
+        await watchedProcessService.getSnapsForProcess(p.correlationKey);
+    }),
+  );
   setProcessSnaps(snapMap);
 }, [watchedProcessService]);
 ```
@@ -814,6 +844,7 @@ interface ProcessTrackerCardProps {
 ```
 
 **Render structure**:
+
 1. **Header**: `displayName` + unwatch icon button
 2. **Meta**: `processType` · "Watching since {date}"
 3. **Progress rail**: Derive sorted unique steps from `snaps`. Filled dot = has snaps, hollow = no snaps yet. Label the highest filled dot as current stage.
@@ -847,15 +878,15 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 
 ## 15. API Needs Summary
 
-| Endpoint | Status | Phase | Notes |
-|---|---|---|---|
-| `GET /api/watchlist` | ✅ Exists | — | Snap bookmarks (F1) — unchanged |
-| `POST /api/watchlist/{snapId}` | ✅ Exists | — | Snap bookmarks (F1) — unchanged |
-| `DELETE /api/watchlist/{snapId}` | ✅ Exists | — | Snap bookmarks (F1) — unchanged |
-| `GET /api/snaps/process/{correlationKey}` | ❌ New | W3 | All snaps in a process, ordered by step |
-| `GET /api/watchlist/processes` | ❌ New | W3 | List user's watched processes |
-| `POST /api/watchlist/processes/{correlationKey}` | ❌ New | W3 | Watch a process |
-| `DELETE /api/watchlist/processes/{correlationKey}` | ❌ New | W3 | Unwatch a process |
+| Endpoint                                           | Status    | Phase | Notes                                   |
+| -------------------------------------------------- | --------- | ----- | --------------------------------------- |
+| `GET /api/watchlist`                               | ✅ Exists | —     | Snap bookmarks (F1) — unchanged         |
+| `POST /api/watchlist/{snapId}`                     | ✅ Exists | —     | Snap bookmarks (F1) — unchanged         |
+| `DELETE /api/watchlist/{snapId}`                   | ✅ Exists | —     | Snap bookmarks (F1) — unchanged         |
+| `GET /api/snaps/process/{correlationKey}`          | ❌ New    | W3    | All snaps in a process, ordered by step |
+| `GET /api/watchlist/processes`                     | ❌ New    | W3    | List user's watched processes           |
+| `POST /api/watchlist/processes/{correlationKey}`   | ❌ New    | W3    | Watch a process                         |
+| `DELETE /api/watchlist/processes/{correlationKey}` | ❌ New    | W3    | Unwatch a process                       |
 
 ---
 
@@ -873,6 +904,7 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 ## 17. Implementation Phases
 
 ### Phase W1 — Domain Model & Data Layer
+
 **Acceptance gate**: `dotnet build` passes. `GetByCorrelationKeyAsync` returns snaps grouped by key.
 
 1. Add correlation fields to `PoliSnap.cs` (§4.1)
@@ -891,6 +923,7 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 14. Update saver + mapper + add `getByCorrelationKey()` in `SqliteSnapRepository.ts` (§12)
 
 ### Phase W2 — Provider Correlation Wiring
+
 **Acceptance gate**: Run ingest. Verify snaps for a bill have `CorrelationKey = "bill:{number}"` and ascending `ProcessStep` values.
 
 15. Wire `CongressionalActivityProvider` mapper (§8.2) — reference implementation
@@ -899,6 +932,7 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 18. Add process completeness warning to `ProviderBindingValidator` (§8.4)
 
 ### Phase W3 — API Endpoints
+
 **Acceptance gate**: `dotnet test` still 39+/39. Manual: `GET /api/snaps/process/bill:H.R.1041` returns ordered snap list.
 
 19. Add `GET /api/snaps/process/{correlationKey}` to `SnapsController.cs` (§9.1)
@@ -907,6 +941,7 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 22. Write xUnit tests for the three new controller actions
 
 ### Phase W4 — Mobile Service + Storage
+
 **Acceptance gate**: App starts without error. `watchedProcessService.watchProcess(...)` writes to SQLite. `getSnapsForProcess(...)` returns snaps from SQLite.
 
 23. Create `IWatchedProcessService.ts` (§13.1)
@@ -914,6 +949,7 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 25. Register in `container.ts` and `service-provider.tsx` (§13.3)
 
 ### Phase W5 — Mobile UX
+
 **Acceptance gate**: Tapping "Track Process" on a snap with a `correlationKey` adds it to the Tracking tab. The progress rail reflects the actual steps in the snap data.
 
 26. Add `processes` tab to watchlist screen (§14.1)
@@ -925,15 +961,15 @@ The prop is optional — all existing callers that do not pass `onTrackProcess` 
 
 ## 18. Acceptance Criteria
 
-| Criterion | Verified By |
-|---|---|
-| `CorrelationKey` is traceable to a source DTO field | Code review of each mapper — no UUID, no AI output |
-| All `IsProcessOriented` providers set `CorrelationKey` | `ProviderBindingValidator` warning appears if missing |
-| `GET /api/snaps/process/{key}` returns snaps ordered by `ProcessStep` | xUnit test + manual check |
-| Watching a process auto-surfaces all related snaps in Tracking tab | E2E: watch a bill, trigger ingest, verify new snaps appear |
-| Existing bookmark behavior is unchanged | Regression: add/remove snap bookmark still works end-to-end |
-| Snaps without `correlationKey` show bookmark-only UI | UI test: no "Track Process" button on standalone snaps |
-| Progress rail is data-driven, not hard-coded | Add a new process type without changing `ProcessTrackerCard` |
-| SQLite Migrations 26 + 27 are non-breaking | Try-catch on every `ALTER TABLE`; app starts clean on existing installs |
-| Delta sync delivers correlation fields to mobile | Fields present on snaps after `syncWithBackend()` |
-| New process type requires only a schema + mapper | Checklist: zero enum changes, zero switch-case changes, zero UI changes |
+| Criterion                                                             | Verified By                                                             |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `CorrelationKey` is traceable to a source DTO field                   | Code review of each mapper — no UUID, no AI output                      |
+| All `IsProcessOriented` providers set `CorrelationKey`                | `ProviderBindingValidator` warning appears if missing                   |
+| `GET /api/snaps/process/{key}` returns snaps ordered by `ProcessStep` | xUnit test + manual check                                               |
+| Watching a process auto-surfaces all related snaps in Tracking tab    | E2E: watch a bill, trigger ingest, verify new snaps appear              |
+| Existing bookmark behavior is unchanged                               | Regression: add/remove snap bookmark still works end-to-end             |
+| Snaps without `correlationKey` show bookmark-only UI                  | UI test: no "Track Process" button on standalone snaps                  |
+| Progress rail is data-driven, not hard-coded                          | Add a new process type without changing `ProcessTrackerCard`            |
+| SQLite Migrations 26 + 27 are non-breaking                            | Try-catch on every `ALTER TABLE`; app starts clean on existing installs |
+| Delta sync delivers correlation fields to mobile                      | Fields present on snaps after `syncWithBackend()`                       |
+| New process type requires only a schema + mapper                      | Checklist: zero enum changes, zero switch-case changes, zero UI changes |

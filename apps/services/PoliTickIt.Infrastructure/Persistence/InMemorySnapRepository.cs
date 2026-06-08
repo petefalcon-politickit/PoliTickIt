@@ -727,5 +727,26 @@ namespace PoliTickIt.Infrastructure.Persistence
                 .ToList();
             return Task.FromResult<IEnumerable<PoliSnap>>(results);
         }
+
+        public Task<IEnumerable<PoliSnap>> GetByCorrelationKeyAsync(string correlationKey)
+        {
+            var results = _store.Values
+                .Where(s => string.Equals(s.CorrelationKey, correlationKey, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(s => s.ProcessStep ?? int.MaxValue)
+                .ThenBy(s => s.CreatedAt)
+                .ToList();
+            return Task.FromResult<IEnumerable<PoliSnap>>(results);
+        }
+
+        public Task<IEnumerable<PoliSnap>> GetByChannelsAsync(IEnumerable<string> channels, int limit = 100)
+        {
+            var channelSet = new HashSet<string>(channels, StringComparer.OrdinalIgnoreCase);
+            var results = _store.Values
+                .Where(s => s.Channels.Any(c => channelSet.Contains(c)))
+                .OrderByDescending(s => s.CreatedAt)
+                .Take(limit)
+                .ToList();
+            return Task.FromResult<IEnumerable<PoliSnap>>(results);
+        }
     }
 }

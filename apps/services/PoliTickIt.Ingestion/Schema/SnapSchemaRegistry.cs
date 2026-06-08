@@ -47,7 +47,9 @@ public sealed class SnapSchemaRegistry : ISnapSchemaRegistry
                     new SnapElementTemplate("ContextThread", IsRequired: false, "Policy area context")
                 },
                 RequiredChannelPrefixes: new[] { "potus", "federal" },
-                DefaultTtl: TimeSpan.FromHours(24)
+                DefaultTtl: TimeSpan.FromHours(24),
+                IsProcessOriented: true,
+                CorrelationKeyFormat: "eo:{EoNumber}"
             ),
 
             ["BillActivity"] = new SnapSchema(
@@ -60,7 +62,9 @@ public sealed class SnapSchemaRegistry : ISnapSchemaRegistry
                     new SnapElementTemplate("ContextThread", IsRequired: false, "Legislative context")
                 },
                 RequiredChannelPrefixes: new[] { "congress", "federal" },
-                DefaultTtl: TimeSpan.FromHours(12)
+                DefaultTtl: TimeSpan.FromHours(12),
+                IsProcessOriented: true,
+                CorrelationKeyFormat: "bill:{BillNumber}"
             ),
 
             ["FecContribution"] = new SnapSchema(
@@ -72,7 +76,9 @@ public sealed class SnapSchemaRegistry : ISnapSchemaRegistry
                     new SnapElementTemplate("RepresentativeIdentity", IsRequired: false, "Candidate identity")
                 },
                 RequiredChannelPrefixes: new[] { "fec", "federal" },
-                DefaultTtl: TimeSpan.FromHours(6)
+                DefaultTtl: TimeSpan.FromHours(6),
+                IsProcessOriented: true,
+                CorrelationKeyFormat: "fec-donor:{DonorId}:{RepBioguide}"
             ),
 
             ["StagnationSentinel"] = new SnapSchema(
@@ -84,7 +90,8 @@ public sealed class SnapSchemaRegistry : ISnapSchemaRegistry
                     new SnapElementTemplate("ContextThread", IsRequired: true, "Root cause analysis")
                 },
                 RequiredChannelPrefixes: new[] { "sentinel" },
-                DefaultTtl: TimeSpan.FromHours(48)
+                DefaultTtl: TimeSpan.FromHours(48),
+                IsProcessOriented: false
             ),
 
             ["GrantPulse"] = new SnapSchema(
@@ -96,7 +103,9 @@ public sealed class SnapSchemaRegistry : ISnapSchemaRegistry
                     new SnapElementTemplate("TrustThread", IsRequired: true, "SAM.gov/Grants.gov verification")
                 },
                 RequiredChannelPrefixes: new[] { "grants", "federal" },
-                DefaultTtl: TimeSpan.FromHours(24)
+                DefaultTtl: TimeSpan.FromHours(24),
+                IsProcessOriented: true,
+                CorrelationKeyFormat: "grant:{OpportunityId}"
             )
         };
     }

@@ -36,7 +36,9 @@ public record SnapSchema(
     string Type,
     IReadOnlyList<SnapElementTemplate> RequiredElements,
     IReadOnlyList<string> RequiredChannelPrefixes,
-    TimeSpan DefaultTtl
+    TimeSpan DefaultTtl,
+    bool IsProcessOriented = false,
+    string? CorrelationKeyFormat = null
 );
 
 /// <summary>Template describing a required or optional element slot within a snap.</summary>

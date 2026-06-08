@@ -58,3 +58,12 @@ apps/services/PoliTickIt.Api/appsettings.Production.json
 # Publish profile credentials (contain deployment passwords)
 *.pubxml.user
 ServiceDependencies/
+
+# PoliSnap pipeline working folders (intermediate files — not source)
+apps/skill-execution/PoliSnaps/spawn/
+apps/skill-execution/PoliSnaps/normalized/
+apps/skill-execution/PoliSnaps/constructed/
+apps/skill-execution/PoliSnaps/distributed/
+
+# SQLite dev database
+politickit.db

@@ -1,0 +1,768 @@
+{
+    "members": [
+        {
+            "bioguideId": "L000607",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/6774305d0b34857ecc90910d_200.jpg"
+            },
+            "district": 16,
+            "name": "Liccardo, Sam T.",
+            "partyName": "Democratic",
+            "state": "California",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2025
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/L000607?format=json"
+        },
+        {
+            "bioguideId": "H001098",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/67742a6f0b34857ecc9090c5_200.jpg"
+            },
+            "district": 8,
+            "name": "Hamadeh, Abraham J.",
+            "partyName": "Republican",
+            "state": "Arizona",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2025
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/H001098?format=json"
+        },
+        {
+            "bioguideId": "G000605",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/67742a160b34857ecc9090bf_200.jpg"
+            },
+            "district": 13,
+            "name": "Gray, Adam",
+            "partyName": "Democratic",
+            "state": "California",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2025
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/G000605?format=json"
+        },
+        {
+            "bioguideId": "B001323",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/6774217e0b34857ecc909040_200.jpg"
+            },
+            "district": 0,
+            "name": "Begich, Nicholas J.",
+            "partyName": "Republican",
+            "state": "Alaska",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2025
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/B001323?format=json"
+        },
+        {
+            "bioguideId": "A000381",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/67741fc30b34857ecc90902e_200.jpg"
+            },
+            "district": 3,
+            "name": "Ansari, Yassamin",
+            "partyName": "Democratic",
+            "state": "Arizona",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2025
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/A000381?format=json"
+        },
+        {
+            "bioguideId": "S001172",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/s001172_200.jpg"
+            },
+            "district": 3,
+            "name": "Smith, Adrian",
+            "partyName": "Republican",
+            "state": "Nebraska",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2007
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/S001172?format=json"
+        },
+        {
+            "bioguideId": "J000288",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/j000288_200.jpg"
+            },
+            "district": 4,
+            "name": "Johnson, Henry C. \"Hank\"",
+            "partyName": "Democratic",
+            "state": "Georgia",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2007
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/J000288?format=json"
+        },
+        {
+            "bioguideId": "C001069",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/c001069_200.jpg"
+            },
+            "district": 2,
+            "name": "Courtney, Joe",
+            "partyName": "Democratic",
+            "state": "Connecticut",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2007
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/C001069?format=json"
+        },
+        {
+            "bioguideId": "P000034",
+            "depiction": {
+                "attribution": "Image, Congressional Pictorial Directory, 109th.",
+                "imageUrl": "https://www.congress.gov/img/member/p000034_200.jpg"
+            },
+            "district": 6,
+            "name": "Pallone, Frank",
+            "partyName": "Democratic",
+            "state": "New Jersey",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1987
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/P000034?format=json"
+        },
+        {
+            "bioguideId": "S001148",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/678152c81f9ad6ea6fb1eb7f_200.jpg"
+            },
+            "district": 2,
+            "name": "Simpson, Michael K.",
+            "partyName": "Republican",
+            "state": "Idaho",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1999
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/S001148?format=json"
+        },
+        {
+            "bioguideId": "S001145",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_il_9_schakowsky_janice_200.jpg"
+            },
+            "district": 9,
+            "name": "Schakowsky, Janice D.",
+            "partyName": "Democratic",
+            "state": "Illinois",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1999
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/S001145?format=json"
+        },
+        {
+            "bioguideId": "L000557",
+            "depiction": {
+                "attribution": "Image, Congressional Pictorial Directory, 109th.",
+                "imageUrl": "https://www.congress.gov/img/member/l000557_200.jpg"
+            },
+            "district": 1,
+            "name": "Larson, John B.",
+            "partyName": "Democratic",
+            "state": "Connecticut",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1999
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/L000557?format=json"
+        },
+        {
+            "bioguideId": "S000510",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_wa_9_smith_adam_200.jpg"
+            },
+            "district": 9,
+            "name": "Smith, Adam",
+            "partyName": "Democratic",
+            "state": "Washington",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1997
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/S000510?format=json"
+        },
+        {
+            "bioguideId": "D000197",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_co_1_degette_diana_200.jpg"
+            },
+            "district": 1,
+            "name": "DeGette, Diana",
+            "partyName": "Democratic",
+            "state": "Colorado",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1997
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/D000197?format=json"
+        },
+        {
+            "bioguideId": "D000096",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_il_7_davis_danny_200.jpg"
+            },
+            "district": 7,
+            "name": "Davis, Danny K.",
+            "partyName": "Democratic",
+            "state": "Illinois",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1997
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/D000096?format=json"
+        },
+        {
+            "bioguideId": "A000055",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/a000055_200.jpg"
+            },
+            "district": 4,
+            "name": "Aderholt, Robert B.",
+            "partyName": "Republican",
+            "state": "Alabama",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1997
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/A000055?format=json"
+        },
+        {
+            "bioguideId": "T000193",
+            "depiction": {
+                "attribution": "Image, Congressional Pictorial Directory, 109th.",
+                "imageUrl": "https://www.congress.gov/img/member/t000193_200.jpg"
+            },
+            "district": 2,
+            "name": "Thompson, Bennie G.",
+            "partyName": "Democratic",
+            "state": "Mississippi",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1993
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/T000193?format=json"
+        },
+        {
+            "bioguideId": "S000522",
+            "depiction": {
+                "attribution": "Collection of the U.S. House of Representatives <a href=\"http://history.house.gov/Collection/Detail/15032401950?ret=True\">About this object</a>",
+                "imageUrl": "https://www.congress.gov/img/member/s000522_200.jpg"
+            },
+            "district": 4,
+            "name": "Smith, Christopher H.",
+            "partyName": "Republican",
+            "state": "New Jersey",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1981
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/S000522?format=json"
+        },
+        {
+            "bioguideId": "S000185",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/s000185_200.jpg"
+            },
+            "district": 3,
+            "name": "Scott, Robert C. \"Bobby\"",
+            "partyName": "Democratic",
+            "state": "Virginia",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1993
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/S000185?format=json"
+        },
+        {
+            "bioguideId": "R000395",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/r000395_200.jpg"
+            },
+            "district": 5,
+            "name": "Rogers, Harold",
+            "partyName": "Republican",
+            "state": "Kentucky",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1981
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/R000395?format=json"
+        },
+        {
+            "bioguideId": "B000490",
+            "depiction": {
+                "attribution": "Image, Congressional Pictorial Directory, 109th.",
+                "imageUrl": "https://www.congress.gov/img/member/b000490_200.jpg"
+            },
+            "district": 2,
+            "name": "Bishop, Sanford D.",
+            "partyName": "Democratic",
+            "state": "Georgia",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1993
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/B000490?format=json"
+        },
+        {
+            "bioguideId": "L000491",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_ok_3_lucas_frank_200.jpg"
+            },
+            "district": 3,
+            "name": "Lucas, Frank D.",
+            "partyName": "Republican",
+            "state": "Oklahoma",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1993
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/L000491?format=json"
+        },
+        {
+            "bioguideId": "C001063",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_tx_28_cuellar_henry_200.jpg"
+            },
+            "district": 28,
+            "name": "Cuellar, Henry",
+            "partyName": "Democratic",
+            "state": "Texas",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2005
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/C001063?format=json"
+        },
+        {
+            "bioguideId": "M001157",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_tx_10_mccaul_michael_200.jpg"
+            },
+            "district": 10,
+            "name": "McCaul, Michael T.",
+            "partyName": "Republican",
+            "state": "Texas",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2005
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/M001157?format=json"
+        },
+        {
+            "bioguideId": "F000450",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_nc_5_foxx_virginia_200.jpg"
+            },
+            "district": 5,
+            "name": "Foxx, Virginia",
+            "partyName": "Republican",
+            "state": "North Carolina",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2005
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/F000450?format=json"
+        },
+        {
+            "bioguideId": "C001061",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_mo_5_cleaver_emanuel_200.jpg"
+            },
+            "district": 5,
+            "name": "Cleaver, Emanuel",
+            "partyName": "Democratic",
+            "state": "Missouri",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2005
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/C001061?format=json"
+        },
+        {
+            "bioguideId": "C001051",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/c001051_200.jpg"
+            },
+            "district": 31,
+            "name": "Carter, John R.",
+            "partyName": "Republican",
+            "state": "Texas",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2003
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/C001051?format=json"
+        },
+        {
+            "bioguideId": "C001053",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/c001053_200.jpg"
+            },
+            "district": 4,
+            "name": "Cole, Tom",
+            "partyName": "Republican",
+            "state": "Oklahoma",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2003
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/C001053?format=json"
+        },
+        {
+            "bioguideId": "R000575",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_al_3_rogers_mike_200.jpg"
+            },
+            "district": 3,
+            "name": "Rogers, Mike D.",
+            "partyName": "Republican",
+            "state": "Alabama",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2003
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/R000575?format=json"
+        },
+        {
+            "bioguideId": "W000795",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_sc_2_wilson_joe_200.jpg"
+            },
+            "district": 2,
+            "name": "Wilson, Joe",
+            "partyName": "Republican",
+            "state": "South Carolina",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2001
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/W000795?format=json"
+        },
+        {
+            "bioguideId": "L000560",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_wa_2_larsen_rick_200.jpg"
+            },
+            "district": 2,
+            "name": "Larsen, Rick",
+            "partyName": "Democratic",
+            "state": "Washington",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2001
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/L000560?format=json"
+        },
+        {
+            "bioguideId": "G000546",
+            "depiction": {
+                "attribution": "Collection of the U.S. House of Representatives",
+                "imageUrl": "https://www.congress.gov/img/member/g000546_200.jpg"
+            },
+            "district": 6,
+            "name": "Graves, Sam",
+            "partyName": "Republican",
+            "state": "Missouri",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2001
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/G000546?format=json"
+        },
+        {
+            "bioguideId": "M001143",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_mn_4_mccollum_betty_200.jpg"
+            },
+            "district": 4,
+            "name": "McCollum, Betty",
+            "partyName": "Democratic",
+            "state": "Minnesota",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 2001
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/M001143?format=json"
+        },
+        {
+            "bioguideId": "C000537",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/c000537_200.jpg"
+            },
+            "district": 6,
+            "name": "Clyburn, James E.",
+            "partyName": "Democratic",
+            "state": "South Carolina",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1993
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/C000537?format=json"
+        },
+        {
+            "bioguideId": "K000009",
+            "depiction": {
+                "attribution": "Image courtesy of the Member",
+                "imageUrl": "https://www.congress.gov/img/member/k000009_200.jpg"
+            },
+            "district": 9,
+            "name": "Kaptur, Marcy",
+            "partyName": "Democratic",
+            "state": "Ohio",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1983
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/K000009?format=json"
+        },
+        {
+            "bioguideId": "H000874",
+            "depiction": {
+                "attribution": "Congressional Pictorial Directory",
+                "imageUrl": "https://www.congress.gov/img/member/116_rp_md_5_hoyer_steny_200.jpg"
+            },
+            "district": 5,
+            "name": "Hoyer, Steny H.",
+            "partyName": "Democratic",
+            "state": "Maryland",
+            "terms": {
+                "item": [
+                    {
+                        "chamber": "House of Representatives",
+                        "startYear": 1981
+                    }
+                ]
+            },
+            "updateDate": "2025-09-24T07:40:12Z",
+            "url": "https://api.congress.gov/v3/member/H000874?format=json"
+        }
+    ],
+    "pagination": {
+        "count": 536,
+        "prev": "https://api.congress.gov/v3/member/congress/119?chamber=House&currentMember=true&offset=250&limit=250&format=json"
+    },
+    "request": {
+        "contentType": "application/json",
+        "format": "json"
+    }
+}

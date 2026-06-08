@@ -41,6 +41,16 @@ export class SqliteDatabaseService implements IDatabaseService {
         // Execute Foreign Key pragma separately - Use runAsync for single statements for better stability
         await database.runAsync("PRAGMA foreign_keys = ON");
 
+        // Schema repair: runs on every boot to recover columns that may be missing due to a prior
+        // withTransactionAsync rollback where DDL rolled back but PRAGMA user_version persisted
+        // (known expo-sqlite split-state on Android). Safe on fresh installs — snaps table won't
+        // exist yet so ALTER TABLE fails silently inside try/catch.
+        try { await database.runAsync("ALTER TABLE snaps ADD COLUMN cached_at TEXT DEFAULT (datetime('now'))"); } catch (e) {}
+        try { await database.runAsync("ALTER TABLE snaps ADD COLUMN correlation_key TEXT"); } catch (e) {}
+        try { await database.runAsync("ALTER TABLE snaps ADD COLUMN process_step INTEGER"); } catch (e) {}
+        try { await database.runAsync("ALTER TABLE snaps ADD COLUMN process_stage TEXT"); } catch (e) {}
+        try { await database.runAsync("ALTER TABLE snaps ADD COLUMN parent_snap_id TEXT"); } catch (e) {}
+
         // Handle Schema Migrations using user_version.
         // expo-sqlite web (wa-sqlite) can return the PRAGMA row with a different
         // column key depending on the backend. We read any numeric value from the
@@ -481,33 +491,64 @@ export class SqliteDatabaseService implements IDatabaseService {
             await database.runAsync("PRAGMA user_version = 24");
           }
 
-          // Migration 25: Snap TTL — cached_at column for delta-sync cache eviction
-          if (currentVersion < 25) {
-            console.log(
-              "[SqliteDatabaseService] Applying Migration 25: Adding cached_at to snaps...",
-            );
-            try {
-              await database.runAsync(
-                "ALTER TABLE snaps ADD COLUMN cached_at TEXT DEFAULT (datetime('now'))",
-              );
-            } catch (e) {
-              console.log(
-                "[SqliteDatabaseService] snaps.cached_at column already exists, skipping...",
-              );
-            }
-            await database.runAsync("PRAGMA user_version = 25");
-          }
         });
 
-        // TTL eviction: remove stale snaps that were cached more than SNAP_CACHE_TTL_HOURS ago.
-        // Runs after all migrations to avoid operating on a schema that may not yet have cached_at.
+        // Migrations 25-27 run OUTSIDE withTransactionAsync.
+        // ALTER TABLE DDL inside a transaction that rolls back on Android can leave columns
+        // missing while PRAGMA user_version persists — causing split-state on next boot.
+        // Running them standalone makes each step individually atomic and recoverable.
+
+        // Migration 25: Snap TTL — cached_at column for delta-sync cache eviction
+        if (currentVersion < 25) {
+          console.log("[SqliteDatabaseService] Applying Migration 25: Adding cached_at to snaps...");
+          try { await database.runAsync("ALTER TABLE snaps ADD COLUMN cached_at TEXT DEFAULT (datetime('now'))"); } catch (e) { /* already exists */ }
+          await database.runAsync("PRAGMA user_version = 25");
+        }
+
+        // Migration 26: Snap correlation fields
+        if (currentVersion < 26) {
+          console.log("[SqliteDatabaseService] Applying Migration 26: Snap correlation fields...");
+          try { await database.runAsync("ALTER TABLE snaps ADD COLUMN correlation_key TEXT"); } catch (e) { /* already exists */ }
+          try { await database.runAsync("ALTER TABLE snaps ADD COLUMN process_step INTEGER"); } catch (e) { /* already exists */ }
+          try { await database.runAsync("ALTER TABLE snaps ADD COLUMN process_stage TEXT"); } catch (e) { /* already exists */ }
+          try { await database.runAsync("ALTER TABLE snaps ADD COLUMN parent_snap_id TEXT"); } catch (e) { /* already exists */ }
+          try { await database.runAsync("CREATE INDEX IF NOT EXISTS idx_snaps_correlation ON snaps(correlation_key)"); } catch (e) { /* already exists */ }
+          await database.runAsync("PRAGMA user_version = 26");
+        }
+
+        // Migration 27: Watched processes table
+        if (currentVersion < 27) {
+          console.log("[SqliteDatabaseService] Applying Migration 27: Watched processes table...");
+          await database.runAsync(`
+            CREATE TABLE IF NOT EXISTS watched_processes (
+              id TEXT PRIMARY KEY,
+              correlation_key TEXT NOT NULL,
+              display_name TEXT,
+              process_type TEXT,
+              watched_since TEXT DEFAULT (datetime('now')),
+              notify_on_update INTEGER DEFAULT 1,
+              last_viewed_at TEXT,
+              synced INTEGER DEFAULT 0
+            )
+          `);
+          try { await database.runAsync("CREATE INDEX IF NOT EXISTS idx_wp_correlation ON watched_processes(correlation_key)"); } catch (e) { /* already exists */ }
+          await database.runAsync("PRAGMA user_version = 27");
+        }
+
+        // TTL eviction: remove stale snaps cached more than ttlHours ago.
+        // Wrapped in try/catch — if cached_at doesn't exist (e.g. migration rolled back
+        // on a previous boot leaving a split schema state), eviction is skipped silently.
         const ttlHours = 24;
-        await database.runAsync(
-          `DELETE FROM snaps WHERE cached_at IS NOT NULL AND cached_at < datetime('now', '-${ttlHours} hours')`,
-        );
-        console.log(
-          `[SqliteDatabaseService] TTL eviction complete (threshold: ${ttlHours}h).`,
-        );
+        try {
+          await database.runAsync(
+            `DELETE FROM snaps WHERE cached_at IS NOT NULL AND cached_at < datetime('now', '-${ttlHours} hours')`,
+          );
+          console.log(
+            `[SqliteDatabaseService] TTL eviction complete (threshold: ${ttlHours}h).`,
+          );
+        } catch (e) {
+          console.warn("[SqliteDatabaseService] TTL eviction skipped (schema not ready):", e);
+        }
 
         this.db = database;
 

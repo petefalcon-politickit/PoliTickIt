@@ -37,6 +37,36 @@ public class PoliSnap
     /// </summary>
     public bool IsRetracted { get; set; } = false;
     public DateTimeOffset? RetractedAt { get; set; }
+
+    // ── Process Correlation ──────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Groups all snaps belonging to the same political process.
+    /// Convention: "{processType}:{stableId}" — e.g. "bill:H.R.1041", "eo:14110".
+    /// Set deterministically by the ISnapMapper at ingest time.
+    /// Null for standalone snaps that are not part of a process.
+    /// </summary>
+    public string? CorrelationKey { get; set; }
+
+    /// <summary>
+    /// The snap ID of the root/origin snap in this process.
+    /// Null if this snap IS the root, or if the snap is standalone.
+    /// </summary>
+    public string? ParentSnapId { get; set; }
+
+    /// <summary>
+    /// Ordinal step within the process (1=first stage, N=final stage).
+    /// Meaning is defined per snap type by the mapper.
+    /// Null for standalone snaps or process types with no defined stages.
+    /// </summary>
+    public int? ProcessStep { get; set; }
+
+    /// <summary>
+    /// Human-readable stage label verbatim from the source data.
+    /// e.g. "Introduced", "In Committee", "Passed House", "Signed into Law".
+    /// </summary>
+    public string? ProcessStage { get; set; }
+
     public List<SnapElement> Elements { get; set; } = new();
     public SnapNavigation? Navigation { get; set; }
     public string? Theme { get; set; }
