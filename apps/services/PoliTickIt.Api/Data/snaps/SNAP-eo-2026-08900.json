@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-08900",
+  "sku": "EXECUTIVE-ORDER-2026-08900",
+  "title": "Promoting Efficiency, Accountability, and Performance in Federal Contracting",
+  "subtitle": "EO 14402",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-05-05T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.0297265Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/05/05/2026-08900/promoting-efficiency-accountability-and-performance-in-federal-contracting"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-08900",
+    "bodyText": "( printed page 24325) Executive Order 14402 of April 30, 2026 Promoting Efficiency, Accountability, and Performance in Federal Contracting By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose . The American people expect their Government to operate with integrity, efficiency, and transparency. For too long, Federal procurement has tolerated unpredictable costs, bloated overhead, and weak performance incentives. The United States Government must adopt the best business practices to protect taxpayer dollars, hold contractors accountable, and achieve demonstrable returns on investment. Many private-sector contracts focus on driving performance rather than ever-increasing costs, often dictating a fixed cost for a well-defined outcome. Fixed-price contracts are characterized by clearly defined outcomes and deliverables on predictable timelines for fixed prices that generally are not adjusted based on contractors\u0027 costs, and often tie profit to the contractors\u0027 performance, rewarding work that exceeds expectations and penalizing subpar performance. This performance-based model encourages contractors to control costs and expeditiously meet deliverables to maximize profits. Many Government contracts, however, operate on what is known as a \u0026ldquo;cost-reimbursement\u0026rdquo; model. Under that model, Government contractors are guaranteed reimbursement for their allowable incurred costs, and may receive profit margins on top of expenses. Cost-reimbursement contracts frequently allow for poorly defined product or service deliverables and increase the Government\u0027s exposure to overspending by providing little incentive to control costs. A review of spending across the Government in Fiscal Year 2024 identified approximately $120 billion obligated on cost-reimbursement consulting contracts alone. While there are circumstances in which cost-reimbursement contracting is appropriate, such as research and the pre-production developmental phase of major systems acquisition, it should be the exception, granted only in limited circumstances and with appropriate senior-level accountability at the agency. To ensure that Government contracts incentivize performance rather than cost inflation, it is the policy of my Administration that fixed-price contracts with performance-based considerations should serve as the default and preferred method of procurement in order to advance cost predictability and budget discipline, appropriate contractor incentives and accountability, and streamlined procurement and contract administration. Sec. 2 . Default to Fixed-Price Contracting . (a) To the maximum extent consistent with law, and except as provided in subsection (b) of this section, executive branch departments and agencies (agencies) shall, in procurement, utilize fixed-price contracts, which for purposes of this order shall mean fixed-price contracts as defined in Part 16 of the Feder\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/05/05/2026-08900.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14402",
+        "text": "Promoting Efficiency, Accountability, and Performance in Federal Contracting",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-04-30"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-db4fc392e99a407e9977919818733a3a",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14402: Promoting Efficiency, Accountability, and Performance in Federal Contracting",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

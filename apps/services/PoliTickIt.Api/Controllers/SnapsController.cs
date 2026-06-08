@@ -165,6 +165,33 @@ public sealed class SnapsController : ControllerBase
         return Ok(snap);
     }
 
+    // ──────────────────────────────────────────────────────────────────────────
+    // GET /api/snaps/delta?since={iso8601}
+    // ──────────────────────────────────────────────────────────────────────────
+    /// <summary>
+    /// Returns all snaps (including tombstones) where Max(CreatedAt, UpdatedAt)
+    /// is greater than <paramref name="since"/>.
+    /// Mobile clients call this on reconnect passing their last sync timestamp.
+    /// </summary>
+    [HttpGet("delta")]
+    [ProducesResponseType(typeof(SnapDeltaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetDelta([FromQuery] DateTimeOffset? since)
+    {
+        if (since is null)
+            return BadRequest(new { error = "Query parameter 'since' is required (ISO-8601 UTC)." });
+
+        var snaps = (await _snapRepository.GetDeltaAsync(since.Value)).ToList();
+
+        _logger.LogInformation("Delta sync: {Count} snaps since {Since}", snaps.Count, since);
+
+        return Ok(new SnapDeltaResponse(
+            Snaps: snaps,
+            Total: snaps.Count,
+            Since: since.Value,
+            SyncTimestamp: DateTimeOffset.UtcNow));
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     /// <summary>
@@ -198,7 +225,7 @@ public sealed class SnapsController : ControllerBase
     private enum FeedMode { National, MyFeed, Trending }
 }
 
-// ── Response DTO ──────────────────────────────────────────────────────────────
+// ── Response DTOs ─────────────────────────────────────────────────────────────
 public sealed record SnapFeedResponse(
     IReadOnlyList<PoliSnap> Snaps,
     int Total,
@@ -209,4 +236,10 @@ public sealed record SnapFeedResponse(
     /// incremental pull.
     /// </summary>
     DateTime SyncTimestamp);
+
+public sealed record SnapDeltaResponse(
+    IReadOnlyList<PoliSnap> Snaps,
+    int Total,
+    DateTimeOffset Since,
+    DateTimeOffset SyncTimestamp);
 

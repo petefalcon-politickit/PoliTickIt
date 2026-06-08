@@ -12,13 +12,15 @@ export class ApiSnapRepository implements ISnapRepository {
   private readonly baseUrl = "http://10.0.0.252:5000/api";
 
   async getAllSnaps(): Promise<PoliSnap[]> {
-    const url = `${this.baseUrl}/snaps/registry`;
+    const url = `${this.baseUrl}/snaps?limit=200`;
     try {
       // Increased timeout to 10s to account for backend cold-starts/rebuilds
       const response = await fetchWithTimeout(url, { timeout: 10000 });
       if (!response.ok)
         throw new Error(`Network response was not ok: ${response.status}`);
-      return await response.json();
+      const data = await response.json();
+      // API returns SnapFeedResponse { snaps: [...], total, mode, syncTimestamp }
+      return Array.isArray(data) ? data : (data.snaps ?? []);
     } catch (error: any) {
       console.error(
         `[ApiSnapRepository] Failed to fetch snaps from ${url}:`,
@@ -68,6 +70,66 @@ export class ApiSnapRepository implements ISnapRepository {
       });
       return await response.json();
     } catch (error) {
+      return [];
+    }
+  }
+
+  async getSnapsByRepresentativeId(repId: string): Promise<PoliSnap[]> {
+    const url = `${this.baseUrl}/snaps?channels=${encodeURIComponent(`Representative:${repId}`)}&limit=100`;
+    try {
+      const response = await fetchWithTimeout(url, { timeout: 10000 });
+      if (!response.ok) return [];
+      const data = await response.json();
+      return Array.isArray(data) ? data : (data.snaps ?? []);
+    } catch (error) {
+      console.warn(
+        `[ApiSnapRepository] getSnapsByRepresentativeId failed for ${repId}:`,
+        error,
+      );
+      return [];
+    }
+  }
+
+  /**
+   * Fetches only snaps updated after `since` (ISO-8601 string).
+   * Includes retracted tombstones so callers can evict them locally.
+   * Returns the server-stamped syncTimestamp alongside the snaps.
+   */
+  async getDeltaSnaps(
+    since: string,
+  ): Promise<{ snaps: PoliSnap[]; syncTimestamp: string }> {
+    const url = `${this.baseUrl}/snaps/delta?since=${encodeURIComponent(since)}`;
+    try {
+      const response = await fetchWithTimeout(url, { timeout: 10000 });
+      if (!response.ok)
+        throw new Error(`Delta fetch failed: ${response.status}`);
+      const data = await response.json();
+      return {
+        snaps: data.snaps ?? [],
+        syncTimestamp: data.syncTimestamp ?? new Date().toISOString(),
+      };
+    } catch (error: any) {
+      console.error(`[ApiSnapRepository] getDeltaSnaps failed:`, error.message);
+      return { snaps: [], syncTimestamp: since };
+    }
+  }
+
+  /**
+   * Fetches snaps for a specific channel with a configurable limit.
+   * Used for proactive cache hydration (e.g. on representative follow).
+   */
+  async getSnapsByChannel(channel: string, limit = 50): Promise<PoliSnap[]> {
+    const url = `${this.baseUrl}/snaps?channels=${encodeURIComponent(channel)}&limit=${limit}`;
+    try {
+      const response = await fetchWithTimeout(url, { timeout: 10000 });
+      if (!response.ok) return [];
+      const data = await response.json();
+      return Array.isArray(data) ? data : (data.snaps ?? []);
+    } catch (error) {
+      console.warn(
+        `[ApiSnapRepository] getSnapsByChannel failed for ${channel}:`,
+        error,
+      );
       return [];
     }
   }

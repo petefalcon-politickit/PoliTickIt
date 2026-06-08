@@ -38,8 +38,11 @@ export default function SettingsRepsScreen() {
   const [displayCount, setDisplayCount] = useState(PAGE_SIZE);
   const [filters, setFilters] = useState<RepFilters>(DEFAULT_FILTERS);
 
-  const { representativeRepository, apiRepresentativeRepository } =
-    useServices();
+  const {
+    representativeRepository,
+    apiRepresentativeRepository,
+    apiSyncService,
+  } = useServices();
 
   // â”€â”€ Load â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   useEffect(() => {
@@ -121,6 +124,10 @@ export default function SettingsRepsScreen() {
         representativeRepository.toggleFollow(id, newStatus),
         apiRepresentativeRepository.toggleFollow(id, newStatus),
       ]);
+      // B4: proactive cache hydration — fire-and-forget on follow
+      if (newStatus) {
+        apiSyncService.hydrateRepresentativeSnaps(id);
+      }
     } catch (error) {
       console.error("Failed to toggle representative follow:", error);
       setAllReps((prev) =>

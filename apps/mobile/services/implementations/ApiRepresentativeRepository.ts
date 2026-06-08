@@ -17,6 +17,7 @@ interface ApiRepResponse {
   chamber: string; // "House" | "Senate"
   imageUrl: string;
   congressGovUrl?: string;
+  branchType?: string; // "legislative" | "executive"
 }
 
 function mapApiRep(raw: ApiRepResponse): Representative {
@@ -32,6 +33,8 @@ function mapApiRep(raw: ApiRepResponse): Representative {
     level: "Federal",
     profileImage: raw.imageUrl || `${IMAGE_CDN_BASE}/${raw.id}.jpg`,
     imageUrl: raw.imageUrl,
+    branchType:
+      (raw.branchType as "legislative" | "executive") ?? "legislative",
   };
 }
 
@@ -72,6 +75,50 @@ export class ApiRepresentativeRepository implements IRepresentativeRepository {
         error.message,
       );
       return null;
+    }
+  }
+
+  /**
+   * Fetches the authenticated user's own representatives (House + 2 Senators)
+   * from the /api/my-representatives endpoint using the stored access token.
+   */
+  async fetchMyRepresentatives(): Promise<Representative[]> {
+    const url = `${this.baseUrl}/my-representatives`;
+    try {
+      const token = await apiAuthService.getAccessToken();
+      if (!token) {
+        console.warn("[ApiRepRepo] fetchMyRepresentatives: no access token");
+        return [];
+      }
+      const response = await fetchWithTimeout(url, {
+        timeout: 10000,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok)
+        throw new Error(`my-representatives fetch failed: ${response.status}`);
+      const raw: ApiRepResponse[] = await response.json();
+      return raw.map(mapApiRep);
+    } catch (error: any) {
+      console.error("[ApiRepRepo] fetchMyRepresentatives:", error.message);
+      return [];
+    }
+  }
+
+  /**
+   * Fetches all Executive Branch officials (President, VP, Cabinet) from the
+   * public /api/representatives/executive endpoint. No auth required.
+   */
+  async fetchExecutiveOfficials(): Promise<Representative[]> {
+    const url = `${this.baseUrl}/representatives/executive`;
+    try {
+      const response = await fetchWithTimeout(url, { timeout: 10000 });
+      if (!response.ok)
+        throw new Error(`executive officials fetch failed: ${response.status}`);
+      const raw: ApiRepResponse[] = await response.json();
+      return raw.map(mapApiRep);
+    } catch (error: any) {
+      console.error("[ApiRepRepo] fetchExecutiveOfficials:", error.message);
+      return [];
     }
   }
 

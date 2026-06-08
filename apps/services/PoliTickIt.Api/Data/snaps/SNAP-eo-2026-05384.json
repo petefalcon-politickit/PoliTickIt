@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-05384",
+  "sku": "EXECUTIVE-ORDER-2026-05384",
+  "title": "Promoting Access to Mortgage Credit",
+  "subtitle": "EO 14393",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-03-18T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.1777473Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/03/18/2026-05384/promoting-access-to-mortgage-credit"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-05384",
+    "bodyText": "( printed page 13203) Executive Order 14393 of March 13, 2026 Promoting Access to Mortgage Credit By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose. Every American seeking to buy a home should have access to a mortgage from a reliable lender, at a rate commensurate with his or her creditworthiness. Over the past two decades, however, statutory and regulatory changes\u0026mdash;including rules adopted under the Dodd-Frank Act, Public Law 111-203 , and subsequent rulemakings\u0026mdash;have increased the compliance costs of mortgage origination and servicing and distorted the structure of the mortgage market. These burdens have contributed to a significant decline in bank participation in mortgage lending. Community banks, generally institutions with fewer than $30 billion in assets, have been especially affected. The regulatory and rule changes have undermined community banks\u0027 businesses, concentrated credit and liquidity risk outside the banking system, and resulted in reduced access to credit for some creditworthy borrowers, including rural households and low- and moderate-income households. My Administration will reduce these regulatory burdens to ensure that these creditworthy borrowers can access the capital required to purchase a home. It is the policy of the United States to improve the availability and affordability of mortgage credit; tailor rules for community banks and \u0026ldquo;smaller banks\u0026rdquo; (banks with assets fewer than $100 billion); reduce the regulatory burden on community banks and otherwise facilitate community bank engagement in mortgage activity; foster innovation, growth, and consumer choice in the mortgage market; modernize origination and closing standards to reduce lending costs; remove regulatory distortions to the structure of the mortgage market and to ensure capital and liquidity frameworks subject similar credit and liquidity risks to similar regulation across the system; promote competition among mortgage lenders of all charter types to drive down mortgage rates; and strengthen housing-finance liquidity. Sec. 2 . Origination and Ability-to-Repay (ATR)/Qualified Mortgage (QM) Reform. (a) The Consumer Financial Protection Bureau (CFPB) shall consider, as appropriate and consistent with applicable law: (i) proposing amendments to Regulation Z that tailor the following requirements for smaller banks: ATR and QM requirements (including potentially a broader QM safe harbor for portfolio loans) and the requirements of the Truth in Lending Act, Public Law 90-321 (TILA), Real Estate Settlement Procedure Act, Public Law 93-533 (RESPA), and TILA-RESPA Integrated Disclosure (TRID) rules; (ii) replacing TRID timing rules with a materiality-based standard that preserves consumer clarity and reduces closing delays; (iii) exempting small-mortgage loans from caps on QM points and fees or, as appropriate, modifying such caps to support afford\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/03/18/2026-05384.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14393",
+        "text": "Promoting Access to Mortgage Credit",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-03-13"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-4ec6792f16084f24ac82fddd5f0e2d2b",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14393: Promoting Access to Mortgage Credit",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

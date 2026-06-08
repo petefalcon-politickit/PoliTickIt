@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PoliTickIt.Domain.Models;
@@ -15,5 +16,10 @@ namespace PoliTickIt.Domain.Interfaces
         /// "rep:D000622").  Returns null if no snap with that key exists.
         /// </summary>
         Task<PoliSnap?> FindByContentKeyAsync(string contentKey);
+        /// <summary>
+        /// Returns all snaps where <c>Max(CreatedAt, UpdatedAt) &gt; since</c>.
+        /// Includes tombstones (<c>IsRetracted = true</c>) so mobile clients can evict.
+        /// </summary>
+        Task<IEnumerable<PoliSnap>> GetDeltaAsync(DateTimeOffset since);
     }
 }

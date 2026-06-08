@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PoliTickIt.Domain.Exceptions;
 using PoliTickIt.Domain.Interfaces;
 using PoliTickIt.Domain.Models;
 
@@ -62,5 +63,20 @@ public class IngestionService : IIngestionService
         await _maintenance.AuditContextEfficiencyAsync();
 
         return allSnaps;
+    }
+
+    public async Task<IEnumerable<PoliSnap>> RunProviderAsync(string providerName)
+    {
+        var provider = _providers.FirstOrDefault(
+            p => string.Equals(p.ProviderName, providerName, System.StringComparison.OrdinalIgnoreCase))
+            ?? throw new ProviderNotFoundException(providerName);
+
+        var snaps = await provider.FetchLatestSnapsAsync();
+        var snapList = snaps.ToList();
+
+        _policyAreaNormalizer.NormalizeSnaps(snapList);
+        await _snapRepository.SaveSnapsAsync(snapList);
+
+        return snapList;
     }
 }

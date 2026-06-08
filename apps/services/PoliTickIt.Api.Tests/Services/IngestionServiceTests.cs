@@ -3,6 +3,7 @@ using Xunit;
 using PoliTickIt.Domain.Interfaces;
 using PoliTickIt.Domain.Models;
 using PoliTickIt.Ingestion.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace PoliTickIt.Api.Tests.Services;
 
@@ -51,7 +52,8 @@ public class IngestionServiceTests
 
         var providers = new List<IDataSourceProvider> { mockProvider1.Object, mockProvider2.Object };
         var mockMaintenance = new Mock<IManifestorMaintenanceService>();
-        var service = new IngestionService(providers, mockSnapRepository.Object, mockMaintenance.Object);
+        var mockNormalizer = new Mock<IPolicyAreaNormalizer>();
+        var service = new IngestionService(providers, mockSnapRepository.Object, mockMaintenance.Object, mockNormalizer.Object);
 
         // Act
         var result = await service.RunIngestionAsync();
@@ -75,7 +77,8 @@ public class IngestionServiceTests
         var providers = new List<IDataSourceProvider>();
         var mockSnapRepository = new Mock<ISnapRepository>();
         var mockMaintenance = new Mock<IManifestorMaintenanceService>();
-        var service = new IngestionService(providers, mockSnapRepository.Object, mockMaintenance.Object);
+        var mockNormalizer = new Mock<IPolicyAreaNormalizer>();
+        var service = new IngestionService(providers, mockSnapRepository.Object, mockMaintenance.Object, mockNormalizer.Object);
 
         // Act
         var result = await service.RunIngestionAsync();
@@ -108,7 +111,8 @@ public class IngestionServiceTests
             .Setup(p => p.FetchLatestSnapsAsync())
             .ReturnsAsync(testSnaps);
 
-        var service = new IngestionService(new[] { mockProvider.Object }, mockSnapRepository.Object, mockMaintenance.Object);
+        var mockNormalizer = new Mock<IPolicyAreaNormalizer>();
+        var service = new IngestionService(new[] { mockProvider.Object }, mockSnapRepository.Object, mockMaintenance.Object, mockNormalizer.Object);
 
         // Act
         await service.RunIngestionAsync();

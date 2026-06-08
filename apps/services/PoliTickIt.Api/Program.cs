@@ -23,15 +23,18 @@ using PoliTickIt.Ingestion.Configuration;
 using PoliTickIt.Ingestion.Normalization.Extensions;
 using PoliTickIt.Ingestion.Normalization.Interfaces;
 using PoliTickIt.Ingestion.Normalization.Models;
+using PoliTickIt.Ingestion.Schema;
+using PoliTickIt.Domain.CanonicalModel;
 using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ── Azure App Configuration + Key Vault (non-Development only) ────────────────
 // Local dev: secrets come from appsettings.Development.json (gitignored).
+// Testing:   WebApplicationFactory integration tests — skip remote config.
 // Azure:     non-secret config from Politickit-AC, secrets from Politickit-KV,
 //            both accessed via the Web App's System-Assigned Managed Identity.
-if (!builder.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment() && !builder.Environment.IsEnvironment("Testing"))
 {
     var credential = new ManagedIdentityCredential();
     builder.Configuration.AddAzureAppConfiguration(options =>
@@ -135,6 +138,9 @@ builder.Services.Configure<CongressApiOptions>(
 builder.Services.AddSingleton<IRepresentativeStore, CongressMemberStore>();
 builder.Services.AddHostedService<RepresentativesHydrationService>();
 
+// ── Executive Branch Officials Store ──────────────────────────────────────────
+builder.Services.AddSingleton<IExecutiveOfficialStore, ExecutiveOfficialStore>();
+
 // ── Policy Area Taxonomy ──────────────────────────────────────────────────────
 // IPolicyAreaStore: in-memory; seeded at startup from hardcoded Congress.gov taxonomy.
 // IPolicyAreaNormalizer: normalizes free-text provider labels → canonical slugs.
@@ -181,12 +187,18 @@ builder.Services.AddScoped<IManifestorIntelligenceService, ManifestorIntelligenc
 builder.Services.AddScoped<IManifestorMaintenanceService, ManifestorMaintenanceService>();
 builder.Services.AddScoped<IContextEnrichmentProcessor, ContextEnrichmentProcessor>();
 
+// Schema Registry & Builder (A1 — D5/D6)
+builder.Services.AddSingleton<ISnapSchemaRegistry, SnapSchemaRegistry>();
+builder.Services.AddTransient<SnapBuilder>();
+builder.Services.AddSingleton<IProviderBindingValidator, ProviderBindingValidator>();
+
 // Register Data Providers with API configuration
 builder.Services.AddScoped<IDataSourceProvider, FecProvider>();
 builder.Services.AddScoped<IDataSourceProvider, CongressionalActivityProvider>();
 builder.Services.AddScoped<IDataSourceProvider, EthicsCommitteeProvider>();
 builder.Services.AddScoped<IDataSourceProvider, FiscalPulseProvider>();
 builder.Services.AddScoped<IDataSourceProvider, GrantPulseProvider>();
+builder.Services.AddScoped<IDataSourceProvider, FederalRegisterIngestionProvider>();
 builder.Services.AddScoped<IIngestionService, IngestionService>();
 
 // Register Tech Debt Services
@@ -214,6 +226,8 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // ── Cosmos DB — ensure database and container exist ───────────────────────────
+// Skipped in Testing environment (WebApplicationFactory integration tests).
+if (!app.Environment.IsEnvironment("Testing"))
 {
     var cosmosClient = app.Services.GetRequiredService<CosmosClient>();
     var cosmosSettings = app.Services.GetRequiredService<IOptions<CosmosSettings>>().Value;

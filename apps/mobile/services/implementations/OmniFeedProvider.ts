@@ -205,6 +205,12 @@ export class OmniFeedProvider implements IOmniFeedProvider {
             s.metadata?.insightType === "Activity Reporting" ||
             s.elements.some((e) => e.type === "Metric.Progress.Stepper")),
       );
+    } else if (tab === "Executive Orders") {
+      filteredSnaps = snaps.filter(
+        (s) =>
+          s.type === "ExecutiveOrder" ||
+          s.metadata?.insightType === "Executive Order",
+      );
     } else if (tab === "Activity") {
       filteredSnaps = snaps.filter((s) => !isAuditRelated(s));
     }

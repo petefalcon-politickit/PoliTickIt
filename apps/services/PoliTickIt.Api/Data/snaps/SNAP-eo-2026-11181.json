@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-11181",
+  "sku": "EXECUTIVE-ORDER-2026-11181",
+  "title": "Removing Unnecessary and Counterproductive Restrictions on Access to Federal Lands",
+  "subtitle": "EO 14408",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-06-03T00:00:00",
+  "updatedAt": "2026-06-03T00:00:00",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/06/03/2026-11181/removing-unnecessary-and-counterproductive-restrictions-on-access-to-federal-lands"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-11181",
+    "bodyText": "( printed page 33577) Executive Order 14408 of May 29, 2026 Removing Unnecessary and Counterproductive Restrictions on Access to Federal Lands By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose. My Administration has eliminated a record number of unnecessary regulations to further our Nation\u0027s prosperity and reduce regulatory burdens on industries critical to our national and economic security while keeping sufficient environmental protections in place. Executive Order 11644 of February 8, 1972 (Use of Off-Road Vehicles on the Public Lands), and Executive Order 11989 of May 24, 1977 (Off-Road Vehicles on Public Lands), are examples of this excessive regulation. Both were issued about 50 years ago when today\u0027s technology was not available to be paired with existing Federal statutes. The Congress has enacted or amended a comprehensive set of statutory authorities to establish Federal land policy, including the National Historic Preservation Act, Public Law 89-665, 80 Stat. 915 (1966) (codified as amended at 54 U.S.C. 300101 et seq. ), the National Environmental Policy Act, Public Law 91-190, 83 Stat. 852 (1970) (codified as amended at 42 U.S.C. 4321 et seq. ), the Endangered Species Act, Public Law 93-205, 87 Stat. 884 (1973) (codified as amended at 16 U.S.C. 1531 et seq. ), and the Federal Land Policy and Management Act, Public Law 94-579, 90 Stat. 2743 (1976) (codified as amended at 43 U.S.C. 1701 et seq. ). I have determined that those statutory authorities, together with executive department and agency (agency) specific land management authorities, provide the appropriate framework for managing off-road vehicle use on Federal lands without retaining the additional specific designation criteria imposed by Executive Order 11644 and Executive Order 11989 . I have further determined that technological, operational, and land-management developments since the issuance of Executive Order 11644 and Executive Order 11989 support replacing those specific criteria with a framework grounded in applicable statutory authorities. Executive Order 11644 and Executive Order 11989 direct agencies to promulgate regulations providing that, where off-road vehicle use is permitted on Federal lands, roads, and trails, such use designations must be made in accordance with ill-defined criteria purportedly intended to minimize resource impacts and conflicts between different users of Federal land. These criteria, which are not required by statute, are difficult for agencies to operationalize due to vagueness, and include \u0026ldquo;minimiz[ing] harassment of wildlife or significant disruption of wildlife habitats,\u0026rdquo; minimizing \u0026ldquo;conflicts between off-road vehicle use and other existing or proposed recreational uses . . . taking into account noise and other factors,\u0026rdquo; and ensuring that off-road vehicle use in given locations will not \u0026ldquo;adversely affect [the \u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/06/03/2026-11181.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14408",
+        "text": "Removing Unnecessary and Counterproductive Restrictions on Access to Federal Lands",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-05-29"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-9983b3ad86d4400f867eff3f748d89fd",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14408: Removing Unnecessary and Counterproductive Restrictions on Access to Federal Lands",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

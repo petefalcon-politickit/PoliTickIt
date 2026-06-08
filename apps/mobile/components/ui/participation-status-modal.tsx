@@ -2,19 +2,17 @@ import { CapitalLogo } from "@/components/ui/capital-logo";
 import { PARTICIPATION_TIERS } from "@/constants/participation";
 import { Colors } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
-import { useThemeColor } from "@/hooks/use-theme-color";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-    Modal,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { ThemedText } from "../themed-text";
 
 interface ParticipationStatusModalProps {
   isVisible: boolean;
@@ -27,12 +25,12 @@ export const ParticipationStatusModal: React.FC<
   const { contributionCredits } = useActivity();
   const router = useRouter();
 
-  const backgroundColor = useThemeColor({}, "background");
-  const overlayColor = useThemeColor({}, "overlay");
-  const primaryColor = useThemeColor({}, "primary");
-  const secondaryTextColor = useThemeColor({}, "textSecondary");
-  const borderColor = useThemeColor({}, "border");
-  const surfaceColor = useThemeColor({}, "backgroundSecondary");
+  const backgroundColor = Colors.light.background;
+  const overlayColor = "rgba(0, 0, 0, 0.5)";
+  const primaryColor = Colors.light.primary;
+  const secondaryTextColor = Colors.light.textSecondary;
+  const borderColor = Colors.light.border;
+  const surfaceColor = Colors.light.backgroundSecondary;
 
   const currentLevel =
     [...PARTICIPATION_TIERS]
@@ -68,12 +66,10 @@ export const ParticipationStatusModal: React.FC<
               <CapitalLogo credits={contributionCredits} size={32} />
             </View>
             <View style={styles.headerTitleContainer}>
-              <ThemedText style={styles.brandTitle}>
-                Participation Capital
-              </ThemedText>
-              <ThemedText style={styles.brandSubtitle}>
+              <Text style={styles.brandTitle}>Participation Capital</Text>
+              <Text style={styles.brandSubtitle}>
                 Intelligence Earned, Not Bought.
-              </ThemedText>
+              </Text>
             </View>
             <TouchableOpacity style={styles.closeButton} onPress={onClose}>
               <Ionicons name="close" size={24} color={secondaryTextColor} />

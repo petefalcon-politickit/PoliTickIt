@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-05388",
+  "sku": "EXECUTIVE-ORDER-2026-05388",
+  "title": "Removing Regulatory Barriers to Affordable Home Construction",
+  "subtitle": "EO 14394",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-03-18T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.1404303Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/03/18/2026-05388/removing-regulatory-barriers-to-affordable-home-construction"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-05388",
+    "bodyText": "( printed page 13207) Executive Order 14394 of March 13, 2026 Removing Regulatory Barriers to Affordable Home Construction By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose. The American dream of homeownership depends on a dynamic housing market in which a varied inventory of new homes is built and renovated each year. Layers of unnecessary regulatory barriers, slow permitting processes, and onerous mandates at all levels of government have delayed construction, restricted development, and driven up the costs of new housing. These constraints have made housing less affordable for many Americans. It is the policy of my Administration to reduce regulatory barriers to building homes and to steward taxpayer dollars in a manner that promotes housing affordability. Sec. 2 . Targeting Federal Regulatory Barriers to Residential Development. (a) The Secretary of the Army, acting through the Assistant Secretary of the Army for Civil Works, and the Administrator of the Environmental Protection Agency shall review and revise requirements related to stormwater, wetlands, lakes, rivers, and other bodies of water to reduce housing construction and ownership costs, streamline regulatory and agency decision-making processes, reduce property tax burdens, and increase insurability, as appropriate and consistent with applicable law. Such requirements shall include: (i) the Construction General Permit for stormwater discharges from construction activity; (ii) federally issued Total Maximum Daily Loads; (iii) construction site and post-construction requirements for Municipal Separate Stormwater System permits; (iv) Federal standards for permits under section 404 of the Clean Water Act (CWA), 33 U.S.C. 1344 , for the discharge of dredged and fill material into waters of the United States; and (v) Federal standards for assumption of dredge and fill permitting by States and tribes under section 404(g) of CWA. (b) The Secretary of Commerce, the Secretary of Housing and Urban Development, the Secretary of Transportation, and the Director of the Federal Housing Finance Agency (FHFA) shall, within their respective authorities, consider eliminating unduly burdensome rules and reforming programs that constrain residential development and impede housing affordability, especially the construction of affordable single-family homes as well as suburban and exurban neighborhoods, including, as needed: (i) the Economic Development Administration\u0027s guidelines and investment priorities concerning development density; (ii) the Department of Transportation\u0027s Reconnecting Communities Pilot Program; (iii) the Department of Housing and Urban Development\u0027s Pathways to Removing Obstacles to Housing Program; and (iv) the FHFA\u0027s guidelines and regulations regarding chattel lending for manufactured housing and incentivizing low-balance home mortgages. ( printed page 13208) (c) The Secretary of Ag\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/03/18/2026-05388.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14394",
+        "text": "Removing Regulatory Barriers to Affordable Home Construction",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-03-13"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-b6ea2cc85f6d45c89f86f6a468845e88",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14394: Removing Regulatory Barriers to Affordable Home Construction",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

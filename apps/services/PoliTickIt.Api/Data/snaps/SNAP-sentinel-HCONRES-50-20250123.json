@@ -1,0 +1,74 @@
+{
+  "id": "sentinel-HCONRES-50-20250123",
+  "sku": "SENTINEL-STAGNATION-HCONRES-50",
+  "title": "Stagnation Sentinel: Calling on the Government of Venezuela to uphold the human rights and civil liberties of the people of Venezuela.",
+  "type": "Accountability",
+  "createdAt": "2026-06-02T23:46:45.7706768Z",
+  "updatedAt": "2026-06-02T23:46:45.7706768Z",
+  "channels": [
+    "PolicyArea:congress"
+  ],
+  "sources": [
+    {
+      "name": "Congress.gov",
+      "url": "https://api.congress.gov/v3/bill/110/hconres/50?format=json"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Congress",
+    "insightType": "Committee Stagnation",
+    "laymanSummary": "CRITICAL STAGNATION: This bill has been dormant for 496 days. Our forensic analysis indicates high institutional resistance.",
+    "keywords": [
+      "Stagnation",
+      "Friction",
+      "Bureaucracy",
+      "Sentinel",
+      "Depth:District",
+      "ContextScore:0.79"
+    ],
+    "policyAreaId": "congress"
+  },
+  "elements": [
+    {
+      "id": "stagnation-gauge",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Friction",
+        "value": 100,
+        "label": "Committee Friction",
+        "subLabel": "496 Days Dormant"
+      }
+    },
+    {
+      "id": "impact-indicator",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Accountability Delta"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Congress.gov API v3",
+        "verificationLevel": "Tier 2",
+        "analysisMode": "Forensic Stagnation Check"
+      }
+    },
+    {
+      "id": "context-thread-b3e967c2b707491fb0e1375f95728004",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "SNP-004 triggered: Stagnation detected on HCONRES 50.",
+        "refinementScore": 0.79,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

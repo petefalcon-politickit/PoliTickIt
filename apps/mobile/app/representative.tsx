@@ -21,21 +21,35 @@ import {
     View,
 } from "react-native";
 
-const TABS = [
-  "Activity",
-  "Audit",
-  "Productivity",
-  "Community",
-  "Voting",
-  "Events",
-  "Committee",
-  "Biography",
-];
+const TABS_BY_BRANCH: Record<string, string[]> = {
+  legislative: [
+    "Activity",
+    "Audit",
+    "Productivity",
+    "Community",
+    "Voting",
+    "Events",
+    "Committee",
+    "Biography",
+  ],
+  executive: [
+    "Activity",
+    "Executive Orders",
+    "Events",
+    "Productivity",
+    "Biography",
+  ],
+};
 
 export default function RepresentativeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  const { omniFeedProvider, representativeRepository } = useServices();
+  const {
+    omniFeedProvider,
+    representativeRepository,
+    apiRepresentativeRepository,
+    apiSyncService,
+  } = useServices();
   const {
     lastViewedRepresentativeId,
     setLastViewedRepresentativeId,
@@ -49,6 +63,9 @@ export default function RepresentativeScreen() {
   );
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("Activity");
+  const activeTabs =
+    TABS_BY_BRANCH[representative?.branchType ?? "legislative"] ??
+    TABS_BY_BRANCH.legislative;
   const [filterVisible, setFilterVisible] = useState(false);
   const [repSearchVisible, setRepSearchVisible] = useState(false);
 
@@ -68,6 +85,10 @@ export default function RepresentativeScreen() {
 
     try {
       await representativeRepository.toggleFollow(representative.id, newStatus);
+      // B4: proactive cache hydration — fire-and-forget on follow
+      if (newStatus) {
+        apiSyncService.hydrateRepresentativeSnaps(representative.id);
+      }
     } catch (error) {
       console.error("Failed to toggle follow:", error);
       // Revert on failure
@@ -115,8 +136,13 @@ export default function RepresentativeScreen() {
       }
 
       try {
-        const repData =
+        let repData =
           await representativeRepository.getRepresentativeById(targetId);
+        // Executive officials are not cached in SQLite — fall back to API
+        if (!repData) {
+          repData =
+            await apiRepresentativeRepository.getRepresentativeById(targetId);
+        }
         setRepresentative(repData);
         setLastViewedRepresentativeId(targetId);
 
@@ -153,6 +179,18 @@ export default function RepresentativeScreen() {
     representativeRepository,
   ]);
 
+  // Telemetry: log when user views the Executive Orders tab
+  useEffect(() => {
+    if (activeTab === "Executive Orders" && representative) {
+      // TODO: replace with real analytics SDK call (e.g. Amplitude, Firebase)
+      console.log("[Telemetry] executive_order_viewed", {
+        event: "executive_order_viewed",
+        representativeId: representative.id,
+        representativeName: representative.name,
+      });
+    }
+  }, [activeTab, representative]);
+
   const renderTabs = () => {
     if (!representative) return null;
 
@@ -166,7 +204,7 @@ export default function RepresentativeScreen() {
         pointerEvents="auto"
         style={styles.tabsScrollView}
       >
-        {TABS.map((tab) => (
+        {activeTabs.map((tab) => (
           <Pressable
             key={tab}
             onPress={() => {
@@ -386,10 +424,16 @@ export default function RepresentativeScreen() {
             ? {
                 name: representative.name,
                 avatar: representative.profileImage,
-                position: representative.position,
-                subtext: representative.district
-                  ? `${representative.state}, ${representative.district}`
-                  : representative.state,
+                position:
+                  representative.branchType === "executive"
+                    ? (representative.chamber ?? representative.position)
+                    : representative.position,
+                subtext:
+                  representative.branchType === "executive"
+                    ? "Executive Branch"
+                    : representative.district
+                      ? `${representative.state}, ${representative.district}`
+                      : representative.state,
                 isFollowing: representative.isFollowing,
                 onFollowPress: toggleFollow,
               }

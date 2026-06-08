@@ -96,6 +96,15 @@ public class LocalFileSnapRepository : ISnapRepository, IReloadableSnapRepositor
         return Task.FromResult<PoliSnap?>(null);
     }
 
+    public Task<IEnumerable<PoliSnap>> GetDeltaAsync(DateTimeOffset since)
+    {
+        var sinceUtc = since.UtcDateTime;
+        var results = _store.Values
+            .Where(s => (s.UpdatedAt > sinceUtc ? s.UpdatedAt : s.CreatedAt) > sinceUtc)
+            .ToList();
+        return Task.FromResult<IEnumerable<PoliSnap>>(results);
+    }
+
     public Task SaveSnapAsync(PoliSnap snap)
     {
         UpsertAndPersist(snap);

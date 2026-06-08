@@ -1,0 +1,71 @@
+{
+  "id": "bill-HCONRES-2-20260324",
+  "sku": "CONG-BILL-HCONRES-2",
+  "title": "Legislative Pulse: Expressing the sense of the Congress that children in the United States should understand and appreciate the contributions of individuals from the territories of the United States and the contributions of such individuals in United States history.",
+  "type": "Accountability",
+  "createdAt": "2026-03-24T00:00:00",
+  "updatedAt": "2026-03-24T00:00:00",
+  "channels": [
+    "PolicyArea:congress"
+  ],
+  "sources": [
+    {
+      "name": "Congress.gov",
+      "url": "https://api.congress.gov/v3/bill/110/hconres/2?format=json"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Congress",
+    "insightType": "Bill Tracking",
+    "laymanSummary": "Recent activity detected on HCONRES 2: Expressing the sense of the Congress that children in the United States should understand and appreciate the contributions of individuals from the territories of the United States and the contributions of such individuals in United States history.. This pulse tracks institutional velocity.",
+    "keywords": [
+      "Congress",
+      "Bill",
+      "Legislation",
+      "Activity",
+      "Depth:State",
+      "ContextScore:0.41"
+    ],
+    "policyAreaId": "congress"
+  },
+  "elements": [
+    {
+      "id": "bill-info",
+      "type": "Metric.Legislative.Info",
+      "data": {
+        "billNumber": "2",
+        "chamber": "House",
+        "status": "Updated"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Congress.gov API v3",
+        "verificationLevel": "Tier 2"
+      }
+    },
+    {
+      "id": "presentation-overrides",
+      "type": "Meta.Presentation",
+      "data": {
+        "fontSizeOffset": 5,
+        "v-rhythm": "tight-1"
+      }
+    },
+    {
+      "id": "context-thread-255ec72b19be4c1ea6645b47ae4ab8c3",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State",
+        "derivationSummary": "Legislative velocity update for HCONRES 2.",
+        "refinementScore": 0.41,
+        "activeTier": "State",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
-import { currentUser } from "@/constants/mockData";
 import { Colors, Typography } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
+import { useAuth } from "@/contexts/auth-context";
 import { useDrawer } from "@/contexts/drawer-context";
 import { useServices } from "@/contexts/service-provider";
 import { VerificationTier } from "@/services/interfaces/IVerificationService";
@@ -60,6 +60,12 @@ const activityItems: ActivityItem[] = [
     route: "representative",
   },
   {
+    id: "my-representation",
+    label: "My Representation",
+    icon: "account-multiple-outline",
+    route: "my-representation",
+  },
+  {
     id: "watchlist",
     label: "Watchlist",
     icon: "bookmark-outline",
@@ -115,6 +121,7 @@ const settingsItems: SettingsItem[] = [
 export const NavigationDrawer = () => {
   const { isOpen, closeDrawer } = useDrawer();
   const { counts, lastViewedRepresentativeId } = useActivity();
+  const { user } = useAuth();
   const { verificationService } = useServices();
   const router = useRouter();
   const pathname = usePathname();
@@ -208,7 +215,7 @@ export const NavigationDrawer = () => {
         >
           <View style={styles.avatarWrapper}>
             <Image
-              source={currentUser.profileImage}
+              source={user?.profileImage || require("@/assets/images/icon.png")}
               style={styles.headerAvatar}
               contentFit="cover"
             />
@@ -223,9 +230,11 @@ export const NavigationDrawer = () => {
             )}
           </View>
           <View style={styles.userContent}>
-            <Text style={styles.userName}>{String(currentUser.name)}</Text>
+            <Text style={styles.userName}>{String(user?.name ?? "")}</Text>
             <Text style={styles.userLocation}>
-              {String(currentUser.state)}, {String(currentUser.district)}
+              {user?.state && user?.district
+                ? `${user.state}, District ${user.district}`
+                : (user?.state ?? "")}
             </Text>
           </View>
         </TouchableOpacity>

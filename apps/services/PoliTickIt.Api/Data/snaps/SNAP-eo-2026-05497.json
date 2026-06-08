@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-05497",
+  "sku": "EXECUTIVE-ORDER-2026-05497",
+  "title": "Establishing the Task Force To Eliminate Fraud",
+  "subtitle": "EO 14395",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-03-19T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.131895Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/03/19/2026-05497/establishing-the-task-force-to-eliminate-fraud"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-05497",
+    "bodyText": "Executive Order 14395 of March 16, 2026 Establishing the Task Force To Eliminate Fraud By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose and Policy. American taxpayers fund a vast benefits system for citizens in need that includes housing, food, medical care, cash assistance, and more. States administer these federally funded programs, and some States have embraced loopholes that avoid individual eligibility validation, allow self-certification of eligibility, and expand eligibility far beyond what the Congress intended. Worse, despite accepting Federal funds, some States have refused to institute basic fraud controls such as providing enrollee information to the Federal Government that would allow it to verify eligibility. As a result, illegal aliens, criminals, foreign gangs, bureaucrats, State and local officials, non-governmental organizations, and ineligible providers exploit these programs\u0026mdash;which are intended to provide a safety net to lawfully eligible Americans\u0026mdash;with ease. This exploitation and lack of controls to prevent it have resulted in widespread fraud, waste, and abuse at the expense of the American taxpayers who pay for and utilize these programs, contributing substantially to the national debt. Self-dealing political actors use such public benefits programs to solidify control over their communities and our political systems. Due to lax immigration policy and immigration fraud, certain public officials admit into our country, and provide sanctuary from Federal immigration laws to, migrant populations who are likely to rely on means-tested, public assistance programs (welfare) and increase the political support and power of the public officials providing the benefits. This increased support incentivizes public officials to maximize the flow of welfare to these communities and makes public officials who do so more powerful. Many of these public officials then fail to police these programs\u0026mdash;and in some cases, willfully turn a blind eye to fraud, waste, and abuse within them\u0026mdash;to ensure that welfare flows to these migrants. Due to insufficient election integrity measures, some migrants who are not eligible to vote do so anyway, with the same public officials permitting widespread ballot harvesting schemes that compromise our election integrity and help these public officials remain in power. The staggering fraud and waste in Minnesota alone is a case in point. Federal prosecutors in the State estimate that Medicaid fraud in recent years could total in the billions. Nearly 9 percent of the roughly $866 million spent on food stamps in Minnesota each year is estimated to be spent in error. The non-profit Feeding our Future engineered a scam that stole nearly $250 million intended to feed needy children in Minnesota by opening fake meal sites and submitting fraudulent claims for millions of meals that were never served.\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/03/19/2026-05497.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14395",
+        "text": "Establishing the Task Force To Eliminate Fraud",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-03-16"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-afe3436d830f418a87aa7c3459278a1d",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14395: Establishing the Task Force To Eliminate Fraud",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

@@ -26,23 +26,24 @@ public class SnapsControllerTests : IAsyncLifetime
     public async Task GetAll_ShouldReturnEmptyList_WhenNoSnapsExist()
     {
         // Act
-        var response = await _client!.GetAsync("/snaps");
+        var response = await _client!.GetAsync("/api/snaps");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var content = await response.Content.ReadAsStringAsync();
-        var snaps = JsonSerializer.Deserialize<List<PoliSnap>>(content, 
+        var result = JsonSerializer.Deserialize<JsonElement>(content,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        
-        Assert.NotNull(snaps);
-        Assert.NotEmpty(snaps); // Repository is seeded with data
+
+        // SnapsController returns a SnapFeedResponse, not a raw list
+        Assert.True(result.TryGetProperty("snaps", out var snapsEl));
+        Assert.Equal(JsonValueKind.Array, snapsEl.ValueKind);
     }
 
     [Fact]
     public async Task GetById_ShouldReturnNotFound_WhenSnapDoesNotExist()
     {
         // Act
-        var response = await _client!.GetAsync("/snaps/non-existent-id");
+        var response = await _client!.GetAsync("/api/snaps/non-existent-id");
 
         // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -51,18 +52,19 @@ public class SnapsControllerTests : IAsyncLifetime
     [Fact]
     public async Task GetById_ShouldReturnSnap_WhenSnapExists()
     {
-        // First get all snaps to find an existing ID
-        var allResponse = await _client!.GetAsync("/snaps");
+        // First get all snaps to find an existing ID via the feed endpoint
+        var allResponse = await _client!.GetAsync("/api/snaps");
         var allContent = await allResponse.Content.ReadAsStringAsync();
-        var allSnaps = JsonSerializer.Deserialize<List<PoliSnap>>(allContent, 
+        var feedResult = JsonSerializer.Deserialize<JsonElement>(allContent,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        
-        Assert.NotNull(allSnaps);
-        Assert.NotEmpty(allSnaps);
-        
+
+        Assert.True(feedResult.TryGetProperty("snaps", out var snapsEl));
+        var snapsList = snapsEl.EnumerateArray().ToList();
+        Assert.NotEmpty(snapsList);
+
         // Now test getting by ID
-        var existingId = allSnaps[0].Id;
-        var response = await _client!.GetAsync($"/snaps/{existingId}");
+        var existingId = snapsList[0].GetProperty("id").GetString();
+        var response = await _client!.GetAsync($"/api/snaps/{existingId}");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

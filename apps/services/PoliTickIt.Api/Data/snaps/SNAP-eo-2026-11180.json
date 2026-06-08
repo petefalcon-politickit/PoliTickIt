@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-11180",
+  "sku": "EXECUTIVE-ORDER-2026-11180",
+  "title": "Realigning United States Core Childhood Vaccine Recommendations With Best Practices From Peer, Developed Countries",
+  "subtitle": "EO 14407",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-06-03T00:00:00",
+  "updatedAt": "2026-06-03T00:00:00",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/06/03/2026-11180/realigning-united-states-core-childhood-vaccine-recommendations-with-best-practices-from-peer"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-11180",
+    "bodyText": "Executive Order 14407 of May 29, 2026 Realigning United States Core Childhood Vaccine Recommendations With Best Practices From Peer, Developed Countries By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose and Policy. Pursuant to the Presidential Memorandum of December 5, 2025 (Aligning United States Core Childhood Vaccine Recommendations with Best Practices from Peer, Developed Countries) (Memorandum), the Department of Health and Human Services (HHS) completed a scientific assessment that compared United States childhood immunization recommendations with those of peer nations, analyzed vaccine uptake and public trust, evaluated clinical and epidemiological evidence and knowledge gaps, and examined vaccine mandates (scientific assessment). The scientific assessment found that the United States currently recommends more childhood vaccines than any peer nation, including more than twice as many vaccine doses as some European nations, and identified a set of consensus vaccines that are consistently recommended in all peer countries. The scientific assessment also found that, instead of implementing vaccination mandates, most peer nations maintain high childhood vaccination rates through public trust and education. My Administration is committed to ensuring that Americans are receiving the best scientifically supported medical advice in the world. Additionally, my Administration is committed to protecting religious liberty and parental authority. Therefore, it is the policy of the United States that the core childhood vaccine schedule should be aligned with scientific evidence and best practices from peer, developed countries while preserving access to vaccines currently available to Americans and that the Federal Government will continue to protect religious freedom and enforce all legal protections for parents. Sec. 2 . Updating the Childhood Vaccine Schedule. (a) The scientific assessment, with its proposed updates to the categories of the vaccine schedule, is acknowledged as a guiding resource for the Federal Government. (b) The Centers for Disease Control and Prevention (CDC) and its Advisory Committee on Immunization Practices (ACIP) shall review the scientific assessment and the latest clinical data and, to the extent permitted by law, take any appropriate steps to update the United States childhood and adolescent vaccine schedule. ACIP\u0027s review should consider ways to provide maximum flexibility to parents and doctors through recommendations for timing and sequencing of the administration of routine immunizations. (c) Each executive department and agency shall ensure all actions, regulations, funding, and coverage related to child and adolescent immunizations align with the schedule recommended by the ACIP and adopted by the CDC, including fulfilling all legal obligations with respect to parental authority, religious freedom, disability accommod\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/06/03/2026-11180.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14407",
+        "text": "Realigning United States Core Childhood Vaccine Recommendations With Best Practices From Peer, Developed Countries",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-05-29"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-78cf1da57c694033b6d1b6d74e492608",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14407: Realigning United States Core Childhood Vaccine Recommendations With Best Practices From Peer, Developed Countries",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

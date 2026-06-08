@@ -23,6 +23,6 @@ public class ApiWebApplicationFactory : WebApplicationFactory<Program>
             services.AddSingleton<ISnapRepository, InMemorySnapRepository>();
         });
 
-        builder.UseEnvironment("Development");
+        builder.UseEnvironment("Testing");
     }
 }

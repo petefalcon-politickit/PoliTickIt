@@ -20,16 +20,31 @@ import { useActivity } from "@/contexts/activity-context";
 import { ServiceProvider, useServices } from "@/contexts/service-provider";
 import { useWatchlist } from "@/contexts/watchlist-context";
 import { useTelemetry } from "@/hooks/use-telemetry";
+import {
+    ContextThreadAttributes,
+    GaugeAttributes,
+    RepresentativeIdentityAttributes,
+    TextBlockAttributes,
+    TrustThreadAttributes,
+} from "@/types/canonical-model";
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import { FeedGutter } from "./ui/feed-gutter";
 import { SeveredTitle } from "./ui/severed-title";
 
+/** Union of all typed element attribute shapes from canonical-model.ts */
+type ElementAttributes =
+  | TextBlockAttributes
+  | GaugeAttributes
+  | TrustThreadAttributes
+  | RepresentativeIdentityAttributes
+  | ContextThreadAttributes;
+
 interface Element {
   id: string;
   type?: string;
   template?: any;
-  data?: Record<string, any>;
+  data?: ElementAttributes | Record<string, unknown>;
   presentation?: any;
   provenance?: any;
   navigation?: any;
@@ -179,14 +194,16 @@ export const PoliSnapItem = ({
   const [activeTab, setActiveTab] = useState(
     tabs && tabs.length > 0 ? tabs[0] : "",
   );
+  const [eoExpanded, setEoExpanded] = useState(false);
 
-  const {
-    navigationService,
-    forensicSignalCoordinator,
-    hapticService,
-  } = useServices();
+  const { navigationService, forensicSignalCoordinator, hapticService } =
+    useServices();
   const { trackAction } = useTelemetry();
-  const { isWatched: ctxIsWatched, addToWatchlist, removeFromWatchlist } = useWatchlist();
+  const {
+    isWatched: ctxIsWatched,
+    addToWatchlist,
+    removeFromWatchlist,
+  } = useWatchlist();
   const isWatched = ctxIsWatched(snap.id);
 
   useEffect(() => {
@@ -425,6 +442,56 @@ export const PoliSnapItem = ({
           );
         })}
 
+        {/* Executive Order Full Text */}
+        {snap.type === "ExecutiveOrder" && snap.metadata?.bodyText && (
+          <View style={styles.eoBodyContainer}>
+            <ThemedText
+              style={styles.eoBodyText}
+              numberOfLines={eoExpanded ? undefined : 4}
+            >
+              {snap.metadata.bodyText}
+            </ThemedText>
+            <TouchableOpacity
+              style={styles.eoExpandButton}
+              onPress={() => setEoExpanded((v) => !v)}
+              activeOpacity={0.7}
+            >
+              <ThemedText style={styles.eoExpandText}>
+                {eoExpanded ? "Show less" : "Show more"}
+              </ThemedText>
+              <Ionicons
+                name={eoExpanded ? "chevron-up" : "chevron-down"}
+                size={13}
+                color={Colors.light.primary}
+              />
+            </TouchableOpacity>
+            {eoExpanded && snap.metadata.bodyHtmlUrl && (
+              <TouchableOpacity
+                style={styles.eoReadMoreButton}
+                onPress={() =>
+                  WebBrowser.openBrowserAsync(snap.metadata!.bodyHtmlUrl!)
+                }
+                activeOpacity={0.7}
+              >
+                <Ionicons
+                  name="document-text-outline"
+                  size={13}
+                  color={Colors.light.primary}
+                  style={{ marginRight: 5 }}
+                />
+                <ThemedText style={styles.eoReadMoreText}>
+                  Read full order on Federal Register
+                </ThemedText>
+                <Ionicons
+                  name="open-outline"
+                  size={12}
+                  color={Colors.light.primary}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
+
         {/* Standalone Snap-level Provenance (Institutional Receipt) */}
         {snap.metadata?.provenance && (
           <View style={{ marginTop: 11 }}>
@@ -482,6 +549,11 @@ export const PoliSnapItem = ({
         {renderContent()}
       </FeatureGate>
     );
+  }
+
+  // Retraction guard — do not render officially retracted snaps
+  if (snap.isRetracted) {
+    return null;
   }
 
   return renderContent();
@@ -676,6 +748,45 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     flexDirection: "row",
     alignItems: "center",
+  },
+  eoBodyContainer: {
+    marginTop: 12,
+    marginBottom: 8,
+    padding: Spacing.md,
+    backgroundColor: "#F8FAFC",
+    borderRadius: 8,
+    borderLeftWidth: 3,
+    borderLeftColor: Colors.light.primary,
+  },
+  eoBodyText: {
+    fontSize: Typography.sizes.sm,
+    lineHeight: 20,
+    color: Colors.light.textSlate,
+  },
+  eoExpandButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginTop: 6,
+  },
+  eoExpandText: {
+    fontSize: Typography.sizes.sm,
+    color: Colors.light.primary,
+    fontWeight: "500",
+  },
+  eoReadMoreButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+    paddingTop: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: Colors.light.border,
+  },
+  eoReadMoreText: {
+    fontSize: Typography.sizes.sm,
+    color: Colors.light.primary,
+    fontWeight: "500",
+    flex: 1,
   },
   footerText: {
     fontSize: Typography.sizes.sm,

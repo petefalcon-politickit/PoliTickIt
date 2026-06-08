@@ -1,0 +1,74 @@
+{
+  "id": "sentinel-HCONRES-32-20250606",
+  "sku": "SENTINEL-STAGNATION-HCONRES-32",
+  "title": "Stagnation Sentinel: Honoring the members of the United States Air Force who were killed in the June 25, 1996, terrorist bombing of the Khobar Towers United States military housing compound near Dhahran, Saudi Arabia.",
+  "type": "Accountability",
+  "createdAt": "2026-06-02T23:46:45.7713917Z",
+  "updatedAt": "2026-06-02T23:46:45.7713917Z",
+  "channels": [
+    "PolicyArea:congress"
+  ],
+  "sources": [
+    {
+      "name": "Congress.gov",
+      "url": "https://api.congress.gov/v3/bill/110/hconres/32?format=json"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Congress",
+    "insightType": "Committee Stagnation",
+    "laymanSummary": "CRITICAL STAGNATION: This bill has been dormant for 362 days. Our forensic analysis indicates high institutional resistance.",
+    "keywords": [
+      "Stagnation",
+      "Friction",
+      "Bureaucracy",
+      "Sentinel",
+      "Depth:District",
+      "ContextScore:0.79"
+    ],
+    "policyAreaId": "congress"
+  },
+  "elements": [
+    {
+      "id": "stagnation-gauge",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Friction",
+        "value": 99,
+        "label": "Committee Friction",
+        "subLabel": "362 Days Dormant"
+      }
+    },
+    {
+      "id": "impact-indicator",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 84,
+        "label": "Accountability Delta"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Congress.gov API v3",
+        "verificationLevel": "Tier 2",
+        "analysisMode": "Forensic Stagnation Check"
+      }
+    },
+    {
+      "id": "context-thread-2c6af0c05cf042e588cc24922992e31a",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "SNP-004 triggered: Stagnation detected on HCONRES 32.",
+        "refinementScore": 0.79,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-import { currentUser } from "@/constants/mockData";
 import { Colors, GlobalStyles, Spacing, Typography } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
+import { useAuth } from "@/contexts/auth-context";
 import { useDrawer } from "@/contexts/drawer-context";
 import { useServices } from "@/contexts/service-provider";
 import { VerificationTier } from "@/services/interfaces/IVerificationService";
@@ -53,6 +53,7 @@ export const PoliTickItHeader: React.FC<PoliTickItHeaderProps> = ({
 }) => {
   const { toggleDrawer } = useDrawer();
   const { contributionCredits } = useActivity();
+  const { user: authUser } = useAuth();
   const { verificationService } = useServices();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -202,7 +203,9 @@ export const PoliTickItHeader: React.FC<PoliTickItHeaderProps> = ({
             onPress={() => router.push("/profile")}
           >
             <Image
-              source={currentUser.profileImage}
+              source={
+                authUser?.profileImage || require("@/assets/images/icon.png")
+              }
               style={styles.headerAvatar}
               contentFit="cover"
             />
@@ -213,12 +216,13 @@ export const PoliTickItHeader: React.FC<PoliTickItHeaderProps> = ({
             )}
           </TouchableOpacity>
           <View>
-            <Text style={styles.userNameText}>{String(currentUser.name)}</Text>
+            <Text style={styles.userNameText}>
+              {String(authUser?.name ?? "")}
+            </Text>
             <View style={styles.metaRow}>
               <Text style={styles.location}>
-                {String(currentUser.state)}
-                {" • "}
-                {String(currentUser.district)}
+                {authUser?.state ?? ""}
+                {authUser?.district ? ` • District ${authUser.district}` : ""}
               </Text>
               <TierBadge credits={contributionCredits} />
             </View>

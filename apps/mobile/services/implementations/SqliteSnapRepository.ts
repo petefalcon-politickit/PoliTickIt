@@ -22,8 +22,8 @@ export class SqliteSnapRepository
           metadata: JSON.parse(row.metadata_json || "{}"),
         }),
         saver: (snap: PoliSnap) => ({
-          query: `INSERT OR REPLACE INTO snaps (id, sku, title, type, createdAt, metadata_json, sources_json) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          query: `INSERT OR REPLACE INTO snaps (id, sku, title, type, createdAt, metadata_json, sources_json, cached_at) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))`,
           params: [
             snap.id,
             snap.sku,
@@ -153,6 +153,13 @@ export class SqliteSnapRepository
       [pattern],
     );
     return Promise.all(rows.map((row: any) => this.mapRowToSnap(row)));
+  }
+
+  /**
+   * Removes a snap and its elements from the local cache (used for retraction tombstones).
+   */
+  async deleteSnap(id: string): Promise<void> {
+    await this.db.execute(`DELETE FROM snaps WHERE id = ?`, [id]);
   }
 
   /**

@@ -11,10 +11,14 @@
 //        — Returns all 535 current Congress members (RSP mobile sync).
 //   GET  /api/representatives/{bioguideId}
 //        — Returns a single member by BioguideId.
+//   GET  /api/my-representatives   [Authorize]
+//        — Returns the authenticated user's House member + 2 Senators,
+//          derived from the `state` and `district` JWT claims.
 //   POST /admin/hydrate-reps
 //        — Force-refresh the Congress member cache from api.congress.gov.
 // ─────────────────────────────────────────────────────────────────────────────
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PoliTickIt.Domain.Interfaces;
 using PoliTickIt.Domain.Models;
@@ -25,13 +29,16 @@ namespace PoliTickIt.Api.Controllers;
 public sealed class RepresentativesController : ControllerBase
 {
     private readonly IRepresentativeStore _store;
+    private readonly IExecutiveOfficialStore _executiveStore;
     private readonly ILogger<RepresentativesController> _logger;
 
     public RepresentativesController(
         IRepresentativeStore store,
+        IExecutiveOfficialStore executiveStore,
         ILogger<RepresentativesController> logger)
     {
         _store = store;
+        _executiveStore = executiveStore;
         _logger = logger;
     }
 
@@ -88,6 +95,11 @@ public sealed class RepresentativesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetById(string bioguideId)
     {
+        // Check executive store first (IDs like "POTUS-47", "SEC-STATE" never exist in Congress store)
+        var executive = _executiveStore.GetById(bioguideId);
+        if (executive is not null)
+            return Ok(RepresentativeMobileDto.FromExecutive(executive));
+
         if (!_store.IsHydrated)
             return Ok(null);
 
@@ -110,6 +122,47 @@ public sealed class RepresentativesController : ControllerBase
         await _store.HydrateAsync(ct);
         return Ok(new { status = "hydrated", memberCount = _store.GetAll().Count, timestamp = DateTime.UtcNow });
     }
+
+    // ──────────────────────────────────────────────────────────────────────────
+    // GET /api/my-representatives   [Authorize]
+    // Returns the authenticated user's House member + 2 Senators.
+    // State and district are read from the JWT claims (set at login time from
+    // the user's onboarding zip lookup — no extra DB call required).
+    // ──────────────────────────────────────────────────────────────────────────
+    [HttpGet("/api/my-representatives")]
+    [Authorize]
+    [ProducesResponseType(typeof(IReadOnlyList<RepresentativeMobileDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public IActionResult GetMyRepresentatives()
+    {
+        var state    = User.FindFirst("state")?.Value;
+        var district = User.FindFirst("district")?.Value;
+
+        if (string.IsNullOrWhiteSpace(state) || string.IsNullOrWhiteSpace(district))
+            return BadRequest(new { error = "User profile is missing state or district. Please update your district in Settings." });
+
+        if (!_store.IsHydrated)
+        {
+            _logger.LogWarning("My-representatives requested before hydration complete");
+            return Ok(Array.Empty<RepresentativeMobileDto>());
+        }
+
+        var members = _store.GetForDistrict(state.ToUpperInvariant(), district);
+        return Ok(members.Select(RepresentativeMobileDto.FromMember));
+    }
+
+    // ──────────────────────────────────────────────────────────────────────────
+    // GET /api/representatives/executive
+    // Returns all Executive Branch officials (President, VP, Cabinet).
+    // Public endpoint — no auth required.
+    // ──────────────────────────────────────────────────────────────────────────
+    [HttpGet("/api/representatives/executive")]
+    [ProducesResponseType(typeof(IReadOnlyList<RepresentativeMobileDto>), StatusCodes.Status200OK)]
+    public IActionResult GetExecutive()
+    {
+        var officials = _executiveStore.GetAll();
+        return Ok(officials.Select(RepresentativeMobileDto.FromExecutive));
+    }
 }
 
 // ── Response DTO (mobile-facing shape) ───────────────────────────────────────
@@ -125,7 +178,8 @@ public sealed record RepresentativeMobileDto(
     string? District,
     string Chamber,
     string ImageUrl,
-    string? CongressGovUrl)
+    string? CongressGovUrl,
+    string BranchType = "legislative")
 {
     private const string ImageCdnBase =
         "https://unitedstates.github.io/images/congress/225x275";
@@ -141,7 +195,20 @@ public sealed record RepresentativeMobileDto(
             ImageUrl:      !string.IsNullOrWhiteSpace(m.ImageUrl)
                                ? m.ImageUrl
                                : $"{ImageCdnBase}/{m.BioguideId}.jpg",
-            CongressGovUrl: m.CongressGovUrl);
+            CongressGovUrl: m.CongressGovUrl,
+            BranchType:    "legislative");
+
+    public static RepresentativeMobileDto FromExecutive(ExecutiveOfficial o) =>
+        new(
+            Id:            o.Id,
+            Name:          o.Name,
+            Party:         o.Party,
+            State:         o.State,
+            District:      null,
+            Chamber:       o.Title,
+            ImageUrl:      o.ImageUrl,
+            CongressGovUrl: null,
+            BranchType:    "executive");
 }
 
 // Keep old DTO name as alias so existing Swagger-generated clients don't break

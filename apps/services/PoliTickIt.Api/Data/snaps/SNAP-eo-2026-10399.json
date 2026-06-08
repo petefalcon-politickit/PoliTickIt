@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-10399",
+  "sku": "EXECUTIVE-ORDER-2026-10399",
+  "title": "Integrating Financial Technology Innovation Into Regulatory Frameworks",
+  "subtitle": "EO 14405",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-05-22T00:00:00",
+  "updatedAt": "2026-06-03T13:43:06.9859397Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/05/22/2026-10399/integrating-financial-technology-innovation-into-regulatory-frameworks"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-10399",
+    "bodyText": "( printed page 30475) Executive Order 14405 of May 19, 2026 Integrating Financial Technology Innovation Into Regulatory Frameworks By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Policy. The United States is a global leader in financial innovation, driven in part by the rapid growth of financial technology (fintech) firms. These firms provide innovative services and solutions that enhance access to financial products and services and create economic opportunity for all Americans. To foster this financial innovation, the Federal Government must update regulations to allow integration of digital assets and innovative technology into traditional financial services and payment systems. The Federal Government must also remove overly burdensome and fragmented regulations and supervisory practices that form barriers to entry and primarily benefit incumbent financial services firms. It is therefore the policy of the United States to streamline regulatory processes, reduce unnecessary barriers to entry, and encourage collaboration between fintech firms, federally regulated financial institutions, and Federal financial regulators. Sec. 2 . Definitions. For the purposes of this order: (a) \u0026ldquo;Fintech firm\u0026rdquo; refers to a non-bank company that uses or develops technological means to offer or support the offering of financial products or services, including, but not limited to, any application or any digital or online technology that facilitates access to, management of, or data processing for financial products or services. Such financial products or services may include, but are not limited to, payment processing, lending, deposit-taking, derivatives, investment management, brokerage services, underwriting and capital-market activities, custodial and fiduciary services, digital banking, digital asset-related services, securities and commodities market activities, and blockchain-based services. For the avoidance of doubt, such financial products or services also include the activities set forth in paragraphs (A) through (G) of section 4(k)(4) of the Bank Holding Company Act of 1956 ( 12 U.S.C. 1843(k)(4) ). (b) \u0026ldquo;Bank\u0026rdquo; has the meaning given that term in section 3 of the Federal Deposit Insurance Act ( 12 U.S.C. 1813 ). (c) \u0026ldquo;Credit union\u0026rdquo; means an \u0026ldquo;insured credit union\u0026rdquo;, as defined in section 101 of the Federal Credit Union Act ( 12 U.S.C. 1752(7) ). (d) \u0026ldquo;Financial products and services\u0026rdquo; refer to activities permissible under Federal or State law for a bank or credit union to undertake as well as the financial activities listed in Appendix A to 12 CFR part 242. (e) \u0026ldquo;Federal financial regulators\u0026rdquo; refers to the Consumer Financial Protection Bureau, the Securities and Exchange Commission, the National Credit Union Administration, the Commodity Futures Trading Commission, the Federal Deposit Insurance Corpo\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/05/22/2026-10399.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14405",
+        "text": "Integrating Financial Technology Innovation Into Regulatory Frameworks",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-05-19"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-d4a24432a93244f3955cb946fccdd16c",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14405: Integrating Financial Technology Innovation Into Regulatory Frameworks",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

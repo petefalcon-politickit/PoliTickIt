@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-04826",
+  "sku": "EXECUTIVE-ORDER-2026-04826",
+  "title": "Combating Cybercrime, Fraud, and Predatory Schemes Against American Citizens",
+  "subtitle": "EO 14390",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-03-11T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.2201265Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/03/11/2026-04826/combating-cybercrime-fraud-and-predatory-schemes-against-american-citizens"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-04826",
+    "bodyText": "Executive Order 14390 of March 6, 2026 Combating Cybercrime, Fraud, and Predatory Schemes Against American Citizens By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose and Policy. Cybercrime, fraud, and predatory schemes are draining American families of their life savings, stealing the benefits of years of work, and destroying the lives of our youth. These activities\u0026mdash;which include deploying ransomware and malware, phishing, financial fraud, \u0026ldquo;sextortion\u0026rdquo; and other extortion schemes, impersonation, and more\u0026mdash;are often coordinated campaigns carried out by Transnational Criminal Organizations (TCOs) aimed at the most vulnerable among us. In many cases, foreign regimes provide willing or tacit state support to cybercrime and predatory schemes, creating a shadow economy fueled by stolen identities, coercion, forced labor, and human trafficking. It is the policy of the United States to protect Americans from, and harden our financial and digital systems against, these threats. The United States shall counter attacks on Americans with a commensurate response that includes law enforcement, diplomacy, and potential offensive actions. It is further the policy of the United States to provide support to victims of these crimes, expand public alerts, and prioritize protection for those most at risk to end the exploitation and victimization of Americans. Sec. 2 . Combating Scam Centers and Cybercrime. (a) The Secretary of State, the Secretary of the Treasury, the Secretary of War, the Attorney General, and the Secretary of Homeland Security, in consultation with the Office of the National Cyber Director, and in coordination with the Assistant to the President and Homeland Security Advisor (APHSA), shall: (i) within 60 days of the date of this order, review the relevant operational, technical, diplomatic, and regulatory frameworks in place to determine how each can be improved to best combat TCOs engaged in cyber-enabled crime and similar predatory schemes against Americans; and (ii) within 120 days of the date of this order, using the results of the review directed in subsection (a)(i) of this section, submit to the President, through the APHSA, an action plan that identifies the TCOs responsible for scam centers and cybercrime and proposes solutions to prevent, disrupt, investigate, and dismantle these TCOs. This action plan shall provide for the creation of an operational cell within the National Coordination Center (NCC) established pursuant to section 6(d) of Executive Order 14159 of January 20, 2025 (Protecting the American People Against Invasion), which will be responsible for coordinating Federal efforts to detect, disrupt, dismantle, and deter\u0026mdash;including by involving the private sector as appropriate\u0026mdash;cyber-enabled criminal activity conducted by foreign TCOs and associated networks that target United States persons, busin\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/03/11/2026-04826.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14390",
+        "text": "Combating Cybercrime, Fraud, and Predatory Schemes Against American Citizens",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-03-06"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-9f055366263b48dbaed3e4a2af1b363d",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14390: Combating Cybercrime, Fraud, and Predatory Schemes Against American Citizens",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

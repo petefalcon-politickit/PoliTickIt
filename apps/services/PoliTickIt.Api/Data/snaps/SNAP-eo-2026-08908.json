@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-08908",
+  "sku": "EXECUTIVE-ORDER-2026-08908",
+  "title": "Promoting Retirement-Savings Access for American Workers by Establishing TrumpIRA.gov",
+  "subtitle": "EO 14403",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-05-05T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.020013Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/05/05/2026-08908/promoting-retirement-savings-access-for-american-workers-by-establishing-trumpiragov"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-08908",
+    "bodyText": "( printed page 24329) Executive Order 14403 of April 30, 2026 Promoting Retirement-Savings Access for American Workers by Establishing TrumpIRA.gov By the authority vested in me as President by the Constitution and the laws of the United States of America, and to ensure that every American worker has access to a simple, portable, low-cost retirement-savings option, it is hereby ordered: Section 1 . Policy . Tens of millions of Americans lack access to employer-sponsored retirement plans. Workers in small businesses, part-time workers, independent contractors, and self-employed workers face unnecessary barriers to saving for retirement. My Administration intends to give these often-left-out American workers access to the same type of retirement-savings opportunities offered to every Federal worker and to establish an easy and transparent way for eligible workers to obtain up to a $1,000 match for their savings. Hard-working Americans deserve retirement security in portable savings vehicles that offer access to low-cost investments similar to those offered to Federal workers in the Thrift Savings Plan. It is the policy of the United States to promote high-quality, low-cost individual retirement accounts (IRAs) offered by private-sector financial institutions that meet objective standards of cost, transparency, and fiduciary responsibility. It is further the policy of the United States to increase public awareness of the Federal Saver\u0027s Match enacted in the bipartisan SECURE 2.0 Act ( Public Law 117-328 , Division T) and to facilitate participation in eligible retirement-savings vehicles that provide diversified, index-based investment options. Through a federally administered retirement-savings informational platform that highlights qualifying high-quality, low-cost, private-sector IRAs, the United States will promote retirement-savings participation, provide access to retirement-savings options similar to those enjoyed by Federal employees, and encourage workers to reap the rewards of the vibrant American private-sector along with the power of compound earnings. Sec. 2 . Establishment of TrumpIRA.gov . (a) The Secretary of the Treasury shall, by January 1, 2027, establish a website (TrumpIRA.gov) that provides individuals, with a particular focus on independent contractors, self-employed individuals, and other workers who do not have access to an employer-sponsored retirement plan, with information about high-quality, low-cost IRAs. Individuals who contribute to qualifying IRAs, and who are otherwise eligible, are entitled to a Federal Saver\u0027s Match contribution of up to $1,000 pursuant to 26 U.S.C. 6433 . (b) TrumpIRA.gov shall list financial institutions that offer IRAs under 26 U.S.C. 408 , accept the Federal Saver\u0027s Match contribution under 26 U.S.C. 6433(e)(2)(C) , and meet other criteria, as directed by the Secretary of the Treasury, consistent with applicable law. In addition, TrumpIRA.gov shall explain the cost and quality criteria describ\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/05/05/2026-08908.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14403",
+        "text": "Promoting Retirement-Savings Access for American Workers by Establishing TrumpIRA.gov",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-04-30"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-f3cf147550f14ce683368f41acd5539d",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14403: Promoting Retirement-Savings Access for American Workers by Establishing TrumpIRA.gov",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

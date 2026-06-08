@@ -26,6 +26,8 @@ export class SqliteRepresentativeRepository
             profileImage: row.profile_image,
             biography: row.biography,
             isFollowing: !!row.is_following,
+            branchType:
+              (row.branch_type as "legislative" | "executive") ?? "legislative",
             ...meta,
           };
         },
@@ -43,14 +45,16 @@ export class SqliteRepresentativeRepository
             isFollowing,
             bioguideId,
             imageUrl,
+            branchType,
             ...meta
           } = rep;
           const effectiveChamber = chamber ?? position ?? null;
+          const effectiveBranch = branchType ?? "legislative";
           return {
             query: `INSERT OR REPLACE INTO representatives (
               id, name, position, chamber, party, state, district,
-              profile_image, biography, is_following, metadata_json
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              profile_image, biography, is_following, branch_type, metadata_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             params: [
               id,
               name,
@@ -62,6 +66,7 @@ export class SqliteRepresentativeRepository
               profileImage || null,
               biography || null,
               isFollowing ? 1 : 0,
+              effectiveBranch,
               JSON.stringify(meta || {}),
             ],
           };
@@ -100,14 +105,16 @@ export class SqliteRepresentativeRepository
       isFollowing, // intentionally NOT written — sovereignty rule
       bioguideId,
       imageUrl,
+      branchType,
       ...meta
     } = rep;
     const effectiveChamber = chamber ?? position ?? null;
+    const effectiveBranch = branchType ?? "legislative";
 
     await this.db.execute(
       `INSERT INTO representatives (
-        id, name, position, chamber, party, state, district, profile_image, biography, metadata_json
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        id, name, position, chamber, party, state, district, profile_image, biography, branch_type, metadata_json
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       ON CONFLICT(id) DO UPDATE SET
         name = excluded.name,
         position = excluded.position,
@@ -117,6 +124,7 @@ export class SqliteRepresentativeRepository
         district = excluded.district,
         profile_image = excluded.profile_image,
         biography = excluded.biography,
+        branch_type = excluded.branch_type,
         metadata_json = excluded.metadata_json;`,
       [
         id,
@@ -128,6 +136,7 @@ export class SqliteRepresentativeRepository
         district || null,
         profileImage || null,
         biography || null,
+        effectiveBranch,
         JSON.stringify(meta || {}),
       ],
     );

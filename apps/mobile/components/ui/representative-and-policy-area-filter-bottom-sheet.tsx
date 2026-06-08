@@ -6,15 +6,15 @@ import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import React, { useRef, useState } from "react";
 import {
-    FlatList,
-    Modal,
-    PanResponder,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Modal,
+  PanResponder,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 interface RepresentativeAndPolicyAreaFilterBottomSheetProps {
@@ -24,6 +24,7 @@ interface RepresentativeAndPolicyAreaFilterBottomSheetProps {
     sortBy: "date-desc" | "date-asc" | "relevancy";
     importance: "all" | "high" | "medium";
     insightType: string;
+    branch: "all" | "legislative" | "executive";
     reps: string[];
     policies: string[];
     state: string;
@@ -422,6 +423,12 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
     "general",
   );
   const overlayColor = useThemeColor({}, "overlay");
+  const pickerOverlayColor = useThemeColor({}, "modalOverlay");
+  const pickerContentBg = useThemeColor({}, "background");
+  const pickerTextColor = useThemeColor({}, "text");
+  const pickerTitleColor = useThemeColor({}, "text");
+  const pickerItemActiveBg = useThemeColor({}, "backgroundSecondary");
+
   const [followingOnlyReps, setFollowingOnlyReps] = useState(true);
   const [followingOnlyPolicy, setFollowingOnlyPolicy] = useState(false);
 
@@ -432,6 +439,9 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
     "all",
   );
   const [insightType, setInsightType] = useState("All Types");
+  const [branch, setBranch] = useState<"all" | "legislative" | "executive">(
+    "all",
+  );
 
   const panResponder = useRef(
     PanResponder.create({
@@ -646,6 +656,27 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
         <ThemedText style={styles.dropdownText}>{insightType}</ThemedText>
         <Ionicons name="chevron-down" size={20} color={Colors.light.text} />
       </TouchableOpacity>
+
+      <ThemedText style={styles.sectionTitle}>Branch</ThemedText>
+      <View style={styles.chipContainer}>
+        {(["all", "legislative", "executive"] as const).map((b) => (
+          <TouchableOpacity
+            key={b}
+            style={[styles.chip, branch === b && styles.activeChip]}
+            onPress={() => setBranch(b)}
+          >
+            <ThemedText
+              style={[styles.chipText, branch === b && styles.activeChipText]}
+            >
+              {b === "all"
+                ? "All"
+                : b === "legislative"
+                  ? "Legislative"
+                  : "Executive"}
+            </ThemedText>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 
@@ -729,17 +760,26 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
 
     return (
       <Modal visible={!!activePicker} transparent animationType="fade">
-        <View style={styles.pickerOverlay}>
+        <View
+          style={[
+            styles.pickerOverlay,
+            { backgroundColor: pickerOverlayColor },
+          ]}
+        >
           <TouchableOpacity
             style={styles.pickerDismissArea}
             activeOpacity={1}
             onPress={() => setActivePicker(null)}
           />
-          <View style={styles.pickerContent}>
+          <View
+            style={[styles.pickerContent, { backgroundColor: pickerContentBg }]}
+          >
             <View style={styles.pickerHeader}>
-              <Text style={styles.pickerTitle}>Select {activePicker}</Text>
+              <Text style={[styles.pickerTitle, { color: pickerTitleColor }]}>
+                Select {activePicker}
+              </Text>
               <TouchableOpacity onPress={() => setActivePicker(null)}>
-                <Ionicons name="close" size={24} color={Colors.light.text} />
+                <Ionicons name="close" size={24} color={pickerTextColor} />
               </TouchableOpacity>
             </View>
             <FlatList
@@ -749,7 +789,10 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
                 <TouchableOpacity
                   style={[
                     styles.pickerItem,
-                    currentVal === item && styles.pickerItemActive,
+                    currentVal === item && [
+                      styles.pickerItemActive,
+                      { backgroundColor: pickerItemActiveBg },
+                    ],
                   ]}
                   onPress={() => {
                     setter(item);
@@ -759,6 +802,7 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
                   <Text
                     style={[
                       styles.pickerItemText,
+                      { color: pickerTextColor },
                       currentVal === item && styles.pickerItemTextActive,
                     ]}
                   >
@@ -787,6 +831,7 @@ export const RepresentativeAndPolicyAreaFilterBottomSheet: React.FC<
       sortBy,
       importance,
       insightType,
+      branch,
       reps: selectedReps,
       policies: selectedPolicies,
       state: selectedState,
@@ -1220,8 +1265,8 @@ const styles = StyleSheet.create({
   // Picker Styles
   pickerOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    alignItems: "center",
   },
   pickerDismissArea: {
     position: "absolute",
@@ -1231,53 +1276,52 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   pickerContent: {
-    backgroundColor: "#FFFFFF",
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    height: "80%", // Fixed height works best with FlatList inside Modal
-    width: "100%",
+    width: "90%",
+    maxWidth: 400,
+    borderRadius: 12,
+    maxHeight: "70%",
+    overflow: "hidden",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   pickerHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 24,
+    padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#E2E8F0",
+    borderBottomColor: Colors.light.separator,
   },
   pickerTitle: {
-    fontSize: Typography.sizes.md,
-    fontWeight: "bold",
-    color: Colors.light.primary,
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
+    fontSize: 18,
+    fontWeight: "600",
   },
   pickerList: {
-    flex: 1, // Required to fill the remaining 75% height
+    // The list itself
   },
   pickerListContent: {
     padding: 16,
     paddingBottom: 60, // Ensure bottom items aren't cut off
   },
   pickerItem: {
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 18,
-    paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F7FAFC",
   },
   pickerItemActive: {
-    backgroundColor: "#F7FAFC",
+    // backgroundColor is now set dynamically
   },
   pickerItemText: {
-    fontSize: Typography.sizes.base,
-    color: Colors.light.textSecondary,
+    fontSize: 16,
   },
   pickerItemTextActive: {
     color: Colors.light.primary,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   primaryButton: {
     backgroundColor: Colors.light.primary,

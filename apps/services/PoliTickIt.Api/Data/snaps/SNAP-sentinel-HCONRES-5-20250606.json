@@ -1,0 +1,74 @@
+{
+  "id": "sentinel-HCONRES-5-20250606",
+  "sku": "SENTINEL-STAGNATION-HCONRES-5",
+  "title": "Stagnation Sentinel: Expressing support for the designation and goals of \u0022Hire a Veteran Week\u0022 and encouraging the President to issue a proclamation supporting those goals.",
+  "type": "Accountability",
+  "createdAt": "2026-06-02T23:46:45.7706334Z",
+  "updatedAt": "2026-06-02T23:46:45.7706334Z",
+  "channels": [
+    "PolicyArea:congress"
+  ],
+  "sources": [
+    {
+      "name": "Congress.gov",
+      "url": "https://api.congress.gov/v3/bill/110/hconres/5?format=json"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Congress",
+    "insightType": "Committee Stagnation",
+    "laymanSummary": "CRITICAL STAGNATION: This bill has been dormant for 362 days. Our forensic analysis indicates high institutional resistance.",
+    "keywords": [
+      "Stagnation",
+      "Friction",
+      "Bureaucracy",
+      "Sentinel",
+      "Depth:District",
+      "ContextScore:0.79"
+    ],
+    "policyAreaId": "congress"
+  },
+  "elements": [
+    {
+      "id": "stagnation-gauge",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Friction",
+        "value": 99,
+        "label": "Committee Friction",
+        "subLabel": "362 Days Dormant"
+      }
+    },
+    {
+      "id": "impact-indicator",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 84,
+        "label": "Accountability Delta"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Congress.gov API v3",
+        "verificationLevel": "Tier 2",
+        "analysisMode": "Forensic Stagnation Check"
+      }
+    },
+    {
+      "id": "context-thread-524a588622564a228b58b0d594b3f67e",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "SNP-004 triggered: Stagnation detected on HCONRES 5.",
+        "refinementScore": 0.79,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

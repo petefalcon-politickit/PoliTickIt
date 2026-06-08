@@ -456,7 +456,58 @@ export class SqliteDatabaseService implements IDatabaseService {
             }
             await database.runAsync("PRAGMA user_version = 23");
           }
+
+          // Migration 24: Branch Type — distinguishes legislative vs. executive representatives
+          if (currentVersion < 24) {
+            console.log(
+              "[SqliteDatabaseService] Applying Migration 24: Adding branch_type to representatives...",
+            );
+            try {
+              await database.runAsync(
+                "ALTER TABLE representatives ADD COLUMN branch_type TEXT DEFAULT 'legislative'",
+              );
+            } catch (e) {
+              console.log(
+                "[SqliteDatabaseService] representatives.branch_type column already exists, skipping...",
+              );
+            }
+            try {
+              await database.runAsync(
+                "CREATE INDEX IF NOT EXISTS idx_rep_branch ON representatives(branch_type)",
+              );
+            } catch (e) {
+              // index may already exist
+            }
+            await database.runAsync("PRAGMA user_version = 24");
+          }
+
+          // Migration 25: Snap TTL — cached_at column for delta-sync cache eviction
+          if (currentVersion < 25) {
+            console.log(
+              "[SqliteDatabaseService] Applying Migration 25: Adding cached_at to snaps...",
+            );
+            try {
+              await database.runAsync(
+                "ALTER TABLE snaps ADD COLUMN cached_at TEXT DEFAULT (datetime('now'))",
+              );
+            } catch (e) {
+              console.log(
+                "[SqliteDatabaseService] snaps.cached_at column already exists, skipping...",
+              );
+            }
+            await database.runAsync("PRAGMA user_version = 25");
+          }
         });
+
+        // TTL eviction: remove stale snaps that were cached more than SNAP_CACHE_TTL_HOURS ago.
+        // Runs after all migrations to avoid operating on a schema that may not yet have cached_at.
+        const ttlHours = 24;
+        await database.runAsync(
+          `DELETE FROM snaps WHERE cached_at IS NOT NULL AND cached_at < datetime('now', '-${ttlHours} hours')`,
+        );
+        console.log(
+          `[SqliteDatabaseService] TTL eviction complete (threshold: ${ttlHours}h).`,
+        );
 
         this.db = database;
 

@@ -41,6 +41,7 @@ export default function RepresentativeScreen() {
     omniFeedProvider,
     representativeRepository,
     civicIntelligenceService,
+    apiSyncService,
   } = useServices();
   const {
     lastViewedRepresentativeId,
@@ -76,6 +77,10 @@ export default function RepresentativeScreen() {
 
     try {
       await representativeRepository.toggleFollow(representative.id, newStatus);
+      // B4: proactive cache hydration — fire-and-forget on follow
+      if (newStatus) {
+        apiSyncService.hydrateRepresentativeSnaps(representative.id);
+      }
     } catch (error) {
       console.error("Failed to toggle follow:", error);
       // Revert on failure

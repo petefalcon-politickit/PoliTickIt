@@ -1,0 +1,79 @@
+{
+  "id": "eo-2026-03832",
+  "sku": "EXECUTIVE-ORDER-2026-03832",
+  "title": "Ending Certain Tariff Actions",
+  "subtitle": "EO 14389",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-02-25T00:00:00",
+  "updatedAt": "2026-06-02T23:47:25.4608543Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/02/25/2026-03832/ending-certain-tariff-actions"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-03832",
+    "bodyText": "( printed page 9437) Executive Order 14389 of February 20, 2026 Ending Certain Tariff Actions By the authority vested in me as President by the Constitution and the laws of the United States of America, including the International Emergency Economic Powers Act ( 50 U.S.C. 1701 et seq. ) (IEEPA), the National Emergencies Act ( 50 U.S.C. 1601 et seq. ), section 604 of the Trade Act of 1974, as amended ( 19 U.S.C. 2483 ), and section 301 of title 3, United States Code , it is hereby ordered: Section 1 . Background. In Executive Order 14193 of February 1, 2025 (Imposing Duties To Address the Flow of Illicit Drugs Across Our Northern Border), as amended; Executive Order 14194 of February 1, 2025 (Imposing Duties To Address the Situation at Our Southern Border), as amended; Executive Order 14195 of February 1, 2025 (Imposing Duties To Address the Synthetic Opioid Supply Chain in the People\u0027s Republic of China), as amended; Executive Order 14245 of March 24, 2025 (Imposing Tariffs on Countries Importing Venezuelan Oil); Executive Order 14257 of April 2, 2025 (Regulating Imports With a Reciprocal Tariff To Rectify Trade Practices That Contribute to Large and Persistent Annual United States Goods Trade Deficits), as amended; Executive Order 14323 of July 30, 2025 (Addressing Threats to the United States by the Government of Brazil), as amended; Executive Order 14329 of August 6, 2025 (Addressing Threats to the United States by the Government of the Russian Federation), as amended; Executive Order 14380 of January 29, 2026 (Addressing Threats to the United States by the Government of Cuba); and Executive Order 14382 of February 6, 2026 (Addressing Threats to the United States by the Government of Iran), I declared or described national emergencies with respect to unusual and extraordinary threats to the national security, foreign policy, or economy of the United States and took actions to deal with those threats, including by imposing, pursuant to IEEPA, additional ad valorem duties on certain imports of certain foreign trading partners. In light of recent events, the additional ad valorem duties imposed pursuant to IEEPA in Executive Order 14193 , as amended; Executive Order 14194 , as amended; Executive Order 14195 , as amended; Executive Order 14245 ; Executive Order 14257 , as amended; Executive Order 14323 , as amended; Executive Order 14329 , as amended; Executive Order 14380 ; and Executive Order 14382 shall no longer be in effect and, as soon as practicable, shall no longer be collected. All other actions, including any other action taken to address the national emergencies declared or described in Executive Order 14193 , Executive Order 14194 , Executive Order 14195 , Executive Order 14245 , Executive Order 14257 , Executive Order 14323 , Executive Order 14329 , Executive Order 14380 , and Executive Order 14382 , that do not impose additional ad valorem duties under IEEPA or involve steps necessary to implement the imposition of additional ad valo\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/02/25/2026-03832.html"
+  },
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14389",
+        "text": "Ending Certain Tariff Actions",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-02-20"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-277c0669bcab4f26ae0e37f2001827de",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14389: Ending Certain Tariff Actions",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

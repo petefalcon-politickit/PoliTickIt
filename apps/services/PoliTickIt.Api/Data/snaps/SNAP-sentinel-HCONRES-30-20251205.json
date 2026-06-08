@@ -1,0 +1,74 @@
+{
+  "id": "sentinel-HCONRES-30-20251205",
+  "sku": "SENTINEL-STAGNATION-HCONRES-30",
+  "title": "Stagnation Sentinel: Raising awareness and encouraging prevention of stalking by establishing January 2007 as \u0022National Stalking Awareness Month\u0022.",
+  "type": "Accountability",
+  "createdAt": "2026-06-02T23:46:45.7706404Z",
+  "updatedAt": "2026-06-02T23:46:45.7706404Z",
+  "channels": [
+    "PolicyArea:congress"
+  ],
+  "sources": [
+    {
+      "name": "Congress.gov",
+      "url": "https://api.congress.gov/v3/bill/110/hconres/30?format=json"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Congress",
+    "insightType": "Committee Stagnation",
+    "laymanSummary": "CRITICAL STAGNATION: This bill has been dormant for 180 days. Our forensic analysis indicates high institutional resistance.",
+    "keywords": [
+      "Stagnation",
+      "Friction",
+      "Bureaucracy",
+      "Sentinel",
+      "Depth:State",
+      "ContextScore:0.59"
+    ],
+    "policyAreaId": "congress"
+  },
+  "elements": [
+    {
+      "id": "stagnation-gauge",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Friction",
+        "value": 49,
+        "label": "Committee Friction",
+        "subLabel": "180 Days Dormant"
+      }
+    },
+    {
+      "id": "impact-indicator",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 41,
+        "label": "Accountability Delta"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Congress.gov API v3",
+        "verificationLevel": "Tier 2",
+        "analysisMode": "Forensic Stagnation Check"
+      }
+    },
+    {
+      "id": "context-thread-eacc23503f34414ba8177302a0b7843f",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State",
+        "derivationSummary": "SNP-004 triggered: Stagnation detected on HCONRES 30.",
+        "refinementScore": 0.59,
+        "activeTier": "State",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

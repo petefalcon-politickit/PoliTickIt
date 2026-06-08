@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-10400",
+  "sku": "EXECUTIVE-ORDER-2026-10400",
+  "title": "Restoring Integrity to America\u0027s Financial System",
+  "subtitle": "EO 14406",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-05-22T00:00:00",
+  "updatedAt": "2026-06-03T13:43:06.9814754Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/05/22/2026-10400/restoring-integrity-to-americas-financial-system"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-10400",
+    "bodyText": "( printed page 30479) Executive Order 14406 of May 19, 2026 Restoring Integrity to America\u0027s Financial System By the authority vested in me as President by the Constitution and the laws of the United States of America, it is hereby ordered: Section 1 . Purpose. America\u0027s financial institutions serve a critical role in safeguarding the American people against financial fraud and abuse. My Administration has taken significant steps to lower the costs of providing financial services for Americans and reduce unnecessary and burdensome Federal regulations that restrain economic growth and hamper the competitiveness of financial service providers nationwide. However, it has long been the policy of the United States to adopt tailored measures to safeguard our financial system from illicit use and promote safe and sound lending and other practices by financial institutions. My Administration will not tolerate national security and public safety risks caused by illicit cross-border financial activity, nor will it permit risks to our financial system posed by the extension of credit or financial services to the inadmissible and removable alien population. Even the provision of the most basic financial services, absent proper know-your-customer practices, can be abused to facilitate the funding of activities that pose significant threats to national security and public safety. Low-dollar cross-border funds transfers have been used to facilitate or commit terrorist financing, narcotics trafficking, human trafficking, and other illegal activity. Financial trend analyses have uncovered hubs of deadly fentanyl-related financial activity in the United States related to Mexico-based cartels. A recent analysis of Chinese money laundering networks identified how foreign passport holders have used United States-based accounts to facilitate the laundering of over $312 billion for criminal organizations, with human trafficking highlighted among the activities associated with the transfers. Robust customer identification programs and enhanced due diligence measures are necessary to mitigate these risks. Banks and other financial institutions should also be attentive to the credit risks posed by the extension of mortgage and auto loans, credit cards, and other consumer credit to the inadmissible and removable alien population. Many of those borrowers face the possibility of the loss of wages due to removal or their employers\u0027 decisions to comply with immigration law. Lending to aliens without legal work authorization or who face a substantial loss-of-wage risk creates a structural \u0026ldquo;ability to repay\u0026rdquo; deficiency that undermines the safety and soundness of the national banking system. Additionally, employers who violate immigration law may underreport wages, use mismatched or invalid Social Security numbers and taxpayer identification numbers, or fail to properly withhold or remit payroll taxes. Such schemes can create vulnerabilities within our financial syste\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/05/22/2026-10400.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14406",
+        "text": "Restoring Integrity to America\u0027s Financial System",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-05-19"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-0cada2720e21411592542837c87191b0",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14406: Restoring Integrity to America\u0027s Financial System",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

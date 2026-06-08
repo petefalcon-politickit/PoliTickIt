@@ -167,6 +167,15 @@ export interface PoliSnap {
     voteOutcome?: string;
     /** Congressional session number: "119" */
     congress?: string;
+    /**
+     * Plain-text body of the document (HTML stripped), up to ~3 000 chars.
+     * Populated at ingest for ExecutiveOrder snaps.
+     */
+    bodyText?: string;
+    /** URL to the authoritative HTML page for the full document body. */
+    bodyHtmlUrl?: string;
+    contentKey?: string;
+    policyAreaId?: string;
   };
   elements: Element[];
   navigation?: {
@@ -176,4 +185,10 @@ export interface PoliSnap {
   };
   theme?: string;
   locale?: string;
+  /** Geographic jurisdiction for this snap (e.g., "US", "US-TX-17"). */
+  jurisdiction?: string;
+  /** When true the snap has been officially retracted and should not be displayed. */
+  isRetracted?: boolean;
+  /** ISO-8601 timestamp when the snap was retracted. Populated only if isRetracted is true. */
+  retractedAt?: string;
 }

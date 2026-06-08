@@ -3,9 +3,9 @@ import { PoliSnapCollection } from "@/components/polisnap-renderer";
 import { ThemedText } from "@/components/themed-text";
 import { DashboardBackground } from "@/components/ui/dashboard-background";
 import {
-    POLICY_AREAS,
-    REPRESENTATIVES,
-    RepresentativeAndPolicyAreaFilterBottomSheet,
+  POLICY_AREAS,
+  REPRESENTATIVES,
+  RepresentativeAndPolicyAreaFilterBottomSheet,
 } from "@/components/ui/representative-and-policy-area-filter-bottom-sheet";
 import { Colors, GlobalStyles, Spacing, Typography } from "@/constants/theme";
 import { useActivity } from "@/contexts/activity-context";
@@ -15,14 +15,14 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useCallback, useEffect, useState } from "react";
 import {
-    Animated,
-    Platform,
-    RefreshControl,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Animated,
+  Platform,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 // Accountability Screen Component
@@ -61,6 +61,7 @@ export default function AccountabilityScreen() {
     sortBy: "date-desc" | "date-asc" | "relevancy";
     importance: "all" | "high" | "medium";
     insightType: string;
+    branch: "all" | "legislative" | "executive";
     reps: string[];
     policies: string[];
     state: string;
@@ -71,6 +72,7 @@ export default function AccountabilityScreen() {
     sortBy: "date-desc",
     importance: "all",
     insightType: "All Types",
+    branch: "all",
     reps: REPRESENTATIVES.filter((r) => r.isFollowing).map((r) => r.id),
     policies: POLICY_AREAS.map((p) => p.id),
     state: "Any state",

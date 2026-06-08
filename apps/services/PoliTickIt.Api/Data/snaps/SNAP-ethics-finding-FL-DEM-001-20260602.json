@@ -1,0 +1,105 @@
+{
+  "id": "ethics-finding-FL-DEM-001-20260602",
+  "sku": "ETH-AUD-CRP-FL-DEM-001-202606",
+  "title": "Ethics Finding: Substantial Evidence of Fraud",
+  "type": "Accountability",
+  "createdAt": "2026-06-02T23:46:45.7724453Z",
+  "updatedAt": "2026-06-02T23:46:45.7724453Z",
+  "channels": [
+    "PolicyArea:congress"
+  ],
+  "sources": [
+    {
+      "name": "House Ethics Committee",
+      "url": "https://ethics.house.gov"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Congress",
+    "insightType": "Committee Finding",
+    "representativeId": "FL-DEM-001",
+    "applicationTier": "ROI Auditor",
+    "laymanSummary": "The Ethics Committee has concluded that there is substantial evidence regarding Substantial Evidence of Fraud for the target representative.",
+    "keywords": [
+      "Ethics",
+      "Integrity",
+      "Accountability",
+      "Forensic",
+      "Substantial Evidence",
+      "Depth:District",
+      "ContextScore:0.96"
+    ],
+    "policyAreaId": "congress"
+  },
+  "elements": [
+    {
+      "id": "rep-header",
+      "type": "Header.Representative",
+      "data": {
+        "id": "FL-DEM-001",
+        "name": "Florida Representative",
+        "position": "Member of Congress",
+        "state": "Florida",
+        "party": "Democratic",
+        "imgUri": "https://via.placeholder.com/225x275"
+      }
+    },
+    {
+      "id": "finding-summary",
+      "type": "Narrative.Insight.Summary",
+      "data": {
+        "text": "Automated Audit: The House Ethics Committee released a formal finding regarding Substantial Evidence of Fraud. Documented allegations include: Wire Fraud, Campaign Finance Diversion, False Statements."
+      }
+    },
+    {
+      "id": "corruption-metric",
+      "type": "Metric.CorruptionIndex",
+      "data": {
+        "title": "PIVOT INTENSITY",
+        "score": 95,
+        "insight": "Institutional finding triggers maximum forensic audit intensity.",
+        "confidence": 0.99
+      }
+    },
+    {
+      "id": "allegation-list",
+      "type": "Metric.Achievement.List",
+      "data": {
+        "title": "Documented Allegations",
+        "items": [
+          "Wire Fraud",
+          "Campaign Finance Diversion",
+          "False Statements"
+        ]
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "referenceId": "ETH-FL-DEM-001-2026",
+        "verificationLevel": "Tier 3",
+        "oracleSource": "House Ethics Committee"
+      },
+      "provenance": {
+        "url": "https://ethics.house.gov/reports/FL-DEM-001-Finding.pdf",
+        "label": "Official Committee Report",
+        "isVerified": true,
+        "timestamp": "2026-06-02T23:46:45.7724453Z"
+      }
+    },
+    {
+      "id": "context-thread-f85cd6cbf4fd429ca7105e52c2c3eedf",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 FL \u2192 23",
+        "derivationSummary": "Ethics finding for representative in FL-23: Substantial Evidence of Fraud",
+        "refinementScore": 0.96,
+        "activeTier": "District",
+        "targetState": "FL",
+        "targetDistrict": "23",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "eo-2026-09173",
+  "sku": "EXECUTIVE-ORDER-2026-09173",
+  "title": "Imposing Sanctions on Those Responsible for Repression in Cuba and for Threats to United States National Security and Foreign Policy",
+  "subtitle": "EO 14404",
+  "type": "ExecutiveOrder",
+  "createdAt": "2026-05-07T00:00:00",
+  "updatedAt": "2026-06-03T13:43:07.0125063Z",
+  "channels": [
+    "PoliTickIt:Accountability",
+    "Representative:POTUS-47",
+    "Branch:Executive"
+  ],
+  "sources": [
+    {
+      "name": "Federal Register",
+      "url": "https://www.federalregister.gov/documents/2026/05/07/2026-09173/imposing-sanctions-on-those-responsible-for-repression-in-cuba-and-for-threats-to-united-states"
+    }
+  ],
+  "metadata": {
+    "policyArea": "Executive Action",
+    "insightType": "Executive Order",
+    "representativeId": "POTUS-47",
+    "laymanSummary": "Presidential Executive Order signed by the President of the United States.",
+    "keywords": [
+      "Executive Order",
+      "Presidential Action",
+      "Executive Branch",
+      "Depth:District",
+      "ContextScore:0.91"
+    ],
+    "contentKey": "eo:2026-09173",
+    "bodyText": "Executive Order 14404 of May 1, 2026 Imposing Sanctions on Those Responsible for Repression in Cuba and for Threats to United States National Security and Foreign Policy By the authority vested in me as President by the Constitution and the laws of the United States of America, including the International Emergency Economic Powers Act ( 50 U.S.C. 1701 et seq. ) (IEEPA), the National Emergencies Act ( 50 U.S.C. 1601 et seq. ) (NEA), section 212(f) of the Immigration and Nationality Act of 1952 ( 8 U.S.C. 1182(f) ), and section 301 of title 3, United States Code , and in order to take further steps with respect to the national emergency declared in Executive Order 14380 of January 29, 2026 (Addressing Threats to the United States by the Government of Cuba), I hereby determine and order: Section 1 . Policy. The policies, practices, and actions of the Government of Cuba, as described in Executive Order 14380 , continue to constitute an unusual and extraordinary threat, which has its source in whole or substantial part outside the United States, to the national security and foreign policy of the United States. Not only are these policies, practices, and actions designed to harm the United States, but they are also repugnant to the moral and political values of free and democratic societies. Sec. 2 . Sanctionable Conduct. (a) All property and interests in property that are in the United States, that hereafter come within the United States, or that are or hereafter come within the possession or control of any United States persons of the following persons are blocked and may not be transferred, paid, exported, withdrawn, or otherwise dealt in: (i) any foreign person determined by the Secretary of State, in consultation with the Secretary of the Treasury; or by the Secretary of the Treasury, in consultation with the Secretary of State: (A) to operate in or have operated in the energy, defense and related materiel, metals and mining, financial services, or security sector of the Cuban economy, or any other sector of the Cuban economy, as may be determined by the Secretary of the Treasury, in consultation with the Secretary of State; (B) to be owned, controlled, or directed by, or to have acted or purported to act for or on behalf of, directly or indirectly, the Government of Cuba or any person whose property or interests in property are blocked pursuant to this order; (C) to own or control, directly or indirectly, any person whose property or interests in property are blocked pursuant to this order; (D) to have materially assisted, sponsored, or provided financial, material, or technological support for, or goods or services to or in support of, the Government of Cuba or any person whose property or interests in property are blocked pursuant to this order; (E) to be or have been a leader, official, senior executive officer, or member of the board of directors of the Government of Cuba or an entity whose property or interests in property are blocked pursua\u2026",
+    "bodyHtmlUrl": "https://www.federalregister.gov/documents/full_text/html/2026/05/07/2026-09173.html"
+  },
+  "jurisdiction": "federal",
+  "isRetracted": false,
+  "elements": [
+    {
+      "id": "eo-header",
+      "type": "Universal.TextBlock",
+      "data": {
+        "label": "EO 14404",
+        "text": "Imposing Sanctions on Those Responsible for Repression in Cuba and for Threats to United States National Security and Foreign Policy",
+        "subtext": ""
+      }
+    },
+    {
+      "id": "eo-meta",
+      "type": "Universal.Gauge",
+      "data": {
+        "mode": "Linear",
+        "value": 85,
+        "label": "Executive Authority",
+        "subLabel": "Signed 2026-05-01"
+      }
+    },
+    {
+      "id": "trust-thread",
+      "type": "Trust.Thread",
+      "data": {
+        "oracleSource": "Federal Register API v1",
+        "verificationLevel": "Tier 1",
+        "analysisMode": "Primary Source \u2014 U.S. Government"
+      }
+    },
+    {
+      "id": "context-thread-0043c4b1d6f947169c36be16986b3e55",
+      "type": "Context.Thread",
+      "data": {
+        "lineage": "National \u2192 State \u2192 District",
+        "derivationSummary": "Executive Order #14404: Imposing Sanctions on Those Responsible for Repression in Cuba and for Threats to United States National Security and Foreign Policy",
+        "refinementScore": 0.91,
+        "activeTier": "District",
+        "targetState": "N/A",
+        "targetDistrict": "N/A",
+        "refinedBy": "PoliManifestor.CEP"
+      }
+    }
+  ]
+}

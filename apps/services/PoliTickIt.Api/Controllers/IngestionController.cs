@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PoliTickIt.Domain.Interfaces;
+using PoliTickIt.Domain.CanonicalModel;
+using PoliTickIt.Domain.Exceptions;
 using PoliTickIt.Ingestion.Services;
 using PoliTickIt.Domain.Models;
 
@@ -13,17 +15,20 @@ public class IngestionController : ControllerBase
     private readonly IIngestionService _ingestionService;
     private readonly IReloadableSnapRepository _reloadable;
     private readonly ITrendingService _trending;
+    private readonly ISnapSchemaRegistry _schemaRegistry;
     private readonly ILogger<IngestionController> _logger;
 
     public IngestionController(
         IIngestionService ingestionService,
         IReloadableSnapRepository reloadable,
         ITrendingService trending,
+        ISnapSchemaRegistry schemaRegistry,
         ILogger<IngestionController> logger)
     {
         _ingestionService = ingestionService;
         _reloadable = reloadable;
         _trending = trending;
+        _schemaRegistry = schemaRegistry;
         _logger = logger;
     }
 
@@ -44,6 +49,67 @@ public class IngestionController : ControllerBase
             provider = "All Active Providers", 
             timestamp = DateTime.UtcNow,
             snaps = snaps 
+        });
+    }
+
+    /// <summary>
+    /// Runs a single named provider. Returns 404 if the provider name is unknown.
+    /// </summary>
+    [HttpPost("run/{providerName}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> RunProvider(string providerName)
+    {
+        _logger.LogInformation("Triggering ingestion for provider: {Provider}", providerName);
+        try
+        {
+            var snaps = await _ingestionService.RunProviderAsync(providerName);
+            _trending.Invalidate();
+            return Ok(new
+            {
+                count = snaps.Count(),
+                provider = providerName,
+                timestamp = DateTime.UtcNow,
+                snaps = snaps
+            });
+        }
+        catch (ProviderNotFoundException ex)
+        {
+            _logger.LogWarning("Provider not found: {Provider}", ex.ProviderName);
+            return NotFound(new { error = $"Provider '{ex.ProviderName}' is not registered." });
+        }
+    }
+
+    /// <summary>
+    /// Returns the readiness status of all registered snap schemas.
+    /// Binding Decision D4 — surfaced at GET /ingestion/status.
+    /// </summary>
+    [HttpGet("status")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public IActionResult Status()
+    {
+        var schemas = _schemaRegistry.RegisteredTypes.Select(t =>
+        {
+            var schema = _schemaRegistry.GetSchema(t);
+            return new
+            {
+                type = t,
+                requiredElements = schema.RequiredElements.Select(e => new
+                {
+                    elementType = e.ElementType,
+                    isRequired = e.IsRequired,
+                    description = e.Description
+                }),
+                requiredChannelPrefixes = schema.RequiredChannelPrefixes,
+                defaultTtlHours = schema.DefaultTtl.TotalHours
+            };
+        });
+
+        return Ok(new
+        {
+            timestamp = DateTime.UtcNow,
+            registeredSnapTypes = _schemaRegistry.RegisteredTypes.Count,
+            schemas = schemas
         });
     }
 

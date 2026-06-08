@@ -35,6 +35,8 @@ export interface Representative {
     bipartisanIndex?: number;
   };
   isFollowing?: boolean;
+  /** Branch of government: "legislative" (Congress) or "executive" (President/VP/Cabinet). */
+  branchType?: "legislative" | "executive";
 }
 
 export interface Interest {

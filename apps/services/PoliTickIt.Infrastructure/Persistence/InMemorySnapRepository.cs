@@ -718,5 +718,14 @@ namespace PoliTickIt.Infrastructure.Persistence
                 string.Equals(s.Metadata.ContentKey, contentKey, StringComparison.OrdinalIgnoreCase));
             return Task.FromResult(snap);
         }
+
+        public Task<IEnumerable<PoliSnap>> GetDeltaAsync(DateTimeOffset since)
+        {
+            var sinceUtc = since.UtcDateTime;
+            var results = _store.Values
+                .Where(s => (s.UpdatedAt > sinceUtc ? s.UpdatedAt : s.CreatedAt) > sinceUtc)
+                .ToList();
+            return Task.FromResult<IEnumerable<PoliSnap>>(results);
+        }
     }
 }

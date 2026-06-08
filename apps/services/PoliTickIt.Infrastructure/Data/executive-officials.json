@@ -1,0 +1,162 @@
+[
+  {
+    "id": "POTUS-47",
+    "name": "Donald J. Trump",
+    "title": "President",
+    "party": "Republican",
+    "state": "FL",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/440px-Donald_Trump_official_portrait.jpg",
+    "biography": "47th President of the United States, serving since January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "VPOTUS-47",
+    "name": "JD Vance",
+    "title": "Vice President",
+    "party": "Republican",
+    "state": "OH",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/JD_Vance_official_portrait_%282025%29.jpg/440px-JD_Vance_official_portrait_%282025%29.jpg",
+    "biography": "47th Vice President of the United States, serving since January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-STATE",
+    "name": "Marco Rubio",
+    "title": "Secretary of State",
+    "party": "Republican",
+    "state": "FL",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Marco_Rubio_official_photo_2025.jpg/440px-Marco_Rubio_official_photo_2025.jpg",
+    "biography": "72nd Secretary of State, confirmed January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-TREASURY",
+    "name": "Scott Bessent",
+    "title": "Secretary of the Treasury",
+    "party": "Republican",
+    "state": "SC",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Scott_Bessent_official_portrait_2025.jpg/440px-Scott_Bessent_official_portrait_2025.jpg",
+    "biography": "79th Secretary of the Treasury, confirmed January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-DEFENSE",
+    "name": "Pete Hegseth",
+    "title": "Secretary of Defense",
+    "party": "Republican",
+    "state": "TN",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pete_Hegseth_official_portrait_2025.jpg/440px-Pete_Hegseth_official_portrait_2025.jpg",
+    "biography": "29th Secretary of Defense, confirmed February 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "AG",
+    "name": "Pam Bondi",
+    "title": "Attorney General",
+    "party": "Republican",
+    "state": "FL",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Pam_Bondi_official_portrait_2025.jpg/440px-Pam_Bondi_official_portrait_2025.jpg",
+    "biography": "87th Attorney General of the United States, confirmed February 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-INTERIOR",
+    "name": "Doug Burgum",
+    "title": "Secretary of the Interior",
+    "party": "Republican",
+    "state": "ND",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Doug_Burgum_official_portrait_2025.jpg/440px-Doug_Burgum_official_portrait_2025.jpg",
+    "biography": "55th Secretary of the Interior, confirmed January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-AGRICULTURE",
+    "name": "Brooke Rollins",
+    "title": "Secretary of Agriculture",
+    "party": "Republican",
+    "state": "TX",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Brooke_Rollins_official_portrait_2025.jpg/440px-Brooke_Rollins_official_portrait_2025.jpg",
+    "biography": "33rd Secretary of Agriculture, confirmed February 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-COMMERCE",
+    "name": "Howard Lutnick",
+    "title": "Secretary of Commerce",
+    "party": "Republican",
+    "state": "NY",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Howard_Lutnick_official_portrait_2025.jpg/440px-Howard_Lutnick_official_portrait_2025.jpg",
+    "biography": "41st Secretary of Commerce, confirmed February 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-LABOR",
+    "name": "Lori Chavez-DeRemer",
+    "title": "Secretary of Labor",
+    "party": "Republican",
+    "state": "OR",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Lori_Chavez-DeRemer_official_portrait_2025.jpg/440px-Lori_Chavez-DeRemer_official_portrait_2025.jpg",
+    "biography": "29th Secretary of Labor, confirmed March 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-HHS",
+    "name": "Robert F. Kennedy Jr.",
+    "title": "Secretary of Health and Human Services",
+    "party": "Republican",
+    "state": "CA",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Robert_F._Kennedy_Jr._official_portrait_2025.jpg/440px-Robert_F._Kennedy_Jr._official_portrait_2025.jpg",
+    "biography": "26th Secretary of Health and Human Services, confirmed February 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-TRANSPORTATION",
+    "name": "Sean Duffy",
+    "title": "Secretary of Transportation",
+    "party": "Republican",
+    "state": "WI",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sean_Duffy_official_portrait_2025.jpg/440px-Sean_Duffy_official_portrait_2025.jpg",
+    "biography": "20th Secretary of Transportation, confirmed January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-ENERGY",
+    "name": "Chris Wright",
+    "title": "Secretary of Energy",
+    "party": "Republican",
+    "state": "CO",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Chris_Wright_official_portrait_2025.jpg/440px-Chris_Wright_official_portrait_2025.jpg",
+    "biography": "17th Secretary of Energy, confirmed January 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-EDUCATION",
+    "name": "Linda McMahon",
+    "title": "Secretary of Education",
+    "party": "Republican",
+    "state": "CT",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Linda_McMahon_official_portrait_2025.jpg/440px-Linda_McMahon_official_portrait_2025.jpg",
+    "biography": "13th Secretary of Education, confirmed March 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-VA",
+    "name": "Doug Collins",
+    "title": "Secretary of Veterans Affairs",
+    "party": "Republican",
+    "state": "GA",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Doug_Collins_official_portrait_2025.jpg/440px-Doug_Collins_official_portrait_2025.jpg",
+    "biography": "11th Secretary of Veterans Affairs, confirmed February 2025.",
+    "branchType": "executive"
+  },
+  {
+    "id": "SEC-DHS",
+    "name": "Kristi Noem",
+    "title": "Secretary of Homeland Security",
+    "party": "Republican",
+    "state": "SD",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Kristi_Noem_official_portrait_2025.jpg/440px-Kristi_Noem_official_portrait_2025.jpg",
+    "biography": "7th Secretary of Homeland Security, confirmed January 2025.",
+    "branchType": "executive"
+  }
+]

@@ -26,6 +26,17 @@ public class PoliSnap
     public List<string> Channels { get; set; } = new();
     public List<Source> Sources { get; set; } = new();
     public SnapMetadata Metadata { get; set; } = new();
+    /// <summary>
+    /// Jurisdiction scope for feed filtering and Cosmos partitioning.
+    /// Format: "federal" | "state:TX" | "county:TX-Travis" | "city:Austin-TX".
+    /// </summary>
+    public string Jurisdiction { get; set; } = "federal";
+    /// <summary>
+    /// Tombstone flag — never hard-delete snaps.  When true the snap should be
+    /// evicted from mobile caches and hidden from feeds.
+    /// </summary>
+    public bool IsRetracted { get; set; } = false;
+    public DateTimeOffset? RetractedAt { get; set; }
     public List<SnapElement> Elements { get; set; } = new();
     public SnapNavigation? Navigation { get; set; }
     public string? Theme { get; set; }
@@ -94,6 +105,23 @@ public class SnapMetadata
     /// Null when the raw label could not be resolved to a known taxonomy entry.
     /// </summary>
     public string? PolicyAreaId { get; set; }
+
+    // ── Full-body content (Executive Orders, legislation text, etc.) ─────────
+
+    /// <summary>
+    /// Plain-text body of the document (HTML tags stripped), truncated to
+    /// ~3 000 characters. Populated at ingest time for document-type snaps
+    /// (e.g. ExecutiveOrder) so detail screens can render content inline
+    /// without a network call.
+    /// </summary>
+    public string? BodyText { get; set; }
+
+    /// <summary>
+    /// URL to the authoritative HTML rendering of the full document body.
+    /// Used as a "Read full order →" deep-link fallback when <see cref="BodyText"/>
+    /// is truncated or unavailable.
+    /// </summary>
+    public string? BodyHtmlUrl { get; set; }
 }
 
 public class SnapNavigation

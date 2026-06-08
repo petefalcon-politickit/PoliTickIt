@@ -120,9 +120,32 @@ export class HybridSnapRepository implements ISnapRepository {
 
   async getSnapsByRepresentativeId(repId: string): Promise<PoliSnap[]> {
     if (this.source === SnapDataSource.MOCK) {
-      return this.mockRepo.getSnapsByRepresentativeId(repId);
+      const mockSnaps = await this.mockRepo.getSnapsByRepresentativeId(repId);
+      // Mock has no executive-branch snaps — fall through to live data if mock returns nothing
+      if (mockSnaps.length > 0) return mockSnaps;
     }
-    return this.localRepo.getSnapsByRepresentativeId(repId);
+
+    // Check SQLite cache first
+    const localSnaps = await this.localRepo.getSnapsByRepresentativeId(repId);
+    if (localSnaps.length > 0) return localSnaps;
+
+    // Fall back to API and cache results for offline use
+    try {
+      const apiSnaps = await this.apiRepo.getSnapsByRepresentativeId!(repId);
+      if (apiSnaps && apiSnaps.length > 0) {
+        for (const snap of apiSnaps) {
+          await this.localRepo.saveSnap(snap);
+        }
+        return apiSnaps;
+      }
+    } catch (error) {
+      console.warn(
+        `[HybridSnapRepository] API getSnapsByRepresentativeId failed for ${repId}`,
+        error,
+      );
+    }
+
+    return localSnaps; // empty
   }
 
   /**

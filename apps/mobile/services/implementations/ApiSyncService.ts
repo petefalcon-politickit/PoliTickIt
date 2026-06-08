@@ -1,16 +1,19 @@
-import { ISnapRepository } from "../interfaces/ISnapRepository";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApiCorrelationRepository } from "./ApiCorrelationRepository";
 import { ApiInterestRepository } from "./ApiInterestRepository";
 import { ApiParticipationRepository } from "./ApiParticipationRepository";
 import { ApiRepresentativeRepository } from "./ApiRepresentativeRepository";
+import { ApiSnapRepository } from "./ApiSnapRepository";
 import { SqliteAgencyRepository } from "./SqliteAgencyRepository";
 import { SqliteCorrelationRepository } from "./SqliteCorrelationRepository";
 import { SqliteParticipationRepository } from "./SqliteParticipationRepository";
 import { SqliteRepresentativeRepository } from "./SqliteRepresentativeRepository";
 import { SqliteSnapRepository } from "./SqliteSnapRepository";
 
+const LAST_SYNCED_AT_KEY = "@politickit:lastSyncedAt";
+
 export class ApiSyncService {
-  private apiSnapRepo: ISnapRepository;
+  private apiSnapRepo: ApiSnapRepository;
   private sqliteSnapRepo: SqliteSnapRepository;
   private apiRepRepo: ApiRepresentativeRepository;
   private sqliteRepRepo: SqliteRepresentativeRepository;
@@ -33,7 +36,7 @@ export class ApiSyncService {
     apiInterestRepository,
     agencyRepository,
   }: {
-    apiSnapRepository: ISnapRepository;
+    apiSnapRepository: ApiSnapRepository;
     sqliteSnapRepository: SqliteSnapRepository;
     apiRepresentativeRepository: ApiRepresentativeRepository;
     sqliteRepresentativeRepository: SqliteRepresentativeRepository;
@@ -65,17 +68,42 @@ export class ApiSyncService {
       console.log("[ApiSyncService] Starting Auto-Sync with C# Backend...");
       let totalCount = 0;
 
-      // 1. Sync Snaps
-      const remoteSnaps = await this.apiSnapRepo.getAllSnaps();
-      if (remoteSnaps.length > 0) {
+      // 1. Sync Snaps — delta if we have a cursor, full fetch on first run
+      const lastSyncedAt = await AsyncStorage.getItem(LAST_SYNCED_AT_KEY);
+      let newSyncTimestamp: string;
+
+      if (lastSyncedAt) {
+        console.log(`[ApiSyncService] Delta sync since ${lastSyncedAt}...`);
+        const { snaps: deltaSnaps, syncTimestamp } =
+          await this.apiSnapRepo.getDeltaSnaps(lastSyncedAt);
+        newSyncTimestamp = syncTimestamp;
+
+        for (const snap of deltaSnaps) {
+          if (snap.isRetracted) {
+            // B3: tombstone — evict from local SQLite
+            await this.sqliteSnapRepo.deleteSnap(snap.id);
+          } else {
+            await this.sqliteSnapRepo.saveSnap(snap);
+          }
+        }
+        totalCount += deltaSnaps.length;
         console.log(
-          `[ApiSyncService] Found ${remoteSnaps.length} snaps on backend. Syncing...`,
+          `[ApiSyncService] Delta sync complete: ${deltaSnaps.length} changes.`,
         );
+      } else {
+        console.log(`[ApiSyncService] Full snap sync (no cursor)...`);
+        const remoteSnaps = await this.apiSnapRepo.getAllSnaps();
+        newSyncTimestamp = new Date().toISOString();
         for (const snap of remoteSnaps) {
           await this.sqliteSnapRepo.saveSnap(snap);
         }
         totalCount += remoteSnaps.length;
+        console.log(
+          `[ApiSyncService] Full sync complete: ${remoteSnaps.length} snaps.`,
+        );
       }
+
+      await AsyncStorage.setItem(LAST_SYNCED_AT_KEY, newSyncTimestamp);
 
       // 2. Sync Representatives (RSP Protocol)
       const remoteReps = await this.apiRepRepo.getAllRepresentatives();
@@ -156,6 +184,32 @@ export class ApiSyncService {
     } catch (error) {
       console.error("[ApiSyncService] Sync failed:", error);
       return { success: false, count: 0 };
+    }
+  }
+
+  /**
+   * B4 — Proactive cache hydration on representative follow.
+   * Immediately fetches the latest snaps for the given rep and upserts them
+   * into SQLite so the feed is populated before the user navigates to it.
+   * Fire-and-forget safe: errors are swallowed non-fatally.
+   */
+  async hydrateRepresentativeSnaps(repId: string): Promise<void> {
+    try {
+      const snaps = await this.apiSnapRepo.getSnapsByChannel(
+        `Representative:${repId}`,
+        50,
+      );
+      for (const snap of snaps) {
+        await this.sqliteSnapRepo.saveSnap(snap);
+      }
+      console.log(
+        `[ApiSyncService] Hydrated ${snaps.length} snaps for rep ${repId}.`,
+      );
+    } catch (error) {
+      console.warn(
+        `[ApiSyncService] hydrateRepresentativeSnaps failed for ${repId}:`,
+        error,
+      );
     }
   }
 
