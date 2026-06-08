@@ -17,6 +17,21 @@
       }
     },
     {
+      "label": "[PoliTickIt-Mobile] EXPO START",
+      "type": "shell",
+      "command": "npx.cmd expo start",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/mobile"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "group": "politickit",
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
       "label": "[PoliTickIt-Mobile] WEB SIMULATOR",
       "type": "shell",
       "command": "npx.cmd expo start --web",

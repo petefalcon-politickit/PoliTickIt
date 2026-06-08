@@ -1,0 +1,26 @@
+{
+  "folders": [
+    {
+      "name": "🗳️ PoliTickIt",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#0D1117",
+      "statusBar.background": "#164570",
+      "titleBar.activeBackground": "#164570"
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/bin": true,
+      "**/obj": true
+    }
+  }
+}
